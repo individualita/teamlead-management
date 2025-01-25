@@ -1,0 +1,38 @@
+:root {
+	/* container settings */
+
+	--container-width: 1000px;
+	--container-padding: 15px;
+
+	/* Font settings */
+	--font-main: "Nunito Sans", serif;
+
+	/* Background */
+	--page-bg: #fafbfc;
+
+
+	/* text - colors */
+	--text-color: #35323b;
+	--text-inactive: #787486;
+
+	/* colors */
+	--color-primary: #7F56D9;
+	--color-secondary: #0080fc;
+	--color-warning: #fdB657;
+	--color-critical: #fc717a;
+	--color-success: #1bcb81;
+
+
+
+	/*
+	--color-primary-light: #ab81fb;
+	--color-accent-yellow: #ffe9b1;
+	--color-accent-red: #fa744b;
+	--color-accent-green: #4be650;
+	--color-heading: #3c3587; */
+
+	/* Breakpoints */
+    --laptop-size: 1199px;
+	--tablet-size: 959px;
+	--mobile-size: 599px;
+}	

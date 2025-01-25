@@ -1,0 +1,40 @@
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	color: var(--text-color);
+	font-family: var(--font-main);
+	font-size: 14px;
+	text-wrap: balance;
+}
+
+
+img, svg {
+    display: block;
+    max-width: 100%;
+    height: auto;
+	object-fit: cover;
+
+}
+
+
+code {
+	background-color: #e9f1f6;
+	padding: 0.2rem;
+	border-radius: 4px;
+}
+
+pre.code {
+	overflow-x: auto;
+	background-color: #e9f1f6;
+	padding: 1rem;
+	border-radius: 4px;
+}
+
+
+
+
+
+
