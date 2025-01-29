@@ -1,10 +1,13 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import AuthForm from "./components/AuthForm"
-import {auth} from './services/firebaseConfig';
-import { useAuthStore } from "./store/authStore";
+import AuthForm from "../components/authForm/AuthForm";
+import {auth} from '../../../shared/config/firebaseConfig';
+import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
 
-import { createUserService } from "./services/createUserService";
+
+
+import { FIREBASE_AUTH_ERRORS } from "../constants/firebaseAuthErrors";
+import { createUserService } from "../services/createUserService";
 
 //test@gmail.com
 //Test1234
@@ -28,23 +31,16 @@ const SignIn = () => {
             
             navigate('/home')
 
-        } catch (error) {
-            if (error instanceof Error) {
-                setErrorMessage(error.message); // Доступ к свойству message
-
-            } else {
-                setErrorMessage("An unexpected error"); // Запасной вариант
-            }
+        } catch (error: any) {
+            const firebaseError = FIREBASE_AUTH_ERRORS.get(error.code) || "An unknown error occurred.";
+            setErrorMessage(firebaseError);
             console.error(error);
-            throw  error;
 
         } finally {
             setLoading(false);
         }
     }
     
-
-
     return (
         <>
             <h1>Sign in page</h1>

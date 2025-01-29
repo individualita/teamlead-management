@@ -1,12 +1,14 @@
-import AuthForm from "./components/AuthForm";
+import AuthForm from "../components/authForm/AuthForm";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { useAuthStore } from "./store/authStore";
+import { useAuthStore } from "../store/authStore";
 
 import { useNavigate } from "react-router-dom";
 
-import { auth } from './services/firebaseConfig';
+import {auth} from '../../../shared/config/firebaseConfig';
 
-import { createUserService } from "./services/createUserService";
+import { FIREBASE_AUTH_ERRORS } from "../constants/firebaseAuthErrors";
+
+import { createUserService } from "../services/createUserService";
 
 const SignUp = () => {
 
@@ -28,15 +30,10 @@ const SignUp = () => {
             console.log('register success!')
             navigate('/home');
 
-        } catch (error) {
-            if (error instanceof Error) {
-                setErrorMessage(error.message)
-            } else {
-                setErrorMessage("An unexpected error");
-            }
-
+        } catch (error: any) {
+            const firebaseError = FIREBASE_AUTH_ERRORS.get(error.code) || "An unknown error occurred.";
+            setErrorMessage(firebaseError);
             console.error(error);
-            throw error;
 
         } finally {
             setLoading(false);

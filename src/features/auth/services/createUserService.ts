@@ -19,14 +19,3 @@ export const createUserService = async (action: AuthActionType, auth: Auth, emai
     }
 }
 
-
-
-
-
-
-
-
-/*
-const createUserService2 = ((action, auth, email, password), async (action, auth, email, password) => {
-    const userCredential = await action(auth, email, password);
-}) */

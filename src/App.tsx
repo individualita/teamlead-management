@@ -1,9 +1,9 @@
 import { Navigate, Routes, Route } from 'react-router-dom';
 
-import Container from './components/Container';
+import Container from './shared/components/Container';
 
-import SignIn from './features/auth/SignIn';
-import SignUp from './features/auth/SignUp';
+import SignIn from './features/auth/pages/SignIn';
+import SignUp from './features/auth/pages/SignUp';
 import Home from './features/home/Home';
 
 import './App.css';
