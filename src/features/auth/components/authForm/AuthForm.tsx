@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { useAuthStore } from '../../store/authStore';
 
+import { ROUTE_PATHS } from '../../../../shared/constants/routePaths';
+
 import ErrorAlert from '../errorAlert/ErrorAlert';
 
 // material UI
@@ -83,7 +85,7 @@ const AuthForm = ({title, handleClick} : AuthFormProps) => {
                 <p className='text-center'>
                     {title === 'Sign in' ? `Don't have an account?` : 'Already have an account?' } {''}
 
-                    <Link to={title === 'Sign in'? '/signup' : '/login'} className='text-blue-600'>
+                    <Link to={title === 'Sign in'? ROUTE_PATHS.SIGN_UP : ROUTE_PATHS.SIGN_IN} className='text-blue-600'>
                         {title==='Sign in'? 'Sign Up' : 'Sign in'}
                     </Link>
 

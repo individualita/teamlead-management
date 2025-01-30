@@ -4,6 +4,7 @@ import {auth} from '../../../shared/config/firebaseConfig';
 import { useAuthStore } from "../store/authStore";
 import { useNavigate } from "react-router-dom";
 
+import { ROUTE_PATHS } from "../../../shared/constants/routePaths";
 
 
 import { FIREBASE_AUTH_ERRORS } from "../constants/firebaseAuthErrors";
@@ -29,7 +30,7 @@ const SignIn = () => {
     
             setUser(user);
             
-            navigate('/home')
+            navigate(ROUTE_PATHS.HOME);
 
         } catch (error: any) {
             const firebaseError = FIREBASE_AUTH_ERRORS.get(error.code) || "An unknown error occurred.";

@@ -1,6 +1,9 @@
 import { Navigate, Routes, Route } from 'react-router-dom';
 
+import { ROUTE_PATHS } from './shared/constants/routePaths';
+
 import Container from './shared/components/Container';
+
 
 import SignIn from './features/auth/pages/SignIn';
 import SignUp from './features/auth/pages/SignUp';
@@ -15,10 +18,10 @@ const App = () => {
         <div className='app'>
             <Container>
                 <Routes>
-                    <Route path='/login' element={<SignIn />}/>
-                    <Route path='/signup' element={<SignUp />}/> 
-                    <Route path='/home' element={<Home />}/>
-                    <Route path="*" element={<Navigate to="/login" />} />
+                    <Route path={ROUTE_PATHS.SIGN_IN} element={<SignIn />}/>
+                    <Route path={ROUTE_PATHS.SIGN_UP} element={<SignUp />}/> 
+                    <Route path={ROUTE_PATHS.HOME} element={<Home />}/>
+                    <Route path="*" element={<Navigate to={ROUTE_PATHS.SIGN_IN} />} />
                 </Routes>
             </Container>
         </div>

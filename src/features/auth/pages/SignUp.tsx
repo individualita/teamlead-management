@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import {auth} from '../../../shared/config/firebaseConfig';
 
 import { FIREBASE_AUTH_ERRORS } from "../constants/firebaseAuthErrors";
+import { ROUTE_PATHS } from "../../../shared/constants/routePaths";
 
 import { createUserService } from "../services/createUserService";
 
@@ -28,7 +29,7 @@ const SignUp = () => {
             setUser(user);
 
             console.log('register success!')
-            navigate('/home');
+            navigate(ROUTE_PATHS.HOME);
 
         } catch (error: any) {
             const firebaseError = FIREBASE_AUTH_ERRORS.get(error.code) || "An unknown error occurred.";
