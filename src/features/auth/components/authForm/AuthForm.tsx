@@ -38,9 +38,6 @@ const AuthForm = ({title, handleClick} : AuthFormProps) => {
     };
 
 
-
-    
-    console.log(errors);
     return (
         <div className={styles.formContainer}>
 
