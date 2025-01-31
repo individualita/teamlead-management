@@ -1,5 +1,6 @@
-import { Navigate, Routes, Route } from 'react-router-dom';
-import { ReactNode, useEffect } from 'react';
+import { Navigate, Routes, Route, Outlet } from 'react-router-dom';
+import { useEffect, Suspense } from 'react';
+
 
 import { useAuthStore } from './features/auth/store/authStore';
 
@@ -7,6 +8,8 @@ import { ROUTE_PATHS } from './shared/constants/routePaths';
 
 import Container from './shared/components/Container';
 
+import { ProtectedRoute } from './shared/routes/ProtectedRoute';
+import { PublicRoute } from './shared/routes/PublicRote';
 
 import SignIn from './features/auth/pages/SignIn';
 import SignUp from './features/auth/pages/SignUp';
@@ -18,45 +21,50 @@ import './App.css';
 
 const App = () => {
 
-    const { user, listenAuthState} = useAuthStore();
+    const { user, listenAuthState, loading, authInitialized} = useAuthStore();
 
     useEffect(() => {
-        console.log('user:',user)
 
-        listenAuthState();
+        const unsubsrcibe = listenAuthState();
 
-        return () => listenAuthState();
+        return () => unsubsrcibe();
     
     }, []);
 
-  
+    console.log('user:', user, 'loading:', loading, 'initialized:', authInitialized);
+
     return (
         <div className='app'>
             <Container>
-                <Routes>
-                    <Route path={ROUTE_PATHS.SIGN_IN} element={<SignIn />}/>
-                    <Route path={ROUTE_PATHS.SIGN_UP} element={<SignUp />}/> 
-                    <Route path={ROUTE_PATHS.HOME} element={<ProtectedRoute> <Home /> </ProtectedRoute>}/>
-                    
-                    <Route path="*" element={<Navigate to={ROUTE_PATHS.SIGN_IN} />} />
-                </Routes>
+                <Suspense fallback={<div>loading...</div>}>
+                    <Routes>
+                        {/* Публичные маршруты (только для НЕ залогиненных пользователей) */}
+                        <Route element={<PublicRoute />}>
+                            <Route path={ROUTE_PATHS.SIGN_IN} element={<SignIn />} />
+                            <Route path={ROUTE_PATHS.SIGN_UP} element={<SignUp />} />
+                        </Route>
+                        
+                        {/* Защищённые маршруты (только для залогиненных пользователей) */}
+                        <Route element={<ProtectedRoute />}>
+                            <Route path={ROUTE_PATHS.HOME} element={<Home />} />
+                        </Route>
+
+                        <Route element={<Outlet />}>
+                            <Route path={ROUTE_PATHS.HOME} element={<Home />}/>
+                        </Route>
+
+                        <Route path='*' element={<Navigate to={ROUTE_PATHS.HOME} />} />
+                        
+                    </Routes>
+
+                </Suspense>
+
             </Container>
         </div>
     )
-}
+};
 
-type ProtectedRouteType = {
-    children: ReactNode
-}
-
-const ProtectedRoute = ({children}: ProtectedRouteType) => {
-    const {loading, user } = useAuthStore();
-
-    if (loading) return <div>loading...</div>;
-    if(!user) return <Navigate to={ROUTE_PATHS.SIGN_IN} /> 
-
-    return children;
-
-}
 
 export default App
+
+

@@ -1,11 +1,11 @@
 import { create } from 'zustand';
-
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 
 import { auth } from './../../../shared/config/firebaseConfig';
 
 //types
 import { User } from '../types/types';
+
 
 interface UserState {
     user: User | null,
@@ -15,10 +15,17 @@ interface UserState {
     setLoading: (payload: boolean ) => void,
 
     errorMessage: string | null,
-    setErrorMessage: (payload: string) => void,
+    setErrorMessage: (payload: string| null) => void,
 
-    listenAuthState: () => void;
+    authInitialized: boolean,
+
+    listenAuthState: () => () => void;
+
+    logout: () => Promise<void>;
+
 }
+
+
 
 export const useAuthStore = create<UserState>((set) => ({
 
@@ -31,14 +38,16 @@ export const useAuthStore = create<UserState>((set) => ({
     errorMessage: null,
     setErrorMessage: (payload) => set({errorMessage: payload}),
 
+    authInitialized: false,
+
     listenAuthState: () =>  {
         set({loading: true});
 
-        
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
 
             if (!currentUser) {
-                set({user: null, loading: false, errorMessage: null });
+                
+                set({user:null, loading: false, errorMessage: null, authInitialized: true });
                 console.log("User is not authenticated or has logged out");
                 return;
             }
@@ -50,19 +59,35 @@ export const useAuthStore = create<UserState>((set) => ({
                     user: {id: currentUser.uid, email: currentUser.email, token},
                     loading: false, 
                     errorMessage: null,
+                    authInitialized: true,
                 });
 
             } catch(error: unknown) {
                 console.error("Error retrieving Firebase token:", error);
 
-                set({user: null, loading: false, errorMessage: (error as Error).message})
-                return;
+                set({user: null, loading: false, errorMessage: (error as Error).message, authInitialized: true})
             } 
         });
 
         return unsubscribe;
-    }
+    },
 
+    logout: async () => {
+
+        set({loading: true});
+
+        try {
+            await signOut(auth);
+            set({user: null, errorMessage: null});
+            console.log("User successfully logged out");
+
+        } catch (error: unknown) {
+            set({errorMessage: (error as Error).message});
+        } finally {
+            set({loading: false});
+        }
+        
+    }
 }));
 
 

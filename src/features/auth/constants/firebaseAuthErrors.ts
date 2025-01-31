@@ -1,6 +1,6 @@
 export const FIREBASE_AUTH_ERRORS = new Map<string, string>([
     ["auth/claims-too-large", "The custom claims payload exceeds the maximum allowed size of 1000 bytes."],
-    ["auth/email-already-exists", "The provided email is already in use by another user."],
+    ["auth/email-already-in-use", "The provided email is already in use by another user."],
     ["auth/id-token-expired", "The provided ID token has expired. Please sign in again."],
     ["auth/id-token-revoked", "The Firebase ID token has been revoked. Please sign in again."],
     ["auth/insufficient-permission", "The credential used lacks the required permissions to perform this operation."],
@@ -40,6 +40,8 @@ export const FIREBASE_AUTH_ERRORS = new Map<string, string>([
     ["auth/uid-already-exists", "The provided UID is already in use by another user."],
     ["auth/unauthorized-continue-uri", "The domain of the continue URL is not whitelisted."],
     ["auth/user-not-found", "No user record found for the provided identifier."],
+    [ "auth/weak-password", "Password should be at least 6 characters"]
+    
 ]);
 
 
