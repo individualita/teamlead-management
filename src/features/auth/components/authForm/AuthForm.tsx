@@ -22,10 +22,10 @@ type AuthInputs = {
 
 type AuthFormProps = {
     title: string,
-    handleClick: (email: string, password: string) => void,
+    onFormSubmit: (email: string, password: string) => void,
 }
 
-const AuthForm = ({title, handleClick} : AuthFormProps) => {
+const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
 
     const {errorMessage} = useAuthStore();
 
@@ -34,7 +34,7 @@ const AuthForm = ({title, handleClick} : AuthFormProps) => {
     });
 
     const onSubmit: SubmitHandler<AuthInputs> = (data) => {
-        handleClick(data.email, data.password)
+        onFormSubmit(data.email, data.password)
     };
 
 

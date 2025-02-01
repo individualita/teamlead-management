@@ -1,22 +1,25 @@
 import { Navigate, Routes, Route } from 'react-router-dom';
-import { useEffect, Suspense } from 'react';
-
+import { useEffect, Suspense, lazy } from 'react';
 
 import { useAuthStore } from './features/auth/store/authStore';
 
 import { ROUTE_PATHS } from './shared/constants/routePaths';
 
 import Container from './shared/components/Container';
+import { LoadingCircle } from './shared/components/LoadingCircle';
 
 import { ProtectedRoute } from './shared/routes/ProtectedRoute';
 import { PublicRoute } from './shared/routes/PublicRote';
 
-import SignIn from './features/auth/pages/SignIn';
-import SignUp from './features/auth/pages/SignUp';
-import Home from './features/home/Home';
-
-
 import './App.css';
+
+
+// Lazy-loaded components
+
+const SignInLazy = lazy(() => import('./features/auth/pages/SignIn'));
+const SignUpLazy = lazy(() => import('./features/auth/pages/SignUp'));
+const HomeLazy = lazy(() => import('./features/home/Home'));
+
 
 
 const App = () => {
@@ -29,24 +32,24 @@ const App = () => {
 
         return () => unsubscribe();
     
-    }, []);
+    }, [listenAuthState]);
 
     console.log('user:', user, 'loading:', isLoading, 'initialized:', isAuthInitialized);
 
     return (
         <div className='app'>
             <Container>
-                <Suspense fallback={<div>loading...</div>}>
+                <Suspense fallback={<LoadingCircle />}>
                     <Routes>
                         {/* Публичные маршруты (только для НЕ залогиненных пользователей) */}
                         <Route element={<PublicRoute />}>
-                            <Route path={ROUTE_PATHS.SIGN_IN} element={<SignIn />} />
-                            <Route path={ROUTE_PATHS.SIGN_UP} element={<SignUp />} />
+                            <Route path={ROUTE_PATHS.SIGN_IN} element={<SignInLazy />} />
+                            <Route path={ROUTE_PATHS.SIGN_UP} element={<SignUpLazy />} />
                         </Route>
                         
                         {/* Защищённые маршруты (только для залогиненных пользователей) */}
                         <Route element={<ProtectedRoute />}>
-                            <Route path={ROUTE_PATHS.HOME} element={<Home />} />
+                            <Route path={ROUTE_PATHS.HOME} element={<HomeLazy />} />
                         </Route>
 
                         <Route path='*' element={<Navigate to={ROUTE_PATHS.HOME} />} />
