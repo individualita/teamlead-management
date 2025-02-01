@@ -11,13 +11,13 @@ interface UserState {
     user: User | null,
     setUser: (payload: User | null) => void,
 
-    loading: boolean,
+    isLoading: boolean,
     setLoading: (payload: boolean ) => void,
 
     errorMessage: string | null,
     setErrorMessage: (payload: string| null) => void,
 
-    authInitialized: boolean,
+    isAuthInitialized: boolean,
 
     listenAuthState: () => () => void;
 
@@ -32,22 +32,22 @@ export const useAuthStore = create<UserState>((set) => ({
     user: null,
     setUser: (payload) => set({user: payload}),
 
-    loading: false,
-    setLoading: (payload) => set({loading: payload}),
+    isLoading: false,
+    setLoading: (payload) => set({isLoading: payload}),
 
     errorMessage: null,
     setErrorMessage: (payload) => set({errorMessage: payload}),
 
-    authInitialized: false,
+    isAuthInitialized: false,
 
     listenAuthState: () =>  {
-        set({loading: true});
+        set({isLoading: true});
 
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
 
             if (!currentUser) {
                 
-                set({user:null, loading: false, errorMessage: null, authInitialized: true });
+                set({user:null, isLoading: false, errorMessage: null, isAuthInitialized: true });
                 console.log("User is not authenticated or has logged out");
                 return;
             }
@@ -57,15 +57,15 @@ export const useAuthStore = create<UserState>((set) => ({
 
                 set({
                     user: {id: currentUser.uid, email: currentUser.email, token},
-                    loading: false, 
+                    isLoading: false, 
                     errorMessage: null,
-                    authInitialized: true,
+                    isAuthInitialized: true,
                 });
 
             } catch(error: unknown) {
                 console.error("Error retrieving Firebase token:", error);
 
-                set({user: null, loading: false, errorMessage: (error as Error).message, authInitialized: true})
+                set({user: null, isLoading: false, errorMessage: (error as Error).message, isAuthInitialized: true})
             } 
         });
 
@@ -74,7 +74,7 @@ export const useAuthStore = create<UserState>((set) => ({
 
     logout: async () => {
 
-        set({loading: true});
+        set({isLoading: true});
 
         try {
             await signOut(auth);
@@ -84,7 +84,7 @@ export const useAuthStore = create<UserState>((set) => ({
         } catch (error: unknown) {
             set({errorMessage: (error as Error).message});
         } finally {
-            set({loading: false});
+            set({isLoading: false});
         }
         
     }

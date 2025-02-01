@@ -3,9 +3,9 @@ import { useAuthStore } from '../../features/auth/store/authStore';
 import { ROUTE_PATHS } from '../constants/routePaths';
 
 export const PublicRoute = () => {
-    const { user, authInitialized} = useAuthStore();
+    const { user, isAuthInitialized} = useAuthStore();
 
-    if (!authInitialized ) return <div>loading...</div>;
+    if (!isAuthInitialized ) return <div>loading...</div>;
 
     if (user) return <Navigate to={ROUTE_PATHS.HOME} />;
 

@@ -21,7 +21,7 @@ import './App.css';
 
 const App = () => {
 
-    const { user, listenAuthState, loading, authInitialized} = useAuthStore();
+    const { user, listenAuthState, isLoading, isAuthInitialized} = useAuthStore();
 
     useEffect(() => {
 
@@ -31,7 +31,7 @@ const App = () => {
     
     }, []);
 
-    console.log('user:', user, 'loading:', loading, 'initialized:', authInitialized);
+    console.log('user:', user, 'loading:', isLoading, 'initialized:', isAuthInitialized);
 
     return (
         <div className='app'>
