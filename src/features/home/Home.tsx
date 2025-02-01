@@ -9,7 +9,7 @@ const Home = () => {
     const navigate = useNavigate();
 
 
-    const handLogOut = async () => {
+    const handleLogOut = async () => {
         await logout();
         navigate(ROUTE_PATHS.SIGN_IN);
     };
@@ -19,7 +19,7 @@ const Home = () => {
             <h1>Home page</h1>
 
 
-            <button onClick={handLogOut}className='p-2 bg-blue-500'>Sign out</button>
+            <button onClick={handleLogOut}className='p-2 bg-blue-500'>Sign out</button>
         </div>
     )
 }

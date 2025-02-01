@@ -1,4 +1,4 @@
-import { Navigate, Routes, Route, Outlet } from 'react-router-dom';
+import { Navigate, Routes, Route } from 'react-router-dom';
 import { useEffect, Suspense } from 'react';
 
 
@@ -25,9 +25,9 @@ const App = () => {
 
     useEffect(() => {
 
-        const unsubsrcibe = listenAuthState();
+        const unsubscribe = listenAuthState();
 
-        return () => unsubsrcibe();
+        return () => unsubscribe();
     
     }, []);
 
@@ -47,10 +47,6 @@ const App = () => {
                         {/* Защищённые маршруты (только для залогиненных пользователей) */}
                         <Route element={<ProtectedRoute />}>
                             <Route path={ROUTE_PATHS.HOME} element={<Home />} />
-                        </Route>
-
-                        <Route element={<Outlet />}>
-                            <Route path={ROUTE_PATHS.HOME} element={<Home />}/>
                         </Route>
 
                         <Route path='*' element={<Navigate to={ROUTE_PATHS.HOME} />} />

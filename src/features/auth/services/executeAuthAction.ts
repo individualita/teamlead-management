@@ -6,7 +6,7 @@ import { User } from '../types/types';
 
 type AuthActionType =  (auth: Auth, email:string, password:string) => Promise<UserCredential>;
 
-export const createUserService = async (action: AuthActionType, auth: Auth, email:string, password:string): Promise<User> => {
+export const executeAuthAction = async (action: AuthActionType, auth: Auth, email:string, password:string): Promise<User> => {
     
     const userCredential = await action(auth, email, password);
     const user = userCredential.user;

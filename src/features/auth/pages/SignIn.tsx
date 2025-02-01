@@ -8,7 +8,7 @@ import { ROUTE_PATHS } from "../../../shared/constants/routePaths";
 
 
 import { FIREBASE_AUTH_ERRORS } from "../constants/firebaseAuthErrors";
-import { createUserService } from "../services/createUserService";
+import { executeAuthAction } from "../services/executeAuthAction";
 
 //test@gmail.com
 //Test1234
@@ -26,7 +26,7 @@ const SignIn = () => {
             setErrorMessage('');
             setLoading(true);
 
-            const user = await createUserService(signInWithEmailAndPassword, auth, email, password);
+            const user = await executeAuthAction(signInWithEmailAndPassword, auth, email, password);
     
             setUser(user);
             
@@ -45,7 +45,7 @@ const SignIn = () => {
     return (
         <>
             <h1>Sign in page</h1>
-            <AuthForm title={'Sign in'} handleClick={handleLogin} />
+            <AuthForm title={'Sign in'} onFormSubmit={handleLogin} />
         </>
     )
 

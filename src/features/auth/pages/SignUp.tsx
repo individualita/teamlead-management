@@ -9,7 +9,7 @@ import {auth} from '../../../shared/config/firebaseConfig';
 import { FIREBASE_AUTH_ERRORS } from "../constants/firebaseAuthErrors";
 import { ROUTE_PATHS } from "../../../shared/constants/routePaths";
 
-import { createUserService } from "../services/createUserService";
+import { executeAuthAction } from "../services/executeAuthAction";
 
 const SignUp = () => {
 
@@ -24,7 +24,7 @@ const SignUp = () => {
             setErrorMessage('');
             setLoading(true);
 
-            const user = await createUserService(createUserWithEmailAndPassword, auth, email, password);
+            const user = await executeAuthAction(createUserWithEmailAndPassword, auth, email, password);
   
             setUser(user);
 
@@ -46,7 +46,7 @@ const SignUp = () => {
         <>
             <h1>Sign Up page!</h1>
 
-            <AuthForm title={'Sign Up'} handleClick={handleRegister} /> 
+            <AuthForm title={'Sign Up'} onFormSubmit={handleRegister} /> 
         </>
     )
 }
