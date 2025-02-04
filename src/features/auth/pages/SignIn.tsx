@@ -1,14 +1,22 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import AuthForm from "../components/authForm/AuthForm";
-import {auth} from '../../../shared/config/firebaseConfig';
-import { useAuthStore } from "../store/authStore";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 
-import { ROUTE_PATHS } from "../../../shared/constants/routePaths";
+//config
+import { auth } from '../../../shared/config/firebaseConfig';
 
+//store
+import { useAuthStore } from '../store/authStore';
 
-import { FIREBASE_AUTH_ERRORS } from "../constants/firebaseAuthErrors";
-import { executeAuthAction } from "../services/executeAuthAction";
+//constants 
+import { FIREBASE_AUTH_ERRORS } from '../constants/firebaseAuthErrors';
+import { ROUTE_PATHS } from '../../../shared/constants/routePaths';
+
+//services
+import { executeAuthAction } from '../services/executeAuthAction';
+
+//components 
+import AuthForm from '../components/authForm/AuthForm';
+
 
 //test@gmail.com
 //Test1234
@@ -33,7 +41,7 @@ const SignIn = () => {
             navigate(ROUTE_PATHS.HOME);
 
         } catch (error: any) {
-            const firebaseError = FIREBASE_AUTH_ERRORS.get(error.code) || "An unknown error occurred.";
+            const firebaseError = FIREBASE_AUTH_ERRORS.get(error.code) || 'An unknown error occurred.';
             setErrorMessage(firebaseError);
             console.error(error);
 

@@ -1,8 +1,11 @@
 import { Outlet, Navigate } from 'react-router-dom'
+
+//store
+import { useAuthStore } from '../../features/auth/store/authStore';
+//constants 
 import { ROUTE_PATHS } from '../constants/routePaths';
 
-import { useAuthStore } from '../../features/auth/store/authStore';
-
+//components
 import { LoadingCircle } from '../components/LoadingCircle';
 
 export const ProtectedRoute = () => {

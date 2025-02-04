@@ -45,3 +45,6 @@
     opacity: 0.9;
 }
 
+.error {
+    @apply text-xs text-red-600;
+}

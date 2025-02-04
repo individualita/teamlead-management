@@ -1,14 +1,17 @@
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Link } from 'react-router-dom';
 
-import { useAuthStore } from '../../store/authStore';
-
-import { ROUTE_PATHS } from '../../../../shared/constants/routePaths';
-
-import ErrorAlert from '../errorAlert/ErrorAlert';
-
 // material UI
 import Divider from '@mui/material/Divider';
+
+//store
+import { useAuthStore } from '../../store/authStore';
+
+//constants
+import { ROUTE_PATHS } from '../../../../shared/constants/routePaths';
+
+//components
+import ErrorAlert from '../errorAlert/ErrorAlert';
 
 //styles
 import styles from './authForm.module.css';
@@ -58,7 +61,7 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
                         placeholder='your@email.com' 
                         className={styles.input}
                     />
-                    {errors.email && <span>Email is required</span>}
+                    {errors.email && <span className={styles.error}>Email is required</span>}
                 </div>
 
                 <div className={styles.formGroup}>
@@ -71,7 +74,7 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
                         className={styles.input}
                         autoComplete='current-password'
                     />
-                    {errors.password && <span> Password is required</span>}
+                    {errors.password && <span className={styles.error}> Password is required</span>}
                 </div>
 
 

@@ -1,6 +1,6 @@
 
 //types
-import { Auth, UserCredential } from "firebase/auth";
+import { Auth, UserCredential } from 'firebase/auth';
 import { User } from '../types/types';
 
 

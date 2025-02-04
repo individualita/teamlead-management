@@ -48,7 +48,7 @@ export const useAuthStore = create<UserState>((set) => ({
             if (!currentUser) {
                 
                 set({user:null, isLoading: false, errorMessage: null, isAuthInitialized: true });
-                console.log("User is not authenticated or has logged out");
+                console.log('User is not authenticated or has logged out');
                 return;
             }
 
@@ -63,7 +63,7 @@ export const useAuthStore = create<UserState>((set) => ({
                 });
 
             } catch(error: unknown) {
-                console.error("Error retrieving Firebase token:", error);
+                console.error('Error retrieving Firebase token:', error);
 
                 set({user: null, isLoading: false, errorMessage: (error as Error).message, isAuthInitialized: true})
             } 
@@ -79,7 +79,7 @@ export const useAuthStore = create<UserState>((set) => ({
         try {
             await signOut(auth);
             set({user: null, errorMessage: null});
-            console.log("User successfully logged out");
+            console.log('User successfully logged out');
 
         } catch (error: unknown) {
             set({errorMessage: (error as Error).message});

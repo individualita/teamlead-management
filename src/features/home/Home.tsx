@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../auth/store/authStore";
+import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../auth/store/authStore';
 
-import { ROUTE_PATHS } from "../../shared/constants/routePaths";
+import { ROUTE_PATHS } from '../../shared/constants/routePaths';
 
 const Home = () => {
 
