@@ -1,4 +1,4 @@
-import { Navigate, Routes, Route } from 'react-router-dom';
+import { Navigate, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, Suspense, lazy } from 'react';
 
 import { useAuthStore } from './features/auth/store/authStore';
@@ -24,7 +24,8 @@ const HomeLazy = lazy(() => import('./features/home/Home'));
 
 const App = () => {
 
-    const { user, listenAuthState, isLoading, isAuthInitialized} = useAuthStore();
+    const { user, listenAuthState, isLoading, isAuthInitialized,  setErrorMessage} = useAuthStore();
+    const {pathname} = useLocation();
 
     useEffect(() => {
 
@@ -33,6 +34,11 @@ const App = () => {
         return () => unsubscribe();
     
     }, [listenAuthState]);
+
+    // Clear message errors when changing routes
+    useEffect(() => {
+        setErrorMessage(null);
+    }, [pathname]);
 
     console.log('user:', user, 'loading:', isLoading, 'initialized:', isAuthInitialized);
 

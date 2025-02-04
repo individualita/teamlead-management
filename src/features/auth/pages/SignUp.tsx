@@ -20,11 +20,12 @@ import AuthForm from '../components/authForm/AuthForm';
 
 const SignUp = () => {
 
-    const {user, setLoading, setErrorMessage, setUser} = useAuthStore();
-    console.log(user);
+    const { setLoading, setErrorMessage, setUser} = useAuthStore();
 
 
     const navigate = useNavigate();
+
+
 
     const handleRegister = async (email: string, password: string) => {
         try {
@@ -46,7 +47,8 @@ const SignUp = () => {
         } finally {
             setLoading(false);
         }
-    }
+    };
+
 
 
     return (

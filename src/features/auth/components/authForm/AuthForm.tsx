@@ -32,7 +32,7 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
 
     const {errorMessage} = useAuthStore();
 
-    const { register, handleSubmit, watch, formState: { errors }} = useForm<AuthInputs>({
+    const { register, handleSubmit,  formState: { errors }} = useForm<AuthInputs>({
         mode: 'onChange',
     });
 
