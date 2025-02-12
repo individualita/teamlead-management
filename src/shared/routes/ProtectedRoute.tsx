@@ -12,7 +12,7 @@ export const ProtectedRoute = () => {
     const {isLoading, user, isAuthInitialized } = useAuthStore();
 
     if (!isAuthInitialized || isLoading) return <LoadingCircle />;
-    if(!user) return <Navigate to={ROUTE_PATHS.SIGN_IN} /> ;
+    if(!user) return <Navigate to={ROUTE_PATHS.SIGN_IN} replace /> ;
 
     return <Outlet />;
 };

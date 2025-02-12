@@ -8,8 +8,13 @@ import { ROUTE_PATHS } from './shared/constants/routePaths';
 import Container from './shared/components/Container';
 import { LoadingCircle } from './shared/components/LoadingCircle';
 
-import { ProtectedRoute } from './shared/routes/ProtectedRoute';
+import { ProtectedRoute } from './shared/routes/ProtectedRoute'; 
 import { PublicRoute } from './shared/routes/PublicRote';
+
+import MainLayout from './shared/components/layouts/mainLayout/MainLayout';
+import Employees from './features/employees/Employees';
+import Activity from './features/activity/Activity';
+import Chat from './features/chat/Chat';
 
 import './App.css';
 
@@ -46,6 +51,7 @@ const App = () => {
         <div className='app'>
             <Container>
                 <Suspense fallback={<LoadingCircle />}>
+
                     <Routes>
                         {/* Публичные маршруты (только для НЕ залогиненных пользователей) */}
                         <Route element={<PublicRoute />}>
@@ -55,10 +61,21 @@ const App = () => {
                         
                         {/* Защищённые маршруты (только для залогиненных пользователей) */}
                         <Route element={<ProtectedRoute />}>
-                            <Route path={ROUTE_PATHS.HOME} element={<HomeLazy />} />
+
+                            <Route element={<MainLayout />}>
+
+                                <Route path={ROUTE_PATHS.HOME} element={<HomeLazy />}/>
+                                <Route path={ROUTE_PATHS.EMPLOYEES} element={<Employees />} />
+                                <Route path={ROUTE_PATHS.ACTIVITY} element={<Activity />} />
+                                <Route path={ROUTE_PATHS.CHAT} element={<Chat />} />
+
+
+                            </Route>
+
                         </Route>
 
-                        <Route path='*' element={<Navigate to={ROUTE_PATHS.HOME} />} />
+                        <Route path="*" element={<Navigate to={`/${ROUTE_PATHS.HOME}`}/>} />
+
                         
                     </Routes>
 

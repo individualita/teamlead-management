@@ -86,7 +86,7 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
                     {title === 'Sign in' ? `Don't have an account?` : 'Already have an account?' } {''}
 
                     <Link to={title === 'Sign in'? ROUTE_PATHS.SIGN_UP : ROUTE_PATHS.SIGN_IN} className='text-blue-600'>
-                        {title==='Sign in'? 'Sign Up' : 'Sign in'}
+                        {title==='Sign in'? 'Get started' : 'Sign in'}
                     </Link>
 
                 </p>

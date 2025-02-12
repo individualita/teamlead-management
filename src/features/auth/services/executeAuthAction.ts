@@ -1,7 +1,7 @@
 
 //types
 import { Auth, UserCredential } from 'firebase/auth';
-import { User } from '../types/types';
+import { User } from '../types';
 
 
 type AuthActionType =  (auth: Auth, email:string, password:string) => Promise<UserCredential>;
