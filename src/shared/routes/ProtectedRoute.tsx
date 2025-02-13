@@ -6,7 +6,7 @@ import { useAuthStore } from '../../features/auth/store/authStore';
 import { ROUTE_PATHS } from '../constants/routePaths';
 
 //components
-import { LoadingCircle } from '../components/LoadingCircle';
+import { LoadingCircle } from '../components/layouts/loadingCircle/LoadingCircle';
 
 export const ProtectedRoute = () => {
     const {isLoading, user, isAuthInitialized } = useAuthStore();

@@ -2,7 +2,7 @@ import { Outlet, Navigate } from 'react-router-dom';
 //store
 import { useAuthStore } from '../../features/auth/store/authStore';
 
-import { LoadingCircle } from '../components/LoadingCircle';
+import { LoadingCircle } from '../components/layouts/loadingCircle/LoadingCircle';
 
 
 export const PublicRoute = () => {

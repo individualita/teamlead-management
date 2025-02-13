@@ -5,8 +5,8 @@ import { useAuthStore } from './features/auth/store/authStore';
 
 import { ROUTE_PATHS } from './shared/constants/routePaths';
 
-import Container from './shared/components/Container';
-import { LoadingCircle } from './shared/components/LoadingCircle';
+import Container from './shared/components/layouts/container/Container';
+import { LoadingCircle } from './shared/components/layouts/loadingCircle/LoadingCircle';
 
 import { ProtectedRoute } from './shared/routes/ProtectedRoute'; 
 import { PublicRoute } from './shared/routes/PublicRote';
