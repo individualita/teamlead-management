@@ -1,6 +1,8 @@
-import ProfileOption  from './ProfileOption';
+import ProfileOption  from '../profileOption/ProfileOption';
 
 import { Transition } from 'react-transition-group';
+
+import styles from './profileDropdown.module.css';
 
 
 type ProfilePropdownProps = {
@@ -30,19 +32,19 @@ const ProfileDropdown = ({isOpen}: ProfilePropdownProps) => {
         <Transition timeout={duration} in={isOpen} unmountOnExit>
             {state => (
 
-                <div 
+                <article 
                     style={{...defaultStyle, ...transitionStyles[state]}} 
-                    className='absolute right-4 bg-white shadow-sm rounded-md inset-shadow-sm'
+                    className={styles.card}
                 >
 
-                    <div className='border-b border-b-gray-300 px-4 py-3'>
-                        <div className='name text-base font-semibold'>Sofia Rivers</div>
-                        <div className='email text-gray-500 text-sm'>randomemail@gmail.com</div>
-                    </div>
+                    <header className={styles.header}>
+                        <h2 className='text-base font-semibold'>Sofia Rivers</h2>
+                        <address className={styles.email}>randomemail@gmail.com</address>
+                    </header>
 
                     <ProfileOption />
 
-                </div>
+                </article>
 
             )}
 

@@ -6,7 +6,6 @@ import Sidebar from '../sidebar/Sidebar';
 const MainLayout = () => {
 
 
-
     return (
         <div className=' border border-amber-600 py-4 h-dvh'>
             <h1 className='text-center'>dashboard</h1>
@@ -15,7 +14,7 @@ const MainLayout = () => {
             <main className='flex h-full'>
 
                 {/* либо флекс бейсис 260*/}
-                { <Sidebar  />}
+                <Sidebar  />
                 
 
 

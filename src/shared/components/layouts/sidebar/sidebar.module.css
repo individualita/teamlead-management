@@ -1,36 +1,18 @@
+
+@reference '../../../../assets/styles/main.css';
+
+
+
 .sidebar {
-    width: 260px;
     min-width: 60px; /* Оставляет место для иконок */
-    background: rgba(178, 186, 197, 0.8);
-    padding: 1rem;
+    padding: 1rem 0.5rem;
     transition: width 0.3s ease-in-out;
     will-change: width;
-    border-right: 1px solid green;
-}
+    border-right: 1px solid gray;
 
-.sidebar.open {
-    width: 260px;
-}
-
-.sidebar.closed {
-    width: 60px;
 }
 
 
-/* Убираем скрытие всей ссылки */
-.sidebar a {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    opacity: 1;
-    transition: opacity 0.3s ease, width 0.3s ease;
-}
 
-/* Скрываем только текст, но не иконку */
-.sidebar.closed a span {
-    opacity: 0;
-    visibility: hidden;
-    width: 0;
-    overflow: hidden;
-    transition: opacity 0.3s ease, width 0.3s ease;
-}
+
+

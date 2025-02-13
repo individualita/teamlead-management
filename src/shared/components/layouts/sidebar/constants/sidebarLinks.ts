@@ -1,10 +1,9 @@
+import { SidebarLink } from '../types/sidebar.types';
 import { HiOutlineSquares2X2 } from 'react-icons/hi2';
 import { GoPeople } from 'react-icons/go';
-import { FaChartColumn } from 'react-icons/fa6';
 import { HiOutlineChatBubbleLeftEllipsis } from 'react-icons/hi2';
+import { FiBarChart } from 'react-icons/fi';
 
-
-import { SidebarLink } from '../types/sidebar.types';
 
 
 
@@ -24,12 +23,12 @@ export const SIDEBAR_LINKS: SidebarLink[] = [
     },
 
     {
-        icon: FaChartColumn,
+        icon: FiBarChart,
         name: 'Daily activity',
         path: '/activity'
     },
     {
-        icon: HiOutlineChatBubbleLeftEllipsis,
+        icon:  HiOutlineChatBubbleLeftEllipsis, 
         name: 'Chat',
         path: '/chat'
     },
