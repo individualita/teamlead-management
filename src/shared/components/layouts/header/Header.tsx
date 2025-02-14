@@ -1,14 +1,15 @@
-import SearchBar from "./SearchBar";
+import SearchBar from './components/searchBar/SearchBar';
+import Logo from './components/logo/Logo';
 
-import ProfileMenu from "../../../../features/profile/ProfileMenu";
+import ProfileMenu from '../../../../features/profile/ProfileMenu';
 
-
+import styles from './header.module.css';
 
 
 const Header = () => {
     return (
-        <header className='flex items-center justify-between border border-b-cyan-700'>
-            <div className="icon">ICON</div>
+        <header className={styles.header}>
+            <Logo />
             <SearchBar />
             <ProfileMenu />
 

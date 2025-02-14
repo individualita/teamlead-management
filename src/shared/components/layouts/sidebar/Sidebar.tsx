@@ -1,4 +1,7 @@
 import { useState } from 'react';
+
+import { RxDoubleArrowLeft } from "react-icons/rx";
+
 import { SIDEBAR_LINKS } from './constants/sidebarLinks';
 import SidebarItem from './components/SidebarItem';
 
@@ -11,10 +14,16 @@ const Sidebar = () => {
     return (
         <aside className={`${styles.sidebar} ${isSidebarOpen? 'w-[260px]': 'w-[60px]'}`}
 >           
-            <button onClick={() =>setIsSidebarOpen(prev => !prev) }>toggle test</button>
+            <button 
+                onClick={() =>setIsSidebarOpen(prev => !prev) }
+                style={{rotate: isSidebarOpen? '0deg': '180deg', transition: 'rotate 0.4s ease-in-out'}}
+                >
+                    <RxDoubleArrowLeft />
+            </button>
+
             <nav className='text-base'>
 
-                <ul className={`flex flex-col gap-3 ${isSidebarOpen? '': 'items-end'}`}>
+                <ul className={`flex flex-col gap-2 ${isSidebarOpen? '': 'items-end'}`}>
 
                     {SIDEBAR_LINKS.map(link => (
                         <SidebarItem key={link.name} link={link} isOpen={isSidebarOpen}/>

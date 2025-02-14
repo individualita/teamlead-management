@@ -9,18 +9,9 @@ import Sidebar from '../sidebar/Sidebar';
 const MainLayout = () => {
 
     const {pathname} = useLocation();
-    console.log(pathname);
-
-    
-
-
-
-
-
-    console.log(getPageTitle(pathname));
 
     return (
-        <div className=' border border-amber-600 py-4 h-dvh'>
+        <div className='h-dvh'>
             <Header />
 
             <main className='flex h-full'>

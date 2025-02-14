@@ -6,9 +6,9 @@
 .sidebar {
     min-width: 60px; /* Оставляет место для иконок */
     padding: 1rem 0.5rem;
-    transition: width 0.3s ease-in-out;
+    transition: width 0.4s ease-in-out;
     will-change: width;
-    border-right: 1px solid gray;
+    @apply border-r-2 border-r-gray-100;
 
 }
 

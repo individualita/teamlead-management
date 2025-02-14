@@ -1,0 +1,5 @@
+@reference '../../../../../../assets/styles/main.css';
+
+.logoWrapper {
+    @apply flex gap-2 items-center w-[260px] px-2;
+}
