@@ -1,3 +1,5 @@
+import { useRef } from 'react';
+
 import ProfileOption  from '../profileOption/ProfileOption';
 
 import { Transition } from 'react-transition-group';
@@ -10,6 +12,8 @@ type ProfilePropdownProps = {
 }
 
 const ProfileDropdown = ({isOpen}: ProfilePropdownProps) => {
+
+    const nodeRef = useRef(null);
 
     const duration = 300;
 
@@ -29,12 +33,13 @@ const ProfileDropdown = ({isOpen}: ProfilePropdownProps) => {
 
     return (
 
-        <Transition timeout={duration} in={isOpen} unmountOnExit>
+        <Transition timeout={duration} in={isOpen} nodeRef={nodeRef} unmountOnExit>
             {state => (
 
                 <article 
                     style={{...defaultStyle, ...transitionStyles[state]}} 
                     className={styles.card}
+                    ref={nodeRef}
                 >
 
                     <header className={styles.header}>

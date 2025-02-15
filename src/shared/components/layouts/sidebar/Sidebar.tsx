@@ -12,8 +12,7 @@ const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
     return (
-        <aside className={`${styles.sidebar} ${isSidebarOpen? 'w-[260px]': 'w-[60px]'}`}
->           
+        <aside className={`${styles.sidebar} ${isSidebarOpen? 'w-[260px]': 'w-[60px]'}`}>           
             <button 
                 onClick={() =>setIsSidebarOpen(prev => !prev) }
                 className={`${styles.toggleButton} ${isSidebarOpen? 'rotate-0': '-rotate-180'}`}

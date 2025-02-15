@@ -8,30 +8,28 @@ import ProfileDropdown from './components/profileDropdown/ProfileDropdown';
 
 const ProfileMenu = () => {
 
-    const [isOpenMenu, setIsOpenMenu] = useState(false);
-    const toggleOpen = () => setIsOpenMenu(prev => !prev);
+    const [isOpenProfileMenu, setIsOpenProfileMenu] = useState(false);
+    const toggleOpen = () => setIsOpenProfileMenu(prev => !prev);
 
     const profileRef = useRef<HTMLDivElement>(null);
-
 
     const handleClickOutside = (e: MouseEvent) => {
 
         //клие не внутри
         if (!profileRef.current?.contains(e.target as Node)) {
-            setIsOpenMenu(false);
+            setIsOpenProfileMenu(false);
         }
     };
 
     useEffect(() => {
 
-        if(!isOpenMenu) return; 
+        if(!isOpenProfileMenu) return; 
 
         document.addEventListener('click', handleClickOutside);
-        
+
         return () => document.removeEventListener('click', handleClickOutside);
 
-    }, [isOpenMenu]);
-
+    }, [isOpenProfileMenu]);
 
 
 
@@ -42,7 +40,7 @@ const ProfileMenu = () => {
                 <Avatar src={'https://material-kit-react.devias.io/assets/avatar.png'}/>
             </div>
 
-            <ProfileDropdown isOpen={isOpenMenu}/>
+            <ProfileDropdown isOpen={isOpenProfileMenu}/>
 
 
         </div>
