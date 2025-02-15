@@ -16,7 +16,7 @@ const Sidebar = () => {
 >           
             <button 
                 onClick={() =>setIsSidebarOpen(prev => !prev) }
-                style={{rotate: isSidebarOpen? '0deg': '180deg', transition: 'rotate 0.4s ease-in-out'}}
+                className={`${styles.toggleButton} ${isSidebarOpen? 'rotate-0': '-rotate-180'}`}
                 >
                     <RxDoubleArrowLeft />
             </button>

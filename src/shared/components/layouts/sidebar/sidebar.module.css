@@ -4,14 +4,21 @@
 
 
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
     min-width: 60px; /* Оставляет место для иконок */
     padding: 1rem 0.5rem;
     transition: width 0.4s ease-in-out;
     will-change: width;
     @apply border-r-2 border-r-gray-100;
-
 }
 
+
+.toggleButton {
+    @apply cursor-pointer  p-2 hover:bg-gray-200 self-end;
+    transition: background-color 0.4s ease-in-out, transform 0.4s ease-in-out;
+}
 
 
 
