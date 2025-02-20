@@ -2,7 +2,6 @@ import SearchBar from './components/searchBar/SearchBar';
 import Logo from './components/logo/Logo';
 
 import ProfileMenu from '../../../../features/profile/ProfileMenu';
-
 import styles from './header.module.css';
 
 
