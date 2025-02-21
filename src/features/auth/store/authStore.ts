@@ -4,7 +4,7 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from './../../../shared/config/firebaseConfig';
 
 //types
-import { User } from '../types';
+import { User } from '../types/user';
 
 
 interface UserState {
