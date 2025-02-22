@@ -33,7 +33,9 @@ const Table = ({columns, data, onDelete}: TableProps) => {
                         ))}
                         
                         {onDelete && (
-                            <button onClick={(() => onDelete(item._id))} className='absolute cursor-pointer top-4 right-[5px] text-xl text-red-500'>X</button>
+                            <td>
+                                <button onClick={(() => onDelete(item._id))} className='absolute cursor-pointer top-4 right-[5px] text-xl text-red-500'>X</button>
+                            </td>
                         )}
                     </tr>
                 ))}

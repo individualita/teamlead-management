@@ -21,6 +21,7 @@ const Employees = () => {
                 {/* desktop size */}
                 <div className='overflow-x-auto rounded-lg shadow-md hidden md:block'>
                     <EmployeesTable />
+
                 </div>
 
                 {/* card view for mobile size */}
@@ -31,7 +32,6 @@ const Employees = () => {
                 </div>
 
             </div>
-
 
         </div>
     )
