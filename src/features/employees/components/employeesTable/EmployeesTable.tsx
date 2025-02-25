@@ -3,6 +3,8 @@ import { useState, useMemo } from 'react';
 
 import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
 
+import { usePagination } from '../../../../shared/hooks/usePagination';
+
 import Table from '../../../../shared/components/layouts/table/Table';
 
 import TablePagination from '../../../../shared/components/layouts/tablePagination/TablePagination';
@@ -27,13 +29,15 @@ const EmployeesTable = () => {
     }, [employees]);
 
 
-    let startIndex = (currentPage - 1) * rowsPerPage; 
-    let endIndex = Math.min((currentPage * rowsPerPage), totalRows);// не выходим за пределы totalRows
+    const {
+        displayedData: displayedEmployees, 
+        startIndex, 
+        endIndex, 
+        isFirstPage, 
+        isLastPage
+    } = usePagination(employees, currentPage, rowsPerPage);
 
-    const isFirstPage = currentPage === 1;
-    const isLastPage = endIndex >= totalRows; 
 
-    const displayedEmployees = employees.slice(startIndex, endIndex); 
 
     
     const handleNextPage = () => {
