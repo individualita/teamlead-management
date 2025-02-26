@@ -7,7 +7,7 @@ import EmployeesTable from './components/employeesTable/EmployeesTable';
 
 import EmployeeCard from './components/employeeCard/EmployeeCard';
 
-
+import TableUiTest from './components/TableUiTest';
 
 const Employees = () => {
 
@@ -30,6 +30,8 @@ const Employees = () => {
                     {employees.map(emp => <EmployeeCard key={emp._id} employee={emp}/>)}
 
                 </div>
+
+                <TableUiTest />
 
             </div>
 
