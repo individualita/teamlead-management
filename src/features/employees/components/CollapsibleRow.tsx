@@ -17,45 +17,40 @@ import { Employee } from '../../../shared/types/employee';
 
 interface CollapsibleRowProps {
     employee: Employee,
+    isOpen: boolean,
+    colSpanLength: number,
 }
 
-const CollapsibleRow = ({employee}: CollapsibleRowProps) => {
+const CollapsibleRow = ({employee, isOpen, colSpanLength}: CollapsibleRowProps) => {
 
-    const [isOpen, setIsOpen] = useState(false); // Локальное состояние
 
     return (
-        <>
+        <TableRow >
+            <TableCell colSpan={colSpanLength} style={{ paddingBottom: 0, paddingTop: 0 }}>
+                <Collapse in={isOpen} timeout="auto" unmountOnExit>
+                    <Box sx={{padding: 2, borderRadius: 1 }} >
+                        <h3>Additional Info</h3>
 
-            {/* collapsed */}
-            <TableRow sx={{background: 'lightgray',  borderBottom: 'unset'}}>
-                <TableCell colSpan={6}>
-                    <Collapse  in={isOpen} timeout="auto" unmountOnExit>
-                        <Box margin={1}>
-                            <h1>Additional information</h1>
-                            <Table size={'small'}>
+                        <Table size="small">
+                            <TableHead>
+                                <TableRow sx={{'& > *': {fontWeight: 'bold'}}}>
+                                    <TableCell>Email</TableCell>
+                                    <TableCell>Phone</TableCell>
+                                </TableRow>
+                            </TableHead>
 
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell>phone</TableCell>
-                                        <TableCell>email</TableCell>
-                                    </TableRow>
-                                </TableHead>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell>{employee.email}</TableCell>
+                                    <TableCell>{employee.phone}</TableCell>
+                                </TableRow>
+                            </TableBody>
 
-                                <TableBody>
-                                    <TableRow>
-                                        <TableCell>{employee.phone}</TableCell>
-                                        <TableCell>{employee.email}</TableCell>
-
-                                    </TableRow>
-                                </TableBody>
-                            </Table>
-
-                        </Box>
-
-                    </Collapse>
-                </TableCell>
-            </TableRow>
-        </>
+                        </Table>
+                    </Box>
+                </Collapse>
+            </TableCell>
+        </TableRow>
     )
 
 }

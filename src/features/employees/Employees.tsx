@@ -11,7 +11,9 @@ import TableUiTest from './components/TableUiTest';
 
 const Employees = () => {
 
-    const {employees} = useEmployeeStore()
+    const {employees} = useEmployeeStore();
+
+    let test = false;
 
     return (
         <div className='employees'>
@@ -20,7 +22,7 @@ const Employees = () => {
 
                 {/* desktop size */}
                 <div className='overflow-x-auto rounded-lg shadow-md hidden md:block'>
-                    <EmployeesTable />
+                    {test && <EmployeesTable />}
 
                 </div>
 
