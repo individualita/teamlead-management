@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import {
     TableRow,
     TableCell,
@@ -9,7 +10,6 @@ import {
     TableHead
 } from '@mui/material';
 
-import { useState } from 'react';
 
 
 import { Employee } from '../../../shared/types/employee';
@@ -18,15 +18,18 @@ import { Employee } from '../../../shared/types/employee';
 interface CollapsibleRowProps {
     employee: Employee,
     isOpen: boolean,
-    colSpanLength: number,
+    isEditing: boolean,
+    colSpanCount: number,
+    editedEmail: string,
+    editedPhone: string,
+    handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void,
 }
 
-const CollapsibleRow = ({employee, isOpen, colSpanLength}: CollapsibleRowProps) => {
-
+const CollapsibleRow = ({employee, isOpen, isEditing, colSpanCount, editedEmail, editedPhone, handleInputChange}: CollapsibleRowProps) => {
 
     return (
         <TableRow >
-            <TableCell colSpan={colSpanLength} style={{ paddingBottom: 0, paddingTop: 0 }}>
+            <TableCell colSpan={colSpanCount} style={{ paddingBottom: 0, paddingTop: 0 }}>
                 <Collapse in={isOpen} timeout="auto" unmountOnExit>
                     <Box sx={{padding: 2, borderRadius: 1 }} >
                         <h3>Additional Info</h3>
@@ -41,8 +44,36 @@ const CollapsibleRow = ({employee, isOpen, colSpanLength}: CollapsibleRowProps) 
 
                             <TableBody>
                                 <TableRow>
-                                    <TableCell>{employee.email}</TableCell>
-                                    <TableCell>{employee.phone}</TableCell>
+                                    {isEditing? (
+                                        <>
+                                            <TableCell> 
+                                                <input 
+                                                    type='email' 
+                                                    name='email'
+                                                    value={editedEmail} 
+                                                    onChange={handleInputChange}
+
+
+                                                />
+                                            </TableCell>
+                                            <TableCell> 
+                                                <input 
+                                                    type='tel' 
+                                                    name='phone' 
+                                                    value={editedPhone}
+                                                    onChange={handleInputChange}
+                                                />
+                                            </TableCell>
+
+                                        </>
+                                    ) : (
+                                        <>
+                                            <TableCell>{employee.email}</TableCell>
+                                            <TableCell>{employee.phone}</TableCell>
+                                        </>
+
+                                    )}
+
                                 </TableRow>
                             </TableBody>
 
