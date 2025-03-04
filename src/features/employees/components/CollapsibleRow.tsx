@@ -20,12 +20,11 @@ interface CollapsibleRowProps {
     isOpen: boolean,
     isEditing: boolean,
     colSpanCount: number,
-    editedEmail: string,
-    editedPhone: string,
-    handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void,
+    formData: Partial<Employee>,
+    handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
 }
 
-const CollapsibleRow = ({employee, isOpen, isEditing, colSpanCount, editedEmail, editedPhone, handleInputChange}: CollapsibleRowProps) => {
+const CollapsibleRow = ({employee, isOpen, isEditing, colSpanCount, formData, handleChange}: CollapsibleRowProps) => {
 
     return (
         <TableRow >
@@ -50,8 +49,8 @@ const CollapsibleRow = ({employee, isOpen, isEditing, colSpanCount, editedEmail,
                                                 <input 
                                                     type='email' 
                                                     name='email'
-                                                    value={editedEmail} 
-                                                    onChange={handleInputChange}
+                                                    value={formData.email} 
+                                                    onChange={handleChange}
 
 
                                                 />
@@ -60,8 +59,8 @@ const CollapsibleRow = ({employee, isOpen, isEditing, colSpanCount, editedEmail,
                                                 <input 
                                                     type='tel' 
                                                     name='phone' 
-                                                    value={editedPhone}
-                                                    onChange={handleInputChange}
+                                                    value={formData.phone}
+                                                    onChange={handleChange}
                                                 />
                                             </TableCell>
 
