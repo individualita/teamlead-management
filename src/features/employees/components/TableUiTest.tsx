@@ -83,7 +83,7 @@ const TableUiTest = () => {
 
         return () => document.removeEventListener('click', handleCLickOutside);
 
-    }, [ref.current]);
+    }, [ref.current, expandedActionId]);
 
     //pagination
     const handleChangePage = (event: unknown, newPage: number) => {
