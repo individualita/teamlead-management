@@ -17,19 +17,19 @@ import { Employee } from '../../../shared/types/employee';
 
 interface CollapsibleRowProps {
     employee: Employee,
-    isOpen: boolean,
-    isEditing: boolean,
+    isRowExpanded: boolean,
+    isEmployeeEditing: boolean,
     colSpanCount: number,
     formData: EditFormType,
     handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
 }
 
-const CollapsibleRow = ({employee, isOpen, isEditing, colSpanCount, formData, handleChange}: CollapsibleRowProps) => {
+const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCount, formData, handleChange}: CollapsibleRowProps) => {
 
     return (
-        <TableRow >
-            <TableCell colSpan={colSpanCount} style={{ paddingBottom: 0, paddingTop: 0 }}>
-                <Collapse in={isOpen} timeout="auto" unmountOnExit>
+        <TableRow aria-expanded={isRowExpanded}>
+            <TableCell colSpan={colSpanCount} sx={{ paddingBottom: 0, paddingTop: 0 }}>
+                <Collapse in={isRowExpanded} timeout="auto" unmountOnExit>
                     <Box sx={{padding: 2, borderRadius: 1 }} >
                         <h3>Additional Info</h3>
 
@@ -43,7 +43,7 @@ const CollapsibleRow = ({employee, isOpen, isEditing, colSpanCount, formData, ha
 
                             <TableBody>
                                 <TableRow>
-                                    {isEditing? (
+                                    {isEmployeeEditing? (
                                         <>
                                             <TableCell> 
                                                 <input 

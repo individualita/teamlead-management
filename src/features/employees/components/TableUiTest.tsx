@@ -67,11 +67,6 @@ const TableUiTest = () => {
 
 
         const handleCLickOutside = (e: MouseEvent) => {
-            /*
-            if (ref.current && !ref.current.contains(e.target as Node)) {
-                setExpandedActionId(null);
-            }
-            */
             
             if (expandedActionId !== null && ref.current && !ref.current.contains(e.target as Node)) {
                 setExpandedActionId(null);
@@ -221,7 +216,7 @@ const TableUiTest = () => {
                                 const isExpanded = expandedRowId === emp._id;
                                 const isActioned = expandedActionId === emp._id;
 
-                                const isEditing = editedId === emp._id;
+                                const isEmployeeEditing = editedId === emp._id;
 
                                 return (
                                     <Fragment key={emp._id}>
@@ -230,7 +225,7 @@ const TableUiTest = () => {
                                             sx={{ '& > *': { borderBottom: 'unset' } }} 
                                             className='hover:bg-gray-100'
                                         >
-                                            {isEditing? (
+                                            {isEmployeeEditing? (
                                                 <>
                                                     <TableCell>
                                                         <input 
@@ -352,8 +347,8 @@ const TableUiTest = () => {
                                         {/* открывается когда редактирование или просто нажатие на стрелку вниз*/}
                                         <CollapsibleRow 
                                             employee={emp} 
-                                            isOpen={isExpanded || isEditing} 
-                                            isEditing={isEditing} 
+                                            isRowExpanded={isExpanded || isEmployeeEditing} 
+                                            isEmployeeEditing={isEmployeeEditing} 
                                             colSpanCount={TABLE_COLUMNS.length} 
                                             formData={editForm} 
                                             handleChange={ handleChange}
