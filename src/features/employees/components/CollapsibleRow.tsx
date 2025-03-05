@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 
 
-
+import { EditFormType } from './types/editForm';
 import { Employee } from '../../../shared/types/employee';
 
 
@@ -20,7 +20,7 @@ interface CollapsibleRowProps {
     isOpen: boolean,
     isEditing: boolean,
     colSpanCount: number,
-    formData: Partial<Employee>,
+    formData: EditFormType,
     handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
 }
 

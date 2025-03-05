@@ -1,4 +1,4 @@
-import  { Fragment, useState, useMemo } from 'react';
+import  { Fragment, useState, useMemo, useEffect, useRef } from 'react';
 import {
     Table,
     TableBody,
@@ -21,9 +21,7 @@ import { ChangeEvent } from 'react';
 import { FaAngleUp } from 'react-icons/fa';
 import { FaAngleDown } from 'react-icons/fa6';
 import { HiDotsVertical } from 'react-icons/hi';
-import { IoTrash } from 'react-icons/io5';
-import { MdEdit } from 'react-icons/md';
-import { FaPencil } from 'react-icons/fa6';
+
 
 import { getStatusColor } from '../utils/getStatusColor';
 import { TABLE_COLUMNS } from '../constants/tableColumns';
@@ -40,6 +38,7 @@ import ActionMenu from './actionMenu/ActionMenu';
 import { EditFormType } from './types/editForm';
 
 const TableUiTest = () => {
+    const ref = useRef<HTMLDivElement>(null);
 
     const [rowsPerPage, setRowsPerPage] = useState<number>(5);
     const [currentPage, setCurrentPage] = useState<number>(0);
@@ -64,6 +63,28 @@ const TableUiTest = () => {
 
     const {employees, deleteEmployee, updateEmployee} = useEmployeeStore();
     
+    useEffect(() => {
+
+
+        const handleCLickOutside = (e: MouseEvent) => {
+            /*
+            if (ref.current && !ref.current.contains(e.target as Node)) {
+                setExpandedActionId(null);
+            }
+            */
+            
+            if (expandedActionId !== null && ref.current && !ref.current.contains(e.target as Node)) {
+                setExpandedActionId(null);
+            }
+            
+        }
+
+        document.addEventListener('click', handleCLickOutside);
+
+        return () => document.removeEventListener('click', handleCLickOutside);
+
+    }, [ref.current]);
+
     //pagination
     const handleChangePage = (event: unknown, newPage: number) => {
         setCurrentPage(newPage);
@@ -164,7 +185,7 @@ const TableUiTest = () => {
     return (
         <div className='tableTest mt-5'>
 
-
+            <h1>expandedActionId: {expandedActionId}</h1>
             <TableContainer 
                 sx={{
                     borderRadius: 3,
@@ -295,7 +316,10 @@ const TableUiTest = () => {
                                                             
                                                             <button 
                                                                 type='button'
-                                                                onClick={() => handleToggleActionMenu(emp._id)} 
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation()
+                                                                    handleToggleActionMenu(emp._id);
+                                                                } } 
                                                                 className='text-xl cursor-pointer'
                                                                 aria-haspopup='true'
                                                                 aria-label='Open action menu'
@@ -307,7 +331,12 @@ const TableUiTest = () => {
                                                         </Box>
 
                                                         {isActioned && (
-                                                            <ActionMenu employeeId={emp._id} handleEditEmployee={handleEditEmployee} deleteEmployee={deleteEmployee}/>
+                                                            <ActionMenu 
+                                                                employeeId={emp._id} 
+                                                                handleEditEmployee={handleEditEmployee} 
+                                                                deleteEmployee={deleteEmployee} 
+                                                                ref={ref}
+                                                            />
                                                         )}
 
                                                     </TableCell>

@@ -2,7 +2,7 @@
 
 
 .menu {
-    @apply absolute -left-22 top-3 w-35 bg-white shadow-sm rounded-md inset-shadow-sm z-10 flex flex-col; 
+    @apply absolute -left-10 top-3 w-35 bg-white shadow-sm rounded-md inset-shadow-sm z-10 flex flex-col; 
 }
 
 .button {
