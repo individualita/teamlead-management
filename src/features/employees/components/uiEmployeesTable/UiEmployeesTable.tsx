@@ -5,15 +5,10 @@ import {
     TableCell,
     TableContainer,
     TableFooter,
-    TableHead,
     TablePagination,
     TableRow,
     Box,
-    Collapse,
     Paper,
-    IconButton,
-    Tab,
-    getListItemSecondaryActionClassesUtilityClass
 } from '@mui/material';
 
 import { ChangeEvent } from 'react';
@@ -23,21 +18,26 @@ import { FaAngleDown } from 'react-icons/fa6';
 import { HiDotsVertical } from 'react-icons/hi';
 
 
-import { getStatusColor } from '../utils/getStatusColor';
-import { TABLE_COLUMNS } from '../constants/tableColumns';
-import { EMPLOYEE_STATUS_OPTIONS } from '../constants/employeeStatusOptions';
+import { getStatusColor } from '../../utils/getStatusColor';
+import { TABLE_COLUMNS } from '../../constants/tableColumns';
+import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
 
 
 
-import { useEmployeeStore } from '../../../shared/stores/employeesStore';
-import { Employee } from '../../../shared/types/employee';
-import CollapsibleRow from './collapsibleRow/CollapsibleRow';
+import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
+import { Employee } from '../../../../shared/types/employee';
+import CollapsibleRow from '../collapsibleRow/CollapsibleRow';
 
-import ActionMenu from './actionMenu/ActionMenu';
+import TableHeader from '../tableHeader/TableHeader';
 
-import { EditFormType } from './types/editForm';
+import ActionMenu from '../actionMenu/ActionMenu';
 
-const TableUiTest = () => {
+import { EditFormType } from '../../types/editForm';
+
+import styles from './../../employees.module.css';
+
+
+const UiEmployeesTable = () => {
     const ref = useRef<HTMLDivElement>(null);
 
     const [rowsPerPage, setRowsPerPage] = useState<number>(5);
@@ -94,11 +94,8 @@ const TableUiTest = () => {
 
         if(rowsPerPage === -1) return employees;
 
-        const totalRows = employees.length;
-
         const startIndex = currentPage * rowsPerPage;
-        const endIndex = Math.min((currentPage + 1) * rowsPerPage, totalRows);
-
+        const endIndex = (currentPage + 1) * rowsPerPage;
         return employees.slice(startIndex, endIndex);
 
     }, [currentPage, rowsPerPage, employees]);
@@ -183,9 +180,8 @@ const TableUiTest = () => {
 
     //сделать функцию вместо слайс тут енаписать нормальных емплои
     return (
-        <div className='tableTest mt-5'>
+        <div className='mt-5'>
 
-            <h1>expandedActionId: {expandedActionId}</h1>
             <TableContainer 
                 sx={{
                     borderRadius: 3,
@@ -194,25 +190,8 @@ const TableUiTest = () => {
                 > 
 
                 <Table>
-                    <TableHead  
-                        sx={{
-                            '& th:first-of-type': { borderTopLeftRadius: 8 },
-                            '& th:last-of-type': { borderTopRightRadius: 8 },
-                            backgroundColor: '#f5f5f5', 
-                        }}
-                    >
 
-                        <TableRow>
-
-                            {/* columns */}
-                            {TABLE_COLUMNS.map(col=> (
-                                <TableCell key={col.key} align={col.align}>
-                                    {col.label}
-                                </TableCell>
-                            ))}
-
-                        </TableRow>
-                    </TableHead>
+                    <TableHeader />
 
                     <TableBody>
                         {paginatedEmployees.map((emp: Employee) =>  {
@@ -228,7 +207,7 @@ const TableUiTest = () => {
                                         
                                         <TableRow 
                                             sx={{ '& > *': { borderBottom: 'unset' } }} 
-                                            className='hover:bg-gray-100'
+                                            className='hover:bg-gray-50'
                                         >
                                             {isEmployeeEditing? (
                                                 <>
@@ -237,7 +216,8 @@ const TableUiTest = () => {
                                                             type='text'
                                                             name='name' 
                                                             onChange={handleChange}  
-                                                            value={editForm.name} 
+                                                            value={editForm.name}
+                                                            className={styles.input} 
                                                         />
                                                     </TableCell>
                                                     
@@ -247,6 +227,8 @@ const TableUiTest = () => {
                                                             name='position' 
                                                             value={editForm.position}
                                                             onChange={handleChange} 
+                                                            className={styles.input} 
+
     
                                                         />
                                                     </TableCell>
@@ -254,9 +236,11 @@ const TableUiTest = () => {
                                                     <TableCell>
                                                         <input 
                                                             type='date' 
-                                                            name='date' 
+                                                            name='startDate' 
                                                             value={editForm.startDate}
                                                             onChange={handleChange} 
+                                                            className={styles.input} 
+
                                                         />
                                                     </TableCell>
 
@@ -265,9 +249,15 @@ const TableUiTest = () => {
                                                             name='status' 
                                                             onChange={handleChange} 
                                                             value={editForm.status}
+                                                            className={styles.select}
                                                             >
                                                                 {EMPLOYEE_STATUS_OPTIONS.map(status => (
-                                                                    <option value={status}>{status}</option>
+                                                                    <option 
+                                                                        key={status} 
+                                                                        value={status}
+                                                                    >
+                                                                        {status}
+                                                                    </option>
                                                                 ))}
                                                         </select> 
 
@@ -277,11 +267,11 @@ const TableUiTest = () => {
                                                         <button 
                                                             type='button'
                                                             onClick={handleUpdateEmployee} 
-                                                            className='p-2 bg-indigo-600 text-white rounded-md cursor-pointer'
+                                                            className='py-2 px-4 bg-green-600 text-white rounded-md cursor-pointer hover:bg-green-600/90'
                                                             aria-label='save changes'
                                                             title='save changes'
                                                         >
-                                                            save changes
+                                                            Save
                                                         </button>
 
                                                     </TableCell>
@@ -394,6 +384,6 @@ const TableUiTest = () => {
 }
 
 
-export default TableUiTest;
+export default UiEmployeesTable;
 
 

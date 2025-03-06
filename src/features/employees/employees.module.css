@@ -1,0 +1,6 @@
+@reference '../../assets/styles/main.css';
+
+.input,
+.select {
+    @apply block border border-gray-300/50  py-1 px-1.5 rounded-xs focus:outline-none  focus:ring-2 focus:ring-[rgba(200,194,231,0.8)] transition-all duration-300;
+}

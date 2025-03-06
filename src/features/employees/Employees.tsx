@@ -7,7 +7,7 @@ import EmployeesTable from './components/employeesTable/EmployeesTable';
 
 import EmployeeCard from './components/employeeCard/EmployeeCard';
 
-import TableUiTest from './components/TableUiTest';
+import UiEmployeesTable from './components/uiEmployeesTable/UiEmployeesTable';
 
 const Employees = () => {
 
@@ -33,7 +33,7 @@ const Employees = () => {
 
                 </div>
 
-                <TableUiTest />
+                <UiEmployeesTable />
 
             </div>
 

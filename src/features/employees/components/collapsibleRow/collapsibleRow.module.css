@@ -1,5 +1,0 @@
-@reference '../../../../assets/styles/main.css';
-
-.input {
-    @apply border border-amber-800 py-1 px-1.5 rounded-xs;
-}

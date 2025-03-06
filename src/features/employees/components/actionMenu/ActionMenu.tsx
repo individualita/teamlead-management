@@ -27,7 +27,7 @@ const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
                 <button 
                     onClick={() => handleEditEmployee(employeeId)} 
                     className={styles.button}
-                    role='menu item'
+                    role='menuitem'
                     aria-label='Edit employee'
 
                     >
@@ -38,7 +38,7 @@ const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
                 <button 
                     onClick={() => deleteEmployee(employeeId)}
                     className={styles.button}
-                    role='menu item'
+                    role='menuitem'
                     aria-label='Delete employee'
                 >
                     <IoTrash className='text-lg text-red-600' /> 

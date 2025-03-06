@@ -11,11 +11,10 @@ import {
 } from '@mui/material';
 
 
-import { EditFormType } from '../types/editForm';
+import { EditFormType } from '../../types/editForm';
 import { Employee } from '../../../../shared/types/employee';
 
-import styles from './collapsibleRow.module.css';
-
+import styles from './../../employees.module.css';
 
 interface CollapsibleRowProps {
     employee: Employee,
@@ -33,13 +32,12 @@ const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCoun
             <TableCell colSpan={colSpanCount} sx={{ paddingBottom: 0, paddingTop: 0 }}>
                 <Collapse in={isRowExpanded} timeout="auto" unmountOnExit>
                     <Box sx={{padding: 2, borderRadius: 1 }} >
-                        <h3>Additional Info</h3>
 
                         <Table size="small">
-                            <TableHead>
+                            <TableHead sx={{backgroundColor: '#f5f5f5'}}>
                                 <TableRow sx={{'& > *': {fontWeight: '500', color:'black'}}}>
-                                    <TableCell>Email</TableCell>
-                                    <TableCell>Phone</TableCell>
+                                    <TableCell sx={{color: '#3e3e3e', fontWeight: '600'}}>Email</TableCell>
+                                    <TableCell sx={{color: '#3e3e3e', fontWeight: '600'}}>Phone</TableCell>
                                 </TableRow>
                             </TableHead>
 
