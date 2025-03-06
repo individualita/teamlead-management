@@ -31,7 +31,7 @@ import { EMPLOYEE_STATUS_OPTIONS } from '../constants/employeeStatusOptions';
 
 import { useEmployeeStore } from '../../../shared/stores/employeesStore';
 import { Employee } from '../../../shared/types/employee';
-import CollapsibleRow from './CollapsibleRow';
+import CollapsibleRow from './collapsibleRow/CollapsibleRow';
 
 import ActionMenu from './actionMenu/ActionMenu';
 
@@ -91,8 +91,13 @@ const TableUiTest = () => {
     };
 
     const paginatedEmployees = useMemo(() => {
+
+        if(rowsPerPage === -1) return employees;
+
+        const totalRows = employees.length;
+
         const startIndex = currentPage * rowsPerPage;
-        const endIndex = (currentPage + 1) * rowsPerPage; 
+        const endIndex = Math.min((currentPage + 1) * rowsPerPage, totalRows);
 
         return employees.slice(startIndex, endIndex);
 

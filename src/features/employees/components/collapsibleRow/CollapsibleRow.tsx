@@ -11,8 +11,10 @@ import {
 } from '@mui/material';
 
 
-import { EditFormType } from './types/editForm';
-import { Employee } from '../../../shared/types/employee';
+import { EditFormType } from '../types/editForm';
+import { Employee } from '../../../../shared/types/employee';
+
+import styles from './collapsibleRow.module.css';
 
 
 interface CollapsibleRowProps {
@@ -35,23 +37,23 @@ const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCoun
 
                         <Table size="small">
                             <TableHead>
-                                <TableRow sx={{'& > *': {fontWeight: 'bold'}}}>
+                                <TableRow sx={{'& > *': {fontWeight: '500', color:'black'}}}>
                                     <TableCell>Email</TableCell>
                                     <TableCell>Phone</TableCell>
                                 </TableRow>
                             </TableHead>
 
                             <TableBody>
-                                <TableRow>
+                                <TableRow sx={{'& > *':{fontWEight: '400', color: 'var(--text-inactive)'}}}>
                                     {isEmployeeEditing? (
                                         <>
-                                            <TableCell> 
+                                            <TableCell > 
                                                 <input 
                                                     type='email' 
                                                     name='email'
                                                     value={formData.email} 
                                                     onChange={handleChange}
-
+                                                    className={styles.input}
 
                                                 />
                                             </TableCell>
@@ -61,6 +63,7 @@ const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCoun
                                                     name='phone' 
                                                     value={formData.phone}
                                                     onChange={handleChange}
+                                                    className={styles.input}
                                                 />
                                             </TableCell>
 
