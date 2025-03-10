@@ -6,7 +6,7 @@ export const EMPLOYEES: Employee[] = [
         position: 'Sales Representative',
         phone: '+34 654 321 987',
         email: 'lucia.morales@barcelonamail.org',
-        startDate: '2020-03-12',
+        startDate: new Date('2020-03-12'),
         status: 'Active',
     },
     {
@@ -15,7 +15,7 @@ export const EMPLOYEES: Employee[] = [
         position: 'Software Engineer',
         phone: '+7 911 654 3210',
         email: 'a.orlov@sibir-post.com',
-        startDate: '2018-07-05',
+        startDate: new Date('2018-07-05'),
         status: 'On Vacation',
     },
     {
@@ -24,7 +24,7 @@ export const EMPLOYEES: Employee[] = [
         position: 'Data Analyst',
         phone: '+49 152 789 6543',
         email: 't.weber@hamburg-mail.net',
-        startDate: '2019-09-23',
+        startDate: new Date('2019-09-23'),
         status: 'Sick Leave',
     },
     {
@@ -33,7 +33,7 @@ export const EMPLOYEES: Employee[] = [
         position: 'Marketing Specialist',
         phone: '+48 601 234 567',
         email: 'jakub.nowak@warszawamail.pl',
-        startDate: '2021-17-06',
+        startDate: new Date('2021-06-17'),
         status: 'Probation',
 
     },
@@ -43,7 +43,7 @@ export const EMPLOYEES: Employee[] = [
         position: 'HR Manager',
         phone: '+33 612 345 678',
         email: 'camille.lefevre@lyonpost.fr',
-        startDate: '2022-02-11',
+        startDate: new Date('2022-02-11'),
         status: 'Suspended',
     },
     {
@@ -52,7 +52,7 @@ export const EMPLOYEES: Employee[] = [
         position: 'Product Designer',
         phone: '+39 328 765 4321',
         email: 'matteo.rossi@roma-mail.it',
-        startDate: '2020-08-30',
+        startDate: new Date('2020-08-30'),
         status: 'Resigned',
     },
     {
@@ -61,7 +61,7 @@ export const EMPLOYEES: Employee[] = [
         position: 'Financial Advisor',
         phone: '+39 329 123 4567',
         email: 'leonardo.bianchi@napoli-post.it',
-        startDate: '2017-11-14',
+        startDate: new Date('2017-11-14'),
         status: 'Terminated',
     },
     {
@@ -70,7 +70,7 @@ export const EMPLOYEES: Employee[] = [
         position: 'Customer Support',
         phone: '+44 7911 123456',
         email: 'emily.smith@londonpost.uk',
-        startDate: '2019-04-04',
+        startDate: new Date('2019-04-04'),
         status: 'Maternity Leave',
 
     },
@@ -80,7 +80,7 @@ export const EMPLOYEES: Employee[] = [
         position: 'IT Administrator',
         phone: '+7 916 987 6543',
         email: 'p.ivanov@moskva-net.ru',
-        startDate: '2016-05-29',
+        startDate: new Date('2016-05-29'),
         status: 'Retired',
     },
     {
@@ -89,7 +89,7 @@ export const EMPLOYEES: Employee[] = [
         position: 'Project Manager',
         phone: '+48 602 987 654',
         email: 'm.zielinska@gdansknet.pl',
-        startDate: '2020-12-09',
+        startDate: new Date('2020-12-09'),
         status: 'Fired',
     }
 ];

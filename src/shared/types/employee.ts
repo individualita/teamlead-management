@@ -4,6 +4,6 @@ export interface Employee {
     position: string;
     phone: string;
     email: string;
-    startDate: string;
+    startDate: Date | null,
     status: string;
 };

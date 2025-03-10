@@ -11,6 +11,13 @@ import {
     Paper,
 } from '@mui/material';
 
+import dayjs, { Dayjs } from 'dayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+
+
+
 import { ChangeEvent } from 'react';
 
 import { FaAngleUp } from 'react-icons/fa';
@@ -48,6 +55,7 @@ const UiEmployeesTable = () => {
     const [expandedActionId, setExpandedActionId] = useState<string | null>(null);
 
 
+
     
     const [editedId, setEditedId] = useState<string | null>(null);
     
@@ -56,7 +64,7 @@ const UiEmployeesTable = () => {
         position: '',
         phone: '',
         email: '',
-        startDate: '',
+        startDate: null,
         status: '',
     });
 
@@ -148,7 +156,7 @@ const UiEmployeesTable = () => {
             position: '',
             phone: '',
             email: '',
-            startDate: '',
+            startDate: null,
             status: '',
         })
     };
@@ -158,14 +166,11 @@ const UiEmployeesTable = () => {
 
         setEditForm(prev => ({
             ...prev, 
-            [name]: value,
+            [name]: name === 'startDate'? new Date(value) : value,
         }));
 
     };
 
-
-
-    //сделать функцию вместо слайс тут енаписать нормальных емплои
     return (
         <div className='mt-5'>
 
@@ -224,7 +229,7 @@ const UiEmployeesTable = () => {
                                                         <input 
                                                             type='date' 
                                                             name='startDate' 
-                                                            value={editForm.startDate}
+                                                            value={editForm.startDate ? editForm.startDate.toISOString().split('T')[0] : ''}
                                                             onChange={handleChange} 
                                                             className={styles.input} 
 
@@ -268,7 +273,7 @@ const UiEmployeesTable = () => {
                                                 <>
                                                     <TableCell>{emp.name}</TableCell>
                                                     <TableCell>{emp.position}</TableCell>
-                                                    <TableCell>{formatDate(emp.startDate)}</TableCell>
+                                                    <TableCell>{emp.startDate?.toLocaleDateString('ru-RU') || ''}</TableCell>
 
                                                     <TableCell sx={{width: 120}}>
                                                         <div className={`${getStatusColor(emp.status)} text-center  font-semibold rounded-xl p-1 text-xs`}>
