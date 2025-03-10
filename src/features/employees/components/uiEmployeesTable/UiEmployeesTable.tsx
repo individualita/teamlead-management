@@ -17,11 +17,10 @@ import { FaAngleUp } from 'react-icons/fa';
 import { FaAngleDown } from 'react-icons/fa6';
 import { HiDotsVertical } from 'react-icons/hi';
 
-
+import { formatDate } from '../../utils/formatDate';
 import { getStatusColor } from '../../utils/getStatusColor';
 import { TABLE_COLUMNS } from '../../constants/tableColumns';
 import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
-
 
 
 import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
@@ -136,19 +135,7 @@ const UiEmployeesTable = () => {
 
         if (!editedId) return;
 
-        //установить данные в инпуте?
-
-        const updatedData = {
-            name: editForm.name,
-            position: editForm.position,
-            phone: editForm.phone,
-            email: editForm.email,
-            startDate: editForm.startDate,
-            status: editForm.status,
-        };
-
-
-        updateEmployee(editedId , updatedData);
+        updateEmployee(editedId , editForm);
 
         //закрываем окна. 
         setExpandedRowId(null);
@@ -281,7 +268,7 @@ const UiEmployeesTable = () => {
                                                 <>
                                                     <TableCell>{emp.name}</TableCell>
                                                     <TableCell>{emp.position}</TableCell>
-                                                    <TableCell>{emp.startDate}</TableCell>
+                                                    <TableCell>{formatDate(emp.startDate)}</TableCell>
 
                                                     <TableCell sx={{width: 120}}>
                                                         <div className={`${getStatusColor(emp.status)} text-center  font-semibold rounded-xl p-1 text-xs`}>
