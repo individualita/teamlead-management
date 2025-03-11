@@ -9,6 +9,8 @@ import {
     TableRow,
     Box,
     Paper,
+    TextField,
+    MenuItem,
 } from '@mui/material';
 
 import dayjs, { Dayjs } from 'dayjs';
@@ -161,15 +163,16 @@ const UiEmployeesTable = () => {
         })
     };
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const {name, value} = e.target;
 
         setEditForm(prev => ({
             ...prev, 
-            [name]: name === 'startDate'? new Date(value) : value,
+            [name]: value,
         }));
 
     };
+
 
     return (
         <div className='mt-5'>
@@ -204,54 +207,119 @@ const UiEmployeesTable = () => {
                                             {isEmployeeEditing? (
                                                 <>
                                                     <TableCell>
-                                                        <input 
-                                                            type='text'
-                                                            name='name' 
-                                                            onChange={handleChange}  
+                                                        <TextField
+                                                            type='text' 
+                                                            name='name'
+                                                            onChange={handleChange}
                                                             value={editForm.name}
-                                                            className={styles.input} 
+                                                            size='small'
+                                                            sx={{
+                                                                '& .MuiInputBase-input': {
+                                                                    padding: '5px 8px',
+                                                                    fontSize: '14px'
+                                                                }
+                                                            }}
+
                                                         />
                                                     </TableCell>
                                                     
                                                     <TableCell>
-                                                        <input 
+
+                                                        <TextField
+                                                            required
                                                             type='text' 
-                                                            name='position' 
+                                                            name='position'
                                                             value={editForm.position}
-                                                            onChange={handleChange} 
-                                                            className={styles.input} 
+                                                            onChange={handleChange}
+                                                            size='small'
+                                                            sx={{
 
-    
+                                                                '& .MuiInputBase-root': {
+                                                                    height: '31px', 
+                                                                },
+                                                                '& .MuiInputBase-input': {
+                                                                    padding: '5px 8px',
+                                                                    fontSize: '14px'
+                                                                }
+                                                            }}
+
                                                         />
+                                                        
                                                     </TableCell>
 
                                                     <TableCell>
-                                                        <input 
-                                                            type='date' 
-                                                            name='startDate' 
-                                                            value={editForm.startDate ? editForm.startDate.toISOString().split('T')[0] : ''}
-                                                            onChange={handleChange} 
-                                                            className={styles.input} 
 
-                                                        />
+                                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
+                                                            <DatePicker
+                                                                name='startDate'
+                                                                value={editForm.startDate ? dayjs(editForm.startDate) : null}  
+                                                                onChange={ (newValue) => setEditForm(prev => ({...prev, startDate: newValue? newValue.toDate() : null}) )} 
+                                                                format='DD/MM/YYYY'
+                                                                slotProps={{
+                                                                    textField: {
+                                                                      size: 'small', 
+                                                                      sx: {
+
+                                                                        '& .MuiInputBase-root': { //внешняя оболочка
+                                                                        height: '31px', 
+                                                                        padding: '0 5px', 
+                                                                        },
+                                                                        '& .MuiInputBase-input': { //input
+                                                                            padding: '5px', 
+                                                                            fontSize: 14,
+                                                                        },
+                                                                        '& .MuiIconButton-root': { //button
+                                                                            marginRight: 1, 
+                                                                        },
+                                                                        '& .MuiInputAdornment-root': { //icon container
+                                                                            marginLeft: 0, 
+                                                                        },
+                                                                        '& .MuiSvgIcon-root': { // icon
+                                                                            fontSize: '18px', 
+                                                                        },
+                                                                      }
+                                                                    },
+                                                                }}                                                     
+
+                                                            />
+                                                        </LocalizationProvider>
+                                                        
                                                     </TableCell>
 
                                                     <TableCell>
-                                                        <select
-                                                            name='status' 
-                                                            onChange={handleChange} 
+
+                                                        <TextField 
+                                                            select
+                                                            name='status'
+                                                            onChange={handleChange}
                                                             value={editForm.status}
-                                                            className={styles.select}
-                                                            >
-                                                                {EMPLOYEE_STATUS_OPTIONS.map(status => (
-                                                                    <option 
-                                                                        key={status} 
-                                                                        value={status}
-                                                                    >
-                                                                        {status}
-                                                                    </option>
-                                                                ))}
-                                                        </select> 
+                                                            sx={{
+                                                                '& .MuiInputBase-root': { 
+                                                                    height: '31px', 
+                                                                },
+
+                                                                '& .MuiInputBase-input': {
+                                                                    padding: '5px 8px',
+                                                                    fontSize: '14px',
+                                                                },
+
+                                                            }}
+                                                            
+                                                        >
+                                                            
+                                                            {EMPLOYEE_STATUS_OPTIONS.map(status => (
+                                                                <MenuItem
+                                                                    key={status}
+                                                                    value={status}
+                                                                    sx={{fontSize: '14px'}}
+                                                                >
+                                                                    {status}
+                                                                </MenuItem>
+                                                            ))}
+                                                                
+                                                            
+
+                                                        </TextField>
 
                                                     </TableCell>
 
@@ -273,7 +341,7 @@ const UiEmployeesTable = () => {
                                                 <>
                                                     <TableCell>{emp.name}</TableCell>
                                                     <TableCell>{emp.position}</TableCell>
-                                                    <TableCell>{emp.startDate?.toLocaleDateString('ru-RU') || ''}</TableCell>
+                                                    <TableCell>{emp.startDate? dayjs(emp.startDate).format('DD/MM/YYYY') : '-'}</TableCell>
 
                                                     <TableCell sx={{width: 120}}>
                                                         <div className={`${getStatusColor(emp.status)} text-center  font-semibold rounded-xl p-1 text-xs`}>
