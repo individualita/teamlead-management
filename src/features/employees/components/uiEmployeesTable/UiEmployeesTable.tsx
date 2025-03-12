@@ -42,6 +42,9 @@ import ActionMenu from '../actionMenu/ActionMenu';
 
 import { EditFormType } from '../../types/editForm';
 
+import { commonInputSx } from '../../constants/commonInputSx';
+import { commonDatePickerSx } from '../../constants/commonDatePickerSx';
+
 import styles from './../../employees.module.css';
 
 
@@ -213,12 +216,7 @@ const UiEmployeesTable = () => {
                                                             onChange={handleChange}
                                                             value={editForm.name}
                                                             size='small'
-                                                            sx={{
-                                                                '& .MuiInputBase-input': {
-                                                                    padding: '5px 8px',
-                                                                    fontSize: '14px'
-                                                                }
-                                                            }}
+                                                            sx={commonInputSx}
 
                                                         />
                                                     </TableCell>
@@ -232,16 +230,7 @@ const UiEmployeesTable = () => {
                                                             value={editForm.position}
                                                             onChange={handleChange}
                                                             size='small'
-                                                            sx={{
-
-                                                                '& .MuiInputBase-root': {
-                                                                    height: '31px', 
-                                                                },
-                                                                '& .MuiInputBase-input': {
-                                                                    padding: '5px 8px',
-                                                                    fontSize: '14px'
-                                                                }
-                                                            }}
+                                                            sx={commonInputSx}
 
                                                         />
                                                         
@@ -257,27 +246,8 @@ const UiEmployeesTable = () => {
                                                                 format='DD/MM/YYYY'
                                                                 slotProps={{
                                                                     textField: {
-                                                                      size: 'small', 
-                                                                      sx: {
-
-                                                                        '& .MuiInputBase-root': { //внешняя оболочка
-                                                                        height: '31px', 
-                                                                        padding: '0 5px', 
-                                                                        },
-                                                                        '& .MuiInputBase-input': { //input
-                                                                            padding: '5px', 
-                                                                            fontSize: 14,
-                                                                        },
-                                                                        '& .MuiIconButton-root': { //button
-                                                                            marginRight: 1, 
-                                                                        },
-                                                                        '& .MuiInputAdornment-root': { //icon container
-                                                                            marginLeft: 0, 
-                                                                        },
-                                                                        '& .MuiSvgIcon-root': { // icon
-                                                                            fontSize: '18px', 
-                                                                        },
-                                                                      }
+                                                                        size: 'small', 
+                                                                        sx: commonDatePickerSx
                                                                     },
                                                                 }}                                                     
 
@@ -293,18 +263,7 @@ const UiEmployeesTable = () => {
                                                             name='status'
                                                             onChange={handleChange}
                                                             value={editForm.status}
-                                                            sx={{
-                                                                '& .MuiInputBase-root': { 
-                                                                    height: '31px', 
-                                                                },
-
-                                                                '& .MuiInputBase-input': {
-                                                                    padding: '5px 8px',
-                                                                    fontSize: '14px',
-                                                                },
-
-                                                            }}
-                                                            
+                                                            sx={commonInputSx}
                                                         >
                                                             
                                                             {EMPLOYEE_STATUS_OPTIONS.map(status => (
@@ -317,8 +276,6 @@ const UiEmployeesTable = () => {
                                                                 </MenuItem>
                                                             ))}
                                                                 
-                                                            
-
                                                         </TextField>
 
                                                     </TableCell>

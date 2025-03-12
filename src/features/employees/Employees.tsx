@@ -9,6 +9,9 @@ import EmployeeCard from './components/employeeCard/EmployeeCard';
 
 import UiEmployeesTable from './components/uiEmployeesTable/UiEmployeesTable';
 
+import EmployeeModal from './components/employeeModal/EmployeeModal';
+import AddEmployeeForm from './components/addEmployeeForm/AddEmployeeForm';
+
 const Employees = () => {
 
     const {employees} = useEmployeeStore();
@@ -19,6 +22,7 @@ const Employees = () => {
         <div className='employees'>
 
             <div className='container mx-auto p-6'>
+                <EmployeeModal />
 
                 {/* desktop size */}
                 <div className='overflow-x-auto rounded-lg shadow-md hidden md:block'>

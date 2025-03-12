@@ -1,5 +1,6 @@
 import { ChangeEvent } from 'react';
 import {
+    TextField,
     TableRow,
     TableCell,
     IconButton,
@@ -9,6 +10,8 @@ import {
     TableBody,
     TableHead
 } from '@mui/material';
+
+import { commonInputSx } from '../../constants/commonInputSx';
 
 
 import { EditFormType } from '../../types/editForm';
@@ -22,7 +25,7 @@ interface CollapsibleRowProps {
     isEmployeeEditing: boolean,
     colSpanCount: number,
     formData: EditFormType,
-    handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void,
+    handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void,
 }
 
 const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCount, formData, handleChange}: CollapsibleRowProps) => {
@@ -45,24 +48,25 @@ const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCoun
                                 <TableRow sx={{'& > *':{fontWEight: '400', color: 'var(--text-inactive)'}}}>
                                     {isEmployeeEditing? (
                                         <>
-                                            <TableCell > 
-                                                <input 
-                                                    type='email' 
-                                                    name='email'
-                                                    value={formData.email} 
-                                                    onChange={handleChange}
-                                                    className={styles.input}
+                                            <TableCell >
 
-                                                />
+                                                <TextField 
+                                                    type='email'
+                                                    name='email'
+                                                    value={formData.email}
+                                                    onChange={handleChange}
+                                                    sx={commonInputSx}
+                                                /> 
+
                                             </TableCell>
                                             <TableCell> 
-                                                <input 
-                                                    type='tel' 
-                                                    name='phone' 
+                                                <TextField
+                                                    type='tel'
+                                                    name='phone'
                                                     value={formData.phone}
                                                     onChange={handleChange}
-                                                    className={styles.input}
-                                                />
+                                                    sx={commonInputSx}
+                                                 />
                                             </TableCell>
 
                                         </>
