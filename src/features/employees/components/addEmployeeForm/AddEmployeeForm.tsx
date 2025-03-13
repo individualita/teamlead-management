@@ -4,6 +4,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 
+import { formInputSx } from '../../constants/formInputSx';
+
 import { Dayjs } from 'dayjs';
 
 import Button from '@mui/material/Button';
@@ -14,28 +16,53 @@ import { TextField, MenuItem } from '@mui/material';
 import { EditFormType } from '../../types/editForm';
 
 import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
-import { commonInputSx } from '../../constants/commonInputSx';
-import { commonDatePickerSx } from '../../constants/commonDatePickerSx';
+
 import dayjs from 'dayjs';
+
+import { employeeSchema } from '../../schema/employee.schema';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 
 interface AddEmployeeFormProps {
     handleClose: () => void,
 }
 
+
+interface EmployeeFormData {
+    name: string,
+    position: string,
+    startDate: Date,
+    status: string,
+    email: string,
+    phone: string,
+}
+
+
+
+
 const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
 
-    const { watch, register, handleSubmit, control, formState: {errors}} = useForm<EditFormType>({
+    const { watch, register, handleSubmit, control, formState: {errors}} = useForm<EmployeeFormData>({
         mode: 'onChange',
+        resolver: zodResolver(employeeSchema),
+        defaultValues: {
+            name: '',
+            position: '',
+            startDate: new Date(),
+            status: EMPLOYEE_STATUS_OPTIONS[0],
+            email: '',
+            phone: '',
+        }
 
     });
 
-    //ПЕРЕИМЕНОВАТЬ EDITFORMTYPE
-    const onSubmit: SubmitHandler<EditFormType> = (data) => console.log(data)
-    console.log(watch("name")) // watch input value by passing the name of it
+    const onSubmit: SubmitHandler<EmployeeFormData> = (data) => console.log(data)
+    console.log(errors);
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='mt-10 flex flex-col gap-4'>
+        <form 
+            onSubmit={handleSubmit(onSubmit)} 
+            className='mt-10 flex flex-col gap-4'>
 
             <TextField
                 {...register('name', {required: true})}
@@ -43,20 +70,10 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
                 name='name'
                 size='small'
                 label='Employee name'
-                sx={{
-                    backgroundColor: '#fafafa',
-
-                    '& .MuiInputLabel-root': {
-                        fontSize: 14,
-                    },
-
-                    '& .MuiInputBase-input': {
-                        fontSize: 14, // размер шрифта для вводимого текста
-                    },
-                }}
+                helperText={errors.name && errors.name.message}
+                error={!!errors.name}
+                sx={formInputSx}
             />
-
-            {errors.name && <span className='text-red-300'>Name is required</span>}
 
 
 
@@ -65,18 +82,10 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
                 type='text' 
                 name='position'
                 size='small'
-                sx={{
-                    backgroundColor: '#fafafa',
-
-                    '& .MuiInputLabel-root': {
-                        fontSize: 14,
-                    },
-                    '& .MuiInputBase-input': {
-                        fontSize: 14, // размер шрифта для вводимого текста
-                    },
-
-                }}
                 label='Position' 
+                helperText={errors.position && errors.position.message}
+                error={!!errors.position}
+                sx={formInputSx}
             />
 
 
@@ -92,7 +101,6 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
                             {...field}
                             onChange={(date: Dayjs | null) => field.onChange(date ? date.toDate() : null)} // Dayjs -> Date
                             value={field.value ? dayjs(field.value) : null} // Date -> Dayjs
-                            name='startDate'
                             format='DD/MM/YYYY'
                             label='DD/MM/YYY'
                             slotProps={{
@@ -103,30 +111,11 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
                                 },
                             }}  
                             
-                            sx={{
-                                backgroundColor: '#fafafa',
-
-                                '& .MuiOutlinedInput-input': {
-                                    padding: '10px 8px', 
-                                    fontSize: 14,       // размер шрифта
-                                    lineHeight: 1.5,    // чтобы текст не «прилипал»
-                                },
-            
-                                '& .MuiInputLabel-root': {
-                                    fontSize: 14,
-                                },
-
-                            }}
-
+                            sx={formInputSx}
                         />
 
                     )}
                 />
-
-                
-
-
-
 
             </LocalizationProvider>
 
@@ -138,21 +127,10 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
                 name='status'
                 label='Status'
                 size='small'
-                defaultValue=''
-                sx={{
-                    backgroundColor: '#fafafa',
-
-                    '& .MuiOutlinedInput-input': {
-                        padding: '10px 8px', // верх/низ, лево/право
-                        fontSize: 14,       // размер шрифта
-                        lineHeight: 1.5,    // чтобы текст не «прилипал»
-                    },
-
-                    '& .MuiInputLabel-root': {
-                        fontSize: 14,
-                    },
-
-                }}
+                helperText={errors.status && 'Status is required'}
+                error={!!errors.status}
+                defaultValue={EMPLOYEE_STATUS_OPTIONS[0]}
+                sx={formInputSx}
             >
                 <MenuItem value='' disabled sx={{ fontSize: '14px' }}>
                     Choose status
@@ -176,16 +154,9 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
                 name='email'
                 label='Email'
                 size='small'
-                sx={{
-                    backgroundColor: '#fafafa',
-
-                    '& .MuiInputLabel-root': {
-                        fontSize: 14,
-                    },
-                    '& .MuiInputBase-input': {
-                        fontSize: 14, // размер шрифта для вводимого текста
-                    },
-                }}
+                helperText={errors.email && errors.email.message}
+                error={!!errors.email}
+                sx={formInputSx}
 
             />
 
@@ -195,16 +166,9 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
                 name='phone'
                 label='Phone'
                 size='small'
-                sx={{
-                    backgroundColor: '#fafafa',
-                    '& .MuiInputLabel-root': {
-                        fontSize: 14,
-                    },
-
-                    '& .MuiInputBase-input': {
-                        fontSize: 14, // размер шрифта для вводимого текста
-                    },
-                }}
+                helperText={errors.phone && errors.phone.message}
+                error={!!errors.phone}
+                sx={formInputSx}
             />
 
 
@@ -218,7 +182,7 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
                     type='button' 
                     size='small'>
                         Close
-                    </Button>
+                </Button>
 
             </div>
 
