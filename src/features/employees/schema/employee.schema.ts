@@ -6,6 +6,6 @@ export const employeeSchema = z.object({
     startDate: z.date({message:'Start date is required'}), 
     status: z.string().nonempty('Status is required'),
     email: z.string().email('Please enter a valid email address'),
-    phone: z.string().regex(/^\+?\d{10,15}$/, 'Phone number must be 10 to 15 digits and may start with "+"'),
+    phone: z.string().regex(/^\+?\d{9,15}$/, 'Phone number must be 9 to 15 digits and may start with "+"'),
 });
 

@@ -4,6 +4,8 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 
+import { v4 as uuidv4 } from 'uuid';
+
 import { formInputSx } from '../../constants/formInputSx';
 
 import { Dayjs } from 'dayjs';
@@ -12,8 +14,8 @@ import Button from '@mui/material/Button';
 
 import { TextField, MenuItem } from '@mui/material';
 
+import { NewEmployeeFormData } from '../../types/newEmployeeFormData';
 
-import { EditFormType } from '../../types/editForm';
 
 import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
 
@@ -22,19 +24,12 @@ import dayjs from 'dayjs';
 import { employeeSchema } from '../../schema/employee.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
+import { Employee } from '../../../../shared/types/employee';
+
 
 interface AddEmployeeFormProps {
     handleClose: () => void,
-}
-
-
-interface EmployeeFormData {
-    name: string,
-    position: string,
-    startDate: Date,
-    status: string,
-    email: string,
-    phone: string,
 }
 
 
@@ -42,7 +37,8 @@ interface EmployeeFormData {
 
 const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
 
-    const { watch, register, handleSubmit, control, formState: {errors}} = useForm<EmployeeFormData>({
+
+    const { watch, register, handleSubmit, control, formState: {errors}} = useForm<NewEmployeeFormData>({
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
         defaultValues: {
@@ -56,8 +52,14 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
 
     });
 
-    const onSubmit: SubmitHandler<EmployeeFormData> = (data) => console.log(data)
+    const onSubmit: SubmitHandler<NewEmployeeFormData> = (data) => {
+
+        addEmployee({...data, _id: uuidv4()});
+    };
+
     console.log(errors);
+
+    const {addEmployee} = useEmployeeStore();
 
     return (
         <form 

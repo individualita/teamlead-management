@@ -34,8 +34,6 @@ const drawerStyle =  {
 
 
 }
-//anchor = right
-
 
 
 

@@ -18,6 +18,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
+import { employeeSchema } from '../../schema/employee.schema';
+
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 
 
 import { ChangeEvent } from 'react';
@@ -40,12 +43,14 @@ import TableHeader from '../tableHeader/TableHeader';
 
 import ActionMenu from '../actionMenu/ActionMenu';
 
-import { EditFormType } from '../../types/editForm';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { commonInputSx } from '../../constants/commonInputSx';
 import { commonDatePickerSx } from '../../constants/commonDatePickerSx';
 
+import { EmployeeFormData } from '../../types/employeeFormData';
 import styles from './../../employees.module.css';
+import { NewEmployeeFormData } from '../../types/newEmployeeFormData';
 
 
 const UiEmployeesTable = () => {
@@ -60,11 +65,10 @@ const UiEmployeesTable = () => {
     const [expandedActionId, setExpandedActionId] = useState<string | null>(null);
 
 
-
     
     const [editedId, setEditedId] = useState<string | null>(null);
     
-    const [editForm, setEditForm] = useState<EditFormType>({
+    const [editForm, setEditForm] = useState<EmployeeFormData>({
         name: '',
         position: '',
         phone: '',
@@ -74,7 +78,49 @@ const UiEmployeesTable = () => {
     });
 
     const {employees, deleteEmployee, updateEmployee} = useEmployeeStore();
-    
+
+    const { watch, register, getValues,setValue,  handleSubmit, control, formState: {errors, isDirty}} = useForm<NewEmployeeFormData>({
+        mode: 'onChange',
+        resolver: zodResolver(employeeSchema),
+        defaultValues: {
+            name: editForm.name,
+            position: editForm.position,
+            startDate: editForm.startDate? editForm.startDate : new Date(),
+            status: editForm.status,
+            email: editForm.email,
+            phone: editForm.phone
+        }
+
+    });
+
+    console.log(watch());
+    console.log(errors);
+    console.log('editFOrm: ',editForm)
+
+
+    //as stirng??? //handleUPDATEEMPLOYEE(BYLE)
+    const onSubmit: SubmitHandler<NewEmployeeFormData> = (data) => {
+
+        if (!editedId) return;
+
+        updateEmployee(editedId, data);
+                //закрываем окна. 
+                setExpandedRowId(null);
+                setExpandedActionId(null);
+                setEditedId(null);
+        
+                //чистим стейты
+                setEditForm({
+                    name: '',
+                    position: '',
+                    phone: '',
+                    email: '',
+                    startDate: null,
+                    status: '',
+                })
+    };
+
+
     useEffect(() => {
 
 
@@ -131,6 +177,16 @@ const UiEmployeesTable = () => {
 
         if (!currentEmployee) return;
 
+        setValue('name', currentEmployee.name);
+        setValue('position', currentEmployee.position);
+        setValue('phone', currentEmployee.phone);
+        setValue('email', currentEmployee.email);
+        setValue('startDate', currentEmployee.startDate? currentEmployee.startDate : new Date());
+        setValue('status', currentEmployee.status);
+        
+
+
+        
         setEditForm({
             name: currentEmployee.name,
             position: currentEmployee.position,
@@ -142,29 +198,7 @@ const UiEmployeesTable = () => {
 
     }
 
-    // при сохранении изменений обновляем сотрудника в сторе
 
-    const handleUpdateEmployee = () => {
-
-        if (!editedId) return;
-
-        updateEmployee(editedId , editForm);
-
-        //закрываем окна. 
-        setExpandedRowId(null);
-        setExpandedActionId(null);
-        setEditedId(null);
-
-        //чистим стейты
-        setEditForm({
-            name: '',
-            position: '',
-            phone: '',
-            email: '',
-            startDate: null,
-            status: '',
-        })
-    };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const {name, value} = e.target;
@@ -211,10 +245,11 @@ const UiEmployeesTable = () => {
                                                 <>
                                                     <TableCell>
                                                         <TextField
+                                                            {...register('name', {required: true})}
+                                                            helperText={errors.name && errors.name.message}
+                                                            error={!!errors.name}
                                                             type='text' 
                                                             name='name'
-                                                            onChange={handleChange}
-                                                            value={editForm.name}
                                                             size='small'
                                                             sx={commonInputSx}
 
@@ -224,11 +259,9 @@ const UiEmployeesTable = () => {
                                                     <TableCell>
 
                                                         <TextField
-                                                            required
+                                                            {...register('position', {required: true})}
                                                             type='text' 
                                                             name='position'
-                                                            value={editForm.position}
-                                                            onChange={handleChange}
                                                             size='small'
                                                             sx={commonInputSx}
 
@@ -241,8 +274,6 @@ const UiEmployeesTable = () => {
                                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                                                             <DatePicker
                                                                 name='startDate'
-                                                                value={editForm.startDate ? dayjs(editForm.startDate) : null}  
-                                                                onChange={ (newValue) => setEditForm(prev => ({...prev, startDate: newValue? newValue.toDate() : null}) )} 
                                                                 format='DD/MM/YYYY'
                                                                 slotProps={{
                                                                     textField: {
@@ -259,10 +290,9 @@ const UiEmployeesTable = () => {
                                                     <TableCell>
 
                                                         <TextField 
+                                                            {...register('status', {required: true})}
                                                             select
                                                             name='status'
-                                                            onChange={handleChange}
-                                                            value={editForm.status}
                                                             sx={commonInputSx}
                                                         >
                                                             
@@ -283,7 +313,7 @@ const UiEmployeesTable = () => {
                                                     <TableCell>
                                                         <button 
                                                             type='button'
-                                                            onClick={handleUpdateEmployee} 
+                                                            //onClick={onSubmit} 
                                                             className='py-2 px-4 bg-green-600 text-white rounded-md cursor-pointer hover:bg-green-600/90'
                                                             aria-label='save changes'
                                                             title='save changes'

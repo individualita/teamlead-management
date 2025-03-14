@@ -14,7 +14,7 @@ import {
 import { commonInputSx } from '../../constants/commonInputSx';
 
 
-import { EditFormType } from '../../types/editForm';
+import { EmployeeFormData } from '../../types/employeeFormData';
 import { Employee } from '../../../../shared/types/employee';
 
 import styles from './../../employees.module.css';
@@ -24,7 +24,7 @@ interface CollapsibleRowProps {
     isRowExpanded: boolean,
     isEmployeeEditing: boolean,
     colSpanCount: number,
-    formData: EditFormType,
+    formData: EmployeeFormData,
     handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void,
 }
 
