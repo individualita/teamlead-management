@@ -14,8 +14,6 @@ import Button from '@mui/material/Button';
 
 import { TextField, MenuItem } from '@mui/material';
 
-import { NewEmployeeFormData } from '../../types/newEmployeeFormData';
-
 
 import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
 
@@ -25,7 +23,8 @@ import { employeeSchema } from '../../schema/employee.schema';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
-import { Employee } from '../../../../shared/types/employee';
+
+import { EmployeeFormData } from '../../types/employeeFormData';
 
 
 interface AddEmployeeFormProps {
@@ -38,7 +37,7 @@ interface AddEmployeeFormProps {
 const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
 
 
-    const { watch, register, handleSubmit, control, formState: {errors}} = useForm<NewEmployeeFormData>({
+    const { watch, register, handleSubmit, control, formState: {errors}} = useForm<EmployeeFormData>({
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
         defaultValues: {
@@ -52,7 +51,7 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
 
     });
 
-    const onSubmit: SubmitHandler<NewEmployeeFormData> = (data) => {
+    const onSubmit: SubmitHandler<EmployeeFormData> = (data) => {
 
         addEmployee({...data, _id: uuidv4()});
     };

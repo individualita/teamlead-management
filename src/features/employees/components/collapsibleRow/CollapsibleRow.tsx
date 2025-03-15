@@ -14,6 +14,9 @@ import {
 import { commonInputSx } from '../../constants/commonInputSx';
 
 
+
+import { UseFormRegister, FieldErrors } from 'react-hook-form';
+
 import { EmployeeFormData } from '../../types/employeeFormData';
 import { Employee } from '../../../../shared/types/employee';
 
@@ -24,11 +27,11 @@ interface CollapsibleRowProps {
     isRowExpanded: boolean,
     isEmployeeEditing: boolean,
     colSpanCount: number,
-    formData: EmployeeFormData,
-    handleChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => void,
+    register: UseFormRegister<EmployeeFormData>,
+    errors: FieldErrors<EmployeeFormData>
 }
 
-const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCount, formData, handleChange}: CollapsibleRowProps) => {
+const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCount, register, errors}: CollapsibleRowProps) => {
 
     return (
         <TableRow aria-expanded={isRowExpanded}>
@@ -51,20 +54,24 @@ const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCoun
                                             <TableCell >
 
                                                 <TextField 
+                                                    {...register('email', {required: true})}
+                                                    helperText={errors.email && errors.email.message}
+                                                    error={!!errors.email}
                                                     type='email'
                                                     name='email'
-                                                    value={formData.email}
-                                                    onChange={handleChange}
                                                     sx={commonInputSx}
                                                 /> 
 
                                             </TableCell>
+
                                             <TableCell> 
+
                                                 <TextField
+                                                    {...register('phone', {required: true})}
+                                                    helperText={errors.phone && errors.phone.message}
+                                                    error={!!errors.phone}
                                                     type='tel'
                                                     name='phone'
-                                                    value={formData.phone}
-                                                    onChange={handleChange}
                                                     sx={commonInputSx}
                                                  />
                                             </TableCell>

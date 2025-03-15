@@ -50,7 +50,6 @@ import { commonDatePickerSx } from '../../constants/commonDatePickerSx';
 
 import { EmployeeFormData } from '../../types/employeeFormData';
 import styles from './../../employees.module.css';
-import { NewEmployeeFormData } from '../../types/newEmployeeFormData';
 
 
 const UiEmployeesTable = () => {
@@ -68,58 +67,43 @@ const UiEmployeesTable = () => {
     
     const [editedId, setEditedId] = useState<string | null>(null);
     
-    const [editForm, setEditForm] = useState<EmployeeFormData>({
-        name: '',
-        position: '',
-        phone: '',
-        email: '',
-        startDate: null,
-        status: '',
-    });
 
     const {employees, deleteEmployee, updateEmployee} = useEmployeeStore();
 
-    const { watch, register, getValues,setValue,  handleSubmit, control, formState: {errors, isDirty}} = useForm<NewEmployeeFormData>({
+    const { watch, register, getValues,setValue,  handleSubmit, reset, control, formState: {errors, isDirty}} = useForm<EmployeeFormData>({
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
-        defaultValues: {
-            name: editForm.name,
-            position: editForm.position,
-            startDate: editForm.startDate? editForm.startDate : new Date(),
-            status: editForm.status,
-            email: editForm.email,
-            phone: editForm.phone
-        }
-
     });
 
-    console.log(watch());
+    console.log('watch', watch());
     console.log(errors);
-    console.log('editFOrm: ',editForm)
 
 
-    //as stirng??? //handleUPDATEEMPLOYEE(BYLE)
-    const onSubmit: SubmitHandler<NewEmployeeFormData> = (data) => {
+    const onSubmit: SubmitHandler<EmployeeFormData> = (data) => {
 
         if (!editedId) return;
 
         updateEmployee(editedId, data);
-                //закрываем окна. 
-                setExpandedRowId(null);
-                setExpandedActionId(null);
-                setEditedId(null);
-        
-                //чистим стейты
-                setEditForm({
-                    name: '',
-                    position: '',
-                    phone: '',
-                    email: '',
-                    startDate: null,
-                    status: '',
-                })
-    };
+        //закрываем окна. 
+        setExpandedRowId(null);
+        setExpandedActionId(null);
+        setEditedId(null);
 
+
+
+
+        //с reset() не сбросится, поэтому указываем явно
+        reset({
+            name: '',
+            position: '',
+            phone: '',
+            email: '',
+            startDate: new Date(),
+            status: '',
+        });
+
+    };
+    
 
     useEffect(() => {
 
@@ -177,38 +161,21 @@ const UiEmployeesTable = () => {
 
         if (!currentEmployee) return;
 
-        setValue('name', currentEmployee.name);
-        setValue('position', currentEmployee.position);
-        setValue('phone', currentEmployee.phone);
-        setValue('email', currentEmployee.email);
-        setValue('startDate', currentEmployee.startDate? currentEmployee.startDate : new Date());
-        setValue('status', currentEmployee.status);
-        
+        console.log('currentEmployee:', currentEmployee); // 👀 Проверь, есть ли status
 
 
-        
-        setEditForm({
+        //or setValue()
+        reset({
             name: currentEmployee.name,
             position: currentEmployee.position,
             phone: currentEmployee.phone,
             email: currentEmployee.email,
-            startDate: currentEmployee.startDate,
+            startDate: currentEmployee.startDate || new Date(),
             status: currentEmployee.status,
         });
-
+        
     }
 
-
-
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
-        const {name, value} = e.target;
-
-        setEditForm(prev => ({
-            ...prev, 
-            [name]: value,
-        }));
-
-    };
 
 
     return (
@@ -263,6 +230,8 @@ const UiEmployeesTable = () => {
                                                             type='text' 
                                                             name='position'
                                                             size='small'
+                                                            helperText={errors.position && errors.position.message}
+                                                            error={!!errors.position}
                                                             sx={commonInputSx}
 
                                                         />
@@ -272,48 +241,76 @@ const UiEmployeesTable = () => {
                                                     <TableCell>
 
                                                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                                            <DatePicker
+                                                            <Controller 
                                                                 name='startDate'
-                                                                format='DD/MM/YYYY'
-                                                                slotProps={{
-                                                                    textField: {
-                                                                        size: 'small', 
-                                                                        sx: commonDatePickerSx
-                                                                    },
-                                                                }}                                                     
+                                                                control={control}
+                                                                rules={{required: true}}
+                                                                render={({field}) =>  (
+                                                                    
+                                                                    //MUI DatePicker = Dayjs, RHF = date. поэтому onChange + value (для обработки даты)
+                                                                    <DatePicker
+                                                                        {...field}
+                                                                        onChange={(date: Dayjs | null) => field.onChange(date ? date.toDate() : null)} // Dayjs -> Date
+                                                                        value={field.value ? dayjs(field.value) : null} // Date -> Dayjs
+                                                                        format='DD/MM/YYYY'
+                                                                        slotProps={{
+                                                                            textField: {
+                                                                                size: 'small', 
+                                                                                error: !!errors.startDate,
+                                                                                helperText: errors.startDate?.message, 
+                                                                                sx: commonDatePickerSx
+                                                                            },
+                                                                        }}  
+                                                                        
+                                                                    />
+
+                                                                )}
 
                                                             />
+
                                                         </LocalizationProvider>
                                                         
                                                     </TableCell>
 
                                                     <TableCell>
-
-                                                        <TextField 
-                                                            {...register('status', {required: true})}
-                                                            select
+                                                        
+                                                        <Controller
                                                             name='status'
-                                                            sx={commonInputSx}
-                                                        >
-                                                            
-                                                            {EMPLOYEE_STATUS_OPTIONS.map(status => (
-                                                                <MenuItem
-                                                                    key={status}
-                                                                    value={status}
-                                                                    sx={{fontSize: '14px'}}
+                                                            control={control}
+                                                            rules={{required: true}}
+                                                            render={({field}) => (
+
+                                                                <TextField 
+                                                                    {...field}
+                                                                    select
+                                                                    helperText={errors.status && 'Status is required'}
+                                                                    error={!!errors.status}
+                                                                    sx={commonInputSx}
                                                                 >
-                                                                    {status}
-                                                                </MenuItem>
-                                                            ))}
-                                                                
-                                                        </TextField>
+                                                                    
+                                                                    {EMPLOYEE_STATUS_OPTIONS.map(status => (
+                                                                        <MenuItem
+                                                                            key={status}
+                                                                            value={status}
+                                                                            sx={{fontSize: '14px'}}
+                                                                        >
+                                                                            {status}
+                                                                        </MenuItem>
+                                                                    ))}
+                                                                        
+                                                                </TextField>
+
+                                                            )}
+                                                        />
+
+
 
                                                     </TableCell>
 
                                                     <TableCell>
                                                         <button 
                                                             type='button'
-                                                            //onClick={onSubmit} 
+                                                            onClick={handleSubmit(onSubmit)} 
                                                             className='py-2 px-4 bg-green-600 text-white rounded-md cursor-pointer hover:bg-green-600/90'
                                                             aria-label='save changes'
                                                             title='save changes'
@@ -392,8 +389,8 @@ const UiEmployeesTable = () => {
                                             isRowExpanded={isExpanded || isEmployeeEditing} 
                                             isEmployeeEditing={isEmployeeEditing} 
                                             colSpanCount={TABLE_COLUMNS.length} 
-                                            formData={editForm} 
-                                            handleChange={ handleChange}
+                                            errors={errors}
+                                            register={register}
                                         />
 
                                     </Fragment>
