@@ -1,18 +1,14 @@
-
 import { useEffect, useState } from 'react';
 
-import { useEmployeeStore } from '../../shared/stores/employeesStore';
-import EmployeesTable from './components/employeesTable/EmployeesTable';
-
-
-import EmployeeCard from './components/employeeCard/EmployeeCard';
-
-import UiEmployeesTable from './components/uiEmployeesTable/UiEmployeesTable';
-
-import AddEmployeeDrawer from './components/addEmployeeDrawer/AddEmployeeDrawer';
-import AddEmployeeForm from './components/addEmployeeForm/AddEmployeeForm';
-
 import { Alert } from '@mui/material';
+
+import { useEmployeeStore } from '../../shared/stores/employeesStore';
+
+import EmployeesTable from './components/employeesTable/EmployeesTable';
+import EmployeeCard from './components/employeeCard/EmployeeCard';
+import UiEmployeesTable from './components/uiEmployeesTable/UiEmployeesTable';
+import AddEmployeeDrawer from './components/addEmployeeDrawer/AddEmployeeDrawer';
+
 
 
 const Employees = () => {
@@ -56,8 +52,6 @@ const Employees = () => {
 
                 {/* desktop size */}
                 <div className='overflow-x-auto rounded-lg shadow-md hidden md:block'>
-
-                    
 
                     {test && <EmployeesTable />}
 

@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const employeeSchema = z.object({
-    name: z.string().min(2, 'Employee name must be at least 2 characters long'),
-    position: z.string().min(2, 'Position must be at least 2 characters long'),
+    name: z.string().min(2, 'At least 2 characters long'),
+    position: z.string().min(2, 'At least 2 characters long'),
     startDate: z.date({message:'Start date is required'}), 
     status: z.string().nonempty('Status is required'),
     email: z.string().email('Please enter a valid email address'),

@@ -1,9 +1,9 @@
-import { ChangeEvent } from 'react';
+import { UseFormRegister, FieldErrors } from 'react-hook-form';
+
 import {
     TextField,
     TableRow,
     TableCell,
-    IconButton,
     Collapse,
     Box,
     Table,
@@ -11,16 +11,11 @@ import {
     TableHead
 } from '@mui/material';
 
+
 import { commonInputSx } from '../../constants/commonInputSx';
-
-
-
-import { UseFormRegister, FieldErrors } from 'react-hook-form';
-
 import { EmployeeFormData } from '../../types/employeeFormData';
 import { Employee } from '../../../../shared/types/employee';
 
-import styles from './../../employees.module.css';
 
 interface CollapsibleRowProps {
     employee: Employee,
@@ -55,11 +50,21 @@ const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCoun
 
                                                 <TextField 
                                                     {...register('email', {required: true})}
-                                                    helperText={errors.email && errors.email.message}
+                                                    helperText={errors.email ? errors.email.message : '\u200B'}
                                                     error={!!errors.email}
                                                     type='email'
                                                     name='email'
                                                     sx={commonInputSx}
+                                                    slotProps={{
+                                                        formHelperText: {
+                                                            sx: {
+                                                                minHeight: '2em',
+                                                                color: 'green',
+                                                                margin: 0,
+                                                                padding: 0,
+                                                            }
+                                                        }
+                                                    }}
                                                 /> 
 
                                             </TableCell>
@@ -68,11 +73,21 @@ const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCoun
 
                                                 <TextField
                                                     {...register('phone', {required: true})}
-                                                    helperText={errors.phone && errors.phone.message}
+                                                    helperText={errors.phone ? errors.phone.message : '\u200B'}
                                                     error={!!errors.phone}
                                                     type='tel'
                                                     name='phone'
                                                     sx={commonInputSx}
+                                                    slotProps={{
+                                                        formHelperText: {
+                                                            sx: {
+                                                                minHeight: '2em',
+                                                                color: 'green',
+                                                                margin: 0,
+                                                                padding: 0,
+                                                            }
+                                                        }
+                                                    }}
                                                  />
                                             </TableCell>
 

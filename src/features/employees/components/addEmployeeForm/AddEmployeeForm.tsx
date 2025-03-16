@@ -1,29 +1,23 @@
+import dayjs from 'dayjs';
+import { Dayjs } from 'dayjs';
+import { v4 as uuidv4 } from 'uuid';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+
+//MUI
+import { TextField, MenuItem } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-
-import { v4 as uuidv4 } from 'uuid';
-
-import { formInputSx } from '../../constants/formInputSx';
-
-import { Dayjs } from 'dayjs';
-
 import Button from '@mui/material/Button';
 
-import { TextField, MenuItem } from '@mui/material';
-
-
-import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
-
-import dayjs from 'dayjs';
-
-import { employeeSchema } from '../../schema/employee.schema';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
 
+
+import { employeeSchema } from '../../schema/employee.schema';
+import { formInputSx } from '../../constants/formInputSx';
+import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
 import { EmployeeFormData } from '../../types/employeeFormData';
 
 
@@ -37,6 +31,7 @@ interface AddEmployeeFormProps {
 
 const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
+    const {addEmployee} = useEmployeeStore();
 
     const { watch, register, handleSubmit, control, formState: {errors}} = useForm<EmployeeFormData>({
         mode: 'onChange',
@@ -61,9 +56,6 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
     };
 
-    console.log(errors);
-
-    const {addEmployee} = useEmployeeStore();
 
     return (
         <form 

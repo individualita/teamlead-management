@@ -1,4 +1,10 @@
 import  { Fragment, useState, useMemo, useEffect, useRef } from 'react';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import dayjs, { Dayjs } from 'dayjs';
+
+
+//MUI
 import {
     Table,
     TableBody,
@@ -11,45 +17,40 @@ import {
     Paper,
     TextField,
     MenuItem,
+    Button
 } from '@mui/material';
 
-import dayjs, { Dayjs } from 'dayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 
-import { employeeSchema } from '../../schema/employee.schema';
 
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'
-
-
-import { ChangeEvent } from 'react';
-
+//icons
 import { FaAngleUp } from 'react-icons/fa';
 import { FaAngleDown } from 'react-icons/fa6';
 import { HiDotsVertical } from 'react-icons/hi';
 
-import { formatDate } from '../../utils/formatDate';
+import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
+import { Employee } from '../../../../shared/types/employee';
+
+
+import { employeeSchema } from '../../schema/employee.schema';
 import { getStatusColor } from '../../utils/getStatusColor';
+
+//constants
+import { commonInputSx } from '../../constants/commonInputSx';
+import { commonDatePickerSx } from '../../constants/commonDatePickerSx';
 import { TABLE_COLUMNS } from '../../constants/tableColumns';
 import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
 
+//types
+import { EmployeeFormData } from '../../types/employeeFormData';
 
-import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
-import { Employee } from '../../../../shared/types/employee';
+//components
 import CollapsibleRow from '../collapsibleRow/CollapsibleRow';
-
 import TableHeader from '../tableHeader/TableHeader';
-
 import ActionMenu from '../actionMenu/ActionMenu';
 
-import { zodResolver } from '@hookform/resolvers/zod';
-
-import { commonInputSx } from '../../constants/commonInputSx';
-import { commonDatePickerSx } from '../../constants/commonDatePickerSx';
-
-import { EmployeeFormData } from '../../types/employeeFormData';
-import styles from './../../employees.module.css';
 
 
 const UiEmployeesTable = () => {
@@ -74,9 +75,6 @@ const UiEmployeesTable = () => {
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
     });
-
-    console.log('watch', watch());
-    console.log(errors);
 
 
     const onSubmit: SubmitHandler<EmployeeFormData> = (data) => {
@@ -207,7 +205,7 @@ const UiEmployeesTable = () => {
                                                     <TableCell>
                                                         <TextField
                                                             {...register('name', {required: true})}
-                                                            helperText={errors.name && errors.name.message}
+                                                            helperText={errors.name && errors.name.message} 
                                                             error={!!errors.name}
                                                             type='text' 
                                                             name='name'
@@ -224,7 +222,7 @@ const UiEmployeesTable = () => {
                                                             type='text' 
                                                             name='position'
                                                             size='small'
-                                                            helperText={errors.position && errors.position.message}
+                                                            helperText={errors.position && errors.position.message} 
                                                             error={!!errors.position}
                                                             sx={commonInputSx}
 
@@ -251,9 +249,10 @@ const UiEmployeesTable = () => {
                                                                             textField: {
                                                                                 size: 'small', 
                                                                                 error: !!errors.startDate,
-                                                                                helperText: errors.startDate?.message, 
+                                                                                helperText: errors.startDate && errors.startDate.message,
                                                                                 sx: commonDatePickerSx
                                                                             },
+ 
                                                                         }}  
                                                                         
                                                                     />
@@ -277,7 +276,7 @@ const UiEmployeesTable = () => {
                                                                 <TextField 
                                                                     {...field}
                                                                     select
-                                                                    helperText={errors.status && 'Status is required'}
+                                                                    helperText={errors.status && errors.status.message}
                                                                     error={!!errors.status}
                                                                     sx={commonInputSx}
                                                                 >
@@ -301,16 +300,19 @@ const UiEmployeesTable = () => {
 
                                                     </TableCell>
 
-                                                    <TableCell>
+                                                    <TableCell align='center'>
                                                         <button 
                                                             type='button'
                                                             onClick={handleSubmit(onSubmit)} 
-                                                            className='py-2 px-4 bg-green-600 text-white rounded-md cursor-pointer hover:bg-green-600/90'
+                                                            className='py-1.5 px-7 bg-green-700 text-white rounded-md cursor-pointer hover:bg-green-700/90 transition-colors duration-300'
                                                             aria-label='save changes'
                                                             title='save changes'
                                                         >
                                                             Save
                                                         </button>
+
+                                                        {/*<Button variant='contained' color='success' type='submit' size='small'>Save</Button>*/}
+                                                        
 
                                                     </TableCell>
 

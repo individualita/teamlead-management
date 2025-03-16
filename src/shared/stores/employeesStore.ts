@@ -17,7 +17,7 @@ export const useEmployeeStore = create<EmployeesState>((set) => ({
     employees: EMPLOYEES,
     addEmployee: (employee) => 
         set((state) => ({
-            employees: [...state.employees, employee]
+            employees: [employee, ...state.employees]
         })),
     deleteEmployee: (id) => 
         set((state) => ({

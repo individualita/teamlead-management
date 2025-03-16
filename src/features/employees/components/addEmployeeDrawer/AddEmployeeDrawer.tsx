@@ -1,15 +1,10 @@
 import { useState } from 'react';
+
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
 import Drawer from '@mui/material/Drawer';
 
-import { Alert } from '@mui/material';
-
 import AddEmployeeForm from '../addEmployeeForm/AddEmployeeForm';
-
-
 
 
 const drawerStyle =  {
@@ -18,15 +13,12 @@ const drawerStyle =  {
     bgcolor: 'background.paper',
     boxShadow: 24,
     height: '100dvh',
-
-
 }
 
 interface EmployeeModalProps {
     showAlert: (name: string) => void;
 }
 
-//sx={style}
 const AddEmployeeDrawer = ({showAlert} : EmployeeModalProps) => {
     const [open, setOpen] = useState(false);
 
@@ -34,9 +26,8 @@ const AddEmployeeDrawer = ({showAlert} : EmployeeModalProps) => {
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-
     return (
-        <div>
+        <>
             <Button 
                 onClick={handleOpen} 
                 variant='contained' 
@@ -60,11 +51,15 @@ const AddEmployeeDrawer = ({showAlert} : EmployeeModalProps) => {
                     <div className='text-xl font-bold'>Add employee</div>
 
 
-                    <AddEmployeeForm handleClose={handleClose} showAlert={showAlert}/>
+                    <AddEmployeeForm 
+                        handleClose={handleClose} 
+                        showAlert={showAlert}
+                    />
+
                 </Box>
 
             </Drawer>
-        </div>
+        </>
     )
 
 }
