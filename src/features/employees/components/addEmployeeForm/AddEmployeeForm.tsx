@@ -29,12 +29,13 @@ import { EmployeeFormData } from '../../types/employeeFormData';
 
 interface AddEmployeeFormProps {
     handleClose: () => void,
+    showAlert: (name: string) => void,
 }
 
 
 
 
-const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
+const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
 
     const { watch, register, handleSubmit, control, formState: {errors}} = useForm<EmployeeFormData>({
@@ -54,6 +55,10 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
     const onSubmit: SubmitHandler<EmployeeFormData> = (data) => {
 
         addEmployee({...data, _id: uuidv4()});
+        handleClose();
+
+        showAlert(data.name);
+
     };
 
     console.log(errors);
@@ -121,32 +126,43 @@ const AddEmployeeForm = ({handleClose}: AddEmployeeFormProps) => {
             </LocalizationProvider>
 
 
-
-            <TextField
-                {...register('status', {required: true})}
-                select
+            <Controller 
                 name='status'
-                label='Status'
-                size='small'
-                helperText={errors.status && 'Status is required'}
-                error={!!errors.status}
-                defaultValue={EMPLOYEE_STATUS_OPTIONS[0]}
-                sx={formInputSx}
-            >
-                <MenuItem value='' disabled sx={{ fontSize: '14px' }}>
-                    Choose status
-                </MenuItem>
-                {EMPLOYEE_STATUS_OPTIONS.map(status => (
-                    <MenuItem
-                        key={status}
-                        value={status}
-                        sx={{fontSize: '14px'}}
+                control={control}
+                rules={{required: true}}
+                render={({ field }) => (
+
+                    <TextField
+                        {...field}
+                        select
+                        label='Status'
+                        size='small'
+                        helperText={errors.status && 'Status is required'}
+                        error={!!errors.status}
+                        defaultValue={EMPLOYEE_STATUS_OPTIONS[0]}
+                        sx={formInputSx}
                     >
-                        {status}
-                    </MenuItem>
-                ))}
-                    
-            </TextField>
+                        <MenuItem value='' disabled sx={{ fontSize: '14px' }}>
+                            Choose status
+                        </MenuItem>
+        
+                        {EMPLOYEE_STATUS_OPTIONS.map(status => (
+                            <MenuItem
+                                key={status}
+                                value={status}
+                                sx={{fontSize: '14px'}}
+                            >
+                                {status}
+                            </MenuItem>
+                        ))}
+                            
+                    </TextField>
+
+
+                )}
+            />
+
+
 
 
             <TextField

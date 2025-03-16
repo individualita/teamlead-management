@@ -90,8 +90,6 @@ const UiEmployeesTable = () => {
         setEditedId(null);
 
 
-
-
         //с reset() не сбросится, поэтому указываем явно
         reset({
             name: '',
@@ -106,7 +104,6 @@ const UiEmployeesTable = () => {
     
 
     useEffect(() => {
-
 
         const handleCLickOutside = (e: MouseEvent) => {
             
@@ -160,9 +157,6 @@ const UiEmployeesTable = () => {
         const currentEmployee = employees.find(emp => emp._id === id);
 
         if (!currentEmployee) return;
-
-        console.log('currentEmployee:', currentEmployee); // 👀 Проверь, есть ли status
-
 
         //or setValue()
         reset({

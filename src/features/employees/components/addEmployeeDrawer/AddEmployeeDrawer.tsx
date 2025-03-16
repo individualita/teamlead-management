@@ -5,25 +5,12 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Drawer from '@mui/material/Drawer';
 
+import { Alert } from '@mui/material';
+
 import AddEmployeeForm from '../addEmployeeForm/AddEmployeeForm';
 
 
 
-const modalStyle = {
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    //transform: 'translate(-100%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '2px solid #000',
-    boxShadow: 24,
-    padding: '10px',    
-
-    //moje
-
-    height: '100dvh'
-};
 
 const drawerStyle =  {
     width: 400,
@@ -35,10 +22,12 @@ const drawerStyle =  {
 
 }
 
-
+interface EmployeeModalProps {
+    showAlert: (name: string) => void;
+}
 
 //sx={style}
-const EmployeeModal = () => {
+const AddEmployeeDrawer = ({showAlert} : EmployeeModalProps) => {
     const [open, setOpen] = useState(false);
 
     //modal toggle.
@@ -71,7 +60,7 @@ const EmployeeModal = () => {
                     <div className='text-xl font-bold'>Add employee</div>
 
 
-                    <AddEmployeeForm handleClose={handleClose}/>
+                    <AddEmployeeForm handleClose={handleClose} showAlert={showAlert}/>
                 </Box>
 
             </Drawer>
@@ -80,4 +69,4 @@ const EmployeeModal = () => {
 
 }
 
-export default EmployeeModal; 
+export default AddEmployeeDrawer; 
