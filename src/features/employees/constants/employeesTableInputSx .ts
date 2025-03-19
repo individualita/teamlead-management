@@ -1,4 +1,4 @@
-export const commonInputSx = {
+export const employeesTableInputSx  = {
     '& .MuiInputBase-root': {
         height: '31px', 
     },

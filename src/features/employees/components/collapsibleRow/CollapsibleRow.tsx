@@ -11,8 +11,7 @@ import {
     TableHead
 } from '@mui/material';
 
-
-import { commonInputSx } from '../../constants/commonInputSx';
+import { employeesTableInputSx } from '../../constants/employeesTableInputSx ';
 import { EmployeeFormData } from '../../types/employeeFormData';
 import { Employee } from '../../../../shared/types/employee';
 
@@ -54,7 +53,7 @@ const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCoun
                                                     error={!!errors.email}
                                                     type='email'
                                                     name='email'
-                                                    sx={commonInputSx}
+                                                    sx={employeesTableInputSx}
                                                     slotProps={{
                                                         formHelperText: {
                                                             sx: {
@@ -77,7 +76,7 @@ const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCoun
                                                     error={!!errors.phone}
                                                     type='tel'
                                                     name='phone'
-                                                    sx={commonInputSx}
+                                                    sx={employeesTableInputSx}
                                                     slotProps={{
                                                         formHelperText: {
                                                             sx: {

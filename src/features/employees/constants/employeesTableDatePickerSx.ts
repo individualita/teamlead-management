@@ -1,4 +1,4 @@
-export const commonDatePickerSx = {
+export const employeesTableDatePickerSx  = {
     '& .MuiInputBase-root': { //внешняя оболочка
         height: '31px', 
         padding: '0 5px', 

@@ -16,10 +16,9 @@ import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
 
 
 import { employeeSchema } from '../../schema/employee.schema';
-import { formInputSx } from '../../constants/formInputSx';
+import { addEmployeeFormInputSx } from '../../constants/addEmployeeFormInputSx';
 import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
 import { EmployeeFormData } from '../../types/employeeFormData';
-
 
 interface AddEmployeeFormProps {
     handleClose: () => void,
@@ -70,7 +69,7 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                 label='Employee name'
                 helperText={errors.name && errors.name.message}
                 error={!!errors.name}
-                sx={formInputSx}
+                sx={addEmployeeFormInputSx}
             />
 
 
@@ -83,7 +82,7 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                 label='Position' 
                 helperText={errors.position && errors.position.message}
                 error={!!errors.position}
-                sx={formInputSx}
+                sx={addEmployeeFormInputSx}
             />
 
 
@@ -109,7 +108,7 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                                 },
                             }}  
                             
-                            sx={formInputSx}
+                            sx={addEmployeeFormInputSx}
                         />
 
                     )}
@@ -132,7 +131,7 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                         helperText={errors.status && 'Status is required'}
                         error={!!errors.status}
                         defaultValue={EMPLOYEE_STATUS_OPTIONS[0]}
-                        sx={formInputSx}
+                        sx={addEmployeeFormInputSx}
                     >
                         <MenuItem value='' disabled sx={{ fontSize: '14px' }}>
                             Choose status
@@ -165,7 +164,7 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                 size='small'
                 helperText={errors.email && errors.email.message}
                 error={!!errors.email}
-                sx={formInputSx}
+                sx={addEmployeeFormInputSx}
 
             />
 
@@ -177,7 +176,7 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                 size='small'
                 helperText={errors.phone && errors.phone.message}
                 error={!!errors.phone}
-                sx={formInputSx}
+                sx={addEmployeeFormInputSx}
             />
 
 

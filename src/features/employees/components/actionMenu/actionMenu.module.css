@@ -1,4 +1,5 @@
-@reference '../../../../assets/styles/main.css';
+/*@reference '../../../../assets/styles/main.css';*/
+@import 'tailwindcss';
 
 
 .menu {

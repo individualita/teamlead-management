@@ -1,7 +1,6 @@
-import  { Fragment, useState, useMemo, useEffect, useRef } from 'react';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
+import  { useState,  useEffect, useRef } from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import dayjs, { Dayjs } from 'dayjs';
 
 
 //MUI
@@ -13,44 +12,25 @@ import {
     TableFooter,
     TablePagination,
     TableRow,
-    Box,
     Paper,
-    TextField,
-    MenuItem,
-    Button
 } from '@mui/material';
 
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-
-
-//icons
-import { FaAngleUp } from 'react-icons/fa';
-import { FaAngleDown } from 'react-icons/fa6';
-import { HiDotsVertical } from 'react-icons/hi';
-
+//store
 import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
-import { Employee } from '../../../../shared/types/employee';
 
-
+//schema
 import { employeeSchema } from '../../schema/employee.schema';
-import { getStatusColor } from '../../utils/getStatusColor';
 
 //constants
-import { commonInputSx } from '../../constants/commonInputSx';
-import { commonDatePickerSx } from '../../constants/commonDatePickerSx';
 import { TABLE_COLUMNS } from '../../constants/tableColumns';
-import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
 
 //types
+import { Employee } from '../../../../shared/types/employee';
 import { EmployeeFormData } from '../../types/employeeFormData';
 
 //components
-import CollapsibleRow from '../collapsibleRow/CollapsibleRow';
 import TableHeader from '../tableHeader/TableHeader';
-import ActionMenu from '../actionMenu/ActionMenu';
-
+import EmployeeRow from '../employeeRow/EmployeeRow';
 
 
 const UiEmployeesTable = () => {
@@ -64,14 +44,12 @@ const UiEmployeesTable = () => {
 
     const [expandedActionId, setExpandedActionId] = useState<string | null>(null);
 
-
-    
     const [editedId, setEditedId] = useState<string | null>(null);
     
 
-    const {employees, deleteEmployee, updateEmployee} = useEmployeeStore();
+    const {employees, updateEmployee} = useEmployeeStore();
 
-    const { watch, register, getValues,setValue,  handleSubmit, reset, control, formState: {errors, isDirty}} = useForm<EmployeeFormData>({
+    const { register, handleSubmit, reset, control, formState: {errors}} = useForm<EmployeeFormData>({
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
     });
@@ -101,6 +79,7 @@ const UiEmployeesTable = () => {
     };
     
 
+
     useEffect(() => {
 
         const handleCLickOutside = (e: MouseEvent) => {
@@ -108,8 +87,8 @@ const UiEmployeesTable = () => {
             if (expandedActionId !== null && ref.current && !ref.current.contains(e.target as Node)) {
                 setExpandedActionId(null);
             }
-            
-        }
+    
+        };
 
         document.addEventListener('click', handleCLickOutside);
 
@@ -127,15 +106,9 @@ const UiEmployeesTable = () => {
         setCurrentPage(0);
     };
 
-    const paginatedEmployees = useMemo(() => {
-
-        if(rowsPerPage === -1) return employees;
-
-        const startIndex = currentPage * rowsPerPage;
-        const endIndex = (currentPage + 1) * rowsPerPage;
-        return employees.slice(startIndex, endIndex);
-
-    }, [currentPage, rowsPerPage, employees]);
+    const paginatedEmployees = rowsPerPage === -1
+    ? employees
+    : employees.slice(currentPage * rowsPerPage, (currentPage + 1) * rowsPerPage);
 
 
     // Разворачивает/сворачивает строку таблицы (стрелка)
@@ -185,219 +158,30 @@ const UiEmployeesTable = () => {
                     <TableHeader />
 
                     <TableBody>
-                        {paginatedEmployees.map((emp: Employee) =>  {
 
-                                //открываем когда редактируем или когда нажимаем на стрелку вниз. 
-                                const isExpanded = expandedRowId === emp._id;
-                                const isActioned = expandedActionId === emp._id;
+                        {paginatedEmployees.map((emp: Employee) =>  (
+                            <EmployeeRow
+                                key={emp._id}
+                                employee={emp}
+                                isExpanded={expandedRowId === emp._id} 
+                                isActioned={expandedActionId === emp._id}
+                                isEditing={editedId === emp._id}
+                                onToggleCollapse={handleToggleRowCollapse}
+                                onToggleActions={handleToggleActionMenu}
+                                onEdit={handleEditEmployee}
+                                errors={errors}
+                                control={control}
+                                register={register}
+                                onSubmit={handleSubmit(onSubmit)}
+                                actionMenuRef={ref}
+                            />
+                        ))}
 
-                                const isEmployeeEditing = editedId === emp._id;
-
-                                return (
-                                    <Fragment key={emp._id}>
-                                        
-                                        <TableRow 
-                                            sx={{ '& > *': { borderBottom: 'unset' } }} 
-                                            className='hover:bg-gray-50'
-                                        >
-                                            {isEmployeeEditing? (
-                                                <>
-                                                    <TableCell>
-                                                        <TextField
-                                                            {...register('name', {required: true})}
-                                                            helperText={errors.name && errors.name.message} 
-                                                            error={!!errors.name}
-                                                            type='text' 
-                                                            name='name'
-                                                            size='small'
-                                                            sx={commonInputSx}
-
-                                                        />
-                                                    </TableCell>
-                                                    
-                                                    <TableCell>
-
-                                                        <TextField
-                                                            {...register('position', {required: true})}
-                                                            type='text' 
-                                                            name='position'
-                                                            size='small'
-                                                            helperText={errors.position && errors.position.message} 
-                                                            error={!!errors.position}
-                                                            sx={commonInputSx}
-
-                                                        />
-                                                        
-                                                    </TableCell>
-
-                                                    <TableCell>
-
-                                                        <LocalizationProvider dateAdapter={AdapterDayjs}>
-                                                            <Controller 
-                                                                name='startDate'
-                                                                control={control}
-                                                                rules={{required: true}}
-                                                                render={({field}) =>  (
-                                                                    
-                                                                    //MUI DatePicker = Dayjs, RHF = date. поэтому onChange + value (для обработки даты)
-                                                                    <DatePicker
-                                                                        {...field}
-                                                                        onChange={(date: Dayjs | null) => field.onChange(date ? date.toDate() : null)} // Dayjs -> Date
-                                                                        value={field.value ? dayjs(field.value) : null} // Date -> Dayjs
-                                                                        format='DD/MM/YYYY'
-                                                                        slotProps={{
-                                                                            textField: {
-                                                                                size: 'small', 
-                                                                                error: !!errors.startDate,
-                                                                                helperText: errors.startDate && errors.startDate.message,
-                                                                                sx: commonDatePickerSx
-                                                                            },
- 
-                                                                        }}  
-                                                                        
-                                                                    />
-
-                                                                )}
-
-                                                            />
-
-                                                        </LocalizationProvider>
-                                                        
-                                                    </TableCell>
-
-                                                    <TableCell>
-                                                        
-                                                        <Controller
-                                                            name='status'
-                                                            control={control}
-                                                            rules={{required: true}}
-                                                            render={({field}) => (
-
-                                                                <TextField 
-                                                                    {...field}
-                                                                    select
-                                                                    helperText={errors.status && errors.status.message}
-                                                                    error={!!errors.status}
-                                                                    sx={commonInputSx}
-                                                                >
-                                                                    
-                                                                    {EMPLOYEE_STATUS_OPTIONS.map(status => (
-                                                                        <MenuItem
-                                                                            key={status}
-                                                                            value={status}
-                                                                            sx={{fontSize: '14px'}}
-                                                                        >
-                                                                            {status}
-                                                                        </MenuItem>
-                                                                    ))}
-                                                                        
-                                                                </TextField>
-
-                                                            )}
-                                                        />
-
-
-
-                                                    </TableCell>
-
-                                                    <TableCell align='center'>
-                                                        <button 
-                                                            type='button'
-                                                            onClick={handleSubmit(onSubmit)} 
-                                                            className='py-1.5 px-7 bg-green-700 text-white rounded-md cursor-pointer hover:bg-green-700/90 transition-colors duration-300'
-                                                            aria-label='save changes'
-                                                            title='save changes'
-                                                        >
-                                                            Save
-                                                        </button>
-
-                                                        {/*<Button variant='contained' color='success' type='submit' size='small'>Save</Button>*/}
-                                                        
-
-                                                    </TableCell>
-
-                                                </>
-                                            ) : (
-                                                <>
-                                                    <TableCell>{emp.name}</TableCell>
-                                                    <TableCell>{emp.position}</TableCell>
-                                                    <TableCell>{emp.startDate? dayjs(emp.startDate).format('DD/MM/YYYY') : '-'}</TableCell>
-
-                                                    <TableCell sx={{width: 120}}>
-                                                        <div className={`${getStatusColor(emp.status)} text-center  font-semibold rounded-xl p-1 text-xs`}>
-                                                            {emp.status}
-                                                        </div>
-                                                    </TableCell>
-
-                                                    <TableCell className='relative'>
-                                                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 3 }}>
-
-                                                            <button 
-                                                                type='button'
-                                                                onClick={() => handleToggleRowCollapse(emp._id)} 
-                                                                className='text-xl cursor-pointer'
-                                                                aria-expanded={isExpanded} 
-                                                                aria-label={isExpanded ? "Collapse row" : "Expand row"}
-                                                                title={isExpanded ? "Collapse row" : "Expand row"}
-                                                            >
-                                                                {isExpanded ?   <FaAngleUp/> : <FaAngleDown />}
-                                                            </button>
-
-                                                            
-                                                            <button 
-                                                                type='button'
-                                                                onClick={(e) => {
-                                                                    e.stopPropagation()
-                                                                    handleToggleActionMenu(emp._id);
-                                                                } } 
-                                                                className='text-xl cursor-pointer'
-                                                                aria-haspopup='true'
-                                                                aria-label='Open action menu'
-                                                                title='Open action menu'
-                                                                >
-                                                                    <HiDotsVertical />
-                                                            </button>
-
-                                                        </Box>
-
-                                                        {isActioned && (
-                                                            <ActionMenu 
-                                                                employeeId={emp._id} 
-                                                                handleEditEmployee={handleEditEmployee} 
-                                                                deleteEmployee={deleteEmployee} 
-                                                                ref={ref}
-                                                            />
-                                                        )}
-
-                                                    </TableCell>
-
-                                                </>  
-                                            )}
-
-
-
-                                        </TableRow>
-
-                                        {/* Выпадающая часть */}
-                                        {/* открывается когда редактирование или просто нажатие на стрелку вниз*/}
-                                        <CollapsibleRow 
-                                            employee={emp} 
-                                            isRowExpanded={isExpanded || isEmployeeEditing} 
-                                            isEmployeeEditing={isEmployeeEditing} 
-                                            colSpanCount={TABLE_COLUMNS.length} 
-                                            errors={errors}
-                                            register={register}
-                                        />
-
-                                    </Fragment>
-                                )
-
-                            })
-                        }
                     </TableBody>
 
                     {/* Футер таблицы с пагинацией */}
                     <TableFooter>
+
                         <TableRow>
 
                             <TableCell colSpan={TABLE_COLUMNS.length} sx={{ padding: '1px'}}>
@@ -412,7 +196,9 @@ const UiEmployeesTable = () => {
 
                                 />
                             </TableCell>
+                            
                         </TableRow>
+
                     </TableFooter>
 
                 </Table>

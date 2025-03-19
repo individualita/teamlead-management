@@ -4,6 +4,9 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 
+import { IoPersonAdd } from 'react-icons/io5';
+
+
 import AddEmployeeForm from '../addEmployeeForm/AddEmployeeForm';
 
 
@@ -28,13 +31,16 @@ const AddEmployeeDrawer = ({showAlert} : EmployeeModalProps) => {
 
     return (
         <>
-            <Button 
+            <Button
+                type='button'
                 onClick={handleOpen} 
                 variant='contained' 
-                sx={{background: 'var(--color-primary)', marginLeft: 'auto', display:'block'}}
+                sx={{background: 'var(--color-primary)', marginLeft: 'auto', display:'flex', gap: '8px', textTransform:'none'}}
+                aria-label='Add new employee'
                 title='Add new employee'
                 >
-                    + Add
+                    <IoPersonAdd />
+                    Add
             </Button>
 
             <Drawer

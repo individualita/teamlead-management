@@ -1,20 +1,23 @@
 import { forwardRef } from 'react';
 
+//icons
 import { FaPencil } from 'react-icons/fa6';
 import { IoTrash } from 'react-icons/io5';
 
+//store
+import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
 
 import styles from './actionMenu.module.css';
 
 interface ActionMenuProps {
     employeeId: string,
     handleEditEmployee: (id: string) => void,
-    deleteEmployee: (id: string) => void,
-
 }
 
 const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
-    ({ employeeId, handleEditEmployee, deleteEmployee}, ref) => {
+    ({ employeeId, handleEditEmployee, }, ref) => {
+
+        const {deleteEmployee} = useEmployeeStore();
         return (
 
             <div 

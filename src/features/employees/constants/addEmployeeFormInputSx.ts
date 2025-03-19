@@ -1,5 +1,5 @@
 
-export const formInputSx = {
+export const addEmployeeFormInputSx = {
     backgroundColor: '#fafafa',
 
     '& .MuiInputLabel-root': {

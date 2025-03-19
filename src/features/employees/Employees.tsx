@@ -4,6 +4,8 @@ import { Alert } from '@mui/material';
 
 import { useEmployeeStore } from '../../shared/stores/employeesStore';
 
+import { ALERT_TIMEOUT } from './constants/alertTimeout';
+
 import EmployeesTable from './components/employeesTable/EmployeesTable';
 import EmployeeCard from './components/employeeCard/EmployeeCard';
 import UiEmployeesTable from './components/uiEmployeesTable/UiEmployeesTable';
@@ -18,14 +20,15 @@ const Employees = () => {
 
     const {employees} = useEmployeeStore();
 
+    
+
     useEffect(() => {
 
         const timer = setTimeout(() => {
 
             setIsAlertVisible(false);
 
-        }, 3000);
-
+        }, ALERT_TIMEOUT);
 
         return () => clearTimeout(timer);
 
@@ -33,8 +36,9 @@ const Employees = () => {
     
 
     const showAlert = (name: string) => {
-        setIsAlertVisible(true);
+
         setAlertMessage(name);
+        setIsAlertVisible(true);
     };
 
     const test = false;
