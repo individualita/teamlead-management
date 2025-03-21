@@ -18,36 +18,42 @@ import {
 //store
 import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
 
-//schema
+//schema & types
 import { employeeSchema } from '../../schema/employee.schema';
+import { Employee } from '../../../../shared/types/employee';
+import { EmployeeFormData } from '../../types/employeeFormData';
 
 //constants
 import { TABLE_COLUMNS } from '../../constants/tableColumns';
-
-//types
-import { Employee } from '../../../../shared/types/employee';
-import { EmployeeFormData } from '../../types/employeeFormData';
 
 //components
 import TableHeader from '../tableHeader/TableHeader';
 import EmployeeRow from '../employeeRow/EmployeeRow';
 
+//Hooks
+import usePagination from '../../hooks/usePagination';
+
 
 const UiEmployeesTable = () => {
-    const ref = useRef<HTMLDivElement>(null);
-
-    const [rowsPerPage, setRowsPerPage] = useState<number>(5);
-    const [currentPage, setCurrentPage] = useState<number>(0);
+    //1. Состояния и рефы
 
     // Состояние для хранения ID (string | null) раскрытой строки
     const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
-
     const [expandedActionId, setExpandedActionId] = useState<string | null>(null);
-
     const [editedId, setEditedId] = useState<string | null>(null);
-    
+    const ref = useRef<HTMLDivElement>(null);
 
+    //2. data and hooks
     const {employees, updateEmployee} = useEmployeeStore();
+
+    const {
+        paginatedItems : paginatedEmployees, 
+        rowsPerPage,
+         currentPage, 
+         handleChangePage, 
+         handleChangeRowsPerPage 
+    } = usePagination({items: employees});
+
 
     const { register, handleSubmit, reset, control, formState: {errors}} = useForm<EmployeeFormData>({
         mode: 'onChange',
@@ -55,62 +61,7 @@ const UiEmployeesTable = () => {
     });
 
 
-    const onSubmit: SubmitHandler<EmployeeFormData> = (data) => {
-
-        if (!editedId) return;
-
-        updateEmployee(editedId, data);
-        //закрываем окна. 
-        setExpandedRowId(null);
-        setExpandedActionId(null);
-        setEditedId(null);
-
-
-        //с reset() не сбросится, поэтому указываем явно
-        reset({
-            name: '',
-            position: '',
-            phone: '',
-            email: '',
-            startDate: new Date(),
-            status: '',
-        });
-
-    };
-    
-
-
-    useEffect(() => {
-
-        const handleCLickOutside = (e: MouseEvent) => {
-            
-            if (expandedActionId !== null && ref.current && !ref.current.contains(e.target as Node)) {
-                setExpandedActionId(null);
-            }
-    
-        };
-
-        document.addEventListener('click', handleCLickOutside);
-
-        return () => document.removeEventListener('click', handleCLickOutside);
-
-    }, [ref.current, expandedActionId]);
-
-    //pagination
-    const handleChangePage = (event: unknown, newPage: number) => {
-        setCurrentPage(newPage);
-    };
-    
-    const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setRowsPerPage(+event.target.value);
-        setCurrentPage(0);
-    };
-
-    const paginatedEmployees = rowsPerPage === -1
-    ? employees
-    : employees.slice(currentPage * rowsPerPage, (currentPage + 1) * rowsPerPage);
-
-
+    //3. event handlers
     // Разворачивает/сворачивает строку таблицы (стрелка)
     const handleToggleRowCollapse = (id: string) => {
         setExpandedRowId(prev => (prev === id ? null : id)); // Открывает только одну строку, закрывает предыдущую
@@ -140,6 +91,47 @@ const UiEmployeesTable = () => {
         });
         
     }
+
+    const onSubmit: SubmitHandler<EmployeeFormData> = (data) => {
+
+        if (!editedId) return;
+
+        updateEmployee(editedId, data);
+        //закрываем окна. 
+        setExpandedRowId(null);
+        setExpandedActionId(null);
+        setEditedId(null);
+
+
+        //с reset() не сбросится, поэтому указываем явно
+        reset({
+            name: '',
+            position: '',
+            phone: '',
+            email: '',
+            startDate: new Date(),
+            status: '',
+        });
+
+    };
+    
+
+    //4. Effects
+    useEffect(() => {
+
+        const handleClickOutside = (e: MouseEvent) => {
+            
+            if (expandedActionId !== null && ref.current && !ref.current.contains(e.target as Node)) {
+                setExpandedActionId(null);
+            }
+    
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => document.removeEventListener('click', handleClickOutside);
+
+    }, [ expandedActionId]);
 
 
 

@@ -25,14 +25,11 @@ interface AddEmployeeFormProps {
     showAlert: (name: string) => void,
 }
 
-
-
-
 const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
     const {addEmployee} = useEmployeeStore();
 
-    const { watch, register, handleSubmit, control, formState: {errors}} = useForm<EmployeeFormData>({
+    const { register, handleSubmit, control, formState: {errors}} = useForm<EmployeeFormData>({
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
         defaultValues: {

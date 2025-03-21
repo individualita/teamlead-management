@@ -29,7 +29,6 @@ import { HiDotsVertical } from 'react-icons/hi';
 import { Employee } from '../../../../shared/types/employee';
 import { EmployeeFormData } from '../../types/employeeFormData';
 
-
 import { DATE_FORMAT } from '../../constants/dateFormat';
 import { employeesTableInputSx } from '../../constants/employeesTableInputSx ';
 import { employeesTableDatePickerSx } from '../../constants/employeesTableDatePickerSx';
@@ -37,6 +36,7 @@ import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
 import { TABLE_COLUMNS } from '../../constants/tableColumns';
 
 import { getStatusColor } from '../../utils/getStatusColor';
+import { formatDate } from '../../utils/formatDate';
 
 
 import ActionMenu from '../actionMenu/ActionMenu';
@@ -205,7 +205,7 @@ const EmployeeRow = ({
                     <>
                         <TableCell>{employee.name}</TableCell>
                         <TableCell>{employee.position}</TableCell>
-                        <TableCell>{employee.startDate? dayjs(employee.startDate).format(DATE_FORMAT) : '-'}</TableCell>
+                        <TableCell>{formatDate(employee.startDate)}</TableCell>
 
                         <TableCell sx={{width: 120}}>
                             <div className={`${getStatusColor(employee.status)} text-center  font-semibold rounded-xl p-1 text-xs`}>
@@ -247,7 +247,7 @@ const EmployeeRow = ({
                             {isActioned && (
                                 <ActionMenu 
                                     employeeId={employee._id} 
-                                    handleEditEmployee={onEdit} 
+                                    onEdit={onEdit} 
                                     ref={actionMenuRef}
                                 />
                             )}

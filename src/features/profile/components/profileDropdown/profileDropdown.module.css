@@ -1,4 +1,4 @@
-@reference '../../../../assets/styles/main.css';
+@import 'tailwindcss';
 
 .card{
     @apply absolute right-4 bg-white shadow-sm rounded-md inset-shadow-sm z-10;

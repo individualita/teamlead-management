@@ -11,11 +11,11 @@ import styles from './actionMenu.module.css';
 
 interface ActionMenuProps {
     employeeId: string,
-    handleEditEmployee: (id: string) => void,
+    onEdit: (id: string) => void,
 }
 
 const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
-    ({ employeeId, handleEditEmployee, }, ref) => {
+    ({ employeeId, onEdit, }, ref) => {
 
         const {deleteEmployee} = useEmployeeStore();
         return (
@@ -28,7 +28,7 @@ const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
             >
                 
                 <button 
-                    onClick={() => handleEditEmployee(employeeId)} 
+                    onClick={() => onEdit(employeeId)} 
                     className={styles.button}
                     role='menuitem'
                     aria-label='Edit employee'

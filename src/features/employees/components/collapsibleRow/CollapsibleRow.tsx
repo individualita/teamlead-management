@@ -11,9 +11,13 @@ import {
     TableHead
 } from '@mui/material';
 
-import { employeesTableInputSx } from '../../constants/employeesTableInputSx ';
 import { EmployeeFormData } from '../../types/employeeFormData';
 import { Employee } from '../../../../shared/types/employee';
+
+import { employeesTableInputSx } from '../../constants/employeesTableInputSx ';
+import { COLLAPSIBLE_ROW_COLUMNS } from '../../constants/collapsibleRowColumns';
+
+
 
 
 interface CollapsibleRowProps {
@@ -24,6 +28,7 @@ interface CollapsibleRowProps {
     register: UseFormRegister<EmployeeFormData>,
     errors: FieldErrors<EmployeeFormData>
 }
+
 
 const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCount, register, errors}: CollapsibleRowProps) => {
 
@@ -36,8 +41,12 @@ const CollapsibleRow = ({employee, isRowExpanded, isEmployeeEditing, colSpanCoun
                         <Table size="small">
                             <TableHead sx={{backgroundColor: '#f5f5f5'}}>
                                 <TableRow sx={{'& > *': {fontWeight: '500', color:'black'}}}>
-                                    <TableCell sx={{color: '#3e3e3e', fontWeight: '600'}}>Email</TableCell>
-                                    <TableCell sx={{color: '#3e3e3e', fontWeight: '600'}}>Phone</TableCell>
+
+                                    {COLLAPSIBLE_ROW_COLUMNS.map(column => (
+                                        <TableCell key={column} sx={{color: '#3e3e3e', fontWeight: '600'}}>{column}</TableCell>
+
+                                    ))}
+
                                 </TableRow>
                             </TableHead>
 

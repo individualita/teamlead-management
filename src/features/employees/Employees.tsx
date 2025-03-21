@@ -6,10 +6,11 @@ import { useEmployeeStore } from '../../shared/stores/employeesStore';
 
 import { ALERT_TIMEOUT } from './constants/alertTimeout';
 
-import EmployeesTable from './components/employeesTable/EmployeesTable';
 import EmployeeCard from './components/employeeCard/EmployeeCard';
 import UiEmployeesTable from './components/uiEmployeesTable/UiEmployeesTable';
 import AddEmployeeDrawer from './components/addEmployeeDrawer/AddEmployeeDrawer';
+
+import styles from './employees.module.css';
 
 
 
@@ -41,9 +42,6 @@ const Employees = () => {
         setIsAlertVisible(true);
     };
 
-    const test = false;
-
-    
 
     return (
         <div className='employees'>
@@ -55,20 +53,19 @@ const Employees = () => {
 
 
                 {/* desktop size */}
-                <div className='overflow-x-auto rounded-lg shadow-md hidden md:block'>
+                <div className={styles.tableDesktopWrapper}>
 
-                    {test && <EmployeesTable />}
+                    <UiEmployeesTable />
 
                 </div>
 
                 {/* card view for mobile size */}
-                <div className='block md:hidden space-y-4'>
+                <div className='block space-y-4 md:hidden'>
 
                     {employees.map(emp => <EmployeeCard key={emp._id} employee={emp}/>)}
 
                 </div>
 
-                <UiEmployeesTable />
 
             </div>
 

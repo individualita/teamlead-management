@@ -1,5 +1,8 @@
 import { Employee } from '../../../../shared/types/employee';
 
+import { formatDate } from '../../utils/formatDate';
+
+
 interface EmployeeCardProps {
     employee: Employee
 }
@@ -13,7 +16,7 @@ const EmployeeCard = ({employee}: EmployeeCardProps) => {
             <p className='text-lg font-semibold'>{employee.name}</p>
             <p className='text-gray-600'>{employee.position}</p>
             <address className='text-gray-500'>{employee.email}</address>
-            <p className='text-gray-400 text-sm'>start date:{employee.startDate?.toLocaleDateString('ru-RU') || ''}</p>
+            <p className='text-gray-400 text-sm'>start date:{formatDate(employee.startDate)}</p>
 
         </div>                        
 

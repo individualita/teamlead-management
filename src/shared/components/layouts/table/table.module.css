@@ -1,4 +1,4 @@
-@reference '../../../../assets/styles/main.css';
+@import 'tailwindcss';
 
 .row {
     @apply bg-gray-50 text-left text-[var(--text-inactive)] text-sm font-semibold;
