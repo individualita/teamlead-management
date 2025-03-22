@@ -1,10 +1,9 @@
-import { forwardRef } from 'react';
-
 import {RefObject} from 'react';
 
-import { Controller, FieldErrors, UseFormRegister, Control, UseFormHandleSubmit, SubmitHandler } from 'react-hook-form';
+import { Controller, FieldErrors, UseFormRegister, Control } from 'react-hook-form';
 import dayjs, { Dayjs } from 'dayjs';
 
+import { Link, useNavigate } from 'react-router-dom';
 
 
 //MUI
@@ -76,6 +75,8 @@ const EmployeeRow = ({
 
 } : EmployeeRowProps) => {
 
+    const navigate = useNavigate();
+
     return (
         <>
             <TableRow 
@@ -93,7 +94,6 @@ const EmployeeRow = ({
                                 name='name'
                                 size='small'
                                 sx={employeesTableInputSx }
-
                             />
                         </TableCell>
                         
@@ -203,7 +203,9 @@ const EmployeeRow = ({
                     </>
                 ) : (
                     <>
-                        <TableCell>{employee.name}</TableCell>
+                        <TableCell onClick={() => navigate(`/employee/${employee._id}`)}>{employee.name}
+                            <Link to={`/employee/${employee._id}`}>link to id </Link>
+                        </TableCell>
                         <TableCell>{employee.position}</TableCell>
                         <TableCell>{formatDate(employee.startDate)}</TableCell>
 
