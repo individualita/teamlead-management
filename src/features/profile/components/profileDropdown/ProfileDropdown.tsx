@@ -1,8 +1,10 @@
 import { useRef } from 'react';
+import { CSSTransition } from 'react-transition-group';
+
+import { fadeTransitionClassNames } from '../../../../shared/constants/fadeTransitionClassnames';
+import { CSS_ANIMATION_DURATION } from '../../../../shared/constants/cssAnimationDuration';
 
 import ProfileOption  from '../profileOption/ProfileOption';
-
-import { Transition } from 'react-transition-group';
 
 import styles from './profileDropdown.module.css';
 
@@ -15,45 +17,31 @@ const ProfileDropdown = ({isOpen}: ProfilePropdownProps) => {
 
     const nodeRef = useRef(null);
 
-    const duration = 300;
-
-    const defaultStyle = {
-        transition: `opacity ${duration}ms ease-in-out`,
-        opacity: 0,
-    
-    }
-
-    const transitionStyles = {
-        entering: { opacity: 1 },
-        entered:  { opacity: 1 },
-        exiting:  { opacity: 0 },
-        exited:  { opacity: 0 },
-        unmounted: {opacity: 0}
-    };
-
     return (
 
-        <Transition timeout={duration} in={isOpen} nodeRef={nodeRef} unmountOnExit>
-            {state => (
+        <CSSTransition 
+            timeout={CSS_ANIMATION_DURATION} 
+            in={isOpen} 
+            nodeRef={nodeRef}
+            classNames={fadeTransitionClassNames}  
+            unmountOnExit
+            >
 
-                <article 
-                    style={{...defaultStyle, ...transitionStyles[state]}} 
-                    className={styles.card}
-                    ref={nodeRef}
-                >
+            <article 
+                className={styles.card}
+                ref={nodeRef}
+            >
 
-                    <header className={styles.header}>
-                        <h2 className='text-base font-semibold'>Sofia Rivers</h2>
-                        <address className={styles.email}>randomemail@gmail.com</address>
-                    </header>
+                <header className={styles.header}>
+                    <h2 className='text-base font-semibold'>Sofia Rivers</h2>
+                    <address className={styles.email}>randomemail@gmail.com</address>
+                </header>
 
-                    <ProfileOption />
+                <ProfileOption />
 
-                </article>
+            </article>
 
-            )}
-
-        </Transition>
+        </CSSTransition>
 
     )
 

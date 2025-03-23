@@ -1,0 +1,1 @@
+export const CSS_ANIMATION_DURATION = 300; //ms

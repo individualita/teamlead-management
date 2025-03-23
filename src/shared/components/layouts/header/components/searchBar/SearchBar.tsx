@@ -4,14 +4,17 @@ import { CiSearch } from 'react-icons/ci';
 
 import styles from './searchBar.module.css';
 
+import { CSS_ANIMATION_DURATION } from '../../../../../constants/cssAnimationDuration';
+
 import { useEmployeeStore } from '../../../../../stores/employeesStore';
 
 import { useNavigate } from 'react-router-dom';
 
 import SearchSuggestionItem from '../searchSuggestionItem/SearchSuggestionItem';
 
-import { Transition } from 'react-transition-group';
+import { fadeTransitionClassNames } from '../../../../../constants/fadeTransitionClassnames';
 
+import { CSSTransition } from 'react-transition-group';
 
 
 const SearchBar = () => {
@@ -42,21 +45,6 @@ const SearchBar = () => {
 
     }, [query]);
 
-    const duration = 300;
-
-    const defaultStyle = {
-        transition: `opacity ${duration}ms ease-in-out`,
-        opacity: 0,
-    }
-
-    const transitionStyles = {
-        entering: { opacity: 1 },
-        entered:  { opacity: 1 },
-        exiting:  { opacity: 0 },
-        exited:  { opacity: 0 },
-        unmounted: {},
-    };
-
 
     return (
         <div className='relative flex items-center'>
@@ -74,25 +62,29 @@ const SearchBar = () => {
             {/* SearchSuggestionItem */}
             {query && (
 
-                <Transition nodeRef={nodeRef} in={isOpen} timeout={duration} unmountOnExit>
-                    {state => (
+                <CSSTransition 
+                    nodeRef={nodeRef} 
+                    in={isOpen} 
+                    timeout={CSS_ANIMATION_DURATION} 
+                    classNames={fadeTransitionClassNames} 
+                    unmountOnExit
+                >
 
-                        <ul ref={nodeRef} style={{...defaultStyle, ...transitionStyles[state]}} className="absolute top-9 w-60 z-10  bg-white  rounded-md">
+                    <ul ref={nodeRef} className='absolute top-9 w-60 z-10  bg-white  rounded-md'>
 
-                            {filteredEmployees.map((emp) => (
+                        {filteredEmployees.map((emp) => (
 
-                                <SearchSuggestionItem 
-                                    key={emp._id} 
-                                    employee={emp} 
-                                    onSelectEmployee={handleSelectEmployee} 
-                                />
+                            <SearchSuggestionItem 
+                                key={emp._id} 
+                                employee={emp} 
+                                onSelectEmployee={handleSelectEmployee} 
+                            />
 
-                            ))}
+                        ))}
 
-                        </ul>
+                    </ul>
 
-                    )}
-                </Transition>
+                </CSSTransition>
 
             )}
 

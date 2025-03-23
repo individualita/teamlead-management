@@ -5,9 +5,9 @@ import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
 
 import { usePagination } from '../../../../shared/hooks/usePagination';
 
-import Table from '../../../../shared/components/layouts/table/Table';
+import Table from '../../../../shared/components/table/Table';
 
-import TablePagination from '../../../../shared/components/layouts/tablePagination/TablePagination';
+import TablePagination from '../../../../shared/components/tablePagination/TablePagination';
 
 
 
