@@ -1,15 +1,22 @@
 import { Employee } from '../../../../../types/employee';
 
+import { useTabsStore } from '../../../../../stores/tabsStore';
+
 interface SearchSuggestionItemProps {
     employee: Employee,
-    onSelectEmployee: (id: string) => void,
+    clearQuery: () => void,
 }
 
-const SearchSuggestionItem = ({employee, onSelectEmployee}: SearchSuggestionItemProps) => {
+const SearchSuggestionItem = ({employee, clearQuery}: SearchSuggestionItemProps) => {
 
+    const { openTab } = useTabsStore();
+    
     return (
         <li
-            onClick={() => onSelectEmployee(employee._id)}
+            onClick={() => {
+                clearQuery()
+                openTab(employee)
+            }}
             className="p-2 hover:bg-gray-50 cursor-pointer"
         >
             {employee.name}

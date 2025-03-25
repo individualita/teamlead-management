@@ -3,7 +3,7 @@ import {RefObject} from 'react';
 import { Controller, FieldErrors, UseFormRegister, Control } from 'react-hook-form';
 import dayjs, { Dayjs } from 'dayjs';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 //MUI
@@ -27,6 +27,8 @@ import { HiDotsVertical } from 'react-icons/hi';
 
 import { Employee } from '../../../../shared/types/employee';
 import { EmployeeFormData } from '../../types/employeeFormData';
+
+import { useTabsStore } from '../../../../shared/stores/tabsStore';
 
 import { DATE_FORMAT } from '../../constants/dateFormat';
 import { employeesTableInputSx } from '../../constants/employeesTableInputSx ';
@@ -75,7 +77,7 @@ const EmployeeRow = ({
 
 } : EmployeeRowProps) => {
 
-    const navigate = useNavigate();
+    const {openTab} = useTabsStore();
 
     return (
         <>
@@ -203,9 +205,14 @@ const EmployeeRow = ({
                     </>
                 ) : (
                     <>
-                        <TableCell onClick={() => navigate(`/employee/${employee._id}`)}>{employee.name}
-                            <Link to={`/employee/${employee._id}`}>link to id </Link>
+
+                        <TableCell 
+                            onClick={() => openTab(employee)}
+                            sx={{cursor: 'pointer'}}
+                            >
+                                {employee.name}
                         </TableCell>
+
                         <TableCell>{employee.position}</TableCell>
                         <TableCell>{formatDate(employee.startDate)}</TableCell>
 

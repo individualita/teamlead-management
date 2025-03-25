@@ -13,7 +13,6 @@ import { PublicRoute } from './shared/routes/PublicRote';
 
 import MainLayout from './shared/components/layouts/mainLayout/MainLayout';
 import Employees from './features/employees/Employees';
-import EmployeeProfile from './features/employees/components/employeeProfile/EmployeeProfile';
 import Activity from './features/activity/Activity';
 import Chat from './features/chat/Chat';
 
@@ -69,9 +68,6 @@ const App = () => {
                                 <Route path={ROUTE_PATHS.EMPLOYEES} element={<Employees />} />
                                 <Route path={ROUTE_PATHS.ACTIVITY} element={<Activity />} />
                                 <Route path={ROUTE_PATHS.CHAT} element={<Chat />} />
-                                
-                                <Route path={ROUTE_PATHS.EMPLOYEES_PROFILE} element={<EmployeeProfile />} />
-
 
                             </Route>
 

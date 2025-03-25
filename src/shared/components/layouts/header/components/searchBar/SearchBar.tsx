@@ -1,20 +1,17 @@
 import { useState, useRef, useEffect } from 'react';
+import { CSSTransition } from 'react-transition-group';
 
+//icons
 import { CiSearch } from 'react-icons/ci';
-
-import styles from './searchBar.module.css';
-
-import { CSS_ANIMATION_DURATION } from '../../../../../constants/cssAnimationDuration';
 
 import { useEmployeeStore } from '../../../../../stores/employeesStore';
 
-import { useNavigate } from 'react-router-dom';
+import { CSS_ANIMATION_DURATION } from '../../../../../constants/cssAnimationDuration';
+import { fadeTransitionClassNames } from '../../../../../constants/fadeTransitionClassNames';
 
 import SearchSuggestionItem from '../searchSuggestionItem/SearchSuggestionItem';
 
-import { fadeTransitionClassNames } from '../../../../../constants/fadeTransitionClassnames';
-
-import { CSSTransition } from 'react-transition-group';
+import styles from './searchBar.module.css';
 
 
 const SearchBar = () => {
@@ -22,22 +19,12 @@ const SearchBar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [query, setQuery] = useState<string>('');
     const {employees} = useEmployeeStore();
-    const navigate = useNavigate();
 
     const filteredEmployees = employees.filter(emp => (
         emp.name.toLowerCase().includes(query.toLowerCase().trim()) )
     );
 
     const nodeRef = useRef(null);
-
-
-
-    console.log(filteredEmployees);
-
-    const handleSelectEmployee = (id: string) => {
-        navigate(`/employee/${id}`);
-        setQuery('');
-    }
 
 
     useEffect(() => {
@@ -70,14 +57,14 @@ const SearchBar = () => {
                     unmountOnExit
                 >
 
-                    <ul ref={nodeRef} className='absolute top-9 w-60 z-10  bg-white  rounded-md'>
+                    <ul ref={nodeRef} className='absolute top-10 w-100 z-10  bg-white shadow-lg rounded-md'>
 
                         {filteredEmployees.map((emp) => (
 
                             <SearchSuggestionItem 
                                 key={emp._id} 
                                 employee={emp} 
-                                onSelectEmployee={handleSelectEmployee} 
+                                clearQuery={() => setQuery('')} 
                             />
 
                         ))}

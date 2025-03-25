@@ -19,6 +19,7 @@ export const useEmployeeStore = create<EmployeesState>((set) => ({
         set((state) => ({
             employees: [employee, ...state.employees]
         })),
+
     deleteEmployee: (id) => 
         set((state) => ({
             employees: state.employees.filter(item => item._id !== id) 
@@ -30,5 +31,4 @@ export const useEmployeeStore = create<EmployeesState>((set) => ({
                 emp._id === id? {...emp, ...updatedData} : emp
             )
         })),
-
 }));

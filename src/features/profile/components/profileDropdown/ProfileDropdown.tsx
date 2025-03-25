@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { fadeTransitionClassNames } from '../../../../shared/constants/fadeTransitionClassnames';
+import { fadeTransitionClassNames } from '../../../../shared/constants/fadeTransitionClassNames';
 import { CSS_ANIMATION_DURATION } from '../../../../shared/constants/cssAnimationDuration';
 
 import ProfileOption  from '../profileOption/ProfileOption';
