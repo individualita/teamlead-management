@@ -6,7 +6,7 @@ import { OUTLET_TAB } from '../constants/outletTab';
 
 
 interface TabsState {
-    activeTab: string | null,
+    activeTab: string,
     setActiveTab: (id: string) => void,
 
     openTab: (employee: Employee) => void,

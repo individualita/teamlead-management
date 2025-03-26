@@ -9,7 +9,9 @@ import { OUTLET_TAB } from '../../../constants/outletTab';
 
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
+import TabsHeader  from '../../tabsHeader/TabsHeader';
 import EmployeeProfile from '../../../../features/employees/components/employeeProfile/EmployeeProfile';
+
 
 
 const MainLayout = () => {
@@ -35,25 +37,17 @@ const MainLayout = () => {
                 <div className='content grow-1'>
                     <h1 className='text-lg font-bold'>{getPageTitle(pathname)}</h1>
 
-                    <div className='flex gap-2'>
+                    <div 
+                        className='flex gap-2'
+                        role='tablist' 
+                        aria-label='Employee Tabs'
+                    >
 
-                        {openTabs.length >= 1 && 
-                            <div 
-                                onClick={() => setActiveTab(OUTLET_TAB)}
-                                className={`${activeTab === OUTLET_TAB? 'font-bold': ''} bg-gray-100 text-xs p-1 rounded-xl cursor-pointer`} 
-                            >
-                                {getPageTitle(pathname)}
-                            </div>}
-
-                        {openTabs.map((tab => (
-                            <div 
-                                key={tab._id}
-                                onClick={() => setActiveTab(tab._id)} 
-                                className={`${tab._id === activeTab? 'font-bold': '' } bg-gray-100 text-xs p-1 rounded-xl  cursor-pointer`} 
-                            >
-                                    {tab.name} 
-                            </div>
-                        )))}
+                        <TabsHeader 
+                            openTabs={openTabs} 
+                            activeTab={activeTab} 
+                            onTabSelect={setActiveTab}
+                        />
 
                     </div>
                     
