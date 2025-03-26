@@ -18,9 +18,6 @@ const EmployeeProfile = ({employee}: EmployeeProfileProps) => {
 
     const {employeeId} = useParams();
 
-    const {employees} = useEmployeeStore();
-    const { closeTab } = useTabsStore();
-
     //const employee = employees.find(emp => emp._id === employeeId);
 
     if (!employee) return <div>Employee not found</div>;
@@ -38,11 +35,7 @@ const EmployeeProfile = ({employee}: EmployeeProfileProps) => {
         <div>
             <h1>Employee profile: {employee.name}</h1>
             <h3>Employee number: {employee.phone}</h3>
-            <h2> ID: {employeeId} </h2>
-
-            {/* navigate - 1 пока оставил. А что если из серчБара? */}
-            <button onClick={() => closeTab(employee)} className='p-2 bg-indigo-800 text-white'>close tab</button>
-            
+            <h2> ID: {employeeId} </h2>            
         </div>
     )
 };

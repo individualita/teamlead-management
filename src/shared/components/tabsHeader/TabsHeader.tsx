@@ -1,5 +1,7 @@
 import { useLocation } from 'react-router-dom';
 
+import { useTabsStore } from '../../stores/tabsStore';
+
 import { Employee } from '../../types/employee';
 
 import { getPageTitle } from '../../utils/getPageTitle';
@@ -18,14 +20,13 @@ interface TabsHeaderProps {
 
 const TabsHeader = ({openTabs, activeTab, onTabSelect}: TabsHeaderProps) => {
 
-
+    const {closeTab} = useTabsStore();
     const { pathname } = useLocation();
 
 
     return (
         
         <>
-
             {/* Render the outlet (default) tab */}
             {openTabs.length >= 1 && (
                 <TabsItem 
@@ -46,6 +47,7 @@ const TabsHeader = ({openTabs, activeTab, onTabSelect}: TabsHeaderProps) => {
                     tabName={tab.name} 
                     isActive={tab._id === activeTab} 
                     onSelect={onTabSelect}
+                    onClose={() => closeTab(tab)}
                 />
             ))}
 
