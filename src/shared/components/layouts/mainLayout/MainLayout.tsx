@@ -34,11 +34,12 @@ const MainLayout = () => {
                 
 
 
-                <div className='content grow-1'>
-                    <h1 className='text-lg font-bold'>{getPageTitle(pathname)}</h1>
+                <div className='content grow-1 px-6'>
+
+                    <h1 className='text-lg font-bold mt-3'>{getPageTitle(pathname)}</h1>
 
                     <div 
-                        className='flex gap-2'
+                        className='flex gap-4 mt-2'
                         role='tablist' 
                         aria-label='Employee Tabs'
                     >
@@ -50,13 +51,16 @@ const MainLayout = () => {
                         />
 
                     </div>
-                    
+
+
                     {activeTab === OUTLET_TAB ? 
                         <Outlet /> 
                         : 
                         <EmployeeProfile employee={activeEmployee}/> 
                     }
+
                 </div>
+
 
             </main>
 

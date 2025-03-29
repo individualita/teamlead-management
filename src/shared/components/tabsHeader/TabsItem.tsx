@@ -15,8 +15,8 @@ const TabsItem = ({ tabId, tabName, isActive, onSelect, onClose}: TabsItemProps)
 
     const isOutletTab = tabId === OUTLET_TAB; 
 
-    const baseStyles = 'text-xs p-1 rounded-xl cursor-pointer flex items-center gap-2 transition';
-    const activeStyles = isActive ? 'font-bold bg-white shadow' : 'bg-gray-100';
+    const baseStyles = 'text-xs text-gray-600 py-1 px-2 rounded-xl cursor-pointer flex items-center gap-3 transition';
+    const activeStyles = isActive ? 'font-bold bg-transparent shadow border' : 'bg-gray-100';
 
     const outletStyles = isOutletTab ? 'bg-transparent text-xl' : '';
 
@@ -26,7 +26,7 @@ const TabsItem = ({ tabId, tabName, isActive, onSelect, onClose}: TabsItemProps)
     };
 
     return (
-        
+
         <div 
             title={`${tabName} page`}
             onClick={() => onSelect(tabId)} 
