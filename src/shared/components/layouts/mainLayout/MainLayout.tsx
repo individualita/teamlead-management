@@ -33,7 +33,6 @@ const MainLayout = () => {
                 <Sidebar  />
                 
 
-
                 <div className='content grow-1 px-6'>
 
                     <h1 className='text-lg font-bold mt-3'>{getPageTitle(pathname)}</h1>
@@ -52,15 +51,17 @@ const MainLayout = () => {
 
                     </div>
 
+                    <div className='container mx-auto'>
+                        {activeTab === OUTLET_TAB ? 
+                            <Outlet /> 
+                            : 
+                            <EmployeeProfile employee={activeEmployee}/> 
+                        }
 
-                    {activeTab === OUTLET_TAB ? 
-                        <Outlet /> 
-                        : 
-                        <EmployeeProfile employee={activeEmployee}/> 
-                    }
+                    </div>
+
 
                 </div>
-
 
             </main>
 

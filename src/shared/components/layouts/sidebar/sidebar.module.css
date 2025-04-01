@@ -7,6 +7,7 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    flex-shrink: 0;
     min-width: 60px; /* Оставляет место для иконок */
     padding: 1rem 0.5rem;
     transition: width 0.4s ease-in-out;

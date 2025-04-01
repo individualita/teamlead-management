@@ -6,7 +6,7 @@ import { Employee } from '../../../../shared/types/employee';
 import { getEmployeeBadgeInfo } from '../../utils/getEmployeesBadgeInfo';
 import { STATUS_TEXT_COLORS } from '../../constants/statusTextColors';
 
-import { getStatusColor } from '../../utils/getStatusColor';
+import { getEmployeeStatusColor } from '../../utils/getEmployeeStatusColor';
 
 interface EmployeeProfileProps {
     employee?: Employee 
@@ -88,7 +88,7 @@ const EmployeeProfile = ({employee}: EmployeeProfileProps) => {
 
                             <span
                                 style={{color: STATUS_TEXT_COLORS[employee.status]}}
-                                className={`${getStatusColor(employee.status)} p-1 rounded-md`}
+                                className={`${getEmployeeStatusColor(employee.status)} p-1 rounded-md`}
                             >
                                 {employee.status}
                             </span>

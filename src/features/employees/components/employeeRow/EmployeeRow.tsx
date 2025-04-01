@@ -34,7 +34,7 @@ import { employeesTableDatePickerSx } from '../../constants/employeesTableDatePi
 import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
 import { TABLE_COLUMNS } from '../../constants/tableColumns';
 
-import { getStatusColor } from '../../utils/getStatusColor';
+import { getEmployeeStatusColor } from '../../utils/getEmployeeStatusColor';
 import { formatDate } from '../../utils/formatDate';
 
 
@@ -215,7 +215,7 @@ const EmployeeRow = ({
                         <TableCell>{formatDate(employee.startDate)}</TableCell>
 
                         <TableCell sx={{width: 120}}>
-                            <div className={`${getStatusColor(employee.status)} text-center  font-semibold rounded-xl p-1 text-xs`}>
+                            <div className={`${getEmployeeStatusColor(employee.status)} text-center  font-semibold rounded-xl p-1 text-xs`}>
                                 {employee.status}
                             </div>
                         </TableCell>

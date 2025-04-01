@@ -46,7 +46,7 @@ const Employees = () => {
     return (
         <div className='employees'>
 
-            <div className='container mx-auto p-6'>
+            <div>
                 <AddEmployeeDrawer showAlert={showAlert}/>
 
                 {isAlertVisible && <Alert>Employee <strong>{alertMessage}</strong> has been added successfully</Alert> }

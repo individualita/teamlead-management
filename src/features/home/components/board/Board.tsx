@@ -25,8 +25,8 @@ const Board = () => {
     console.log(tasksGroupedByStatus);
 
     return (
-        <div className='home flex gap-2'>
 
+        <div className='flex gap-2'>
 
             {/* Iterate over board columns and render each one with its corresponding tasks.
                 Using BOARD_COLUMNS ensures consistency and centralized column definitions. */}
@@ -40,6 +40,8 @@ const Board = () => {
             )}
 
         </div>
+
+
     )
 }
 

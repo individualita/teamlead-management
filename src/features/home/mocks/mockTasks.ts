@@ -2,6 +2,7 @@ import { Task } from '../types/task';
 
 
 export const MOCK_TASKS: Task[] = [
+    /*
     {
         _id: '1',
         title: 'Prepare project proposal',
@@ -39,7 +40,7 @@ export const MOCK_TASKS: Task[] = [
         title: 'Finalize Q2 report',
         description: 'Review data and prepare the final version of the quarterly performance report.',
         status: 'Done',
-        priority: 'Medium',
+        priority: 'Completed',
     },
 
     {
@@ -47,7 +48,7 @@ export const MOCK_TASKS: Task[] = [
         title: 'Client feedback review',
         description: 'Go through the feedback from the last sprint demo and list action points for improvements.',
         status: 'Done',
-        priority: 'Low',
+        priority: 'Completed',
     },
 
     {
@@ -55,6 +56,8 @@ export const MOCK_TASKS: Task[] = [
         title: 'Update project documentation',
         description: 'Revise and update the README and API documentation to reflect recent changes.',
         status: 'Done',
-        priority: 'Medium',
+        priority: 'Completed',
+        
     }
+    */
 ]

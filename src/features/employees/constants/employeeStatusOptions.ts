@@ -1,5 +1,4 @@
-import { STATUS_COLORS } from './statusColors';
+import { EMPLOYEE_STATUS_COLORS } from './employeeStatusColors';
 
-export const EMPLOYEE_STATUS_OPTIONS = Object.keys(STATUS_COLORS);
-
+export const EMPLOYEE_STATUS_OPTIONS = Object.keys(EMPLOYEE_STATUS_COLORS);
 
