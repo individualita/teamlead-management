@@ -19,7 +19,6 @@ import { COLLAPSIBLE_ROW_COLUMNS } from '../../constants/collapsibleRowColumns';
 
 
 
-
 interface CollapsibleRowProps {
     employee: Employee,
     isRowExpanded: boolean,

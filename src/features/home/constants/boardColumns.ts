@@ -1,4 +1,5 @@
-import { Status } from "../types/task";
+import { Status } from '../types/task';
+import { TASK_STATUSES } from './taskStatuses';
 
 interface BoardColumn {
     key: string,
@@ -6,8 +7,8 @@ interface BoardColumn {
 }
 
 export const BOARD_COLUMNS: BoardColumn[] = [
-    { key: 'todo', label: 'To Do' },
-    { key: 'inProgress', label: 'In Progress' },
-    { key: 'done', label: 'Done' }
+    { key: 'todo', label: TASK_STATUSES.TODO },
+    { key: 'inProgress', label: TASK_STATUSES.IN_PROGRESS },
+    { key: 'done', label: TASK_STATUSES.DONE }
 ];
 

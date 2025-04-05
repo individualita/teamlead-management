@@ -1,12 +1,14 @@
+import { EMPLOYEE_STATUSES } from './employeeStatuses';
+
 export const STATUS_TEXT_COLORS: Record<string, string> = {
-    Active: '#16A34A',         
-    'On Vacation': '#EA580C',  
-    'Sick Leave': '#0284C7',   
-    'Maternity Leave': '#DB2777',  
-    Probation: '#CA8A04',      
-    Suspended: '#52525B',      
-    Resigned: '#4B5563',       
-    Terminated: '#DC2626',     
-    Retired: '#6B7280',        
-    Fired: '#DC2626',          
+    [EMPLOYEE_STATUSES.ACTIVE]: '#16A34A',         
+    [EMPLOYEE_STATUSES.ON_VACATION]: '#EA580C',  
+    [EMPLOYEE_STATUSES.SICK_LEAVE]: '#0284C7',   
+    [EMPLOYEE_STATUSES.MATERNITY_LEAVE]: '#DB2777',  
+    [EMPLOYEE_STATUSES.PROBATION]: '#CA8A04',      
+    [EMPLOYEE_STATUSES.SUSPENDED]: '#52525B',      
+    [EMPLOYEE_STATUSES.RESIGNED]: '#4B5563',       
+    [EMPLOYEE_STATUSES.TERMINATED]: '#DC2626',     
+    [EMPLOYEE_STATUSES.RETIRED]: '#6B7280',        
+    [EMPLOYEE_STATUSES.FIRED]: '#DC2626',          
 };

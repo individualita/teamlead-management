@@ -2,7 +2,7 @@ import { Task } from '../types/task';
 
 
 export const MOCK_TASKS: Task[] = [
-    /*
+    
     {
         _id: '1',
         title: 'Prepare project proposal',
@@ -59,5 +59,5 @@ export const MOCK_TASKS: Task[] = [
         priority: 'Completed',
         
     }
-    */
+    
 ]

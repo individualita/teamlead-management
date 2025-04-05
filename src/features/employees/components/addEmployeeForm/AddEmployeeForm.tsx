@@ -11,9 +11,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Button from '@mui/material/Button';
 
-
 import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
-
 
 import { employeeSchema } from '../../schema/employee.schema';
 import { addEmployeeFormInputSx } from '../../constants/addEmployeeFormInputSx';
@@ -36,7 +34,7 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
             name: '',
             position: '',
             startDate: new Date(),
-            status: EMPLOYEE_STATUS_OPTIONS[0],
+            status: EMPLOYEE_STATUS_OPTIONS[0], 
             email: '',
             phone: '',
         }
