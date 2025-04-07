@@ -9,5 +9,7 @@ export const EMPLOYEE_STATUSES = {
     TERMINATED: 'Terminated',
     RETIRED: 'Retired',
     FIRED: 'Fired'
-};
+} as const;
+
+
 

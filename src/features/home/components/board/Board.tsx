@@ -12,7 +12,7 @@ import { groupTasksByStatus } from '../../utils/groupTasksByStatus';
 
 
 //components
-import BoardColumn from '../boardColumn/BoardColumn';
+import BoardColumn from './boardColumn/BoardColumn';
 
 
 

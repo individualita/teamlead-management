@@ -25,6 +25,7 @@ import { EmployeeFormData } from '../../types/employeeFormData';
 
 //constants
 import { TABLE_COLUMNS } from '../../constants/tableColumns';
+import { EMPLOYEE_STATUSES } from '../../constants/employeeStatuses';
 
 //components
 import TableHeader from '../tableHeader/TableHeader';
@@ -110,7 +111,7 @@ const UiEmployeesTable = () => {
             phone: '',
             email: '',
             startDate: new Date(),
-            status: '',
+            status: EMPLOYEE_STATUSES.ACTIVE,
         });
 
     };

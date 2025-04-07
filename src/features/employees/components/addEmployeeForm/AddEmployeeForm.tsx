@@ -13,10 +13,9 @@ import Button from '@mui/material/Button';
 
 import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
 
-import { employeeSchema } from '../../schema/employee.schema';
+import { employeeSchema, EmployeeFormDataSchema } from '../../schema/employee.schema';
 import { addEmployeeFormInputSx } from '../../constants/addEmployeeFormInputSx';
-import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
-import { EmployeeFormData } from '../../types/employeeFormData';
+import { EMPLOYEE_STATUSES } from '../../constants/employeeStatuses';
 
 interface AddEmployeeFormProps {
     handleClose: () => void,
@@ -27,21 +26,21 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
     const {addEmployee} = useEmployeeStore();
 
-    const { register, handleSubmit, control, formState: {errors}} = useForm<EmployeeFormData>({
+    const { register, handleSubmit, control, formState: {errors}} = useForm<EmployeeFormDataSchema>({
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
         defaultValues: {
             name: '',
             position: '',
             startDate: new Date(),
-            status: EMPLOYEE_STATUS_OPTIONS[0], 
+            status: EMPLOYEE_STATUSES.ACTIVE, 
             email: '',
             phone: '',
         }
 
     });
 
-    const onSubmit: SubmitHandler<EmployeeFormData> = (data) => {
+    const onSubmit: SubmitHandler<EmployeeFormDataSchema> = (data) => {
 
         addEmployee({...data, _id: uuidv4()});
         handleClose();
@@ -86,7 +85,6 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                 <Controller 
                     name='startDate'
                     control={control}
-                    rules={{required: true}}
                     render={({ field }) => (
 
                         <DatePicker
@@ -125,14 +123,13 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                         size='small'
                         helperText={errors.status && 'Status is required'}
                         error={!!errors.status}
-                        defaultValue={EMPLOYEE_STATUS_OPTIONS[0]}
                         sx={addEmployeeFormInputSx}
                     >
                         <MenuItem value='' disabled sx={{ fontSize: '14px' }}>
                             Choose status
                         </MenuItem>
         
-                        {EMPLOYEE_STATUS_OPTIONS.map(status => (
+                        {Object.values(EMPLOYEE_STATUSES).map(status => (
                             <MenuItem
                                 key={status}
                                 value={status}

@@ -29,9 +29,9 @@ import { EmployeeFormData } from '../../types/employeeFormData';
 import { useTabsStore } from '../../../../shared/stores/tabsStore';
 
 import { DATE_FORMAT } from '../../constants/dateFormat';
+import { EMPLOYEE_STATUSES } from '../../constants/employeeStatuses';
 import { employeesTableInputSx } from '../../constants/employeesTableInputSx ';
 import { employeesTableDatePickerSx } from '../../constants/employeesTableDatePickerSx';
-import { EMPLOYEE_STATUS_OPTIONS } from '../../constants/employeeStatusOptions';
 import { TABLE_COLUMNS } from '../../constants/tableColumns';
 
 import { getEmployeeStatusColor } from '../../utils/getEmployeeStatusColor';
@@ -163,7 +163,7 @@ const EmployeeRow = ({
                                         sx={employeesTableInputSx }
                                     >
                                         
-                                        {EMPLOYEE_STATUS_OPTIONS.map(status => (
+                                        {Object.values(EMPLOYEE_STATUSES).map(status => (
                                             <MenuItem
                                                 key={status}
                                                 value={status}
