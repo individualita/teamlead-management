@@ -1,19 +1,23 @@
 import { Task } from '../../../types/task';
 
+import { useTasksStore } from '../../../stores/tasksStore';
+
 import { getTaskPriorityColor } from '../../../utils/getTaskPriorityColor';
+
+import XButton from '../../../../../shared/components/xButton/XButton';
 
 interface TaskCardProps {
     task: Task,
 }
 
 
-//    [TASK_PRIORITIES.COMPLETED]: 'bg-green-100 text-green-800',
-
 
 const TaskCard = ({task}: TaskCardProps) => {
 
+    const {deleteTask} = useTasksStore();
+
     return (
-        <article className='mb-4 bg-white rounded-lg shadow-sm p-4'>
+        <article className=' bg-white rounded-lg shadow-sm p-4 relative'>
 
             <header className='flex items-center justify-between'>
                 <h3 className='text-lg font-medium'>{task.title}</h3>
@@ -26,6 +30,12 @@ const TaskCard = ({task}: TaskCardProps) => {
                     </span>
                 )}
 
+                <XButton 
+                    onClick={() => deleteTask(task._id)}
+                    className='absolute top-1 right-1'
+                    ariaLabel='Delete task'
+                    title='Delete task'
+                />
             </header>
 
             <p className='text-sm text-gray-600 mt-5'>

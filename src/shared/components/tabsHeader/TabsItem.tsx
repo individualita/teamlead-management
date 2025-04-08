@@ -1,6 +1,6 @@
-import { MdClose } from 'react-icons/md';
-
 import { OUTLET_TAB } from '../../constants/outletTab';
+
+import XButton from '../xButton/XButton';
 
 
 interface TabsItemProps {
@@ -40,14 +40,11 @@ const TabsItem = ({ tabId, tabName, isActive, onSelect, onClose}: TabsItemProps)
             </span>
 
             {!isOutletTab && onClose &&
-                <button 
-                    type='button'
+                <XButton 
                     onClick={handleClose}
-                    className='hover:text-red-800 transition cursor-pointer'
-                    aria-label="Close tab" 
-                >
-                    <MdClose size={14}/>
-                </button>
+                    ariaLabel='Close tab'
+                    title='Close'
+                />
 
             }
         </div>

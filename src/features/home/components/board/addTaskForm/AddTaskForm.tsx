@@ -13,6 +13,7 @@ import { taskSchema, TaskFormDataSchema } from '../../../schema/tasks.schema';
 
 import { Task } from '../../../types/task';
 
+import { addTaskFormInputSx } from '../../../constants/addTaskFormInputSx';
 import { TASK_PRIORITIES } from '../../../constants/taskPriorities';
 import { TASK_STATUSES } from '../../../constants/taskStatuses';
 
@@ -20,6 +21,8 @@ import { TASK_STATUSES } from '../../../constants/taskStatuses';
 interface AddTaskFormProps {
     onClose: () => void,
 }
+
+
 const AddTaskForm = ({onClose}: AddTaskFormProps) => {
 
     const {addTask} = useTasksStore();
@@ -54,7 +57,7 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
 
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)}className='bg-white rounded-lg shadow-sm p-4 flex flex-col gap-4'>
+        <form onSubmit={handleSubmit(onSubmit)} className='bg-white rounded-lg shadow-sm p-4 flex flex-col gap-4'>
 
             <TextField
                 {...register('title', {required: true})}
@@ -64,6 +67,7 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
                 label='Task title'
                 helperText={errors.title && errors.title.message}
                 error={!!errors.title}
+                sx={addTaskFormInputSx}
                 
             />
 
@@ -77,6 +81,7 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
                 label='Task description'
                 helperText={errors.description && errors.description.message}
                 error={!!errors.description}
+                sx={addTaskFormInputSx}
                 
             />
 
@@ -93,7 +98,7 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
                         size='small'
                         helperText={errors.priority?.message}
                         error={!!errors.priority}
-                        //sx={addEmployeeFormInputSx}
+                        sx={addTaskFormInputSx}
                     >
 
                         {Object.values(TASK_PRIORITIES).map(item => (

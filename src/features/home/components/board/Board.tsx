@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 //store
 import { useTasksStore } from '../../stores/tasksStore';
@@ -18,6 +18,10 @@ import BoardColumn from './boardColumn/BoardColumn';
 
 const Board = () => {
 
+    const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
+    const handleOpenForm = () => setIsFormOpen(true);
+    const handleCloseForm = () => setIsFormOpen(false);
+
     const {tasks} = useTasksStore();
 
     const tasksGroupedByStatus = useMemo(() => groupTasksByStatus(tasks), [tasks]);
@@ -36,6 +40,9 @@ const Board = () => {
                     key={col.key} 
                     title={col.label} 
                     tasks={tasksGroupedByStatus[col.label as keyof TasksGroupedByStatus] || []} // Provide an empty array fallback if no tasks exist for this status.
+                    isFormOpen={isFormOpen}
+                    onOpenForm={handleOpenForm}
+                    onCloseForm={handleCloseForm}
                 />
             )}
 
