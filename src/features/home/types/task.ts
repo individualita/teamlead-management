@@ -1,5 +1,4 @@
-import { TASK_STATUSES } from '../constants/taskStatuses';
-import { TASK_PRIORITIES } from '../constants/taskPriorities';
+import { TASK_STATUSES, TASK_PRIORITIES } from '../constants/tasks';
 
 export type TaskStatus = typeof TASK_STATUSES[keyof typeof TASK_STATUSES];
 export type TaskPriority = typeof TASK_PRIORITIES[keyof typeof TASK_PRIORITIES];

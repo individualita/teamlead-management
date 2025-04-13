@@ -10,7 +10,7 @@ import { OUTLET_TAB } from '../../../constants/outletTab';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import TabsHeader  from '../../tabsHeader/TabsHeader';
-import EmployeeProfile from '../../../../features/employees/components/employeeProfile/EmployeeProfile';
+import EmployeeProfile from '../../employeeProfile/EmployeeProfile';
 
 
 
@@ -51,7 +51,7 @@ const MainLayout = () => {
 
                     </div>
 
-                    <div className='container mx-auto'>
+                    <div className='container mx-auto pt-3'>
                         {activeTab === OUTLET_TAB ? 
                             <Outlet /> 
                             : 
@@ -59,7 +59,6 @@ const MainLayout = () => {
                         }
 
                     </div>
-
 
                 </div>
 

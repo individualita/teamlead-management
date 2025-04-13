@@ -6,9 +6,9 @@ import { useEmployeeStore } from '../../shared/stores/employeesStore';
 
 import { ALERT_TIMEOUT } from './constants/alertTimeout';
 
-import EmployeeCard from './components/employeeCard/EmployeeCard';
-import UiEmployeesTable from './components/uiEmployeesTable/UiEmployeesTable';
-import AddEmployeeDrawer from './components/addEmployeeDrawer/AddEmployeeDrawer';
+import EmployeeCard from './components/EmployeeCard';
+import UiEmployeesTable from './components/UiEmployeesTable';
+import AddEmployeeDrawer from './components/AddEmployeeDrawer';
 
 import styles from './employees.module.css';
 

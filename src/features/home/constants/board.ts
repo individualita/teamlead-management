@@ -1,5 +1,7 @@
+// UI-related constants: styles for components
+
 import { TaskStatus } from '../types/task';
-import { TASK_STATUSES } from './taskStatuses';
+import { TASK_STATUSES } from './tasks';
 
 interface BoardColumn {
     key: string,

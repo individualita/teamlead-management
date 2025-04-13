@@ -1,9 +1,9 @@
 import dayjs from 'dayjs';
 
-import { Employee } from '../../../../shared/types/employee';
+import { Employee } from '../../types/employee';
 
 
-import { getEmployeeBadgeInfo } from '../../utils/getEmployeesBadgeInfo';
+import { getEmployeeBadgeInfo } from '../../../features/employees/utils/getEmployeesBadgeInfo';
 import { STATUS_TEXT_COLORS } from '../../constants/statusTextColors';
 
 import { getEmployeeStatusColor } from '../../utils/getEmployeeStatusColor';

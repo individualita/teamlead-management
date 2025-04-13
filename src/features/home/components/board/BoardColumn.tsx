@@ -1,11 +1,12 @@
-import { TaskStatus, Task } from '../../../types/task';
+import { TaskStatus, Task } from '../../types/task';
 
-import { TASK_STATUSES } from '../../../constants/taskStatuses';
+import { TASK_STATUSES } from '../../constants/tasks';
 
-import BoardHeader from '../boardHeader/BoardHeader';
-import TaskCard from '../taskCard/TaskCard';
-import EmptyState from '../../../../../shared/components/emptyState/EmptyState';
-import AddTaskForm from '../addTaskForm/AddTaskForm';
+import Draggable from '../../dnd/Draggable';
+import BoardHeader from './BoardHeader';
+import TaskCard from './TaskCard';
+import EmptyState from '../../../../shared/components/emptyState/EmptyState';
+import AddTaskForm from './AddTaskForm';
 
 interface BoardColumnProps {
     title: TaskStatus,
@@ -36,7 +37,9 @@ const BoardColumn = ({title, tasks, isFormOpen, onOpenForm, onCloseForm}: BoardC
             {/* Render a TaskCard for each task in the column */}
             {tasks.length > 0 ? (
                 tasks.map(task => (
-                    <TaskCard key={task._id} task={task} />
+                    <Draggable id={task._id} key={task._id}>
+                        <TaskCard key={task._id} task={task} />
+                    </Draggable>
                 ))
             ) : (
                 <EmptyState message={`No tasks ${title.toLowerCase()} yet` }/>

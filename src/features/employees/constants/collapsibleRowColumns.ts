@@ -1,1 +1,0 @@
-export const COLLAPSIBLE_ROW_COLUMNS = ['Email', 'Phone'] as const;

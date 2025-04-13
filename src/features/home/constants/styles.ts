@@ -1,7 +1,6 @@
+// UI-related constants: styles for components
 
-export const addEmployeeFormInputSx = {
-    backgroundColor: '#fafafa',
-
+export const addTaskFormInputSx = {
     '& .MuiInputLabel-root': {
         fontSize: 14,
     },

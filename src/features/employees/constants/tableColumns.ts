@@ -14,3 +14,6 @@ export const TABLE_COLUMNS: TableColumn[] = [
     { key: 'status', label: 'Status', align: 'center' },
     { key: 'actions', label: 'Actions', align: 'center' }, 
 ];
+
+
+export const COLLAPSIBLE_ROW_COLUMNS = ['Email', 'Phone'] as const;

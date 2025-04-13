@@ -1,6 +1,6 @@
 import { TableRow, TableHead, TableCell } from '@mui/material';
 
-import { TABLE_COLUMNS } from '../../constants/tableColumns';
+import { TABLE_COLUMNS } from '../constants/tableColumns';
 
 const TableHeader = () => {
     return (

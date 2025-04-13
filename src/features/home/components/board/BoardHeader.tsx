@@ -1,9 +1,9 @@
-import { TaskStatus } from '../../../types/task';
+import { TaskStatus } from '../../types/task';
 
-import { getTaskStatusColor } from '../../../utils/getTaskStatusColor';
-import { TASK_STATUS_BORDER_COLORS } from '../../../constants/taskStatusBorderColors';
+import { getTaskStatusColor } from '../../utils/getTaskStatusColor';
+import { TASK_STATUS_BORDER_COLORS } from '../../constants/tasks';
 
-import AddTaskButton from '../addTaskButton/AddTaskButton';
+import AddTaskButton from './AddTaskButton';
 
 interface BoardHeaderProps {
     title: TaskStatus,

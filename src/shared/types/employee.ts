@@ -1,4 +1,4 @@
-import { EMPLOYEE_STATUSES } from '../../features/employees/constants/employeeStatuses';
+import { EMPLOYEE_STATUSES } from '../constants/employeeStatuses';
 
 export type EmployeeStatus = typeof EMPLOYEE_STATUSES[keyof typeof EMPLOYEE_STATUSES];
 

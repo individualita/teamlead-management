@@ -7,15 +7,14 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 
-import { useTasksStore } from '../../../stores/tasksStore';
+import { useTasksStore } from '../../stores/tasksStore';
 
-import { taskSchema, TaskFormDataSchema } from '../../../schema/tasks.schema';
+import { taskSchema, TaskFormDataSchema } from '../../schema/tasks.schema';
 
-import { Task } from '../../../types/task';
+import { Task } from '../../types/task';
 
-import { addTaskFormInputSx } from '../../../constants/addTaskFormInputSx';
-import { TASK_PRIORITIES } from '../../../constants/taskPriorities';
-import { TASK_STATUSES } from '../../../constants/taskStatuses';
+import { addTaskFormInputSx } from '../../constants/styles';
+import { TASK_PRIORITIES, TASK_STATUSES } from '../../constants/tasks';
 
 
 interface AddTaskFormProps {

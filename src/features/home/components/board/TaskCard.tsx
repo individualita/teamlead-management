@@ -1,10 +1,11 @@
-import { Task } from '../../../types/task';
+import { Task } from '../../types/task';
 
-import { useTasksStore } from '../../../stores/tasksStore';
+import { useTasksStore } from '../../stores/tasksStore';
 
-import { getTaskPriorityColor } from '../../../utils/getTaskPriorityColor';
+import { getTaskPriorityColor } from '../../utils/getTaskPriorityColor';
 
-import XButton from '../../../../../shared/components/xButton/XButton';
+import XButton from '../../../../shared/components/xButton/XButton';
+
 
 interface TaskCardProps {
     task: Task,
@@ -17,7 +18,10 @@ const TaskCard = ({task}: TaskCardProps) => {
     const {deleteTask} = useTasksStore();
 
     return (
-        <article className=' bg-white rounded-lg shadow-sm p-4 relative'>
+        <article 
+            aria-describedby={`task-${task._id}-description`}
+            className='bg-white rounded-lg shadow-sm p-4 relative w-full max-w-[15rem] sm:max-w-[20rem] cursor-grab'
+        >
 
             <header className='flex items-center justify-between'>
                 <h3 className='text-lg font-medium'>{task.title}</h3>

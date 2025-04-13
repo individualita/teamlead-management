@@ -23,23 +23,23 @@ import { FaAngleUp } from 'react-icons/fa';
 import { FaAngleDown } from 'react-icons/fa6';
 import { HiDotsVertical } from 'react-icons/hi';
 
-import { Employee } from '../../../../shared/types/employee';
-import { EmployeeFormData } from '../../types/employeeFormData';
+import { Employee } from '../../../shared/types/employee';
+import { EmployeeFormData } from '../types/employeeFormData';
 
-import { useTabsStore } from '../../../../shared/stores/tabsStore';
+import { useTabsStore } from '../../../shared/stores/tabsStore';
 
-import { DATE_FORMAT } from '../../constants/dateFormat';
-import { EMPLOYEE_STATUSES } from '../../constants/employeeStatuses';
-import { employeesTableInputSx } from '../../constants/employeesTableInputSx ';
-import { employeesTableDatePickerSx } from '../../constants/employeesTableDatePickerSx';
-import { TABLE_COLUMNS } from '../../constants/tableColumns';
+import { DATE_FORMAT } from '../../../shared/constants/dateFormat';
+import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
+import { employeesTableInputSx } from '../constants/styles';
+import { employeesTableDatePickerSx } from '../constants/styles';
+import { TABLE_COLUMNS } from '../constants/tableColumns';
 
-import { getEmployeeStatusColor } from '../../utils/getEmployeeStatusColor';
-import { formatDate } from '../../utils/formatDate';
+import { getEmployeeStatusColor } from '../../../shared/utils/getEmployeeStatusColor';
+import { formatDate } from '../../../shared/utils/formatDate';
 
 
-import ActionMenu from '../actionMenu/ActionMenu';
-import CollapsibleRow from '../collapsibleRow/CollapsibleRow';
+import ActionMenu from './actionMenu/ActionMenu';
+import CollapsibleRow from './CollapsibleRow';
 
 interface EmployeeRowProps {
     employee: Employee,

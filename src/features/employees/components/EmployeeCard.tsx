@@ -1,6 +1,6 @@
-import { Employee } from '../../../../shared/types/employee';
+import { Employee } from '../../../shared/types/employee';
 
-import { formatDate } from '../../utils/formatDate';
+import { formatDate } from '../../../shared/utils/formatDate';
 
 
 interface EmployeeCardProps {

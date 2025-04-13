@@ -16,23 +16,23 @@ import {
 } from '@mui/material';
 
 //store
-import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
+import { useEmployeeStore } from '../../../shared/stores/employeesStore';
 
 //schema & types
-import { employeeSchema } from '../../schema/employee.schema';
-import { Employee } from '../../../../shared/types/employee';
-import { EmployeeFormData } from '../../types/employeeFormData';
+import { employeeSchema } from '../schema/employee.schema';
+import { Employee } from '../../../shared/types/employee';
+import { EmployeeFormData } from '../types/employeeFormData';
 
 //constants
-import { TABLE_COLUMNS } from '../../constants/tableColumns';
-import { EMPLOYEE_STATUSES } from '../../constants/employeeStatuses';
+import { TABLE_COLUMNS } from '../constants/tableColumns';
+import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
 
 //components
-import TableHeader from '../tableHeader/TableHeader';
-import EmployeeRow from '../employeeRow/EmployeeRow';
+import TableHeader from './TableHeader';
+import EmployeeRow from './EmployeeRow';
 
 //Hooks
-import usePagination from '../../hooks/usePagination';
+import usePagination from '../hooks/usePagination';
 
 
 const UiEmployeesTable = () => {

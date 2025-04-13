@@ -11,11 +11,11 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Button from '@mui/material/Button';
 
-import { useEmployeeStore } from '../../../../shared/stores/employeesStore';
+import { useEmployeeStore } from '../../../shared/stores/employeesStore';
 
-import { employeeSchema, EmployeeFormDataSchema } from '../../schema/employee.schema';
-import { addEmployeeFormInputSx } from '../../constants/addEmployeeFormInputSx';
-import { EMPLOYEE_STATUSES } from '../../constants/employeeStatuses';
+import { employeeSchema, EmployeeFormDataSchema } from '../schema/employee.schema';
+import { addEmployeeFormInputSx } from '../constants/styles';
+import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
 
 interface AddEmployeeFormProps {
     handleClose: () => void,
