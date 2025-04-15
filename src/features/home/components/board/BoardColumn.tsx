@@ -3,10 +3,13 @@ import { TaskStatus, Task } from '../../types/task';
 import { TASK_STATUSES } from '../../constants/tasks';
 
 import Draggable from '../../dnd/Draggable';
+import EmptyState from '../../../../shared/components/emptyState/EmptyState';
+
+
 import BoardHeader from './BoardHeader';
 import TaskCard from './TaskCard';
-import EmptyState from '../../../../shared/components/emptyState/EmptyState';
 import AddTaskForm from './AddTaskForm';
+
 
 interface BoardColumnProps {
     title: TaskStatus,

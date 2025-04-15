@@ -8,6 +8,7 @@ import { MOCK_TASKS } from '../mocks/mockTasks';
 
 interface TasksState {
     tasks: Task[],
+    setTasks: (tasks: Task[]) => void,
     addTask: (task: Task) => void,
     deleteTask: (id: string) => void,
     updateTaskStatus: (id: string, newStatus: TaskStatus, completed: boolean) => void,
@@ -15,6 +16,7 @@ interface TasksState {
 
 export const useTasksStore = create<TasksState>((set) => ({
     tasks: MOCK_TASKS,
+    setTasks: (tasks) => set({ tasks }),
     addTask: (task) => 
         set((state) => ({
             tasks: [task, ...state.tasks]

@@ -1,16 +1,16 @@
 import { TextField, MenuItem } from '@mui/material';
 import Button from '@mui/material/Button';
-
 import { v4 as uuidv4 } from 'uuid';
-
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
+//firebase
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../../../shared/config/firebaseConfig';
 
 import { useTasksStore } from '../../stores/tasksStore';
 
 import { taskSchema, TaskFormDataSchema } from '../../schema/tasks.schema';
-
 import { Task } from '../../types/task';
 
 import { addTaskFormInputSx } from '../../constants/styles';
@@ -25,6 +25,18 @@ interface AddTaskFormProps {
 const AddTaskForm = ({onClose}: AddTaskFormProps) => {
 
     const {addTask} = useTasksStore();
+
+    const addTaskToDb = async(newTask : Task) => {
+
+        try {
+            const docRef = await addDoc(collection(db, 'tasks'), newTask);
+        
+            console.log("Document written with ID: ", docRef.id);
+        } catch (e) {
+            console.error("Error adding document: ", e);
+        }
+    
+    }
 
     const { register, handleSubmit, control, reset, formState: {errors}} = useForm<TaskFormDataSchema>({
         mode: 'onChange',
@@ -47,11 +59,14 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
             completed: false,
         };
         addTask(newTask);
+        addTaskToDb(newTask)
 
         reset();
         onClose();
 
     };
+
+
 
 
 
@@ -111,7 +126,6 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
             />
 
             <Button
-                //onClick={handleClose} 
                 variant='contained' 
                 color='success' 
                 type='submit' 

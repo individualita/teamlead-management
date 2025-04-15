@@ -2,14 +2,20 @@ import { useDroppable } from '@dnd-kit/core';
 
 import { ReactNode } from 'react';
 
+import { TaskStatus } from '../types/task';
 
 interface DroppableProps {
     children: ReactNode,
-    id: string,
-}
+    id: TaskStatus,
+};
+
 const Droppable = ({children, id} : DroppableProps) => {
 
-    // Хук useDroppable добавляет функционал для области бросания
+    const DROPPABLE_STYLES = {
+        base: '',
+        over: 'border-2 border-gray-300 bg-green-50',
+    };
+
     const {isOver, setNodeRef} = useDroppable({
         id: id,
     });
@@ -17,7 +23,7 @@ const Droppable = ({children, id} : DroppableProps) => {
 
 
     return (
-        <div ref={setNodeRef} className={isOver ? 'border-2 border-gray-300 bg-green-50' : ''}>
+        <div ref={setNodeRef} className={isOver ? DROPPABLE_STYLES.over : DROPPABLE_STYLES.base}>
             {children}
         </div>
 

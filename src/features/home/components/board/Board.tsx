@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { DndContext } from '@dnd-kit/core';
 //store
 import { useTasksStore } from '../../stores/tasksStore';
 
 //types
-import { Task } from '../../types/task';
+import { Task, TaskStatus } from '../../types/task';
 import { DragEndEvent } from '@dnd-kit/core';
 import {  TasksGroupedByStatus } from '../../types/task';
 
@@ -21,6 +21,13 @@ import useCustomDnDSensors from '../../dnd/hooks/useCustomDnDSensors';
 import BoardColumn from './BoardColumn';
 import Droppable from '../../dnd/Droppable';
 
+//TEST
+import { collection, getDocs } from 'firebase/firestore'; 
+import { db } from '../../../../shared/config/firebaseConfig';
+
+import useFetchTasks from '../../../../shared/hooks/useFetchTasks';
+import { LoadingCircle } from '../../../../shared/components/layouts/loadingCircle/LoadingCircle';
+
 
 
 const Board = () => {
@@ -29,20 +36,20 @@ const Board = () => {
     const handleOpenForm = () => setIsFormOpen(true);
     const handleCloseForm = () => setIsFormOpen(false);
 
-    const {tasks, updateTaskStatus} = useTasksStore();
+    const {tasks, setTasks, updateTaskStatus} = useTasksStore();
 
     const tasksGroupedByStatus = useMemo(() => groupTasksByStatus(tasks), [tasks]);
 
     const handleDragEnd = (event: DragEndEvent) =>  {
         const {active, over} = event;
-        console.log('over', over)
+
         // Если задача не была брошена в колонку, ничего не делаем
         if (!over) return;
 
         // ID задачи, которую перетащили
         const taskId = active.id as string;
         // Новый статус задачи (ID колонки, куда бросили)
-        const newStatus = over.id as Task['status']; //To Do | In Progress | Done
+        const newStatus = over.id as TaskStatus; //To Do | In Progress | Done
         
         // Обновляем состояние задач, меняя статус + completed перетащенной задачи
         updateTaskStatus(taskId, newStatus, newStatus === TASK_STATUSES.DONE);
@@ -50,8 +57,19 @@ const Board = () => {
 
 
     const sensors = useCustomDnDSensors();
-    console.log(tasksGroupedByStatus);
+    
+    const {loading, errorMessage, fetchTasks} = useFetchTasks();
 
+    // Загрузка задач при старте
+    useEffect( () => {
+
+        fetchTasks();
+
+    }, [setTasks]);
+
+    if (loading) return <LoadingCircle />
+    if (errorMessage) return <div className="p-4 text-red-500">Error: {errorMessage}</div>;
+    
 
     return (
 
