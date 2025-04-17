@@ -5,7 +5,7 @@ export type TaskPriority = typeof TASK_PRIORITIES[keyof typeof TASK_PRIORITIES];
 
 
 export interface Task {
-    _id: string,
+    id: string,
     title: string,
     description: string,
     status: TaskStatus, 

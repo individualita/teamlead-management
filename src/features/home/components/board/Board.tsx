@@ -1,4 +1,4 @@
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState } from 'react';
 import { DndContext } from '@dnd-kit/core';
 //store
 import { useTasksStore } from '../../stores/tasksStore';
@@ -25,8 +25,8 @@ import Droppable from '../../dnd/Droppable';
 import { collection, getDocs } from 'firebase/firestore'; 
 import { db } from '../../../../shared/config/firebaseConfig';
 
-import useFetchTasks from '../../../../shared/hooks/useFetchTasks';
 import { LoadingCircle } from '../../../../shared/components/layouts/loadingCircle/LoadingCircle';
+import useTasksQuery from '../../hooks/useTasksQuery';
 
 
 
@@ -57,18 +57,12 @@ const Board = () => {
 
 
     const sensors = useCustomDnDSensors();
+
     
-    const {loading, errorMessage, fetchTasks} = useFetchTasks();
-
-    // Загрузка задач при старте
-    useEffect( () => {
-
-        fetchTasks();
-
-    }, [setTasks]);
-
-    if (loading) return <LoadingCircle />
-    if (errorMessage) return <div className="p-4 text-red-500">Error: {errorMessage}</div>;
+    const { isLoading, isError, data, error } = useTasksQuery();
+    if (isLoading) return <LoadingCircle />
+    if (isError) return <div className="p-4 text-red-500">Error: {error.message}</div>;
+    console.log('data', data);
     
 
     return (

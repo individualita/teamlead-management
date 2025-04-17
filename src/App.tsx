@@ -1,6 +1,9 @@
 import { Navigate, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, Suspense, lazy } from 'react';
 
+import { QueryClientProvider } from '@tanstack/react-query';
+import { queryClient } from './shared/clients/queryClient';
+
 import { useAuthStore } from './features/auth/store/authStore';
 
 import { ROUTE_PATHS } from './shared/constants/routePaths';
@@ -32,6 +35,7 @@ const App = () => {
     const { user, listenAuthState, isLoading, isAuthInitialized,  setErrorMessage} = useAuthStore();
     const {pathname} = useLocation();
 
+
     useEffect(() => {
 
         const unsubscribe = listenAuthState();
@@ -48,40 +52,44 @@ const App = () => {
     console.log('user:', user, 'loading:', isLoading, 'initialized:', isAuthInitialized);
 
     return (
-        <div className='app'>
-            <Container>
-                <Suspense fallback={<LoadingCircle />}>
+        <QueryClientProvider client={queryClient}>
+            <div className='app'>
+                <Container>
+                    <Suspense fallback={<LoadingCircle />}>
 
-                    <Routes>
-                        {/* Публичные маршруты (только для НЕ залогиненных пользователей) */}
-                        <Route element={<PublicRoute />}>
-                            <Route path={ROUTE_PATHS.SIGN_IN} element={<SignInLazy />} />
-                            <Route path={ROUTE_PATHS.SIGN_UP} element={<SignUpLazy />} />
-                        </Route>
-                        
-                        {/* Защищённые маршруты (только для залогиненных пользователей) */}
-                        <Route element={<ProtectedRoute />}>
+                        <Routes>
+                            {/* Публичные маршруты (только для НЕ залогиненных пользователей) */}
+                            <Route element={<PublicRoute />}>
+                                <Route path={ROUTE_PATHS.SIGN_IN} element={<SignInLazy />} />
+                                <Route path={ROUTE_PATHS.SIGN_UP} element={<SignUpLazy />} />
+                            </Route>
+                            
+                            {/* Защищённые маршруты (только для залогиненных пользователей) */}
+                            <Route element={<ProtectedRoute />}>
 
-                            <Route element={<MainLayout />}>
+                                <Route element={<MainLayout />}>
 
-                                <Route path={ROUTE_PATHS.HOME} element={<HomeLazy />}/>
-                                <Route path={ROUTE_PATHS.EMPLOYEES} element={<Employees />} />
-                                <Route path={ROUTE_PATHS.ACTIVITY} element={<Activity />} />
-                                <Route path={ROUTE_PATHS.CHAT} element={<Chat />} />
+                                    <Route path={ROUTE_PATHS.HOME} element={<HomeLazy />}/>
+                                    <Route path={ROUTE_PATHS.EMPLOYEES} element={<Employees />} />
+                                    <Route path={ROUTE_PATHS.ACTIVITY} element={<Activity />} />
+                                    <Route path={ROUTE_PATHS.CHAT} element={<Chat />} />
+
+                                </Route>
 
                             </Route>
 
-                        </Route>
+                            <Route path="*" element={<Navigate to={`/${ROUTE_PATHS.HOME}`}/>} />
 
-                        <Route path="*" element={<Navigate to={`/${ROUTE_PATHS.HOME}`}/>} />
+                            
+                        </Routes>
 
-                        
-                    </Routes>
+                    </Suspense>
 
-                </Suspense>
+                </Container>
+            </div>
 
-            </Container>
-        </div>
+        </QueryClientProvider>
+
     )
 };
 

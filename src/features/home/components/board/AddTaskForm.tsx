@@ -1,14 +1,11 @@
-import { TextField, MenuItem } from '@mui/material';
+import { TextField, MenuItem, Alert } from '@mui/material';
 import Button from '@mui/material/Button';
-import { v4 as uuidv4 } from 'uuid';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-//firebase
-import { addDoc, collection } from 'firebase/firestore';
-import { db } from '../../../../shared/config/firebaseConfig';
-
 import { useTasksStore } from '../../stores/tasksStore';
+
+import useAddTask from '../../hooks/useAddTask';
 
 import { taskSchema, TaskFormDataSchema } from '../../schema/tasks.schema';
 import { Task } from '../../types/task';
@@ -26,17 +23,8 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
 
     const {addTask} = useTasksStore();
 
-    const addTaskToDb = async(newTask : Task) => {
+    const addTaskMutation = useAddTask();
 
-        try {
-            const docRef = await addDoc(collection(db, 'tasks'), newTask);
-        
-            console.log("Document written with ID: ", docRef.id);
-        } catch (e) {
-            console.error("Error adding document: ", e);
-        }
-    
-    }
 
     const { register, handleSubmit, control, reset, formState: {errors}} = useForm<TaskFormDataSchema>({
         mode: 'onChange',
@@ -52,26 +40,27 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
 
     const onSubmit: SubmitHandler<TaskFormDataSchema> = (data) => {
 
-        const newTask: Task = {
-            _id: uuidv4(),
+        const newTask: Omit<Task, 'id'> = {
             ...data,
             status: TASK_STATUSES.TODO,
             completed: false,
         };
-        addTask(newTask);
-        addTaskToDb(newTask)
 
-        reset();
-        onClose();
+        addTaskMutation.mutate(newTask, {
+            onSuccess: (savedTask) => {
+                addTask(savedTask); //zustand обновляем только после успеха. 
+                reset();
+                onClose();
 
+            },
+        })
     };
-
-
-
 
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='bg-white rounded-lg shadow-sm p-4 flex flex-col gap-4'>
+
+   
 
             <TextField
                 {...register('title', {required: true})}
@@ -129,10 +118,12 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
                 variant='contained' 
                 color='success' 
                 type='submit' 
-                size='small'>
-                    Add
-            </Button>
+                size='small'
+                disabled={addTaskMutation.isPending}
+                >
+                    {addTaskMutation.isPending ? 'Adding...' : 'Add'}
 
+            </Button>
         </form>
     )
 }
