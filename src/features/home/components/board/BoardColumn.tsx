@@ -40,8 +40,8 @@ const BoardColumn = ({title, tasks, isFormOpen, onOpenForm, onCloseForm}: BoardC
             {/* Render a TaskCard for each task in the column */}
             {tasks.length > 0 ? (
                 tasks.map(task => (
-                    <Draggable id={task._id} key={task._id}>
-                        <TaskCard key={task._id} task={task} />
+                    <Draggable id={task.id} key={task.id}>
+                        <TaskCard key={task.id} task={task} />
                     </Draggable>
                 ))
             ) : (

@@ -1,12 +1,11 @@
-import { useMemo, useState } from 'react';
-import { DndContext } from '@dnd-kit/core';
+import { useMemo, useState, useEffect } from 'react';
+import { DndContext, DragEndEvent } from '@dnd-kit/core';
+
 //store
 import { useTasksStore } from '../../stores/tasksStore';
 
 //types
-import { Task, TaskStatus } from '../../types/task';
-import { DragEndEvent } from '@dnd-kit/core';
-import {  TasksGroupedByStatus } from '../../types/task';
+import { TaskStatus, TasksGroupedByStatus} from '../../types/task';
 
 //constants + utils
 import { TASK_STATUSES } from '../../constants/tasks';
@@ -15,30 +14,35 @@ import { groupTasksByStatus } from '../../utils/groupTasksByStatus';
 
 //hooks
 import useCustomDnDSensors from '../../dnd/hooks/useCustomDnDSensors';
-
+import { useTasksQuery } from '../../hooks/useTasksQuery';
 
 //components
+import { LoadingCircle } from '../../../../shared/components/layouts/loadingCircle/LoadingCircle';
 import BoardColumn from './BoardColumn';
 import Droppable from '../../dnd/Droppable';
-
-//TEST
-import { collection, getDocs } from 'firebase/firestore'; 
-import { db } from '../../../../shared/config/firebaseConfig';
-
-import { LoadingCircle } from '../../../../shared/components/layouts/loadingCircle/LoadingCircle';
-import useTasksQuery from '../../hooks/useTasksQuery';
 
 
 
 const Board = () => {
-
+    //State
     const [isFormOpen, setIsFormOpen] = useState<boolean>(false);
+
+    //Custom hooks
+    const { isLoading, isError, data, error } = useTasksQuery();
+    const {tasks, setTasks, updateTaskStatus} = useTasksStore();
+    const sensors = useCustomDnDSensors();
+
+    // Memoized values
+    const tasksGroupedByStatus = useMemo(() => groupTasksByStatus(tasks), [tasks]);
+
+    // Sync server data to Zustand
+    useEffect(() => {
+        if (data) setTasks(data);
+    }, [data]);
+
+    // Event handlers
     const handleOpenForm = () => setIsFormOpen(true);
     const handleCloseForm = () => setIsFormOpen(false);
-
-    const {tasks, setTasks, updateTaskStatus} = useTasksStore();
-
-    const tasksGroupedByStatus = useMemo(() => groupTasksByStatus(tasks), [tasks]);
 
     const handleDragEnd = (event: DragEndEvent) =>  {
         const {active, over} = event;
@@ -53,17 +57,11 @@ const Board = () => {
         
         // Обновляем состояние задач, меняя статус + completed перетащенной задачи
         updateTaskStatus(taskId, newStatus, newStatus === TASK_STATUSES.DONE);
-    }
+    };
 
+    if (isLoading ) return <LoadingCircle />;
+    if (isError) return <div className='p-4 text-red-500'>Error: {error.message || 'Something went wrong'}</div>;
 
-    const sensors = useCustomDnDSensors();
-
-    
-    const { isLoading, isError, data, error } = useTasksQuery();
-    if (isLoading) return <LoadingCircle />
-    if (isError) return <div className="p-4 text-red-500">Error: {error.message}</div>;
-    console.log('data', data);
-    
 
     return (
 
