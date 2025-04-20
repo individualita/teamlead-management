@@ -10,7 +10,7 @@ export const useAddTask = () => {
     const mutation = useMutation({
         mutationFn:  (taskData: Omit<Task, 'id'>) => taskService.addTaskToFirestore(taskData),
         onSuccess: () => {
-            queryClient.invalidateQueries({queryKey: ['tasks']})
+            queryClient.invalidateQueries({queryKey: ['tasks']})            
         },
         onError: (error) => {
             console.error('Mutation error in useAddTask:', error)

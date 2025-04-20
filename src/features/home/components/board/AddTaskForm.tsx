@@ -2,6 +2,8 @@
 import { TextField, MenuItem, Button } from '@mui/material';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'react-toastify';
+
 
 // Internal modules: stores and hooks
 import { useTasksStore } from '../../stores/tasksStore';
@@ -14,6 +16,7 @@ import { Task } from '../../types/task';
 // Internal modules: constants
 import { addTaskFormInputSx } from '../../constants/styles';
 import { TASK_PRIORITIES, TASK_STATUSES } from '../../constants/tasks';
+
 
 
 interface AddTaskFormProps {
@@ -51,10 +54,14 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
         addTaskMutation.mutate(newTask, {
             onSuccess: (savedTask) => {
                 addTask(savedTask); //zustand обновляем только после успеха. 
+                toast.success(`Task ${savedTask.title.toUpperCase()} added successfully!`)
                 reset();
                 onClose();
-
             },
+
+            onError: (error) => {
+                toast.error(`Failed to add task: ${error.message || 'Something went wrong. Try again later'}`);
+            }
         })
     };
 
@@ -107,7 +114,13 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
                     >
 
                         {Object.values(TASK_PRIORITIES).map(item => (
-                            <MenuItem key={item} value={item}>{item}</MenuItem>
+                            <MenuItem 
+                                key={item} 
+                                value={item}
+                                sx={{fontSize: '14px'}}
+                                >
+                                    {item}
+                            </MenuItem>
                         ))}
                             
                     </TextField>

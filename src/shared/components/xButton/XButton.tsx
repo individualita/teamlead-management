@@ -8,10 +8,11 @@ interface XButtonProps {
     title: string,
     size?: number,
     className?: string,
+    disabled? : boolean,
     onClick: (e: MouseEvent<HTMLButtonElement>) => void;
     children?: ReactNode,
 }
-const XButton = ({ariaLabel='close', title, size=14, className='', onClick, children}: XButtonProps) => {
+const XButton = ({ariaLabel='close', title, size=14, className='', disabled=false, onClick, children}: XButtonProps) => {
 
     return (
         <button 
@@ -20,6 +21,7 @@ const XButton = ({ariaLabel='close', title, size=14, className='', onClick, chil
             className={` hover:text-red-800 transition cursor-pointer ${className}`}
             aria-label={ariaLabel}
             title={title} 
+            disabled={disabled}
         >
             {children || <MdClose size={size}/> }
         </button>

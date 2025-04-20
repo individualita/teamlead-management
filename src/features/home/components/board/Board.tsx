@@ -1,6 +1,7 @@
 import { useMemo, useState, useEffect } from 'react';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
 
+
 //store
 import { useTasksStore } from '../../stores/tasksStore';
 
@@ -31,6 +32,7 @@ const Board = () => {
     const { isLoading, isError, data, error } = useTasksQuery();
     const {tasks, setTasks, updateTaskStatus} = useTasksStore();
     const sensors = useCustomDnDSensors();
+
 
     // Memoized values
     const tasksGroupedByStatus = useMemo(() => groupTasksByStatus(tasks), [tasks]);
