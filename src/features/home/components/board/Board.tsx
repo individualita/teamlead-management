@@ -1,5 +1,6 @@
 import { useMemo, useState, useEffect } from 'react';
 import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import { toast } from 'react-toastify';
 
 
 //store
@@ -16,6 +17,7 @@ import { groupTasksByStatus } from '../../utils/groupTasksByStatus';
 //hooks
 import useCustomDnDSensors from '../../dnd/hooks/useCustomDnDSensors';
 import { useTasksQuery } from '../../hooks/useTasksQuery';
+import { useUpdateStatus } from '../../hooks/useUpdateTask';
 
 //components
 import { LoadingCircle } from '../../../../shared/components/layouts/loadingCircle/LoadingCircle';
@@ -32,6 +34,7 @@ const Board = () => {
     const { isLoading, isError, data, error } = useTasksQuery();
     const {tasks, setTasks, updateTaskStatus} = useTasksStore();
     const sensors = useCustomDnDSensors();
+    const updateStatusMutation = useUpdateStatus();
 
 
     // Memoized values
@@ -56,14 +59,17 @@ const Board = () => {
         const taskId = active.id as string;
         // Новый статус задачи (ID колонки, куда бросили)
         const newStatus = over.id as TaskStatus; //To Do | In Progress | Done
+
+        updateStatusMutation.mutate({taskId,  newStatus, completed: newStatus === TASK_STATUSES.DONE}, {
+            onError: (error) => toast.error(`Failed to update task: ${error.message || 'Something went wrong. Try again later'}`)
+        })
         
-        // Обновляем состояние задач, меняя статус + completed перетащенной задачи
+        // Zustand. Обновляем состояние задач, меняя статус + completed перетащенной задачи.
         updateTaskStatus(taskId, newStatus, newStatus === TASK_STATUSES.DONE);
     };
 
     if (isLoading ) return <LoadingCircle />;
     if (isError) return <div className='p-4 text-red-500'>Error: {error.message || 'Something went wrong'}</div>;
-
 
     return (
 

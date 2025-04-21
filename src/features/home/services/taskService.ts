@@ -1,8 +1,13 @@
-import {getDocs, addDoc, deleteDoc,  collection, doc } from 'firebase/firestore';
+import {getDocs, addDoc, deleteDoc, updateDoc,  collection, doc } from 'firebase/firestore';
 import { db } from '../../../shared/config/firebaseConfig';
 
-import { Task } from '../types/task';
+import { Task, TaskStatus } from '../types/task';
 
+export interface UpdateTaskStatus {
+    taskId: string,
+    newStatus: TaskStatus,
+    completed: boolean,
+}
 
 export const taskService = {
 
@@ -26,9 +31,13 @@ export const taskService = {
         await deleteDoc(doc(db, 'tasks', taskId));
     },
 
-    updateTaskInFirestore: () => {
-        //setDoc чи updateDoc? 
-    }
+    updateTaskStatusInFirestore: async ({taskId, newStatus, completed = false}: UpdateTaskStatus) => {
+
+        const taskRef = doc(db, 'tasks', taskId);
+        await updateDoc(taskRef, { status: newStatus, completed });
+
+        return {id: taskId, status: newStatus, completed };  //возвращаем навсякий (и без этого работает)
+    },
 
 };
 
