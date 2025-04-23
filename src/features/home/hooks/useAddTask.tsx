@@ -13,7 +13,7 @@ export const useAddTask = () => {
             queryClient.invalidateQueries({queryKey: ['tasks']})            
         },
         onError: (error) => {
-            console.error('Mutation error in useAddTask:', error)
+            console.error('Something went wrong.Mutation error in useAddTask:', error)
         }
 
     });

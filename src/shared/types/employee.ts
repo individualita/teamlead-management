@@ -4,7 +4,7 @@ export type EmployeeStatus = typeof EMPLOYEE_STATUSES[keyof typeof EMPLOYEE_STAT
 
 
 export interface Employee {
-    _id: string,
+    id: string,
     name: string;
     position: string;
     phone: string;

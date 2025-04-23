@@ -1,8 +1,6 @@
 import { toast } from 'react-toastify';
 import { Task } from '../../types/task';
 
-import { useTasksStore } from '../../stores/tasksStore';
-
 import { getTaskPriorityColor } from '../../utils/getTaskPriorityColor';
 
 import XButton from '../../../../shared/components/xButton/XButton';
@@ -19,15 +17,11 @@ interface TaskCardProps {
 
 const TaskCard = ({task}: TaskCardProps) => {
 
-    const { deleteTask } = useTasksStore();
     const deleteTaskMutation = useDeleteTask();
 
     const onDeleteTask = (taskId: string) => {
 
         deleteTaskMutation.mutate(taskId, {
-            onSuccess: () => {
-                deleteTask(taskId); //zustand
-            },
             onError: (error) => {
                 toast.error(`Failed to delete task: ${error.message || 'Something went wrong. Try again later'}`);
             }

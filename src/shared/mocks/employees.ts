@@ -1,7 +1,7 @@
 import { Employee } from '../types/employee';
 export const EMPLOYEES: Employee[] = [
     {
-        _id: '1',
+        id: '1',
         name: 'Lucia Morales',
         position: 'Sales Representative',
         phone: '+34654321987',
@@ -10,7 +10,7 @@ export const EMPLOYEES: Employee[] = [
         status: 'Active',
     },
     {
-        _id: '2',
+        id: '2',
         name: 'Aleksandr Orlov',
         position: 'Software Engineer',
         phone: '+79116543210',
@@ -19,7 +19,7 @@ export const EMPLOYEES: Employee[] = [
         status: 'On Vacation',
     },
     {
-        _id: '3',
+        id: '3',
         name: 'Tobias Weber',
         position: 'Data Analyst',
         phone: '+491527896543',
@@ -28,7 +28,7 @@ export const EMPLOYEES: Employee[] = [
         status: 'Sick Leave',
     },
     {
-        _id: '4',
+        id: '4',
         name: 'Jakub Nowak',
         position: 'Marketing Specialist',
         phone: '+48601234567',
@@ -38,7 +38,7 @@ export const EMPLOYEES: Employee[] = [
 
     },
     {
-        _id: '5',
+        id: '5',
         name: 'Camille Laurent',
         position: 'HR Manager',
         phone: '+33612345678',
@@ -47,7 +47,7 @@ export const EMPLOYEES: Employee[] = [
         status: 'Suspended',
     },
     {
-        _id: '6',
+        id: '6',
         name: 'Mateo Rossi',
         position: 'Product Designer',
         phone: '+393287654321',
@@ -56,7 +56,7 @@ export const EMPLOYEES: Employee[] = [
         status: 'Resigned',
     },
     {
-        _id: '7',
+        id: '7',
         name: 'Leonardo Bianchi',
         position: 'Financial Advisor',
         phone: '+393291234567',
@@ -65,7 +65,7 @@ export const EMPLOYEES: Employee[] = [
         status: 'Terminated',
     },
     {
-        _id: '8',
+        id: '8',
         name: 'Emily Smith',
         position: 'Customer Support',
         phone: '+447911123456',
@@ -75,7 +75,7 @@ export const EMPLOYEES: Employee[] = [
 
     },
     {
-        _id: '9',
+        id: '9',
         name: 'Petr Ivanov',
         position: 'IT Administrator',
         phone: '+79169876543',
@@ -84,7 +84,7 @@ export const EMPLOYEES: Employee[] = [
         status: 'Retired',
     },
     {
-        _id: '10',
+        id: '10',
         name: 'Magdalena Zielinska',
         position: 'Project Manager',
         phone: '+48602987654',

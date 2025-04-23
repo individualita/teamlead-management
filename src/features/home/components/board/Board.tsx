@@ -36,7 +36,6 @@ const Board = () => {
     const sensors = useCustomDnDSensors();
     const updateStatusMutation = useUpdateStatus();
 
-
     // Memoized values
     const tasksGroupedByStatus = useMemo(() => groupTasksByStatus(tasks), [tasks]);
 

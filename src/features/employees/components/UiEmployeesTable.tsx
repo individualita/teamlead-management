@@ -15,8 +15,6 @@ import {
     Paper,
 } from '@mui/material';
 
-//store
-import { useEmployeeStore } from '../../../shared/stores/employeesStore';
 
 //schema & types
 import { employeeSchema } from '../schema/employee.schema';
@@ -34,9 +32,14 @@ import EmployeeRow from './EmployeeRow';
 //Hooks
 import usePagination from '../hooks/usePagination';
 
+interface UiEmployeesTableProps {
+    employees: Employee[],
+    onUpdateEmployee: (id: string, data: Partial<Employee>) => void,
+    onDeleteEmployee: (id: string) => void,
+    isDeleting?: boolean,
+}
 
-const UiEmployeesTable = () => {
-    //1. Состояния и рефы
+const UiEmployeesTable = ({employees, onUpdateEmployee, onDeleteEmployee, isDeleting}: UiEmployeesTableProps) => {
 
     // Состояние для хранения ID (string | null) раскрытой строки
     const [expandedRowId, setExpandedRowId] = useState<string | null>(null);
@@ -44,15 +47,12 @@ const UiEmployeesTable = () => {
     const [editedId, setEditedId] = useState<string | null>(null);
     const ref = useRef<HTMLDivElement>(null);
 
-    //2. data and hooks
-    const {employees, updateEmployee} = useEmployeeStore();
-
     const {
         paginatedItems : paginatedEmployees, 
         rowsPerPage,
-         currentPage, 
-         handleChangePage, 
-         handleChangeRowsPerPage 
+        currentPage, 
+        handleChangePage, 
+        handleChangeRowsPerPage 
     } = usePagination({items: employees});
 
 
@@ -62,7 +62,7 @@ const UiEmployeesTable = () => {
     });
 
 
-    //3. event handlers
+    // event handlers
     // Разворачивает/сворачивает строку таблицы (стрелка)
     const handleToggleRowCollapse = (id: string) => {
         setExpandedRowId(prev => (prev === id ? null : id)); // Открывает только одну строку, закрывает предыдущую
@@ -77,7 +77,7 @@ const UiEmployeesTable = () => {
     const handleEditEmployee = (id: string) => {
         setEditedId(prev => (prev === id? null : id));
 
-        const currentEmployee = employees.find(emp => emp._id === id);
+        const currentEmployee = employees.find(emp => emp.id === id);
 
         if (!currentEmployee) return;
 
@@ -97,7 +97,8 @@ const UiEmployeesTable = () => {
 
         if (!editedId) return;
 
-        updateEmployee(editedId, data);
+        onUpdateEmployee(editedId, data);
+
         //закрываем окна. 
         setExpandedRowId(null);
         setExpandedActionId(null);
@@ -135,7 +136,6 @@ const UiEmployeesTable = () => {
     }, [ expandedActionId]);
 
 
-
     return (
         <div className='mt-5'>
 
@@ -154,14 +154,16 @@ const UiEmployeesTable = () => {
 
                         {paginatedEmployees.map((emp: Employee) =>  (
                             <EmployeeRow
-                                key={emp._id}
+                                key={emp.id}
                                 employee={emp}
-                                isExpanded={expandedRowId === emp._id} 
-                                isActioned={expandedActionId === emp._id}
-                                isEditing={editedId === emp._id}
+                                isExpanded={expandedRowId === emp.id} 
+                                isActioned={expandedActionId === emp.id}
+                                isEditing={editedId === emp.id}
+                                isDeleting={isDeleting}
                                 onToggleCollapse={handleToggleRowCollapse}
                                 onToggleActions={handleToggleActionMenu}
                                 onEdit={handleEditEmployee}
+                                onDeleteEmployee={onDeleteEmployee}
                                 errors={errors}
                                 control={control}
                                 register={register}

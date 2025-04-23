@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
 import { Dayjs } from 'dayjs';
-import { v4 as uuidv4 } from 'uuid';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'
 
@@ -11,11 +10,16 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import Button from '@mui/material/Button';
 
+import { toast } from 'react-toastify';
+
+//hooks
+import { useAddEmployee } from '../hooks/useAddEmployee';
 import { useEmployeeStore } from '../../../shared/stores/employeesStore';
 
 import { employeeSchema, EmployeeFormDataSchema } from '../schema/employee.schema';
 import { addEmployeeFormInputSx } from '../constants/styles';
 import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
+
 
 interface AddEmployeeFormProps {
     handleClose: () => void,
@@ -24,9 +28,10 @@ interface AddEmployeeFormProps {
 
 const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
+    const addEmployeeMutation = useAddEmployee();
     const {addEmployee} = useEmployeeStore();
 
-    const { register, handleSubmit, control, formState: {errors}} = useForm<EmployeeFormDataSchema>({
+    const { register, handleSubmit, control, reset, formState: {errors}} = useForm<EmployeeFormDataSchema>({
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
         defaultValues: {
@@ -42,11 +47,15 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
     const onSubmit: SubmitHandler<EmployeeFormDataSchema> = (data) => {
 
-        addEmployee({...data, _id: uuidv4()});
-        handleClose();
-
-        showAlert(data.name);
-
+        addEmployeeMutation.mutate(data, {
+            onSuccess: (savedData) => {
+                addEmployee(savedData);
+                reset();
+                handleClose();
+                showAlert(savedData.name);
+            },
+            onError: (error) => toast.error(error.message)
+        });
     };
 
 

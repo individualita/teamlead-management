@@ -21,6 +21,7 @@ import Chat from './features/chat/Chat';
 
 import './App.css';
 
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 // Lazy-loaded components
 
@@ -53,6 +54,7 @@ const App = () => {
 
     return (
         <QueryClientProvider client={queryClient}>
+            <ReactQueryDevtools initialIsOpen={false}  />
             <div className='app'>
                 <Container>
                     <Suspense fallback={<LoadingCircle />}>

@@ -2,8 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../../../shared/clients/queryClient';
 
 
-import { taskService } from '../services/taskService';
-import { UpdateTaskStatus } from '../services/taskService';
+import { taskService, UpdateTaskStatus } from '../services/taskService';
 
 
 export const useUpdateStatus = () => {

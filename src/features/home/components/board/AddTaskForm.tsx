@@ -53,14 +53,13 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
 
         addTaskMutation.mutate(newTask, {
             onSuccess: (savedTask) => {
-                addTask(savedTask); //zustand обновляем только после успеха. 
                 toast.success(`Task ${savedTask.title.toUpperCase()} added successfully!`)
                 reset();
                 onClose();
             },
 
             onError: (error) => {
-                toast.error(`Failed to add task: ${error.message || 'Something went wrong. Try again later'}`);
+                toast.error(error.message);
             }
         })
     };

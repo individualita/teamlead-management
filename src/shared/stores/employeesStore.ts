@@ -7,6 +7,7 @@ import { EMPLOYEES } from '../mocks/employees';
 
 interface EmployeesState  {
     employees: Employee[],
+    setEmployees: (employees: Employee[]) => void,
     addEmployee: ( employee: Employee) => void,
     deleteEmployee: (id: string) => void,
     updateEmployee: (id: string, updatedData: Partial<Employee >) => void,
@@ -15,6 +16,7 @@ interface EmployeesState  {
 
 export const useEmployeeStore = create<EmployeesState>((set) => ({
     employees: EMPLOYEES,
+    setEmployees: (employees) => set({employees}),
     addEmployee: (employee) => 
         set((state) => ({
             employees: [employee, ...state.employees]
@@ -22,13 +24,13 @@ export const useEmployeeStore = create<EmployeesState>((set) => ({
 
     deleteEmployee: (id) => 
         set((state) => ({
-            employees: state.employees.filter(item => item._id !== id) 
+            employees: state.employees.filter(item => item.id !== id) 
         })),
 
     updateEmployee: (id, updatedData) => 
         set((state) => ({
             employees: state.employees.map(emp => 
-                emp._id === id? {...emp, ...updatedData} : emp
+                emp.id === id? {...emp, ...updatedData} : emp
             )
         })),
 }));

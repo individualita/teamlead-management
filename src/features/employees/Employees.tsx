@@ -1,47 +1,80 @@
 import { useEffect, useState } from 'react';
-
 import { Alert } from '@mui/material';
+import { toast } from 'react-toastify';
 
+
+//hooks
 import { useEmployeeStore } from '../../shared/stores/employeesStore';
+import { useEmployeesQuery } from './hooks/useEmployeesQuery';
 
 import { ALERT_TIMEOUT } from './constants/alertTimeout';
-
+import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
 import EmployeeCard from './components/EmployeeCard';
 import UiEmployeesTable from './components/UiEmployeesTable';
 import AddEmployeeDrawer from './components/AddEmployeeDrawer';
 
 import styles from './employees.module.css';
 
+import { useDeleteEmployee } from './hooks/useDeleteEmployee';
+import { useUpdateEmployee } from './hooks/useUpdateEmployee';
+import { Employee } from '../../shared/types/employee';
 
 
 const Employees = () => {
 
-    const [isAlertVisible, setIsAlertVisible] = useState<boolean>(false);
     const [alertMessage, setAlertMessage] = useState<string>('');
 
-    const {employees} = useEmployeeStore();
+    const {employees, setEmployees, deleteEmployee, updateEmployee} = useEmployeeStore();
+    const deleteEmployeeMutation = useDeleteEmployee();
+    const updateEmployeeMutation = useUpdateEmployee()
 
+
+    const { isLoading, isError, data, error } = useEmployeesQuery();
+
+    useEffect(() => {
+        if (data) setEmployees(data);
+    }, [data]);
     
-
+    //alert
     useEffect(() => {
 
         const timer = setTimeout(() => {
 
-            setIsAlertVisible(false);
+            setAlertMessage('');
 
         }, ALERT_TIMEOUT);
 
         return () => clearTimeout(timer);
 
-    }, [isAlertVisible]);
+    }, [alertMessage]);
     
 
-    const showAlert = (name: string) => {
+    const showAlert = (name: string) => setAlertMessage(name);
 
-        setAlertMessage(name);
-        setIsAlertVisible(true);
+    const onDeleteEmployee = (employeeId: string) => {
+
+        deleteEmployeeMutation.mutate(employeeId, {
+            onSuccess: () => {
+                deleteEmployee(employeeId); //zustand
+            },
+            onError: (error) => {
+                toast.error(error.message);
+            }
+        })
     };
 
+    const onUpdateEmployee = (employeeId: string, data: Partial<Employee>) => {
+
+        updateEmployeeMutation.mutate({data, employeeId}, {
+            onSuccess: () => updateEmployee(employeeId, data), //zustand
+            onError: (error) => toast.error(error.message)
+        })
+ 
+    };
+
+
+    if (isLoading ) return <LoadingCircle />;
+    if (isError) return <div className='p-4 text-red-500'>Error: {error.message || 'Something went wrong'}</div>;
 
     return (
         <div className='employees'>
@@ -49,20 +82,25 @@ const Employees = () => {
             <div>
                 <AddEmployeeDrawer showAlert={showAlert}/>
 
-                {isAlertVisible && <Alert>Employee <strong>{alertMessage}</strong> has been added successfully</Alert> }
+                {!!alertMessage && <Alert>Employee <strong>{alertMessage}</strong> has been added successfully</Alert> }
 
 
                 {/* desktop size */}
                 <div className={styles.tableDesktopWrapper}>
 
-                    <UiEmployeesTable />
+                    <UiEmployeesTable
+                        employees={employees}
+                        onUpdateEmployee={onUpdateEmployee}
+                        onDeleteEmployee={onDeleteEmployee}
+                        isDeleting={deleteEmployeeMutation.isPending}
+                    />
 
                 </div>
 
                 {/* card view for mobile size */}
                 <div className='block space-y-4 md:hidden'>
 
-                    {employees.map(emp => <EmployeeCard key={emp._id} employee={emp}/>)}
+                    {employees.map(emp => <EmployeeCard key={emp.id} employee={emp}/>)}
 
                 </div>
 

@@ -46,9 +46,11 @@ interface EmployeeRowProps {
     isExpanded: boolean,
     isActioned: boolean,
     isEditing: boolean,
+    isDeleting?: boolean,
     onToggleCollapse: (id: string) => void,
     onToggleActions: (id: string) => void,
     onEdit: (id: string) => void,
+    onDeleteEmployee: (id: string) => void,
     errors: FieldErrors<EmployeeFormData>,
     control: Control<EmployeeFormData, any>
     register: UseFormRegister<EmployeeFormData>,
@@ -64,9 +66,11 @@ const EmployeeRow = ({
     isExpanded, 
     isActioned, 
     isEditing, 
+    isDeleting,
     onToggleCollapse, 
     onToggleActions,
     onEdit,
+    onDeleteEmployee,
     errors, 
     control, 
     register, 
@@ -225,7 +229,7 @@ const EmployeeRow = ({
 
                                 <button 
                                     type='button'
-                                    onClick={() => onToggleCollapse(employee._id)} 
+                                    onClick={() => onToggleCollapse(employee.id)} 
                                     className='text-xl cursor-pointer'
                                     aria-expanded={isExpanded} 
                                     aria-label={isExpanded ? "Collapse row" : "Expand row"}
@@ -239,7 +243,7 @@ const EmployeeRow = ({
                                     type='button'
                                     onClick={(e) => {
                                         e.stopPropagation()
-                                        onToggleActions(employee._id);
+                                        onToggleActions(employee.id);
                                     } } 
                                     className='text-xl cursor-pointer'
                                     aria-haspopup='true'
@@ -253,8 +257,10 @@ const EmployeeRow = ({
 
                             {isActioned && (
                                 <ActionMenu 
-                                    employeeId={employee._id} 
-                                    onEdit={onEdit} 
+                                    employeeId={employee.id} 
+                                    onEdit={onEdit}
+                                    isDeleting={isDeleting}
+                                    onDeleteEmployee={onDeleteEmployee} 
                                     ref={actionMenuRef}
                                 />
                             )}
