@@ -17,10 +17,11 @@ interface BoardColumnProps {
     isFormOpen: boolean,
     onOpenForm: () => void,
     onCloseForm: () => void,
+    onDelete:(id: string) => void,
 };
 
 
-const BoardColumn = ({title, tasks, isFormOpen, onOpenForm, onCloseForm}: BoardColumnProps) => {
+const BoardColumn = ({title, tasks, isFormOpen, onOpenForm, onCloseForm, onDelete}: BoardColumnProps) => {
 
     const isTodoColumn = title === TASK_STATUSES.TODO;
 
@@ -44,6 +45,7 @@ const BoardColumn = ({title, tasks, isFormOpen, onOpenForm, onCloseForm}: BoardC
                         <TaskCard 
                             key={task.id} 
                             task={task}
+                            onDelete={onDelete}
                         />
                     </Draggable>
                 ))

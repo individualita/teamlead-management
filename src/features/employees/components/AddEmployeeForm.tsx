@@ -14,7 +14,6 @@ import { toast } from 'react-toastify';
 
 //hooks
 import { useAddEmployee } from '../hooks/useAddEmployee';
-import { useEmployeeStore } from '../../../shared/stores/employeesStore';
 
 import { employeeSchema, EmployeeFormDataSchema } from '../schema/employee.schema';
 import { addEmployeeFormInputSx } from '../constants/styles';
@@ -29,9 +28,8 @@ interface AddEmployeeFormProps {
 const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
     const addEmployeeMutation = useAddEmployee();
-    const {addEmployee} = useEmployeeStore();
 
-    const { register, handleSubmit, control, reset, formState: {errors}} = useForm<EmployeeFormDataSchema>({
+    const { register, handleSubmit, control, reset, watch,  formState: {errors}} = useForm<EmployeeFormDataSchema>({
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
         defaultValues: {
@@ -49,7 +47,6 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
         addEmployeeMutation.mutate(data, {
             onSuccess: (savedData) => {
-                addEmployee(savedData);
                 reset();
                 handleClose();
                 showAlert(savedData.name);
@@ -58,7 +55,7 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
         });
     };
 
-
+    console.log(watch('startDate'));
     return (
         <form 
             onSubmit={handleSubmit(onSubmit)} 
@@ -155,8 +152,6 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
             />
 
 
-
-
             <TextField
                 {...register('email',  {required: true})}
                 type='email'
@@ -182,7 +177,15 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
 
             <div className='flex gap-3 ml-auto'>
-                <Button variant='contained' color='success' type='submit' size='small'>Create</Button>
+                <Button 
+                    variant='contained' 
+                    color='success' 
+                    type='submit' 
+                    size='small'
+                    disabled={addEmployeeMutation.isPending}
+                >
+                    {addEmployeeMutation.isPending? 'Loading...' : 'Create'}
+                </Button>
 
                 <Button
                     onClick={handleClose} 

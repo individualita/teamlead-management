@@ -216,7 +216,7 @@ const EmployeeRow = ({
                         </TableCell>
 
                         <TableCell>{employee.position}</TableCell>
-                        <TableCell>{formatDate(employee.startDate)}</TableCell>
+                        <TableCell>{formatDate((employee.startDate))}</TableCell>
 
                         <TableCell sx={{width: 120}}>
                             <div className={`${getEmployeeStatusColor(employee.status)} text-center  font-semibold rounded-xl p-1 text-xs`}>

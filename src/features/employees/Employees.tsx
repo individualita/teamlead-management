@@ -2,22 +2,23 @@ import { useEffect, useState } from 'react';
 import { Alert } from '@mui/material';
 import { toast } from 'react-toastify';
 
-
 //hooks
 import { useEmployeeStore } from '../../shared/stores/employeesStore';
 import { useEmployeesQuery } from './hooks/useEmployeesQuery';
+import { useDeleteEmployee } from './hooks/useDeleteEmployee';
+import { useUpdateEmployee } from './hooks/useUpdateEmployee';
+
+import { Employee } from '../../shared/types/employee';
 
 import { ALERT_TIMEOUT } from './constants/alertTimeout';
+
+import { ErrorMessage } from '../../shared/components/ErrorMessage';
 import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
 import EmployeeCard from './components/EmployeeCard';
 import UiEmployeesTable from './components/UiEmployeesTable';
 import AddEmployeeDrawer from './components/AddEmployeeDrawer';
 
 import styles from './employees.module.css';
-
-import { useDeleteEmployee } from './hooks/useDeleteEmployee';
-import { useUpdateEmployee } from './hooks/useUpdateEmployee';
-import { Employee } from '../../shared/types/employee';
 
 
 const Employees = () => {
@@ -74,36 +75,34 @@ const Employees = () => {
 
 
     if (isLoading ) return <LoadingCircle />;
-    if (isError) return <div className='p-4 text-red-500'>Error: {error.message || 'Something went wrong'}</div>;
+    if (isError) return <ErrorMessage message={error.message}/>
+    console.log(employees)
 
     return (
         <div className='employees'>
+            
+            <AddEmployeeDrawer showAlert={showAlert}/>
 
-            <div>
-                <AddEmployeeDrawer showAlert={showAlert}/>
+            {!!alertMessage && <Alert>Employee <strong>{alertMessage}</strong> has been added successfully</Alert> }
 
-                {!!alertMessage && <Alert>Employee <strong>{alertMessage}</strong> has been added successfully</Alert> }
+            {employees.length <= 0 && <span>Add new employee</span>}
 
+            {/* desktop size */}
+            <div className={styles.tableDesktopWrapper}>
 
-                {/* desktop size */}
-                <div className={styles.tableDesktopWrapper}>
+                <UiEmployeesTable
+                    employees={employees}
+                    onUpdateEmployee={onUpdateEmployee}
+                    onDeleteEmployee={onDeleteEmployee}
+                    isDeleting={deleteEmployeeMutation.isPending}
+                />
 
-                    <UiEmployeesTable
-                        employees={employees}
-                        onUpdateEmployee={onUpdateEmployee}
-                        onDeleteEmployee={onDeleteEmployee}
-                        isDeleting={deleteEmployeeMutation.isPending}
-                    />
+            </div>
 
-                </div>
+            {/* card view for mobile size */}
+            <div className='block space-y-4 md:hidden'>
 
-                {/* card view for mobile size */}
-                <div className='block space-y-4 md:hidden'>
-
-                    {employees.map(emp => <EmployeeCard key={emp.id} employee={emp}/>)}
-
-                </div>
-
+                {employees.map(emp => <EmployeeCard key={emp.id} employee={emp}/>)}
 
             </div>
 

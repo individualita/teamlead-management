@@ -15,11 +15,18 @@ export const employeesService = {
         try {
             const querySnapshot = await getDocs(collection(db, 'employees'));
 
-            const employees: Employee[] = querySnapshot.docs.map((doc) => ({
-                id: doc.id,
-                ...(doc.data() as Omit<Employee, 'id'>),
-            }));
+            const employees: Employee[] = querySnapshot.docs.map((doc) => {
 
+                const {startDate} = doc.data();
+
+                return {
+                    ...(doc.data() as Omit<Employee, 'id' | 'startDate'>),
+                    id: doc.id,
+                    startDate: startDate.toDate(), //преобразуем из Timestamp в Date
+                }
+
+            });
+            
             return employees;
 
         } catch (error) {

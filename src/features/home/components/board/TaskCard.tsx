@@ -1,32 +1,20 @@
-import { toast } from 'react-toastify';
 import { Task } from '../../types/task';
 
 import { getTaskPriorityColor } from '../../utils/getTaskPriorityColor';
 
 import XButton from '../../../../shared/components/xButton/XButton';
 
-import { useDeleteTask } from '../../hooks/useDeleteTask';
 
 
 interface TaskCardProps {
     task: Task,
+    onDelete: (id: string) => void, 
 }
 
 
 
+const TaskCard = ({task, onDelete}: TaskCardProps) => {
 
-const TaskCard = ({task}: TaskCardProps) => {
-
-    const deleteTaskMutation = useDeleteTask();
-
-    const onDeleteTask = (taskId: string) => {
-
-        deleteTaskMutation.mutate(taskId, {
-            onError: (error) => {
-                toast.error(`Failed to delete task: ${error.message || 'Something went wrong. Try again later'}`);
-            }
-        })
-    };
 
     return (
         <article 
@@ -47,11 +35,10 @@ const TaskCard = ({task}: TaskCardProps) => {
                 )}
 
                 <XButton 
-                    onClick={() => onDeleteTask(task.id)}
+                    onClick={() => onDelete(task.id)}
                     className='absolute top-1 right-1'
                     ariaLabel='Delete task'
                     title='Delete task'
-                    disabled={deleteTaskMutation.isPending}
                 />
             </header>
 
@@ -59,7 +46,6 @@ const TaskCard = ({task}: TaskCardProps) => {
                 {task.description}
             </p>
 
-            {deleteTaskMutation.isPending && <div className='text-xs text-gray-400 mt-2'>Loading...</div>}
 
         </article>
     )

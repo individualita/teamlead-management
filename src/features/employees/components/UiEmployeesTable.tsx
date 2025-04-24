@@ -21,6 +21,9 @@ import { employeeSchema } from '../schema/employee.schema';
 import { Employee } from '../../../shared/types/employee';
 import { EmployeeFormData } from '../types/employeeFormData';
 
+//Hooks
+import usePagination from '../hooks/usePagination';
+
 //constants
 import { TABLE_COLUMNS } from '../constants/tableColumns';
 import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
@@ -29,8 +32,6 @@ import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
 import TableHeader from './TableHeader';
 import EmployeeRow from './EmployeeRow';
 
-//Hooks
-import usePagination from '../hooks/usePagination';
 
 interface UiEmployeesTableProps {
     employees: Employee[],
@@ -118,7 +119,7 @@ const UiEmployeesTable = ({employees, onUpdateEmployee, onDeleteEmployee, isDele
     };
     
 
-    //4. Effects
+    // Effects
     useEffect(() => {
 
         const handleClickOutside = (e: MouseEvent) => {
@@ -135,10 +136,8 @@ const UiEmployeesTable = ({employees, onUpdateEmployee, onDeleteEmployee, isDele
 
     }, [ expandedActionId]);
 
-
     return (
         <div className='mt-5'>
-
             <TableContainer 
                 sx={{
                     borderRadius: 3,
@@ -202,7 +201,7 @@ const UiEmployeesTable = ({employees, onUpdateEmployee, onDeleteEmployee, isDele
 
         </div>
     )
-}
+};
 
 
 export default UiEmployeesTable;

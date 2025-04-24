@@ -18,8 +18,10 @@ import { groupTasksByStatus } from '../../utils/groupTasksByStatus';
 import useCustomDnDSensors from '../../dnd/hooks/useCustomDnDSensors';
 import { useTasksQuery } from '../../hooks/useTasksQuery';
 import { useUpdateStatus } from '../../hooks/useUpdateTask';
+import { useDeleteTask } from '../../hooks/useDeleteTask';
 
 //components
+import { ErrorMessage } from '../../../../shared/components/ErrorMessage';
 import { LoadingCircle } from '../../../../shared/components/layouts/loadingCircle/LoadingCircle';
 import BoardColumn from './BoardColumn';
 import Droppable from '../../dnd/Droppable';
@@ -35,6 +37,7 @@ const Board = () => {
     const {tasks, setTasks, updateTaskStatus} = useTasksStore();
     const sensors = useCustomDnDSensors();
     const updateStatusMutation = useUpdateStatus();
+    const deleteTaskMutation = useDeleteTask();
 
     // Memoized values
     const tasksGroupedByStatus = useMemo(() => groupTasksByStatus(tasks), [tasks]);
@@ -67,8 +70,17 @@ const Board = () => {
         updateTaskStatus(taskId, newStatus, newStatus === TASK_STATUSES.DONE);
     };
 
+    const onDeleteTask = (taskId: string) => {
+
+        deleteTaskMutation.mutate(taskId, {
+            onError: (error) => {
+                toast.error(`Failed to delete task: ${error.message || 'Something went wrong. Try again later'}`);
+            }
+        })
+    };
+
     if (isLoading ) return <LoadingCircle />;
-    if (isError) return <div className='p-4 text-red-500'>Error: {error.message || 'Something went wrong'}</div>;
+    if (isError) return <ErrorMessage message={error.message}/>
 
     return (
 
@@ -85,6 +97,7 @@ const Board = () => {
                             isFormOpen={isFormOpen}
                             onOpenForm={handleOpenForm}
                             onCloseForm={handleCloseForm}
+                            onDelete={onDeleteTask}
                         />
 
                     </Droppable>

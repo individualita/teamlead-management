@@ -6,7 +6,6 @@ import { toast } from 'react-toastify';
 
 
 // Internal modules: stores and hooks
-import { useTasksStore } from '../../stores/tasksStore';
 import { useAddTask } from '../../hooks/useAddTask';
 
 // Internal modules: types and schemas
@@ -25,8 +24,6 @@ interface AddTaskFormProps {
 
 
 const AddTaskForm = ({onClose}: AddTaskFormProps) => {
-
-    const {addTask} = useTasksStore();
 
     const addTaskMutation = useAddTask();
 
