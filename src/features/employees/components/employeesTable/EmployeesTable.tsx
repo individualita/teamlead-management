@@ -7,7 +7,7 @@ import { usePagination } from '../../../../shared/hooks/usePagination';
 
 import Table from '../../../../shared/components/table/Table';
 
-import TablePagination from '../../../../shared/components/tablePagination/TablePagination';
+import TablePagination from '../../../../shared/components/TablePagination';
 
 
 
@@ -25,7 +25,7 @@ const EmployeesTable = () => {
 
     //calculate table columns excluding the id field. 
     const employeeTableColumns = useMemo(() => {
-        return employees.length? Object.keys(employees[0]).filter(item => item!== '_id'): [];
+        return employees.length? Object.keys(employees[0]).filter(item => item!== 'id'): [];
     }, [employees]);
 
 

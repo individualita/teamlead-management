@@ -2,7 +2,7 @@ import { Task } from '../../types/task';
 
 import { getTaskPriorityColor } from '../../utils/getTaskPriorityColor';
 
-import XButton from '../../../../shared/components/xButton/XButton';
+import XButton from '../../../../shared/components/XButton';
 
 
 

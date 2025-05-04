@@ -1,10 +1,9 @@
-import { TaskStatus, Task } from '../../types/task';
+import Draggable from '../../dnd/Draggable';
 
+import { TaskStatus, Task } from '../../types/task';
 import { TASK_STATUSES } from '../../constants/tasks';
 
-import Draggable from '../../dnd/Draggable';
-import EmptyState from '../../../../shared/components/emptyState/EmptyState';
-
+import EmptyState from '../../../../shared/components/EmptyState';
 
 import BoardHeader from './BoardHeader';
 import TaskCard from './TaskCard';

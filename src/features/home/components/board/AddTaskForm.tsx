@@ -6,7 +6,8 @@ import { toast } from 'react-toastify';
 
 
 // Internal modules: stores and hooks
-import { useAddTask } from '../../hooks/useAddTask';
+import { useAddMutation } from '../../../../shared/hooks/useAddMutation';
+import { taskService } from '../../services/taskService';
 
 // Internal modules: types and schemas
 import { taskSchema, TaskFormDataSchema } from '../../schema/tasks.schema';
@@ -25,7 +26,10 @@ interface AddTaskFormProps {
 
 const AddTaskForm = ({onClose}: AddTaskFormProps) => {
 
-    const addTaskMutation = useAddTask();
+    const addTaskMutation = useAddMutation({
+        mutationFn: taskService.addTaskToFirestore,
+        queryKey: ['tasks']
+    });
 
 
     const { register, handleSubmit, control, reset, formState: {errors}} = useForm<TaskFormDataSchema>({
@@ -50,7 +54,7 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
 
         addTaskMutation.mutate(newTask, {
             onSuccess: (savedTask) => {
-                toast.success(`Task ${savedTask.title.toUpperCase()} added successfully!`)
+                toast.success(`Task ${(savedTask as Task).title.toUpperCase()} added successfully!`)
                 reset();
                 onClose();
             },

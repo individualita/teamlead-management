@@ -13,12 +13,13 @@ import { TaskStatus, TasksGroupedByStatus} from '../../types/task';
 import { TASK_STATUSES } from '../../constants/tasks';
 import { BOARD_COLUMNS } from '../../constants/board';
 import { groupTasksByStatus } from '../../utils/groupTasksByStatus';
+import { taskService } from '../../services/taskService';
 
 //hooks
 import useCustomDnDSensors from '../../dnd/hooks/useCustomDnDSensors';
 import { useTasksQuery } from '../../hooks/useTasksQuery';
 import { useUpdateStatus } from '../../hooks/useUpdateTask';
-import { useDeleteTask } from '../../hooks/useDeleteTask';
+import { useDeleteMutation } from '../../../../shared/hooks/useDeleteMutation';
 
 //components
 import { ErrorMessage } from '../../../../shared/components/ErrorMessage';
@@ -37,7 +38,10 @@ const Board = () => {
     const {tasks, setTasks, updateTaskStatus} = useTasksStore();
     const sensors = useCustomDnDSensors();
     const updateStatusMutation = useUpdateStatus();
-    const deleteTaskMutation = useDeleteTask();
+    const deleteTaskMutation = useDeleteMutation({
+        mutationFn: taskService.deleteTaskFromFirestore, 
+        queryKey: ['tasks']
+    });
 
     // Memoized values
     const tasksGroupedByStatus = useMemo(() => groupTasksByStatus(tasks), [tasks]);

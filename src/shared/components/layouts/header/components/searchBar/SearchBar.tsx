@@ -62,7 +62,7 @@ const SearchBar = () => {
                         {filteredEmployees.map((emp) => (
 
                             <SearchSuggestionItem 
-                                key={emp._id} 
+                                key={emp.id} 
                                 employee={emp} 
                                 clearQuery={() => setQuery('')} 
                             />

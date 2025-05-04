@@ -12,7 +12,7 @@ import { OUTLET_TAB } from '../../../constants/outletTab';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import TabsHeader  from '../../tabsHeader/TabsHeader';
-import EmployeeProfile from '../../employeeProfile/EmployeeProfile';
+import EmployeeProfile from '../../EmployeeProfile';
 
 
 

@@ -5,11 +5,12 @@ import { toast } from 'react-toastify';
 //hooks
 import { useEmployeeStore } from '../../shared/stores/employeesStore';
 import { useEmployeesQuery } from './hooks/useEmployeesQuery';
-import { useDeleteEmployee } from './hooks/useDeleteEmployee';
+import { useDeleteMutation } from '../../shared/hooks/useDeleteMutation';
 import { useUpdateEmployee } from './hooks/useUpdateEmployee';
 
 import { Employee } from '../../shared/types/employee';
 
+import { employeesService } from './services/employeesService';
 import { ALERT_TIMEOUT } from './constants/alertTimeout';
 
 import { ErrorMessage } from '../../shared/components/ErrorMessage';
@@ -26,7 +27,10 @@ const Employees = () => {
     const [alertMessage, setAlertMessage] = useState<string>('');
 
     const {employees, setEmployees, deleteEmployee, updateEmployee} = useEmployeeStore();
-    const deleteEmployeeMutation = useDeleteEmployee();
+    const deleteEmployeeMutation = useDeleteMutation({
+        mutationFn: employeesService.deleteEmployeeFromFirestore,
+        queryKey: ['employees']
+    });
     const updateEmployeeMutation = useUpdateEmployee()
 
 

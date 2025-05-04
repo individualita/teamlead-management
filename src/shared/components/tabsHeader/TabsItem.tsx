@@ -1,6 +1,6 @@
 import { OUTLET_TAB } from '../../constants/outletTab';
 
-import XButton from '../xButton/XButton';
+import XButton from '../XButton';
 
 
 interface TabsItemProps {

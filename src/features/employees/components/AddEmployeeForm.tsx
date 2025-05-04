@@ -12,9 +12,12 @@ import Button from '@mui/material/Button';
 
 import { toast } from 'react-toastify';
 
-//hooks
-import { useAddEmployee } from '../hooks/useAddEmployee';
+import { Employee } from '../../../shared/types/employee';
 
+//hooks
+import { useAddMutation } from '../../../shared/hooks/useAddMutation';
+
+import { employeesService } from '../services/employeesService';
 import { employeeSchema, EmployeeFormDataSchema } from '../schema/employee.schema';
 import { addEmployeeFormInputSx } from '../constants/styles';
 import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
@@ -27,7 +30,10 @@ interface AddEmployeeFormProps {
 
 const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
 
-    const addEmployeeMutation = useAddEmployee();
+    const addEmployeeMutation = useAddMutation({
+        mutationFn: employeesService.addEmployeeToFirestore,
+        queryKey: ['employees']
+    });
 
     const { register, handleSubmit, control, reset, watch,  formState: {errors}} = useForm<EmployeeFormDataSchema>({
         mode: 'onChange',
@@ -49,7 +55,7 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
             onSuccess: (savedData) => {
                 reset();
                 handleClose();
-                showAlert(savedData.name);
+                showAlert((savedData as Employee).name);
             },
             onError: (error) => toast.error(error.message)
         });
