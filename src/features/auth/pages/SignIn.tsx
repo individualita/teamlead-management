@@ -10,6 +10,7 @@ import { useAuthStore } from '../store/authStore';
 //constants 
 import { FIREBASE_AUTH_ERRORS } from '../constants/firebaseAuthErrors';
 import { ROUTE_PATHS } from '../../../shared/constants/routePaths';
+import { AUTH_TITLES } from '../constants/authTitles';
 
 //services
 import { executeAuthAction } from '../services/executeAuthAction';
@@ -34,7 +35,7 @@ const SignIn = () => {
             setErrorMessage('');
             setLoading(true);
 
-            const user = await executeAuthAction(signInWithEmailAndPassword, auth, email, password);
+            const user = await executeAuthAction(signInWithEmailAndPassword, auth, email, password, undefined);
     
             setUser(user);
             
@@ -53,7 +54,8 @@ const SignIn = () => {
     return (
         <>
             <h1>Sign in page</h1>
-            <AuthForm title={'Sign in'} onFormSubmit={handleLogin} />
+            <AuthForm title={AUTH_TITLES.SIGN_IN} onFormSubmit={handleLogin} />
+
         </>
     )
 

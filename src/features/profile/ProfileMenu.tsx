@@ -1,12 +1,15 @@
 import { useState, useEffect, useRef} from 'react';
 
+import { useAuthStore } from '../auth/store/authStore';
 
 //local components
-import Avatar from './components/avatar/Avatar';
+import Avatar from './components/Avatar';
 import ProfileDropdown from './components/profileDropdown/ProfileDropdown';
 
 
 const ProfileMenu = () => {
+
+    const {user} = useAuthStore();
 
     const [isOpenProfileMenu, setIsOpenProfileMenu] = useState(false);
     const toggleOpen = () => setIsOpenProfileMenu(prev => !prev);
@@ -32,15 +35,20 @@ const ProfileMenu = () => {
     }, [isOpenProfileMenu]);
 
 
+    if (!user) return <div>No user</div>
 
     return (
         <div  className='relative' ref={profileRef}>
 
-            <div className='w-11 h-11 cursor-pointer' onClick={toggleOpen}>
-                <Avatar src={'https://material-kit-react.devias.io/assets/avatar.png'}/>
+            <div className='w-11 h-11 cursor-pointer flex justify-center items-center' onClick={toggleOpen}>
+                <Avatar />
             </div>
 
-            <ProfileDropdown isOpen={isOpenProfileMenu}/>
+            <ProfileDropdown 
+                isOpen={isOpenProfileMenu} 
+                username={user.username}
+                email={user.email}
+            />
 
 
         </div>

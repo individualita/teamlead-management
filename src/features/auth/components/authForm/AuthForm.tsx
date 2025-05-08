@@ -2,13 +2,15 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import { Link } from 'react-router-dom';
 
 // material UI
-import Divider from '@mui/material/Divider';
+import { Alert, Divider } from '@mui/material';
+
 
 //store
 import { useAuthStore } from '../../store/authStore';
 
 //constants
 import { ROUTE_PATHS } from '../../../../shared/constants/routePaths';
+import { AUTH_TITLES } from '../../constants/authTitles';
 
 //components
 import ErrorAlert from '../errorAlert/ErrorAlert';
@@ -18,14 +20,15 @@ import styles from './authForm.module.css';
 
 
 
-type AuthInputs = {
+interface AuthInputs  {
+    username?: string,
     email: string,
     password: string,
 }
 
-type AuthFormProps = {
+interface AuthFormProps {
     title: string,
-    onFormSubmit: (email: string, password: string) => void,
+    onFormSubmit: (email: string, password: string, username?: string) => void,
 }
 
 const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
@@ -37,7 +40,7 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
     });
 
     const onSubmit: SubmitHandler<AuthInputs> = (data) => {
-        onFormSubmit(data.email, data.password)
+        onFormSubmit(data.email, data.password, data.username)
     };
 
 
@@ -49,6 +52,27 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
 
                 <div className={styles.logo}>Teamlead </div>
                 <h1 className={styles.title}>{title}</h1>
+
+                {title === AUTH_TITLES.SIGN_UP && (
+                    <div className={styles.formGroup}>
+                        <label htmlFor='username' className={styles.label}>Your name</label>
+
+                        <input 
+                            type='text' 
+                            id='username' 
+                            {...register('username', { 
+                                required: true,
+                                minLength: { value: 3, message: "Min 3 characters" }
+                            })} 
+                            placeholder='Your name' 
+                            className={styles.input}
+                        />
+                        
+                        {errors.username && <span className={styles.error}>{errors.username.message}</span>}
+                    </div>
+
+                )}
+
                 
 
                 <div className={styles.formGroup}>
@@ -57,7 +81,9 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
                     <input 
                         type='email' 
                         id='email' 
-                        {...register('email', {required: true})} 
+                        {...register('email', {
+                            required: true,
+                        })} 
                         placeholder='your@email.com' 
                         className={styles.input}
                     />
@@ -83,14 +109,25 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
 
                 <Divider>or</Divider>
                 <p className='text-center'>
-                    {title === 'Sign in' ? `Don't have an account?` : 'Already have an account?' } {''}
+                    {title === AUTH_TITLES.SIGN_IN? `Don't have an account?` : 'Already have an account?' } {''}
 
-                    <Link to={title === 'Sign in'? ROUTE_PATHS.SIGN_UP : ROUTE_PATHS.SIGN_IN} className='text-blue-600'>
-                        {title==='Sign in'? 'Get started' : 'Sign in'}
+                    <Link to={title === AUTH_TITLES.SIGN_IN? ROUTE_PATHS.SIGN_UP : ROUTE_PATHS.SIGN_IN} className='text-blue-600'>
+                        {title=== AUTH_TITLES.SIGN_IN? 'Get started' : 'Sign in'}
                     </Link>
 
                 </p>
+
+                {title === AUTH_TITLES.SIGN_IN && (
+                    <Alert 
+                        title='Test account' 
+                        severity='info'
+                    >
+                        <p>Login: <span className='font-bold'>test@test.com</span></p>
+                        <p>Password:<span className='font-bold'>Test1234</span></p>
+                    </Alert>
+                )}
             </form>
+
         </div>
     )
 

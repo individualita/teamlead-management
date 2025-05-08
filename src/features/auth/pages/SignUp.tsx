@@ -10,6 +10,7 @@ import { useAuthStore } from '../store/authStore';
 //constants
 import { FIREBASE_AUTH_ERRORS } from '../constants/firebaseAuthErrors';
 import { ROUTE_PATHS } from '../../../shared/constants/routePaths';
+import { AUTH_TITLES } from '../constants/authTitles';
 
 //services
 import { executeAuthAction } from '../services/executeAuthAction';
@@ -27,12 +28,12 @@ const SignUp = () => {
 
 
 
-    const handleRegister = async (email: string, password: string) => {
+    const handleRegister = async ( email: string, password: string, username?: string) => {
         try {
             setErrorMessage('');
             setLoading(true);
 
-            const user = await executeAuthAction(createUserWithEmailAndPassword, auth, email, password);
+            const user = await executeAuthAction(createUserWithEmailAndPassword, auth, email, password, username);
   
             setUser(user);
 
@@ -55,7 +56,7 @@ const SignUp = () => {
         <>
             <h1>Sign Up page!</h1>
 
-            <AuthForm title={'Sign Up'} onFormSubmit={handleRegister} /> 
+            <AuthForm title={AUTH_TITLES.SIGN_UP} onFormSubmit={handleRegister} /> 
         </>
     )
 }
