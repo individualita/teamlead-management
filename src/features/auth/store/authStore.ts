@@ -56,7 +56,7 @@ export const useAuthStore = create<UserState>((set) => ({
                 const token = await currentUser.getIdToken();
 
                 set({
-                    user: {id: currentUser.uid, username: currentUser.displayName, email: currentUser.email, token},
+                    user: {id: currentUser.uid, username: currentUser.displayName, email: currentUser.email, photoURL: currentUser.photoURL,token},
                     isLoading: false, 
                     errorMessage: null,
                     isAuthInitialized: true,

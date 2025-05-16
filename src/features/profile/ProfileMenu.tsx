@@ -41,7 +41,7 @@ const ProfileMenu = () => {
         <div  className='relative' ref={profileRef}>
 
             <div className='w-11 h-11 cursor-pointer flex justify-center items-center' onClick={toggleOpen}>
-                <Avatar />
+                <Avatar src={user.photoURL} username={user.username} />
             </div>
 
             <ProfileDropdown 

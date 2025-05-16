@@ -11,7 +11,7 @@ import { OUTLET_TAB } from '../../../constants/outletTab';
 
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
-import TabsHeader  from '../../tabsHeader/TabsHeader';
+import TabsHeader  from '../../tabs/TabsHeader';
 import EmployeeProfile from '../../EmployeeProfile';
 
 
@@ -19,11 +19,11 @@ import EmployeeProfile from '../../EmployeeProfile';
 const MainLayout = () => {
 
     const { employees } = useEmployeeStore();
-    const { openTabs, activeTab, setActiveTab } = useTabsStore();
+    const { openTabs, activeTab, setActiveTab, closeTab } = useTabsStore();
 
     const { pathname } = useLocation();
     
-    const activeEmployee = employees.find(emp => emp._id === activeTab);
+    const activeEmployee = employees.find(emp => emp.id === activeTab);
 
     return (
         <div className='h-dvh'>
@@ -62,6 +62,7 @@ const MainLayout = () => {
                             openTabs={openTabs} 
                             activeTab={activeTab} 
                             onTabSelect={setActiveTab}
+                            onCloseTab={closeTab}
                         />
 
                     </div>

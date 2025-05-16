@@ -19,8 +19,6 @@ import { executeAuthAction } from '../services/executeAuthAction';
 import AuthForm from '../components/authForm/AuthForm';
 
 
-//test@gmail.com
-//Test1234
 
 const SignIn = () => {
 

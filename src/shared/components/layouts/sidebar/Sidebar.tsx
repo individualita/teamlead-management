@@ -36,10 +36,3 @@ const Sidebar = () => {
 
 export default Sidebar;
 
-
-/* 
-ul {
-    align-items: flex-end;
-
-}
-*/

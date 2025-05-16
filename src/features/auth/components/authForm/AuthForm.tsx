@@ -62,7 +62,7 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
                             id='username' 
                             {...register('username', { 
                                 required: true,
-                                minLength: { value: 3, message: "Min 3 characters" }
+                                minLength: { value: 3, message: "Min 3 characters" },                                
                             })} 
                             placeholder='Your name' 
                             className={styles.input}
@@ -82,12 +82,15 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
                         type='email' 
                         id='email' 
                         {...register('email', {
-                            required: true,
+                            required: {
+                                value: true,
+                                message: 'Email is required'
+                            },
                         })} 
                         placeholder='your@email.com' 
                         className={styles.input}
                     />
-                    {errors.email && <span className={styles.error}>Email is required</span>}
+                    {errors.email && <span className={styles.error}>{errors.email.message}</span>}
                 </div>
 
                 <div className={styles.formGroup}>
@@ -95,17 +98,24 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
                     <input 
                         type='password' 
                         id='password' 
-                        {...register('password', {required: true})} 
+                        {...register('password', {
+                            required: true,
+                            minLength: { value: 3, message: "Min 5 characters" }
+                        })} 
                         placeholder='••••••' 
                         className={styles.input}
                         autoComplete='current-password'
                     />
-                    {errors.password && <span className={styles.error}> Password is required</span>}
+                    {errors.password && <span className={styles.error}> {errors.password.message}</span>}
                 </div>
 
 
 
-                <button type='submit' className={styles.button}>{title.toUpperCase()}</button>
+                <button 
+                    type='submit' 
+                    className={styles.button}>
+                        {title.toUpperCase()}
+                </button>
 
                 <Divider>or</Divider>
                 <p className='text-center'>

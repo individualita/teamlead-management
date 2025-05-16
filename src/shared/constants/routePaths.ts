@@ -6,4 +6,5 @@ export enum ROUTE_PATHS {
     ACTIVITY = 'activity',
     CHAT = 'chat',
     EMPLOYEES_PROFILE = '/employee/:employeeId',
+    SETTINGS = 'settings'
 }

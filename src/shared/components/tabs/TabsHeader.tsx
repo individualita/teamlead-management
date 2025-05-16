@@ -1,7 +1,5 @@
 import { useLocation } from 'react-router-dom';
 
-import { useTabsStore } from '../../stores/tabsStore';
-
 import { Employee } from '../../types/employee';
 
 import { getPageTitle } from '../../utils/getPageTitle';
@@ -15,14 +13,13 @@ interface TabsHeaderProps {
     openTabs: Employee[],
     activeTab: string,
     onTabSelect: (tabId: string) => void,
+    onCloseTab: (employee: Employee) => void,
 
 }
 
-const TabsHeader = ({openTabs, activeTab, onTabSelect}: TabsHeaderProps) => {
+const TabsHeader = ({openTabs, activeTab, onTabSelect, onCloseTab}: TabsHeaderProps) => {
 
-    const {closeTab} = useTabsStore();
     const { pathname } = useLocation();
-
 
     return (
         
@@ -42,12 +39,12 @@ const TabsHeader = ({openTabs, activeTab, onTabSelect}: TabsHeaderProps) => {
             {/* Render dynamic employee tabs */}
             {openTabs.map(tab => (
                 <TabsItem 
-                    key={tab._id} 
-                    tabId={tab._id} 
+                    key={tab.id} 
+                    tabId={tab.id} 
                     tabName={tab.name} 
-                    isActive={tab._id === activeTab} 
+                    isActive={tab.id === activeTab} 
                     onSelect={onTabSelect}
-                    onClose={() => closeTab(tab)}
+                    onClose={() => onCloseTab(tab)}
                 />
             ))}
 

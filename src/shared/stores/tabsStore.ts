@@ -26,15 +26,15 @@ export const useTabsStore = create<TabsState>((set => ({
 
     openTab: (employee) => 
         set(state => ({
-            openTabs: state.openTabs.some(item => item._id === employee._id) ? state.openTabs : [...state.openTabs, employee],
-            activeTab: employee._id,
+            openTabs: state.openTabs.some(item => item.id === employee.id) ? state.openTabs : [...state.openTabs, employee],
+            activeTab: employee.id,
         })),
         
 
     closeTab: (employee) =>
         set(state => ({
-            openTabs: state.openTabs.filter(item => item._id !== employee._id),
-            activeTab: state.activeTab === employee._id? OUTLET_TAB: state.activeTab
+            openTabs: state.openTabs.filter(item => item.id !== employee.id),
+            activeTab: state.activeTab === employee.id? OUTLET_TAB: state.activeTab
         }))
 
 
