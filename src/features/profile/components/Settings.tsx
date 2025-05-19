@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuthStore } from '../../auth/store/authStore';
 
 import { FaPencil } from 'react-icons/fa6';
+
+import { TextField, Button } from '@mui/material';
+
 
 import { getAuth, deleteUser, updateProfile  } from 'firebase/auth';
 
@@ -21,7 +24,7 @@ const Settings = () => {
 
     console.log('auth current user', auth.currentUser);
 
-    const updateUserName = async () => {
+    const handleUpdateUserName = async () => {
 
         if (!user) return;
 
@@ -49,7 +52,7 @@ const Settings = () => {
 
     };
 
-    const updateUserPhoto = async () => {
+    const handleUpdateUserPhoto = async () => {
 
         if (!user) return;
         try {
@@ -77,15 +80,21 @@ const Settings = () => {
         setIsPhotoChanging(true);
     }
 
+    //загружаем чтобы value было сразу же username. 
+    useEffect(() => {
+        setValue(user?.username || 'Anonymous');
+    }, []);
 
     if (!user) return <div>No user</div>;
 
-    return (
-        <div>
-            <h1>change picture </h1>
+    console.log('value:', value)
 
-            
-            <div className='flex flex-col justify-center text-center'>
+
+
+    return (
+        <div className='flex flex-col items-center gap-5'>
+
+            <header aria-labelledby='profile-heading' className='flex flex-col gap-3'>
 
                 <div className='m-auto w-24 h-24 rounded-full bg-white shadow-md border-2 border-gray-300 hover:scale-110 transition-transform duration-300 flex items-center justify-center'>
                     <img 
@@ -96,126 +105,147 @@ const Settings = () => {
 
                 </div>
 
-                <span>{user?.username || 'Anonymous'}</span>
+                <form onSubmit={(e) => e.preventDefault()}className='flex flex-col'>
 
-                <div className='flex gap-3 justify-center mt-10'>
+                    <div className='flex gap-1 items-center rounded-md relative'>
 
-
-                    <button 
-                        className='border border-gray-600 bg-white p-2 cursor-pointer rounded-md'
-                        onClick={handleChangeName}
-                    >
-                        Change name
-                    </button>
-
-                    <button
-                        className='border border-gray-600 bg-gray-200 p-2 cursor-pointer rounded-md '
-                        onClick={() => setIsPhotoChanging(true)}
-                    >
-                        Change picture
-                    
-                    </button>
-
-                    <button className='border bg-red-400 p-2 cursor-pointer rounded-md'>Delete account</button>
-
-
-                </div>
-  
-
-            </div>
+                        <input 
+                            type='text'
+                            value={value}
+                            name='username' 
+                            onChange={(e) => setValue(e.target.value)}
+                            className={`
+                                ${isNameChanging? 'border': 'border-none'}
+                                border-gray-300 rounded-lg px-2 py-2
+                                text-base
+                                focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-transparent
+                                hover:border-gray-400
+                                disabled:opacity-80 disabled:text-lg disabled:font-bold
+                                placeholder-gray-400
+                                transition-all duration-200
+                            `}
+                            placeholder='Enter your name'
+                            disabled={!isNameChanging}
+                        />
 
 
+                        {isNameChanging? (
+                            <>
 
-            
-            {/*<div className='flex flex-col mt-6'>
+                                <Button
+                                    type='submit' 
+                                    onClick={handleUpdateUserName}
+                                    variant='contained' 
+                                    color='success' 
+                                    size='medium'
+                                    disabled={isLoading}
+                                >
+                                    {isLoading? 'Saving...' : 'Save'}
+                                </Button>
 
-                <div className='flex gap-7'>
-                    <p>Change username</p>
-                    <p>{user?.username || 'Anonymous'}</p>
-                    <button className='cursor-pointer'><FaPencil /> </button>
-                </div>
-
-                <div className='flex gap-7'>
-                    <p>Picture</p>
-                    <p>{user?.username || 'Anonymous'}</p>
-                    <button className='cursor-pointer'><FaPencil /> </button>
-                </div>
-
-
-        
-            </div>*/}
-
+                                <Button
+                                    type='button' 
+                                    onClick={() => setIsNameChanging(false)} 
+                                    variant='text' 
+                                    color='warning' 
+                                    size='medium'>
+                                        Cancel
+                                </Button>
+                            </>
 
 
 
+                        ) : (
+                            
+                            <button
+                                type='button' 
+                                className='absolute right-2 cursor-pointer'
+                                onClick={handleChangeName}
+                            >
+                                <FaPencil 
+                                    className='text-base'
+                                    title='Edit name'
+                                /> 
+                            </button>
+
+                        )}
 
 
-            <br />
-            <button
-                className='border border-gray-600 bg-gray-200 p-2 cursor-pointer rounded-md'
-                onClick={() => setIsPhotoChanging(true)}
-            >
-                Change picture
+                    </div>
+
+                </form>
                 
-            </button>
-            <button onClick={() => setIsPhotoChanging(false)}>Cancel</button>
-            <br />
+                
 
-            <div>value: {value}</div>
 
-            {isNameChanging && (
 
-                <div className='border border-amber-900'>
+            </header>
 
-                    <input 
-                        type='text'
-                        value={value}
-                        name='username' 
-                        onChange={(e) => setValue(e.target.value)}
-                        className='border border-amber-950' 
-                        placeholder='Enter your name'
-                    />
-                    <button 
-                        className='bg-green-300 p-2 cursor-pointer'
-                        onClick={updateUserName}
+
+            <section className='flex'>
+                <form aria-label='Change profile picture' onSubmit={(e) => e.preventDefault()}>
+                    
+                    <div className='flex gap-3'>
+                        <input 
+                            type='text'
+                            value={photoURL} 
+                            name='photourl'
+                            onChange={(e) => setPhotoURL(e.target.value)}
+                            className={`
+                                border border-gray-300 rounded-lg px-2 py-2
+                                text-base
+                                focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-transparent
+                                hover:border-gray-400
+                                placeholder-gray-400
+                                transition-all duration-200
+                            `}
+                            placeholder='Past image link here'
+                        />
+
+                        <Button
+                            type='submit' 
+                            onClick={handleUpdateUserName}
+                            variant='contained' 
+                            color='success' 
+                            size='small'
+                            disabled={isLoading}
+                        >
+                            {isLoading? 'Changing...' : 'Change'}
+                        </Button>
+                        
+                        <button
+                            type='button'
+                            className='
+                                p-2 bg-gray-200 rounded-md uppercase text-[13px] cursor-pointer transition
+                              hover:bg-gray-300 '
+                            onClick={() => setIsPhotoChanging(true)}
+                        >
+                            {isLoading?'Changing...' : 'Default URL'}
+                        
+                        </button>
+
+
+                    </div>
+
+                    {/*<button
+                        type='submit' 
+                        className='px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transitioncursor-pointer'
+                        onClick={handleUpdateUserPhoto}
                         disabled={isLoading}
                         >
                             {isLoading? 'Saving...' : 'Save'}
-                    </button>
+                    </button>*/}
 
-                </div>
-            )}
+                    {/* <button
+                    >
+                        default image/link?
+                    </button> */}
 
-            {isPhotoChanging && (
+                </form>
 
-                <div className='border border-amber-300'>
+            </section>
 
-                    <input 
-                        type='text'
-                        value={photoURL} 
-                        name='photourl'
-                        onChange={(e) => setPhotoURL(e.target.value)}
-                        className='border border-amber-950 p-1' 
-                        placeholder='Past image link here'
-                    />
 
-                    <button 
-                        className='bg-green-300 p-2 cursor-pointer'
-                        onClick={updateUserPhoto}
-                        disabled={isLoading}
-                        >
-                            {isLoading? 'Saving...' : 'Save'}
-                    </button>
-
-                </div>
-
-            )}
-            
-
-        
-            <br />
-            <br />
-            <button>go back!</button>
         </div>
     )
 }
