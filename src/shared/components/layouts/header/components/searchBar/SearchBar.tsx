@@ -35,7 +35,9 @@ const SearchBar = () => {
 
     return (
         <div className='relative flex items-center'>
-            <CiSearch className='absolute left-2 w-5'/>
+            <CiSearch 
+                className='h-4 w-5 absolute left-2'
+            />
             
             <input 
                 name='search' 

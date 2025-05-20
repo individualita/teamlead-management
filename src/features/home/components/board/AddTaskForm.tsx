@@ -69,8 +69,6 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className='bg-white rounded-lg shadow-sm p-4 flex flex-col gap-4'>
 
-   
-
             <TextField
                 {...register('title', {required: true})}
                 type='text' 

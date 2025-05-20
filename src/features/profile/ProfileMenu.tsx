@@ -40,7 +40,7 @@ const ProfileMenu = () => {
     return (
         <div  className='relative' ref={profileRef}>
 
-            <div className='w-11 h-11 cursor-pointer flex justify-center items-center' onClick={toggleOpen}>
+            <div className='w-10 h-10 cursor-pointer flex justify-center items-center' onClick={toggleOpen}>
                 <Avatar src={user.photoURL} username={user.username} />
             </div>
 

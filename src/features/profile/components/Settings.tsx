@@ -1,30 +1,34 @@
-import { useState, useEffect } from 'react';
-import { useAuthStore } from '../../auth/store/authStore';
+import { useState, useEffect, FormEvent } from 'react';
+import { updateProfile  } from 'firebase/auth';
 
+import { Button } from '@mui/material';
 import { FaPencil } from 'react-icons/fa6';
 
-import { TextField, Button } from '@mui/material';
-
-
-import { getAuth, deleteUser, updateProfile  } from 'firebase/auth';
+import { auth } from '../../../shared/config/firebaseConfig';
+import { useAuthStore } from '../../auth/store/authStore';
 
 import { DEFAULT_URL } from '../../../shared/constants/defaultImageUrl';
-import { auth } from '../../../shared/config/firebaseConfig';
+
+import Avatar from './Avatar';
+
 
 
 const Settings = () => {
 
-    const [value, setValue] = useState('');
-    const [isNameChanging, setIsNameChanging] = useState(false);
-    const [isPhotoChanging, setIsPhotoChanging] = useState(false);
+    const [name, setName] = useState('');
+    const [isNameUpdating, setIsNameUpdating] = useState(false);
+
     const [photoURL, setPhotoURL] = useState('');
+    const [isPhotoUpdating, setIsPhotoUpdating] = useState(false);
+
     const [isLoading, setIsLoading] = useState(false);
 
     const { user, setUser } = useAuthStore();
 
-    console.log('auth current user', auth.currentUser);
 
-    const handleUpdateUserName = async () => {
+    const handleUpdateUserName = async (e: FormEvent) => {
+
+        e.preventDefault();
 
         if (!user) return;
 
@@ -32,63 +36,62 @@ const Settings = () => {
 
         try {
             await updateProfile(auth.currentUser!, {
-                displayName: value,
+                displayName: name,
             })
 
             // Вручную обновляем Zustand-стор, так как onAuthStateChanged не срабатывает
             setUser({
                 ...user,
-                username: value,
+                username: name,
             });
-            setValue('');
-            setIsNameChanging(false);
+            setName(name);
 
         } catch (error) {
             console.error('Failed to update profile:', error);
             throw error;
         } finally {
             setIsLoading(false);
+            setIsNameUpdating(false);
+
         }
 
     };
 
-    const handleUpdateUserPhoto = async () => {
+    const handleUpdateUserPhoto = async (e: FormEvent) => {  
 
+        e.preventDefault();
+        
         if (!user) return;
+
+        setIsLoading(true);
+        setIsPhotoUpdating(true);
+
         try {
             await updateProfile(auth.currentUser!, {
                 photoURL
             })
 
-            setUser({...user, photoURL })
+            setUser({...user, photoURL });
+            setPhotoURL('');
 
         } catch (error) {
             console.error('Failed to update profile:', error);
             throw error;
         } finally {
             setIsLoading(false);
+            setIsPhotoUpdating(false);
         }
     }
 
 
-    const handleChangeName = () => {
-        setIsNameChanging(true);
-        setValue(user?.username || '');
-    };
-
-    const handleChangePhoto = () => {
-        setIsPhotoChanging(true);
-    }
-
     //загружаем чтобы value было сразу же username. 
     useEffect(() => {
-        setValue(user?.username || 'Anonymous');
-    }, []);
+        setName(user?.username || '');
+    }, [user]);
 
-    if (!user) return <div>No user</div>;
-
-    console.log('value:', value)
-
+    if (!user) {
+        return <p className='text-center text-red-500'>No user signed in.</p>;
+    }
 
 
     return (
@@ -97,70 +100,72 @@ const Settings = () => {
             <header aria-labelledby='profile-heading' className='flex flex-col gap-3'>
 
                 <div className='m-auto w-24 h-24 rounded-full bg-white shadow-md border-2 border-gray-300 hover:scale-110 transition-transform duration-300 flex items-center justify-center'>
-                    <img 
-                        src={user?.photoURL ||DEFAULT_URL } 
-                        alt={user?.username || 'Anonymous'}
-                        className='w-4/5 h-4/5' 
+                    <Avatar 
+                        src={user?.photoURL}
+                        username={user?.username}  
                     />
-
                 </div>
 
-                <form onSubmit={(e) => e.preventDefault()}className='flex flex-col'>
-
-                    <div className='flex gap-1 items-center rounded-md relative'>
+                <form 
+                    onSubmit={handleUpdateUserName} 
+                    className='flex flex-col'
+                >
+                    <div className='flex gap-3 items-center rounded-md relative'>
 
                         <input 
                             type='text'
-                            value={value}
+                            value={name}
                             name='username' 
-                            onChange={(e) => setValue(e.target.value)}
+                            onChange={(e) => setName(e.target.value)}
                             className={`
-                                ${isNameChanging? 'border': 'border-none'}
+                                ${isNameUpdating? 'border': 'border-none'}
                                 border-gray-300 rounded-lg px-2 py-2
                                 text-base
                                 focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-transparent
                                 hover:border-gray-400
                                 disabled:opacity-80 disabled:text-lg disabled:font-bold
-                                placeholder-gray-400
+                                placeholder-gray-400 
                                 transition-all duration-200
                             `}
                             placeholder='Enter your name'
-                            disabled={!isNameChanging}
+                            disabled={!isNameUpdating}
+                            required
                         />
 
 
-                        {isNameChanging? (
-                            <>
+                        {isNameUpdating? (
+                            <div className='flex gap-3'>
 
                                 <Button
                                     type='submit' 
-                                    onClick={handleUpdateUserName}
                                     variant='contained' 
                                     color='success' 
                                     size='medium'
                                     disabled={isLoading}
                                 >
-                                    {isLoading? 'Saving...' : 'Save'}
+                                    {isLoading && !isPhotoUpdating? 'Saving...' : 'Save'}
                                 </Button>
 
                                 <Button
                                     type='button' 
-                                    onClick={() => setIsNameChanging(false)} 
+                                    onClick={() => {
+                                        setIsNameUpdating(false);
+                                        setName(user.username || '')
+                                    }} 
                                     variant='text' 
                                     color='warning' 
-                                    size='medium'>
+                                    size='medium'
+                                >
                                         Cancel
                                 </Button>
-                            </>
-
-
+                            </div>
 
                         ) : (
                             
                             <button
                                 type='button' 
                                 className='absolute right-2 cursor-pointer'
-                                onClick={handleChangeName}
+                                onClick={() => setIsNameUpdating(true)}
                             >
                                 <FaPencil 
                                     className='text-base'
@@ -175,15 +180,13 @@ const Settings = () => {
 
                 </form>
                 
-                
-
-
-
             </header>
 
-
             <section className='flex'>
-                <form aria-label='Change profile picture' onSubmit={(e) => e.preventDefault()}>
+                <form 
+                    aria-label='Change profile picture' 
+                    onSubmit={handleUpdateUserPhoto}
+                >
                     
                     <div className='flex gap-3'>
                         <input 
@@ -196,21 +199,22 @@ const Settings = () => {
                                 text-base
                                 focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-transparent
                                 hover:border-gray-400
-                                placeholder-gray-400
+                                placeholder-gray-400 placeholder:text-sm
                                 transition-all duration-200
                             `}
                             placeholder='Past image link here'
+                            required
                         />
 
                         <Button
                             type='submit' 
-                            onClick={handleUpdateUserName}
                             variant='contained' 
                             color='success' 
                             size='small'
                             disabled={isLoading}
+                            title='Change image'
                         >
-                            {isLoading? 'Changing...' : 'Change'}
+                            {isLoading && isPhotoUpdating?  'Changing...' : 'Change'}
                         </Button>
                         
                         <button
@@ -218,33 +222,18 @@ const Settings = () => {
                             className='
                                 p-2 bg-gray-200 rounded-md uppercase text-[13px] cursor-pointer transition
                               hover:bg-gray-300 '
-                            onClick={() => setIsPhotoChanging(true)}
+                            onClick={() => setPhotoURL(DEFAULT_URL)}
+                            title='Generate default link'
                         >
-                            {isLoading?'Changing...' : 'Default URL'}
-                        
+                            Default URL
                         </button>
 
 
                     </div>
 
-                    {/*<button
-                        type='submit' 
-                        className='px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transitioncursor-pointer'
-                        onClick={handleUpdateUserPhoto}
-                        disabled={isLoading}
-                        >
-                            {isLoading? 'Saving...' : 'Save'}
-                    </button>*/}
-
-                    {/* <button
-                    >
-                        default image/link?
-                    </button> */}
-
                 </form>
 
-            </section>
-
+            </section> 
 
         </div>
     )
