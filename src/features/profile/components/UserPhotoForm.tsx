@@ -1,57 +1,55 @@
-import { useState, useEffect, FormEvent } from 'react';
-import { updateProfile  } from 'firebase/auth';
+import { useState,  FormEvent } from 'react';
 
 import { Button } from '@mui/material';
-import { FaPencil } from 'react-icons/fa6';
-
-import { auth } from '../../../shared/config/firebaseConfig';
-import { useAuthStore } from '../../auth/store/authStore';
 
 import { DEFAULT_URL } from '../../../shared/constants/defaultImageUrl';
 
+import { useFirebaseProfileUpdate } from '../hooks/useFirebaseProfileUpdate';
 
 const UserPhotoForm = () => {
 
-
     const [photoURL, setPhotoURL] = useState('');
-    const [isPhotoUpdating, setIsPhotoUpdating] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    const [isLoading, setIsLoading] = useState(false);
+    const {update, isLoading} = useFirebaseProfileUpdate();
 
-    const { user, setUser } = useAuthStore();
-    
-    
-    const handleUpdateUserPhoto = async (e: FormEvent) => {  
+    const isValidUrl = (url: string): boolean => {
+        try {
+            new URL(url);
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    };
 
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        
-        if (!user) return;
 
-        setIsLoading(true);
+        setError(null);
+
+        if (!isValidUrl(photoURL)) {
+            setError('Invalid URL. Example: https://example.com');
+            return;
+        }
 
         try {
-            await updateProfile(auth.currentUser!, {
-                photoURL
-            })
-
-            setUser({...user, photoURL });
+            await update({photoURL});
             setPhotoURL('');
-
         } catch (error) {
-            console.error('Failed to update profile:', error);
-            throw error;
-        } finally {
-            setIsLoading(false);
+            console.error('Update failed', error);
+            setError('Failed to update. Please try again.');
         }
-    }
+    };
+
     
     return (
         <form 
             aria-label='Change profile picture' 
-            onSubmit={handleUpdateUserPhoto}
+            onSubmit={handleSubmit}
         >
             
-            <div className='flex gap-3'>
+            <div className='flex gap-3 relative'>
                 <input 
                     type='text'
                     value={photoURL} 
@@ -68,7 +66,7 @@ const UserPhotoForm = () => {
                     placeholder='Past image link here'
                     required
                 />
-
+                {error && <span className='absolute -bottom-7 text-red-500'>{error}</span>}
                 <Button
                     type='submit' 
                     variant='contained' 

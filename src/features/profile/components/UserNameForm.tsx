@@ -1,12 +1,8 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { Button } from '@mui/material';
-
-import { updateProfile } from 'firebase/auth';
-import { useAuthStore } from '../../auth/store/authStore';
-
 import { FaPencil } from 'react-icons/fa6';
 
-import { auth } from '../../../shared/config/firebaseConfig';
+import { useFirebaseProfileUpdate } from '../hooks/useFirebaseProfileUpdate';
 
 interface EditUserNameFormProps {
     currentName: string
@@ -15,48 +11,24 @@ const UserNameForm = ({ currentName}: EditUserNameFormProps) => {
 
     const [name, setName] = useState(currentName);
     const [isNameUpdating, setIsNameUpdating] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
 
-    const { user, setUser } = useAuthStore();
 
-    const handleUpdateUserName = async (e: FormEvent) => {
+    const {update, isLoading} = useFirebaseProfileUpdate();
 
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        if (!user) return;
+        await update({displayName: name});
+        setName(name);
+        setIsNameUpdating(false);
 
-        setIsLoading(true);
+    }
 
-        try {
-            await updateProfile(auth.currentUser!, {
-                displayName: name,
-            })
-
-            // Вручную обновляем Zustand-стор, так как onAuthStateChanged не срабатывает
-            setUser({
-                ...user,
-                username: name,
-            });
-            setName(name);
-
-        } catch (error) {
-            console.error('Failed to update profile:', error);
-            throw error;
-        } finally {
-            setIsLoading(false);
-            setIsNameUpdating(false);
-
-        }
-
-    };
-
-
-    if (!user) return;
 
     return (
 
         <form 
-            onSubmit={handleUpdateUserName} 
+            onSubmit={handleSubmit} 
             className='flex flex-col'
         >
             <div className='flex gap-3 items-center rounded-md relative'>
