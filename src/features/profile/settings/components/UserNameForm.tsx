@@ -30,6 +30,7 @@ const UserNameForm = ({ currentName}: EditUserNameFormProps) => {
         <form 
             onSubmit={handleSubmit} 
             className='flex flex-col'
+            aria-label='edit username'
         >
             <div className='flex gap-3 items-center rounded-md relative'>
 
@@ -63,6 +64,8 @@ const UserNameForm = ({ currentName}: EditUserNameFormProps) => {
                             color='success' 
                             size='medium'
                             disabled={isLoading}
+                            aria-label='Save username'
+                            title='Save username'
                         >
                             {isLoading? 'Saving...' : 'Save'}
                         </Button>
@@ -76,6 +79,8 @@ const UserNameForm = ({ currentName}: EditUserNameFormProps) => {
                             variant='text' 
                             color='warning' 
                             size='medium'
+                            aria-label='Cancel editing'
+                            title='Cancel editing'
                         >
                                 Cancel
                         </Button>
@@ -87,6 +92,7 @@ const UserNameForm = ({ currentName}: EditUserNameFormProps) => {
                         type='button' 
                         className='absolute right-2 cursor-pointer'
                         onClick={() => setIsNameUpdating(true)}
+                        aria-label='Edit username'
                     >
                         <FaPencil 
                             className='text-base'

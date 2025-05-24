@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef} from 'react';
 
-import { useAuthStore } from '../auth/store/authStore';
+import { useAuthStore } from '../../auth/store/authStore';
 
 //local components
-import Avatar from './components/Avatar';
+import Avatar from '../../../shared/components/Avatar';
 import ProfileDropdown from './components/profileDropdown/ProfileDropdown';
 
 

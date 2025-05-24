@@ -25,7 +25,11 @@ const Sidebar = () => {
                 <ul className={`flex flex-col gap-2 ${isSidebarOpen? '': 'items-end'}`}>
 
                     {SIDEBAR_LINKS.map(link => (
-                        <SidebarItem key={link.name} link={link} isOpen={isSidebarOpen}/>
+                        <SidebarItem 
+                            key={link.name} 
+                            link={link} 
+                            isOpen={isSidebarOpen}
+                        />
                     ))}
 
                 </ul>

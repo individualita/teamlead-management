@@ -2,7 +2,7 @@ import { useState,  FormEvent } from 'react';
 
 import { Button } from '@mui/material';
 
-import { DEFAULT_URL } from '../../../shared/constants/defaultImageUrl';
+import { DEFAULT_URL } from '../../../../shared/constants/defaultImageUrl';
 
 import { useFirebaseProfileUpdate } from '../hooks/useFirebaseProfileUpdate';
 
@@ -28,7 +28,7 @@ const UserPhotoForm = () => {
 
         setError(null);
 
-        if (!isValidUrl(photoURL)) {
+        if (!isValidUrl(photoURL.trim())) {
             setError('Invalid URL. Example: https://example.com');
             return;
         }
@@ -54,7 +54,10 @@ const UserPhotoForm = () => {
                     type='text'
                     value={photoURL} 
                     name='photourl'
-                    onChange={(e) => setPhotoURL(e.target.value)}
+                    onChange={(e) => {
+                        setPhotoURL(e.target.value);
+                        if(error) setError(null);
+                    }}
                     className={`
                         border border-gray-300 rounded-lg px-2 py-2
                         text-base
@@ -74,6 +77,7 @@ const UserPhotoForm = () => {
                     size='small'
                     disabled={isLoading}
                     title='Change image'
+                    aria-label='Change user image'
                 >
                     {isLoading?  'Changing...' : 'Change'}
                 </Button>
@@ -85,6 +89,7 @@ const UserPhotoForm = () => {
                         hover:bg-gray-300 '
                     onClick={() => setPhotoURL(DEFAULT_URL)}
                     title='Generate default link'
+                    aria-label='set default URL user image'
                 >
                     Default URL
                 </button>

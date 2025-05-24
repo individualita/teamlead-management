@@ -80,7 +80,6 @@ const Employees = () => {
 
     if (isLoading ) return <LoadingCircle />;
     if (isError) return <ErrorMessage message={error.message}/>
-    console.log(employees)
 
     return (
         <div className='employees'>

@@ -1,25 +1,16 @@
-import { useState, useEffect, FormEvent } from 'react';
-import { updateProfile  } from 'firebase/auth';
 
-import { Button } from '@mui/material';
-import { FaPencil } from 'react-icons/fa6';
-
-import { auth } from '../../../shared/config/firebaseConfig';
 import { useAuthStore } from '../../auth/store/authStore';
 
-import { DEFAULT_URL } from '../../../shared/constants/defaultImageUrl';
+import Avatar from '../../../shared/components/Avatar';
 
-import UserNameForm from './UserNameForm';
+import UserNameForm from './components/UserNameForm';
 
-import UserPhotoForm from './UserPhotoForm';
-
-import Avatar from './Avatar';
+import UserPhotoForm from './components/UserPhotoForm';
 
 
+const ProfileSettings = () => {
 
-const Settings = () => {
-
-    const { user, setUser } = useAuthStore();
+    const { user } = useAuthStore();
 
     if (!user) {
         return <p className='text-center text-red-500'>No user signed in.</p>;
@@ -43,13 +34,12 @@ const Settings = () => {
                 
             </header>
 
-            <section className='flex'>
+            <section aria-labelledby='photo-section-heading' className='flex'>
                 <UserPhotoForm />
-
             </section> 
 
         </div>
     )
 }
 
-export default Settings;
+export default ProfileSettings;

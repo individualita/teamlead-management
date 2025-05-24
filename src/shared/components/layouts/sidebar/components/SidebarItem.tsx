@@ -11,8 +11,9 @@ type SidebarItemProps = {
 }
 
 const SidebarItem = ({link, isOpen}: SidebarItemProps) => {
-
+    
     return (
+
         <li className={styles.item}>
 
             <NavLink 

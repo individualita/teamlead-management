@@ -9,7 +9,7 @@ import { useEmployeeStore } from '../../../../../stores/employeesStore';
 import { CSS_ANIMATION_DURATION } from '../../../../../constants/cssAnimationDuration';
 import { fadeTransitionClassNames } from '../../../../../constants/fadeTransitionClassNames';
 
-import SearchSuggestionItem from '../searchSuggestionItem/SearchSuggestionItem';
+import SearchSuggestionItem from './SearchSuggestionItem';
 
 import styles from './searchBar.module.css';
 

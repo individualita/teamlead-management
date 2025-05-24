@@ -18,7 +18,7 @@ import MainLayout from './shared/components/layouts/mainLayout/MainLayout';
 import Employees from './features/employees/Employees';
 import Activity from './features/activity/Activity';
 import Chat from './features/chat/Chat';
-import Settings from './features/profile/components/Settings';
+import ProfileSettings from './features/profile/settings/ProfileSettings';
 
 import './App.css';
 
@@ -76,7 +76,7 @@ const App = () => {
                                     <Route path={ROUTE_PATHS.EMPLOYEES} element={<Employees />} />
                                     <Route path={ROUTE_PATHS.ACTIVITY} element={<Activity />} />
                                     <Route path={ROUTE_PATHS.CHAT} element={<Chat />} />
-                                    <Route path={ROUTE_PATHS.SETTINGS} element={<Settings />} />
+                                    <Route path={ROUTE_PATHS.SETTINGS} element={<ProfileSettings />} />
 
                                 </Route>
 

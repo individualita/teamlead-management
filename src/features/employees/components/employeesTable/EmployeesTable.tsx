@@ -7,7 +7,7 @@ import { usePagination } from '../../../../shared/hooks/usePagination';
 
 import Table from '../../../../shared/components/table/Table';
 
-import TablePagination from '../../../../shared/components/TablePagination';
+import TablePagination from '../../../../shared/components/table/TablePagination';
 
 
 
