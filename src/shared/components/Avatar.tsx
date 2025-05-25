@@ -7,6 +7,7 @@ const Avatar = ({src, username}: {src: string | null, username: string | null}) 
             src={src || DEFAULT_URL} 
             alt={`${username || 'User'} image`} 
             className='h-[95%] w-[95%] rounded-full'
+            title={`${username}`}
         />
     )
 }
