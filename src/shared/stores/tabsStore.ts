@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { Employee } from '../types/employee';
+import { Employee } from '../types/employee.types';
 
 import { OUTLET_TAB } from '../constants/outletTab';
 

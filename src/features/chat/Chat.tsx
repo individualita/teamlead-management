@@ -3,12 +3,14 @@ import { useMessages } from './hooks/useMessages';
 import { useAuthStore } from '../auth/store/authStore';
 
 import { ErrorMessage } from '../../shared/components/ErrorMessage';
+import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
+
 import MessageList from './components/MessageList';
 import ChatForm from './components/ChatForm';
 
 const Chat = () => {
 
-    const {error, messages} = useMessages();
+    const {error, loading, messages} = useMessages();
 
     const {user} = useAuthStore();
 
@@ -18,6 +20,9 @@ const Chat = () => {
         return <p className='text-center text-red-500'>No user signed in.</p>;
     }
 
+    if (loading) return <LoadingCircle />;
+
+
     return (
         <div className='h-full bg-white rounded-xl shadow-lg'>
 
@@ -26,7 +31,7 @@ const Chat = () => {
 
                 <MessageList 
                     messages={sortedMessages} 
-                    user={user}
+                    currentUserId={user.id}
                 />
 
                 <ChatForm 

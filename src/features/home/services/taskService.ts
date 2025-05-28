@@ -1,7 +1,7 @@
 import {getDocs, addDoc, deleteDoc, updateDoc,  collection, doc } from 'firebase/firestore';
 import { db } from '../../../shared/config/firebaseConfig';
 
-import { Task, TaskStatus } from '../types/task';
+import { Task, TaskStatus } from '../types';
 
 export interface UpdateTaskStatus {
     taskId: string,

@@ -16,5 +16,3 @@ export interface Task {
 
 // Define the type for tasks grouped by status.
 export type TasksGroupedByStatus = Record<TaskStatus, Task[]>;
-
-

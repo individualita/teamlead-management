@@ -1,4 +1,4 @@
-import { TaskStatus } from '../types/task';
+import { TaskStatus } from '../types';
 
 import { TASK_STATUS_COLORS } from '../constants/tasks';
 

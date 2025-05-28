@@ -1,4 +1,4 @@
-import { Employee } from '../../../../../types/employee';
+import { Employee } from '../../../../../types/employee.types';
 
 import { useTabsStore } from '../../../../../stores/tabsStore';
 

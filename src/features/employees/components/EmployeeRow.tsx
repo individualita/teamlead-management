@@ -23,11 +23,13 @@ import { FaAngleUp } from 'react-icons/fa';
 import { FaAngleDown } from 'react-icons/fa6';
 import { HiDotsVertical } from 'react-icons/hi';
 
-import { Employee } from '../../../shared/types/employee';
+//types
+import { Employee } from '../../../shared/types';
 import { EmployeeFormData } from '../types/employeeFormData';
 
 import { useTabsStore } from '../../../shared/stores/tabsStore';
 
+//constants
 import { DATE_FORMAT } from '../../../shared/constants/dateFormat';
 import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
 import { employeesTableInputSx } from '../constants/styles';

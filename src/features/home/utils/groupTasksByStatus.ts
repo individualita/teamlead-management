@@ -1,6 +1,4 @@
-import { Task, TasksGroupedByStatus } from '../types/task';
-
-
+import { Task, TasksGroupedByStatus } from '../types';
 
 export const groupTasksByStatus = (tasks: Task[]) => {
 

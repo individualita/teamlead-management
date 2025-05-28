@@ -1,6 +1,6 @@
 import { useLocation } from 'react-router-dom';
 
-import { Employee } from '../../types/employee';
+import { Employee } from '../../types/employee.types';
 
 import { getPageTitle } from '../../utils/getPageTitle';
 

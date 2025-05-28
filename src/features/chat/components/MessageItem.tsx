@@ -1,22 +1,22 @@
-import { User } from '../../auth/types/user';
-import { Message } from '../hooks/useMessages';
+import { ChatMessage } from '../types';
 
 import Avatar from '../../../shared/components/Avatar';
 
 interface MessageItemProps {
-    user: User,
-    message: Message,
+    currentUserId: string,
+    message: ChatMessage,
 }
-const MessageItem = ({user, message}: MessageItemProps) => {
+const MessageItem = ({currentUserId, message}: MessageItemProps) => {
 
+    const isMine = message.authorId === currentUserId;
 
     return (
 
-        <div className={`flex gap-1 items-center mt-3 ${user?.id === message.id? 'self-end': 'self-start flex-row-reverse'}`}>
+        <div className={`flex gap-1 items-center mt-3 ${isMine? 'self-end': 'self-start flex-row-reverse'}`}>
 
-            <div className={`flex flex-col relative ${user?.id === message.id? 'items-end': 'items-start'}`}>
+            <div className={`flex flex-col relative ${isMine? 'items-end': 'items-start'}`}>
 
-                <p className={`p-3 rounded-xl ${user?.id === message.id? 'bg-blue-500 text-white': 'bg-gray-200 text-black'}`}>{message.text}</p>
+                <p className={`p-3 rounded-xl ${isMine? 'bg-blue-500 text-white': 'bg-gray-200 text-black'}`}>{message.text}</p>
 
                 <span className='text-[9px] text-gray-500 absolute -bottom-4'>
                     {new Date(message.timestamp).toLocaleTimeString()}

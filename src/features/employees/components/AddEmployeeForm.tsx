@@ -12,7 +12,8 @@ import Button from '@mui/material/Button';
 
 import { toast } from 'react-toastify';
 
-import { Employee } from '../../../shared/types/employee';
+//types
+import { Employee } from '../../../shared/types';
 
 //hooks
 import { useAddMutation } from '../../../shared/hooks/useAddMutation';

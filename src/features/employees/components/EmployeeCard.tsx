@@ -1,5 +1,4 @@
-import { Employee } from '../../../shared/types/employee';
-
+import { Employee } from '../../../shared/types';
 import { formatDate } from '../../../shared/utils/formatDate';
 
 

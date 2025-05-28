@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 import { TASK_PRIORITIES } from '../constants/tasks';
-import { TaskPriority } from '../types/task';
+import { TaskPriority } from '../types';
 
 const priorityValues = Object.values(TASK_PRIORITIES) as [TaskPriority, ...TaskPriority[]];
 

@@ -1,6 +1,7 @@
 import Draggable from '../../dnd/Draggable';
 
-import { TaskStatus, Task } from '../../types/task';
+//types
+import { TaskStatus, Task } from '../../types';
 import { TASK_STATUSES } from '../../constants/tasks';
 
 import EmptyState from '../../../../shared/components/EmptyState';

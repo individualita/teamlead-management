@@ -11,9 +11,11 @@ import {
     TableHead
 } from '@mui/material';
 
+//types
 import { EmployeeFormData } from '../types/employeeFormData';
-import { Employee } from '../../../shared/types/employee';
+import { Employee } from '../../../shared/types';
 
+//constants
 import { employeesTableInputSx } from '../constants/styles';
 import { COLLAPSIBLE_ROW_COLUMNS } from '../constants/tableColumns';
 

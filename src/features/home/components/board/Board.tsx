@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useTasksStore } from '../../stores/tasksStore';
 
 //types
-import { TaskStatus, TasksGroupedByStatus} from '../../types/task';
+import { TaskStatus, TasksGroupedByStatus } from '../../types';
 
 //constants + utils
 import { TASK_STATUSES } from '../../constants/tasks';

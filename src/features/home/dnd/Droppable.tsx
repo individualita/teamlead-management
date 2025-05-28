@@ -2,7 +2,7 @@ import { useDroppable } from '@dnd-kit/core';
 
 import { ReactNode } from 'react';
 
-import { TaskStatus } from '../types/task';
+import { TaskStatus } from '../types';
 
 interface DroppableProps {
     children: ReactNode,

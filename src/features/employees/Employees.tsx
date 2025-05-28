@@ -8,8 +8,7 @@ import { useEmployeesQuery } from './hooks/useEmployeesQuery';
 import { useDeleteMutation } from '../../shared/hooks/useDeleteMutation';
 import { useUpdateEmployee } from './hooks/useUpdateEmployee';
 
-import { Employee } from '../../shared/types/employee';
-
+import { Employee } from '../../shared/types';
 import { employeesService } from './services/employeesService';
 import { ALERT_TIMEOUT } from './constants/alertTimeout';
 

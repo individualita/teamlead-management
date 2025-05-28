@@ -11,7 +11,7 @@ import { taskService } from '../../services/taskService';
 
 // Internal modules: types and schemas
 import { taskSchema, TaskFormDataSchema } from '../../schema/tasks.schema';
-import { Task } from '../../types/task';
+import { Task } from '../../types';
 
 // Internal modules: constants
 import { addTaskFormInputSx } from '../../constants/styles';

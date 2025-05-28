@@ -1,9 +1,8 @@
-import { Task } from '../../types/task';
+import { Task } from '../../types';
 
 import { getTaskPriorityColor } from '../../utils/getTaskPriorityColor';
 
 import XButton from '../../../../shared/components/XButton';
-
 
 
 interface TaskCardProps {

@@ -1,22 +1,21 @@
+import { ChatMessage } from '../types';
+
 import EmptyChatState from './EmptyChatState';
 import MessageItem from './MessageItem';
 
-import { Message } from '../hooks/useMessages';
-import { User } from '../../auth/types/user';
-
 interface MessageListProps {
-    messages: Message[],
-    user: User
+    messages: ChatMessage[],
+    currentUserId: string,
 }
 
-const MessageList = ({messages, user}: MessageListProps) => {
+const MessageList = ({messages, currentUserId}: MessageListProps) => {
     return (
         <div className='chat py-4 flex flex-col gap-2'>
 
             {messages.length? messages.map((msg, index) => (
                 <MessageItem 
                     key={index}
-                    user={user} 
+                    currentUserId={currentUserId} 
                     message={msg} 
                 />
 

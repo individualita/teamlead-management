@@ -1,7 +1,7 @@
 // Task-related constants: statuses, priorities, and their visual styles
 
-import { TaskStatus } from '../types/task';
-import { TaskPriority } from '../types/task';
+import { TaskStatus, TaskPriority } from '../types';
+
 
 export const TASK_STATUSES = {
     TODO: 'To Do',

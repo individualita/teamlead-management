@@ -2,18 +2,15 @@ import { useState, useEffect } from 'react';
 import { database } from '../../../shared/config/firebaseConfig';
 import { ref,  onValue} from 'firebase/database';
 
-export interface Message {
-    id: string,
-    name: string,
-    photoURL: string,
-    text: string,
-    timestamp: number
-};
+import { useMessagesStore } from '../store/messagesStore';
 
+import { ChatMessage } from '../types';
 
 export const useMessages = () => {
-    const [messages, setMessages] = useState<Message[]>([]);
     const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(true);
+
+    const {messages, setMessages} = useMessagesStore();
 
     useEffect(() => {
 
@@ -23,11 +20,13 @@ export const useMessages = () => {
             setError(null);
 
             const val = snapshot.val();
-            const data: Message[] = val ? Object.values(val) : [];
+            const data: ChatMessage[] = val ? Object.values(val) : [];
             setMessages(data);
+            setLoading(false); 
         }, (error) => {
             setError('Failed to load messages. Please try again later.');
             console.error(error);
+            setLoading(false); 
         });
 
         //clear
@@ -35,5 +34,5 @@ export const useMessages = () => {
         
     }, []);
 
-    return {messages, error}
+    return {messages, error, loading }
 };

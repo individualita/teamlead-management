@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 
-import { Task } from '../types/task';
-import { TaskStatus } from '../types/task';
+import { Task, TaskStatus } from '../types';
 
 import { MOCK_TASKS } from '../mocks/mockTasks';
 
