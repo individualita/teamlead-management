@@ -1,6 +1,6 @@
 
 import { useMessages } from './hooks/useMessages';
-import { useAuthStore } from '../auth/store/authStore';
+import { useAuthStore } from '../../shared/stores/authStore';
 
 import { ErrorMessage } from '../../shared/components/ErrorMessage';
 import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';

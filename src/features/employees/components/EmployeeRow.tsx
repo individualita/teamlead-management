@@ -25,7 +25,7 @@ import { HiDotsVertical } from 'react-icons/hi';
 
 //types
 import { Employee } from '../../../shared/types';
-import { EmployeeFormData } from '../types/employeeFormData';
+import { EmployeeFormData } from '../types';
 
 import { useTabsStore } from '../../../shared/stores/tabsStore';
 

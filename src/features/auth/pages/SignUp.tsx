@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../../shared/config/firebaseConfig';
 
 //store
-import { useAuthStore } from '../store/authStore';
+import { useAuthStore } from '../../../shared/stores/authStore';
 
 //constants
 import { FIREBASE_AUTH_ERRORS } from '../constants/firebaseAuthErrors';

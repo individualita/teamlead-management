@@ -1,5 +1,5 @@
 
-import { useAuthStore } from '../../auth/store/authStore';
+import { useAuthStore } from '../../../shared/stores/authStore';
 
 import Avatar from '../../../shared/components/Avatar';
 

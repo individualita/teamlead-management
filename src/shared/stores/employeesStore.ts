@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-import { Employee } from '../types/employee.types';
+import { Employee } from '../types';
 
 import { EMPLOYEES } from '../mocks/employees';
 

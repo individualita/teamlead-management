@@ -4,7 +4,7 @@ import { useEffect, Suspense, lazy } from 'react';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './shared/clients/queryClient';
 
-import { useAuthStore } from './features/auth/store/authStore';
+import { useAuthStore } from './shared/stores/authStore';
 
 import { ROUTE_PATHS } from './shared/constants/routePaths';
 

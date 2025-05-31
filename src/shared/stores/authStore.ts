@@ -1,11 +1,10 @@
 import { create } from 'zustand';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 
-import { auth } from './../../../shared/config/firebaseConfig';
+import { auth } from '../config/firebaseConfig';
 
 //types
-import { User } from '../types/user';
-
+import { User } from '../types';
 
 interface UserState {
     user: User | null,

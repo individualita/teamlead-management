@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { useAuthStore } from '../../../auth/store/authStore';
+import { useAuthStore } from '../../../../shared/stores/authStore';
 
 import { ROUTE_PATHS } from '../../../../shared/constants/routePaths';
 

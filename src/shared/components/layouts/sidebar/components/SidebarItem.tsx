@@ -1,7 +1,8 @@
 
 import { NavLink } from 'react-router-dom';
-import { SidebarLink } from '../types/sidebar.types';
 
+//type
+import { SidebarLink } from '../types';
 import styles from './sideBarItem.module.css';
 
 

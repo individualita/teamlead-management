@@ -6,7 +6,7 @@ import { Alert, Divider } from '@mui/material';
 
 
 //store
-import { useAuthStore } from '../../store/authStore';
+import { useAuthStore } from '../../../../shared/stores/authStore';
 
 //constants
 import { ROUTE_PATHS } from '../../../../shared/constants/routePaths';

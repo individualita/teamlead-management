@@ -1,7 +1,7 @@
 import { Outlet, Navigate } from 'react-router-dom'
 
 //store
-import { useAuthStore } from '../../features/auth/store/authStore';
+import { useAuthStore } from '../stores/authStore';
 //constants 
 import { ROUTE_PATHS } from '../constants/routePaths';
 

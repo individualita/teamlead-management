@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef} from 'react';
 
-import { useAuthStore } from '../../auth/store/authStore';
+import { useAuthStore } from '../../../shared/stores/authStore';
 
 //local components
 import Avatar from '../../../shared/components/Avatar';

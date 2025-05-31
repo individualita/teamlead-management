@@ -1,8 +1,10 @@
 
-//types
 import { Auth, UserCredential, updateProfile } from 'firebase/auth';
-import { User } from '../types/user';
 
+//types
+import { User } from '../../../shared/types';
+
+//constants
 import { DEFAULT_URL } from '../../../shared/constants/defaultImageUrl';
 
 

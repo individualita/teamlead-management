@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 
 //types
-import { EmployeeFormData } from '../types/employeeFormData';
+import { EmployeeFormData } from '../types';
 import { Employee } from '../../../shared/types';
 
 //constants

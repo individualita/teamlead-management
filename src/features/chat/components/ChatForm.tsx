@@ -1,9 +1,10 @@
 import { useState, FormEvent } from 'react';
-import { ImTelegram } from 'react-icons/im';
 import { ref,  push} from 'firebase/database';
 import { database } from '../../../shared/config/firebaseConfig';
-import { User } from '../../auth/types/user';
+import { ImTelegram } from 'react-icons/im';
 
+//types
+import { User } from '../../../shared/types';
 
 interface ChatFormProps {
     user: User

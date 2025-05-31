@@ -19,7 +19,7 @@ import {
 //schema & types
 import { employeeSchema } from '../schema/employee.schema';
 import { Employee } from '../../../shared/types';
-import { EmployeeFormData } from '../types/employeeFormData';
+import { EmployeeFormData } from '../types';
 
 //Hooks
 import usePagination from '../hooks/usePagination';
