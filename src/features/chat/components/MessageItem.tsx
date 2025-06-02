@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import { ChatMessage } from '../types';
 
 import Avatar from '../../../shared/components/Avatar';
@@ -12,14 +14,13 @@ const MessageItem = ({currentUserId, message}: MessageItemProps) => {
 
     return (
 
-        <div className={`flex gap-1 items-center mt-3 ${isMine? 'self-end': 'self-start flex-row-reverse'}`}>
-
+        <li className={`flex gap-1 items-center mb-3 ${isMine? 'self-end': 'self-start flex-row-reverse'}`}>
             <div className={`flex flex-col relative ${isMine? 'items-end': 'items-start'}`}>
 
-                <p className={`p-3 rounded-xl ${isMine? 'bg-blue-500 text-white': 'bg-gray-200 text-black'}`}>{message.text}</p>
+                <p className={`p-3 rounded-xl ${isMine? 'bg-[var(--color-primary)] text-white': 'bg-gray-200 text-black'}`}>{message.text}</p>
 
                 <span className='text-[9px] text-gray-500 absolute -bottom-4'>
-                    {new Date(message.timestamp).toLocaleTimeString()}
+                    {dayjs(message.timestamp).format('h:mm A')}
                 </span>
 
             </div>
@@ -28,8 +29,7 @@ const MessageItem = ({currentUserId, message}: MessageItemProps) => {
                 <Avatar src={message.photoURL} username={message.name}/>
             </div>
 
-
-        </div>
+        </li>
 
     )
 

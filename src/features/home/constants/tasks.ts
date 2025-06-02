@@ -10,13 +10,13 @@ export const TASK_STATUSES = {
 } as const;
   
 export const TASK_STATUS_COLORS: Record<TaskStatus, string> = {
-    [TASK_STATUSES.TODO]: 'bg-indigo-600',
+    [TASK_STATUSES.TODO]: 'bg-[var(--color-primary)]',
     [TASK_STATUSES.IN_PROGRESS]: 'bg-orange-300',
     [TASK_STATUSES.DONE]: 'bg-green-600',
 };
   
 export const TASK_STATUS_BORDER_COLORS: Record<TaskStatus, string> = {
-    [TASK_STATUSES.TODO]: 'border-indigo-600',
+    [TASK_STATUSES.TODO]: 'border-[var(--color-primary)]',
     [TASK_STATUSES.IN_PROGRESS]: 'border-orange-300',
     [TASK_STATUSES.DONE]: 'border-green-600',
 };

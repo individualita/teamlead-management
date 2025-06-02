@@ -14,7 +14,7 @@ const Chat = () => {
 
     const {user} = useAuthStore();
 
-    const sortedMessages = [...messages.sort((a, b) => a.timestamp - b.timestamp)];
+    const sortedMessages = [...messages].sort((a, b) => a.timestamp - b.timestamp);
 
     if (!user) {
         return <p className='text-center text-red-500'>No user signed in.</p>;
@@ -24,7 +24,7 @@ const Chat = () => {
 
 
     return (
-        <div className='h-full bg-white rounded-xl shadow-lg'>
+        <div className='max-h-140 bg-white rounded-xl shadow-lg'>
 
             <div className='wrapper flex flex-col h-full justify-between p-3'>
                 {error && <ErrorMessage message={error}/> }
