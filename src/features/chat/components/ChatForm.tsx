@@ -1,11 +1,8 @@
 import { useState, FormEvent } from 'react';
-import { ref,  push} from 'firebase/database';
-import { database } from '../../../shared/config/firebaseConfig';
-import { ImTelegram } from 'react-icons/im';
-import { FaTelegramPlane } from "react-icons/fa";
+import { useSendMessage } from '../hooks/useSendMessage';
 
-
-import { toast } from 'react-toastify';
+import { FaTelegramPlane } from 'react-icons/fa';
+import { CircularProgress } from '@mui/material';
 
 
 //types
@@ -18,44 +15,18 @@ interface ChatFormProps {
 const ChatForm = ({user}: ChatFormProps) => {
 
     const [text, setText] = useState('');
-    const [loading, setLoading] = useState(false);
 
-    const notify = () => toast("Error!");
+    const {send, loading} = useSendMessage(user);
 
-    console.log('loading', loading);
-
-    const sendMessage = async () => {
-
-        setLoading(true);
-        const messagesRef = ref(database, 'messages');
-
-        try {
-            await push(messagesRef, {
-                text: text,
-                timestamp: Date.now(),
-                name: user?.username || 'Anonymous',
-                photoURL: user?.photoURL || null,
-                authorId: user?.id  
-            })
-
-        } catch (error) {
-            notify();
-            console.error('Error sending message:', error);
-            alert('Could not send your message. Please check your connection and try again.');
-
-        }  finally {
-            setLoading(false);
-        }
-
-
-    };
-
-    const handleSubmit = (e: FormEvent) => {
+    const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-        if (!text.trim()) return;
         
-        sendMessage();
-        setText('');
+        try {
+            await send(text);
+            setText('');
+        } catch {
+            alert('Could not send your message. Please check your connection and try again.');
+        }
 
     };
     
@@ -74,15 +45,17 @@ const ChatForm = ({user}: ChatFormProps) => {
                         placeholder='Type something...'
                     />
 
-
-                    <button
-                        type='submit' 
-                        className='p-1 hover:scale-105 transition duration-300 ease-in-out cursor-pointer disabled:opacity-50'
-                        disabled={loading || !text.trim()} 
-                    >
-                        <FaTelegramPlane  className='w-7 h-7 text-[var(--color-primary)]'/>
-                    </button>
-
+                    {loading? (
+                        <CircularProgress />
+                    ) : (
+                        <button
+                            type='submit' 
+                            className='p-1 hover:scale-105 transition duration-300 ease-in-out cursor-pointer disabled:opacity-50'
+                            disabled={loading || !text.trim()} 
+                        >
+                            <FaTelegramPlane  className='w-7 h-7 text-[var(--color-primary)]'/>
+                        </button>
+                    )}
 
                     
                 </div>

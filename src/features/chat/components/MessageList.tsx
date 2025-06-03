@@ -1,6 +1,5 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, Fragment } from 'react';
 import dayjs from 'dayjs';
-
 
 import { ChatMessage } from '../types';
 
@@ -14,12 +13,12 @@ interface MessageListProps {
 
 const MessageList = ({messages, currentUserId}: MessageListProps) => {
 
-    const chatRef  = useRef<HTMLUListElement>(null);
+    const endMessageRef  = useRef<HTMLUListElement>(null);
 
     useEffect(() => {
 
-        if (chatRef.current) {
-            const lastElement = chatRef.current.lastElementChild;
+        if (endMessageRef.current) {
+            const lastElement = endMessageRef.current.lastElementChild;
 
             lastElement?.scrollIntoView({behavior: 'smooth'});
         }
@@ -27,30 +26,23 @@ const MessageList = ({messages, currentUserId}: MessageListProps) => {
     }, [messages.length]);
 
 
-    //test
+    const messagesByDate = [...messages].reduce((acc: Record<string, ChatMessage[]>, message) => {
 
-    //отсортировать сообщения по дате??
+        const dateKey = dayjs(message.timestamp).format('DD-MMM-YYYY');
 
+        if (!acc[dateKey]) acc[dateKey] = [];
 
-    const sortedMessagesByDate = () => {
-        const timeStampsArray = messages.map(msg => msg.timestamp);
+        acc[dateKey].push(message);
 
-        const sortedByTimestamp = [...timeStampsArray].sort((a, b) => a - b);
+        return acc;
 
-        console.log(sortedByTimestamp);
-
-    };
-
-    sortedMessagesByDate();
-
-
-
+    }, {});
 
 
     return (
-        <ul className='chat py-4 flex flex-col gap-2 overflow-y-scroll h-120 max-h-120' ref={chatRef}>
+        <ul className='chat py-4 flex flex-col gap-2 overflow-y-scroll h-120 max-h-120' ref={endMessageRef}>
 
-            {messages.length? messages.map((msg, index) => (
+            {/* {messages.length? messages.map((msg, index) => (
                 <MessageItem 
                     key={index}
                     currentUserId={currentUserId} 
@@ -58,7 +50,24 @@ const MessageList = ({messages, currentUserId}: MessageListProps) => {
                 />
             )) : (
                 <EmptyChatState />
-            )}
+            )}  */}
+
+            {Object.entries(messagesByDate).map(([dateKey, dailyMessages]) => (
+                <Fragment key={dateKey}>
+                    <div className=' py-2 text-center text-sm opacity-60 select-none'>{dateKey}</div>
+
+                    {dailyMessages.map((msg, i) => (
+                        <MessageItem
+                            key={i}
+                            currentUserId={currentUserId}
+                            message={msg}
+                        />
+                    ))}
+
+                </Fragment>
+            ))}
+
+
         </ul>
     )
 }

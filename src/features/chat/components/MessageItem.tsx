@@ -14,12 +14,12 @@ const MessageItem = ({currentUserId, message}: MessageItemProps) => {
 
     return (
 
-        <li className={`flex gap-1 items-center mb-3 ${isMine? 'self-end': 'self-start flex-row-reverse'}`}>
-            <div className={`flex flex-col relative ${isMine? 'items-end': 'items-start'}`}>
+        <li className={`relative flex gap-1 items-center mb-3 ${isMine? 'self-end': 'self-start flex-row-reverse'}`}>
+            <div className={`flex flex-col ${isMine? 'items-end': 'items-start'}`}>
 
-                <p className={`p-3 rounded-xl ${isMine? 'bg-[var(--color-primary)] text-white': 'bg-gray-200 text-black'}`}>{message.text}</p>
+                <p className={`py-1 px-3 rounded-xl ${isMine? 'bg-[var(--color-primary)] text-white': 'bg-gray-200 text-black'}`}>{message.text}</p>
 
-                <span className='text-[9px] text-gray-500 absolute -bottom-4'>
+                <span className='text-[9px] text-gray-500 absolute top-8 right-1'>
                     {dayjs(message.timestamp).format('h:mm A')}
                 </span>
 
