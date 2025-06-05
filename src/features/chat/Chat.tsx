@@ -24,7 +24,7 @@ const Chat = () => {
 
 
     return (
-        <div className='max-h-140 bg-white rounded-xl shadow-lg'>
+        <div className='h-[70vh] bg-white rounded-xl shadow-lg'>
 
             <div className='wrapper flex flex-col h-full justify-between p-3'>
                 {error && <ErrorMessage message={error}/> }

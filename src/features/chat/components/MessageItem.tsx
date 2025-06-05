@@ -11,6 +11,8 @@ interface MessageItemProps {
 const MessageItem = ({currentUserId, message}: MessageItemProps) => {
 
     const isMine = message.authorId === currentUserId;
+    const formattedTime = dayjs(message.timestamp).format('h:mm A');
+
 
     return (
 
@@ -19,14 +21,17 @@ const MessageItem = ({currentUserId, message}: MessageItemProps) => {
 
                 <p className={`py-1 px-3 rounded-xl ${isMine? 'bg-[var(--color-primary)] text-white': 'bg-gray-200 text-black'}`}>{message.text}</p>
 
-                <span className='text-[9px] text-gray-500 absolute top-8 right-1'>
-                    {dayjs(message.timestamp).format('h:mm A')}
+                <span className='text-[8px] text-gray-500 absolute top-8 right-1'>
+                    {formattedTime}
                 </span>
 
             </div>
 
             <div className='h-8 w-8'>
-                <Avatar src={message.photoURL} username={message.name}/>
+                <Avatar 
+                    src={message.photoURL} 
+                    username={message.name}
+                />
             </div>
 
         </li>
