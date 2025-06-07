@@ -1,10 +1,13 @@
 import { useState,  FormEvent } from 'react';
-
 import { Button } from '@mui/material';
 
 import { DEFAULT_URL } from '../../../../shared/constants/defaultImageUrl';
 
+import { updateUserMessagesPhotoURL } from '../services/updateUserMessagesPhotoURL';
+
 import { useFirebaseProfileUpdate } from '../hooks/useFirebaseProfileUpdate';
+import { useAuthStore } from '../../../../shared/stores/authStore';
+
 
 const UserPhotoForm = () => {
 
@@ -12,6 +15,8 @@ const UserPhotoForm = () => {
     const [error, setError] = useState<string | null>(null);
 
     const {update, isLoading} = useFirebaseProfileUpdate();
+    
+    const {user} = useAuthStore();
 
     const isValidUrl = (url: string): boolean => {
         try {
@@ -25,6 +30,7 @@ const UserPhotoForm = () => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
+        if (!user) return;
 
         setError(null);
 
@@ -35,6 +41,8 @@ const UserPhotoForm = () => {
 
         try {
             await update({photoURL});
+            await updateUserMessagesPhotoURL(photoURL, user.id);
+
             setPhotoURL('');
         } catch (error) {
             console.error('Update failed', error);
@@ -42,7 +50,6 @@ const UserPhotoForm = () => {
         }
     };
 
-    
     return (
         <form 
             aria-label='Change profile picture' 
