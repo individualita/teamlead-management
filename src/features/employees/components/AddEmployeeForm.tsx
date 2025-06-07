@@ -18,7 +18,7 @@ import { Employee } from '../../../shared/types';
 //hooks
 import { useAddMutation } from '../../../shared/hooks/useAddMutation';
 
-import { employeesService } from '../services/employeesService';
+import { employeesService } from '../../../shared/services/employeesService';
 import { employeeSchema, EmployeeFormDataSchema } from '../schema/employee.schema';
 import { addEmployeeFormInputSx } from '../constants/styles';
 import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';

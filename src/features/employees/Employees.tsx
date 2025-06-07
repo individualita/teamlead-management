@@ -4,16 +4,13 @@ import { toast } from 'react-toastify';
 
 //hooks
 import { useEmployeeStore } from '../../shared/stores/employeesStore';
-import { useEmployeesQuery } from './hooks/useEmployeesQuery';
 import { useDeleteMutation } from '../../shared/hooks/useDeleteMutation';
 import { useUpdateEmployee } from './hooks/useUpdateEmployee';
 
 import { Employee } from '../../shared/types';
-import { employeesService } from './services/employeesService';
+import { employeesService } from '../../shared/services/employeesService';
 import { ALERT_TIMEOUT } from './constants/alertTimeout';
 
-import { ErrorMessage } from '../../shared/components/ErrorMessage';
-import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
 import EmployeeCard from './components/EmployeeCard';
 import UiEmployeesTable from './components/UiEmployeesTable';
 import AddEmployeeDrawer from './components/AddEmployeeDrawer';
@@ -25,19 +22,13 @@ const Employees = () => {
 
     const [alertMessage, setAlertMessage] = useState<string>('');
 
-    const {employees, setEmployees, deleteEmployee, updateEmployee} = useEmployeeStore();
+    const {employees, deleteEmployee, updateEmployee} = useEmployeeStore();
     const deleteEmployeeMutation = useDeleteMutation({
         mutationFn: employeesService.deleteEmployeeFromFirestore,
         queryKey: ['employees']
     });
     const updateEmployeeMutation = useUpdateEmployee()
 
-
-    const { isLoading, isError, data, error } = useEmployeesQuery();
-
-    useEffect(() => {
-        if (data) setEmployees(data);
-    }, [data]);
     
     //alert
     useEffect(() => {
@@ -77,8 +68,6 @@ const Employees = () => {
     };
 
 
-    if (isLoading ) return <LoadingCircle />;
-    if (isError) return <ErrorMessage message={error.message}/>
 
     return (
         <div className='employees'>

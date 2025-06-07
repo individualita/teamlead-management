@@ -1,7 +1,7 @@
 import {getDocs, addDoc, deleteDoc, updateDoc,  collection, doc } from 'firebase/firestore';
-import { db } from '../../../shared/config/firebaseConfig';
+import { db } from '../config/firebaseConfig';
 
-import { Employee } from '../../../shared/types';
+import { Employee } from '../types';
 
 export interface updateEmployee {
     employeeId: string,

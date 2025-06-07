@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { queryClient } from '../../../shared/clients/queryClient';
 
 
-import { employeesService, updateEmployee } from '../services/employeesService';
+import { employeesService, updateEmployee } from '../../../shared/services/employeesService';
 
 export const useUpdateEmployee = () => {
 

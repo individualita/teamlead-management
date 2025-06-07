@@ -1,29 +1,39 @@
+import { useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
-
 import { ToastContainer } from 'react-toastify';
 
+//hooks
 import { useEmployeeStore } from '../../../stores/employeesStore';
 import { useTabsStore } from '../../../stores/tabsStore';
+import { useEmployeesQuery } from '../../../hooks/useEmployeesQuery';
 
 import { getPageTitle } from '../../../utils/getPageTitle';
-
 import { OUTLET_TAB } from '../../../constants/outletTab';
 
+import { LoadingCircle } from '../loadingCircle/LoadingCircle';
+import { ErrorMessage } from '../../ErrorMessage';
 import Header from '../header/Header';
 import Sidebar from '../sidebar/Sidebar';
 import TabsHeader  from '../../tabs/TabsHeader';
 import EmployeeProfile from '../../../../features/employees/components/EmployeeProfile';
 
 
-
 const MainLayout = () => {
 
-    const { employees } = useEmployeeStore();
+    const {isLoading, isError, data: employees, error} = useEmployeesQuery();
+    const { setEmployees } = useEmployeeStore();
     const { openTabs, activeTab, setActiveTab, closeTab } = useTabsStore();
 
     const { pathname } = useLocation();
     
-    const activeEmployee = employees.find(emp => emp.id === activeTab);
+    const activeEmployee = employees?.find(emp => emp.id === activeTab);
+
+    useEffect(() => {
+        if (employees) setEmployees(employees);
+    }, [employees]);
+
+
+    if (isLoading ) return <LoadingCircle />;
 
     return (
         <div className='h-dvh'>
@@ -68,6 +78,7 @@ const MainLayout = () => {
                     </div>
 
                     <div className='container mx-auto pt-3'>
+                        {isError && <ErrorMessage message={error.message}/> }
                         {activeTab === OUTLET_TAB ? 
                             <Outlet /> 
                             : 
