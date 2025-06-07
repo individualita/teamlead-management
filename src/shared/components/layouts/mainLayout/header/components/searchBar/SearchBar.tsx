@@ -4,10 +4,10 @@ import { CSSTransition } from 'react-transition-group';
 //icons
 import { CiSearch } from 'react-icons/ci';
 
-import { useEmployeeStore } from '../../../../../stores/employeesStore';
+import { useEmployeeStore } from '../../../../../../stores/employeesStore';
 
-import { CSS_ANIMATION_DURATION } from '../../../../../constants/cssAnimationDuration';
-import { fadeTransitionClassNames } from '../../../../../constants/fadeTransitionClassNames';
+import { CSS_ANIMATION_DURATION } from '../../../../../../constants/cssAnimationDuration';
+import { fadeTransitionClassNames } from '../../../../../../constants/fadeTransitionClassNames';
 
 import SearchSuggestionItem from './SearchSuggestionItem';
 
@@ -34,7 +34,7 @@ const SearchBar = () => {
 
 
     return (
-        <div className='relative flex items-center'>
+        <div className='relative flex items-center '>
             <CiSearch 
                 className='h-4 w-5 absolute left-2'
             />
@@ -42,7 +42,7 @@ const SearchBar = () => {
             <input 
                 name='search' 
                 type='text' 
-                placeholder='Search...' 
+                placeholder='Search employee...' 
                 className={styles.input}
                 value={query}
                 onChange={(e) => setQuery(e.target.value) }

@@ -1,6 +1,6 @@
-import { Employee } from '../../../../../types/employee.types';
+import { Employee } from '../../../../../../types';
 
-import { useTabsStore } from '../../../../../stores/tabsStore';
+import { useTabsStore } from '../../../../../../stores/tabsStore';
 
 interface SearchSuggestionItemProps {
     employee: Employee,

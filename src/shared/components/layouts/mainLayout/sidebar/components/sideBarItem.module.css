@@ -1,4 +1,4 @@
-@reference '../../../../../assets/styles/main.css';
+@import 'tailwindcss';
 
 .item {
     @apply flex gap-1 items-center rounded-sm cursor-pointer;
