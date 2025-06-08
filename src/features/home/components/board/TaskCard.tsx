@@ -4,7 +4,6 @@ import { getTaskPriorityColor } from '../../utils/getTaskPriorityColor';
 
 import XButton from '../../../../shared/components/XButton';
 
-
 interface TaskCardProps {
     task: Task,
     onDelete: (id: string) => void, 
@@ -22,7 +21,7 @@ const TaskCard = ({task, onDelete}: TaskCardProps) => {
         >
 
             <header className='flex items-center justify-between'>
-                <h3 className='text-lg font-medium'>{task.title}</h3>
+                <h3 className='text-xl font-bold'>{task.title}</h3>
 
 
                 {task.completed? (

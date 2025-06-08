@@ -1,5 +1,0 @@
-@import 'tailwindcss';
-
-.header {
-    @apply flex items-center justify-between border-b-2 border-b-gray-100;
-}

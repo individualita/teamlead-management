@@ -1,6 +1,6 @@
 import { DEFAULT_URL } from '../constants/defaultImageUrl';
 
-const Avatar = ({src, username}: {src: string | null, username: string | null}) => {
+const Avatar = ({src, username}: {src?: string, username?: string }) => {
     
     return (
         <img 

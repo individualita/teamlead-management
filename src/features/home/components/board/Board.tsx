@@ -88,7 +88,7 @@ const Board = () => {
 
     return (
 
-        <div className='flex gap-2'>
+        <div className='grid grid-cols-3 gap-2'>
 
             <DndContext onDragEnd={handleDragEnd} sensors={sensors}>
                 {BOARD_COLUMNS.map(col => 

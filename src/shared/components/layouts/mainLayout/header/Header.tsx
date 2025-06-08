@@ -2,12 +2,11 @@ import SearchBar from './components/searchBar/SearchBar';
 import Logo from './components/logo/Logo';
 
 import ProfileMenu from '../../../../../features/profile/menu/ProfileMenu';
-import styles from './header.module.css';
 
 
 const Header = () => {
     return (
-        <header className={styles.header}>
+        <header className='p-2 flex items-center justify-between border-b-2 border-b-gray-100'>
             <Logo />
             <SearchBar />
             <ProfileMenu />

@@ -11,6 +11,7 @@ import { useAuthStore } from '../../../../shared/stores/authStore';
 //constants
 import { ROUTE_PATHS } from '../../../../shared/constants/routePaths';
 import { AUTH_TITLES } from '../../constants/authTitles';
+import { VALIDATION_RULES } from '../../constants/validationRules';
 
 //components
 import ErrorAlert from '../errorAlert/ErrorAlert';
@@ -60,10 +61,7 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
                         <input 
                             type='text' 
                             id='username' 
-                            {...register('username', { 
-                                required: true,
-                                minLength: { value: 3, message: "Min 3 characters" },                                
-                            })} 
+                            {...register('username', VALIDATION_RULES.USERNAME)} 
                             placeholder='Your name' 
                             className={styles.input}
                         />
@@ -81,12 +79,7 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
                     <input 
                         type='email' 
                         id='email' 
-                        {...register('email', {
-                            required: {
-                                value: true,
-                                message: 'Email is required'
-                            },
-                        })} 
+                        {...register('email', VALIDATION_RULES.EMAIL)} 
                         placeholder='your@email.com' 
                         className={styles.input}
                     />
@@ -98,10 +91,7 @@ const AuthForm = ({title, onFormSubmit} : AuthFormProps) => {
                     <input 
                         type='password' 
                         id='password' 
-                        {...register('password', {
-                            required: true,
-                            minLength: { value: 3, message: "Min 5 characters" }
-                        })} 
+                        {...register('password', VALIDATION_RULES.PASSWORD)} 
                         placeholder='••••••' 
                         className={styles.input}
                         autoComplete='current-password'

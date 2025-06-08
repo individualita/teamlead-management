@@ -26,7 +26,7 @@ const BoardColumn = ({title, tasks, isFormOpen, onOpenForm, onCloseForm, onDelet
     const isTodoColumn = title === TASK_STATUSES.TODO;
 
     return (
-        <section aria-labelledby='todo-title' className='flex flex-col gap-3 flex-1 bg-gray-100 rounded-xl p-5'>
+        <section aria-labelledby='todo-title' className='flex flex-col gap-3 bg-gray-100 rounded-xl p-5'>
 
             {/* Display the header with title and tasks count */}
             <BoardHeader 
