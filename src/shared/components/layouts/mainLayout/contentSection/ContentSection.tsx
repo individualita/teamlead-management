@@ -10,7 +10,7 @@ import { OUTLET_TAB } from '../../../../constants/outletTab';
 
 //components
 import { ErrorMessage } from '../../../ErrorMessage';
-import EmployeeProfile from '../../../employeeProfile/EmployeeProfile';
+import EmployeeProfile from '../../../EmployeeProfile';
 import TabsHeader from '../../../tabs/TabsHeader';
 
 

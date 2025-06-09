@@ -1,11 +1,11 @@
 import dayjs from 'dayjs';
 
-import { Employee } from '../../types';
+import { Employee } from '../types';
 
-import { STATUS_TEXT_COLORS } from '../../constants/statusTextColors';
+import { STATUS_TEXT_COLORS } from '../constants/statusTextColors';
 
-import { getEmployeeBadgeInfo } from '../../../features/employees/utils/getEmployeesBadgeInfo';
-import { getEmployeeStatusColor } from '../../utils/getEmployeeStatusColor';
+import { getEmployeeBadgeInfo } from '../../features/employees/utils/getEmployeesBadgeInfo';
+import { getEmployeeStatusColor } from '../utils/getEmployeeStatusColor';
 
 interface EmployeeProfileProps {
     employee?: Employee 

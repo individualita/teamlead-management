@@ -3,6 +3,9 @@ import { useEffect, Suspense, lazy } from 'react';
 
 import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './shared/clients/queryClient';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
+import AppProviders from './shared/components/AppProviders';
 
 import { useAuthStore } from './shared/stores/authStore';
 
@@ -12,7 +15,7 @@ import Container from './shared/components/layouts/container/Container';
 import { LoadingCircle } from './shared/components/layouts/loadingCircle/LoadingCircle';
 
 import { ProtectedRoute } from './shared/routes/ProtectedRoute'; 
-import { PublicRoute } from './shared/routes/PublicRote';
+import { PublicRoute } from './shared/routes/PublicRoute';
 
 import MainLayout from './shared/components/layouts/mainLayout/MainLayout';
 import Employees from './features/employees/Employees';
@@ -20,15 +23,14 @@ import Activity from './features/activity/Activity';
 import Chat from './features/chat/Chat';
 import ProfileSettings from './features/profile/settings/ProfileSettings';
 
-import './App.css';
-
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 // Lazy-loaded components
 
 const SignInLazy = lazy(() => import('./features/auth/pages/SignIn'));
 const SignUpLazy = lazy(() => import('./features/auth/pages/SignUp'));
 const HomeLazy = lazy(() => import('./features/home/Home'));
+
+import './App.css';
 
 
 
@@ -54,8 +56,7 @@ const App = () => {
     console.log('user:', user, 'loading:', isLoading, 'initialized:', isAuthInitialized);
 
     return (
-        <QueryClientProvider client={queryClient}>
-            <ReactQueryDevtools initialIsOpen={false}  />
+        <AppProviders>
             <div className='app'>
                 <Container>
                     <Suspense fallback={<LoadingCircle />}>
@@ -91,9 +92,7 @@ const App = () => {
 
                 </Container>
             </div>
-
-        </QueryClientProvider>
-
+        </AppProviders>
     )
 };
 
