@@ -1,5 +1,6 @@
 
-import { useAuthStore } from '../../../shared/stores/authStore';
+// import { useAuthStore } from '../../../shared/stores/authStore';
+import { useAuthUser } from '../../../shared/stores/authStore';
 
 import Avatar from '../../../shared/components/Avatar';
 
@@ -10,7 +11,8 @@ import UserPhotoForm from './components/UserPhotoForm';
 
 const ProfileSettings = () => {
 
-    const { user } = useAuthStore();
+    // const { user } = useAuthStore();
+    const user = useAuthUser();
 
     if (!user) {
         return <p className='text-center text-red-500'>No user signed in.</p>;

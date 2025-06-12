@@ -1,13 +1,10 @@
 import { Navigate, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, Suspense, lazy } from 'react';
 
-import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from './shared/clients/queryClient';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import AppProviders from './shared/components/AppProviders';
 
-import { useAuthStore } from './shared/stores/authStore';
+import { useAuthInitialized, useAuthLoading, useAuthUser, useListenAuthState, setErrorMessage } from './shared/stores/authStore';
 
 import { ROUTE_PATHS } from './shared/constants/routePaths';
 
@@ -35,10 +32,15 @@ import './App.css';
 
 
 const App = () => {
+    //store
+    const listenAuthState = useListenAuthState();
+    const user = useAuthUser();
+    const isLoading = useAuthLoading();
+    const isAuthInitialized = useAuthInitialized();
 
-    const { user, listenAuthState, isLoading, isAuthInitialized,  setErrorMessage} = useAuthStore();
     const {pathname} = useLocation();
 
+    
 
     useEffect(() => {
 

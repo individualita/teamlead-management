@@ -1,22 +1,20 @@
-import { useState,  FormEvent } from 'react';
+import { useState, FormEvent } from 'react';
 import { Button } from '@mui/material';
+//store
+import { useAuthUser } from '../../../../shared/stores/authStore';
 
 import { DEFAULT_URL } from '../../../../shared/constants/defaultImageUrl';
 
 import { updateUserMessagesPhotoURL } from '../services/updateUserMessagesPhotoURL';
 
 import { useFirebaseProfileUpdate } from '../hooks/useFirebaseProfileUpdate';
-import { useAuthStore } from '../../../../shared/stores/authStore';
-
 
 const UserPhotoForm = () => {
-
     const [photoURL, setPhotoURL] = useState('');
     const [error, setError] = useState<string | null>(null);
 
-    const {update, isLoading} = useFirebaseProfileUpdate();
-    
-    const {user} = useAuthStore();
+    const user = useAuthUser();
+    const { update, isLoading } = useFirebaseProfileUpdate();
 
     const isValidUrl = (url: string): boolean => {
         try {
@@ -40,7 +38,7 @@ const UserPhotoForm = () => {
         }
 
         try {
-            await update({photoURL});
+            await update({ photoURL });
             await updateUserMessagesPhotoURL(photoURL, user.id);
 
             setPhotoURL('');
@@ -51,19 +49,15 @@ const UserPhotoForm = () => {
     };
 
     return (
-        <form 
-            aria-label='Change profile picture' 
-            onSubmit={handleSubmit}
-        >
-            
+        <form aria-label='Change profile picture' onSubmit={handleSubmit}>
             <div className='flex gap-3 relative'>
-                <input 
+                <input
                     type='text'
-                    value={photoURL} 
+                    value={photoURL}
                     name='photourl'
-                    onChange={(e) => {
+                    onChange={e => {
                         setPhotoURL(e.target.value);
-                        if(error) setError(null);
+                        if (error) setError(null);
                     }}
                     className={`
                         border border-gray-300 rounded-lg px-2 py-2
@@ -76,19 +70,23 @@ const UserPhotoForm = () => {
                     placeholder='Past image link here'
                     required
                 />
-                {error && <span className='absolute -bottom-7 text-red-500'>{error}</span>}
+                {error && (
+                    <span className='absolute -bottom-7 text-red-500'>
+                        {error}
+                    </span>
+                )}
                 <Button
-                    type='submit' 
-                    variant='contained' 
-                    color='success' 
+                    type='submit'
+                    variant='contained'
+                    color='success'
                     size='small'
                     disabled={isLoading}
                     title='Change image'
                     aria-label='Change user image'
                 >
-                    {isLoading?  'Changing...' : 'Change'}
+                    {isLoading ? 'Changing...' : 'Change'}
                 </Button>
-                
+
                 <button
                     type='button'
                     className='
@@ -100,12 +98,9 @@ const UserPhotoForm = () => {
                 >
                     Default URL
                 </button>
-
-
             </div>
-
         </form>
-    )
-}
+    );
+};
 
 export default UserPhotoForm;

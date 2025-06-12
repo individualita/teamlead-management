@@ -2,52 +2,42 @@ import { useState } from 'react';
 import { updateProfile } from 'firebase/auth';
 
 import { auth } from '../../../../shared/config/firebaseConfig';
-import { useAuthStore } from '../../../../shared/stores/authStore';
+import { useAuthUser } from '../../../../shared/stores/authStore';
+import { setUser } from '../../../../shared/stores/authStore';
 
 interface ProfileFields {
-    displayName?: string
-    photoURL?: string
+    displayName?: string;
+    photoURL?: string;
 }
 
 export const useFirebaseProfileUpdate = (): {
-    isLoading: boolean,
-    update: (payload: ProfileFields) => Promise<void>
+    isLoading: boolean;
+    update: (payload: ProfileFields) => Promise<void>;
 } => {
-
     const [isLoading, setIsLoading] = useState(false);
-    const { user, setUser } = useAuthStore();
+    const user = useAuthUser();
 
-    const update = async (payload:ProfileFields ) => {
+    const update = async (payload: ProfileFields) => {
         if (!user) return;
 
         setIsLoading(true);
 
         try {
-            await updateProfile(auth.currentUser!, payload)
+            await updateProfile(auth.currentUser!, payload);
 
             // Вручную обновляем Zustand-стор, так как onAuthStateChanged не срабатывает
             setUser({
                 ...user,
-                username: payload.displayName?? user.username,
-                photoURL: payload.photoURL?? user.photoURL
+                username: payload.displayName ?? user.username,
+                photoURL: payload.photoURL ?? user.photoURL,
             });
-
-
         } catch (error) {
             console.error('Failed to update profile:', error);
             throw error;
         } finally {
             setIsLoading(false);
         }
-
     };
 
-    return {isLoading, update}
-
-}
-
-
-
-
-
-
+    return { isLoading, update };
+};
