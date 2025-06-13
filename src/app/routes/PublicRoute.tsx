@@ -1,25 +1,21 @@
 import { Outlet, Navigate } from 'react-router-dom';
 
-//store
 import {
     useAuthUser,
     useAuthLoading,
     useAuthInitialized,
-} from '../stores/authStore';
+} from '../../shared/stores/authStore';
 
-//constants
-import { ROUTE_PATHS } from '../constants/routePaths';
+import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
 
-//components
-import { LoadingCircle } from '../components/layouts/loadingCircle/LoadingCircle';
-
-export const ProtectedRoute = () => {
+export const PublicRoute = () => {
     const user = useAuthUser();
     const isLoading = useAuthLoading();
     const isAuthInitialized = useAuthInitialized();
 
     if (!isAuthInitialized || isLoading) return <LoadingCircle />;
-    if (!user) return <Navigate to={ROUTE_PATHS.SIGN_IN} replace />;
+
+    if (user) return <Navigate to='/home' replace />;
 
     return <Outlet />;
 };

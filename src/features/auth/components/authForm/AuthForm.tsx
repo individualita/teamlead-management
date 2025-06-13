@@ -8,7 +8,7 @@ import { Alert, Divider } from '@mui/material';
 import { useAuthError } from '../../../../shared/stores/authStore';
 
 //constants
-import { ROUTE_PATHS } from '../../../../shared/constants/routePaths';
+import { ROUTE_PATHS } from '../../../../app/constants/routePaths';
 import { AUTH_TITLES } from '../../constants/authTitles';
 import { VALIDATION_RULES } from '../../constants/validationRules';
 

@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { logout } from '../../../../shared/stores/authStore';
 
-import { ROUTE_PATHS } from '../../../../shared/constants/routePaths';
+import { ROUTE_PATHS } from '../../../../app/constants/routePaths';
 
 const ProfileOption = () => {
     const navigate = useNavigate();
