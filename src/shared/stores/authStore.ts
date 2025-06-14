@@ -135,9 +135,6 @@ const authStore: StateCreator<UserState> = ((set) => ({
 
             set({user})
 
-            console.log('try sucess');
-            // navigate(ROUTE_PATHS.HOME);
-
         } catch (error: unknown) {
             if (error instanceof FirebaseError) {
                 const firebaseError = FIREBASE_AUTH_ERRORS.get(error.code) || 'An unknown error occurred.';

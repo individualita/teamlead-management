@@ -8,7 +8,6 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { AuthProvider } from './AuthProvider';
 
 
-
 const AppProviders = ({children}: {children: ReactNode}) => {
 
     return (
