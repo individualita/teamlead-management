@@ -7,14 +7,14 @@ import '../../index.css';
 import App from './App.tsx'
 
 createRoot(document.getElementById('root')!).render(
-    /*
+    
     <StrictMode>
-        <Router>
+        <AppProviders>
             <App />
-        </Router>
-    </StrictMode>,*/
+        </AppProviders>
+    </StrictMode>,
 
-    <AppProviders >
-        <App />
-    </AppProviders>
+    // <AppProviders >
+    //     <App />
+    // </AppProviders>
 )

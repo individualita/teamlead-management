@@ -1,5 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 // material UI
 import { Alert, Divider } from '@mui/material';
@@ -36,8 +36,6 @@ interface AuthFormProps {
 const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
     const errorMessage = useAuthError();
 
-    const navigate = useNavigate();
-
     //RHF
     const {
         register,
@@ -49,7 +47,6 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
 
     const onSubmit: SubmitHandler<AuthInputs> = async data => {
         await onFormSubmit(data.email, data.password, data.username);
-        navigate(ROUTE_PATHS.HOME);
     };
 
     return (

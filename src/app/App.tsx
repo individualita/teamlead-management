@@ -10,12 +10,13 @@ import { LoadingCircle } from '../shared/components/layouts/loadingCircle/Loadin
 import { ProtectedRoute } from './routes/ProtectedRoute'; 
 import { PublicRoute } from './routes/PublicRoute';
 
-import { AuthPagesWrapper } from '../features/auth/routes/AuthPagesWrapper';
 import MainLayout from '../shared/components/layouts/mainLayout/MainLayout';
 import Employees from '../features/employees/Employees';
 import Activity from '../features/activity/Activity';
 import Chat from '../features/chat/Chat';
 import ProfileSettings from '../features/profile/settings/ProfileSettings';
+import { ErrorResetter } from '../features/auth/components/errorResetter/ErrorResetter';
+
 
 
 // Lazy-loaded components
@@ -32,17 +33,15 @@ const App = () => {
 
     return (
         <div className='app'>
+            <ErrorResetter /> {/* Error reset when changing the path */}
             <Container>
                 <Suspense fallback={<LoadingCircle />}>
 
                     <Routes>
                         {/* Публичные маршруты (только для НЕ залогиненных пользователей) */}
                         <Route element={<PublicRoute />}>
-                            <Route element={<AuthPagesWrapper />}>
-                                <Route path={ROUTE_PATHS.SIGN_IN} element={<SignInLazy />} />
-                                <Route path={ROUTE_PATHS.SIGN_UP} element={<SignUpLazy />} />      
-                            </Route>
-
+                            <Route path={ROUTE_PATHS.SIGN_IN} element={<SignInLazy />} />
+                            <Route path={ROUTE_PATHS.SIGN_UP} element={<SignUpLazy />} />      
                         </Route>
                         
                         {/* Защищённые маршруты (только для залогиненных пользователей) */}
