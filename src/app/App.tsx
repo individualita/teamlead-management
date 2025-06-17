@@ -1,8 +1,7 @@
 import { Navigate, Routes, Route, } from 'react-router-dom';
 import { Suspense, lazy } from 'react';
 
-
-import { ROUTE_PATHS } from './constants/routePaths';
+import { ROUTES } from '../shared/constants/routes';
 
 import Container from '../shared/components/layouts/container/Container';
 import { LoadingCircle } from '../shared/components/layouts/loadingCircle/LoadingCircle';
@@ -28,7 +27,6 @@ const HomeLazy = lazy(() => import('../features/home/Home'));
 import './App.css';
 
 
-
 const App = () => {
 
     return (
@@ -40,8 +38,8 @@ const App = () => {
                     <Routes>
                         {/* Публичные маршруты (только для НЕ залогиненных пользователей) */}
                         <Route element={<PublicRoute />}>
-                            <Route path={ROUTE_PATHS.SIGN_IN} element={<SignInLazy />} />
-                            <Route path={ROUTE_PATHS.SIGN_UP} element={<SignUpLazy />} />      
+                            <Route path={ROUTES.SIGN_IN.path} element={<SignInLazy />} />
+                            <Route path={ROUTES.SIGN_UP.path} element={<SignUpLazy />} />      
                         </Route>
                         
                         {/* Защищённые маршруты (только для залогиненных пользователей) */}
@@ -49,17 +47,19 @@ const App = () => {
 
                             <Route element={<MainLayout />}>
 
-                                <Route path={ROUTE_PATHS.HOME} element={<HomeLazy />}/>
-                                <Route path={ROUTE_PATHS.EMPLOYEES} element={<Employees />} />
-                                <Route path={ROUTE_PATHS.ACTIVITY} element={<Activity />} />
-                                <Route path={ROUTE_PATHS.CHAT} element={<Chat />} />
-                                <Route path={ROUTE_PATHS.SETTINGS} element={<ProfileSettings />} />
+                                <Route path={ROUTES.HOME.path} element={<HomeLazy />}/>
+                                <Route path={ROUTES.EMPLOYEES.path} element={<Employees />} />
+                                <Route path={ROUTES.ACTIVITY.path} element={<Activity />} />
+                                <Route path={ROUTES.CHAT.path} element={<Chat />} />
+                                <Route path={ROUTES.SETTINGS.path} element={<ProfileSettings />} />
 
                             </Route>
 
                         </Route>
 
-                        <Route path="*" element={<Navigate to={`/${ROUTE_PATHS.HOME}`}/>} />
+                        {/* <Route path="*" element={<Navigate to={`/${ROUTE_PATHS.HOME}`}/>} /> */}
+                        <Route path="*" element={<Navigate to={ROUTES.HOME.path}/>} />
+
 
                         
                     </Routes>

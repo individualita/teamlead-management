@@ -8,8 +8,7 @@ import { Alert, Divider } from '@mui/material';
 import { useAuthError } from '../../../../shared/stores/authStore';
 
 //constants
-import { ROUTE_PATHS } from '../../../../app/constants/routePaths';
-import { AUTH_TITLES } from '../../constants/authTitles';
+import { ROUTES } from '../../../../shared/constants/routes';
 import { VALIDATION_RULES } from '../../constants/validationRules';
 
 //components
@@ -57,7 +56,7 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
                 <div className={styles.logo}>Teamlead </div>
                 <h1 className={styles.title}>{title}</h1>
 
-                {title === AUTH_TITLES.SIGN_UP && (
+                {title === ROUTES.SIGN_UP.title && (
                     <div className={styles.formGroup}>
                         <label htmlFor='username' className={styles.label}>
                             Your name
@@ -124,25 +123,25 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
 
                 <Divider>or</Divider>
                 <p className='text-center'>
-                    {title === AUTH_TITLES.SIGN_IN
+                    {title === ROUTES.SIGN_IN.title
                         ? `Don't have an account?`
                         : 'Already have an account?'}{' '}
                     {''}
                     <Link
                         to={
-                            title === AUTH_TITLES.SIGN_IN
-                                ? ROUTE_PATHS.SIGN_UP
-                                : ROUTE_PATHS.SIGN_IN
+                            title === ROUTES.SIGN_IN.title
+                                ? ROUTES.SIGN_UP.path
+                                : ROUTES.SIGN_IN.path
                         }
                         className='text-blue-600'
                     >
-                        {title === AUTH_TITLES.SIGN_IN
+                        {title === ROUTES.SIGN_IN.title
                             ? 'Get started'
                             : 'Sign in'}
                     </Link>
                 </p>
 
-                {title === AUTH_TITLES.SIGN_IN && (
+                {title === ROUTES.SIGN_IN.title && (
                     <Alert title='Test account' severity='info'>
                         <p>
                             Login:{' '}

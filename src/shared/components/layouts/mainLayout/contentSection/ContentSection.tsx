@@ -5,7 +5,8 @@ import { useLocation } from 'react-router-dom';
 import { Employee } from '../../../../types';
 
 //utils + constants
-import { getPageTitle } from '../../../../utils/getPageTitle';
+// import { getPageTitle } from '../../../../utils/getPageTitle';
+import { getRouteTitle } from '../../../../utils/getRouteTitle';
 import { OUTLET_TAB } from '../../../../constants/outletTab';
 
 //components
@@ -26,11 +27,12 @@ interface ContentSectionProps {
 const ContentSection = ({activeEmployee, isError,  error, openTabs, activeTab, setActiveTab, closeTab}: ContentSectionProps) => {
 
     const { pathname } = useLocation();
+    const title = getRouteTitle(pathname);
 
     return (
         <div className='content grow-1 px-6'>
 
-            <h1 className='text-lg font-bold mt-3'>{getPageTitle(pathname)}</h1>
+            <h1 className='text-lg font-bold mt-3'>{title}</h1>
 
             <div 
                 className='flex gap-4 mt-2'

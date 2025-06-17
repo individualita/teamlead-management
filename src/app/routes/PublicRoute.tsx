@@ -6,6 +6,9 @@ import {
     useAuthInitialized,
 } from '../../shared/stores/authStore';
 
+import { ROUTES } from '../../shared/constants/routes';
+
+
 import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
 
 export const PublicRoute = () => {
@@ -15,7 +18,7 @@ export const PublicRoute = () => {
 
     if (!isAuthInitialized || isLoading) return <LoadingCircle />;
 
-    if (user) return <Navigate to='/home' replace />;
+    if (user) return <Navigate to={ROUTES.HOME.path} replace />;
 
     return <Outlet />;
 };

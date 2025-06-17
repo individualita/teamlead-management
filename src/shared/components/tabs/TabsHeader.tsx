@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom';
 
-import { Employee } from '../../types/employee.types';
+import { Employee } from '../../types';
 
-import { getPageTitle } from '../../utils/getPageTitle';
+import { getRouteTitle } from '../../utils/getRouteTitle';
 
 import { OUTLET_TAB } from '../../constants/outletTab';
 
@@ -20,6 +20,7 @@ interface TabsHeaderProps {
 const TabsHeader = ({openTabs, activeTab, onTabSelect, onCloseTab}: TabsHeaderProps) => {
 
     const { pathname } = useLocation();
+    const tabName = getRouteTitle(pathname);
 
     return (
         
@@ -29,7 +30,7 @@ const TabsHeader = ({openTabs, activeTab, onTabSelect, onCloseTab}: TabsHeaderPr
                 <TabsItem 
                     key={OUTLET_TAB} 
                     tabId={OUTLET_TAB} 
-                    tabName={getPageTitle(pathname)} 
+                    tabName={tabName} 
                     isActive={activeTab === OUTLET_TAB} 
                     onSelect={onTabSelect}
                 />

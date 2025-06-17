@@ -1,7 +1,8 @@
 //store
 import { signUp } from '../../../shared/stores/authStore';
 
-import { AUTH_TITLES } from '../constants/authTitles';
+//constants
+import { ROUTES } from '../../../shared/constants/routes';
 
 //components
 import AuthForm from '../components/authForm/AuthForm';
@@ -11,7 +12,7 @@ const SignUp = () => {
         <>
             <h1>Sign Up page!</h1>
 
-            <AuthForm title={AUTH_TITLES.SIGN_UP} onFormSubmit={signUp} />
+            <AuthForm title={ROUTES.SIGN_UP.title} onFormSubmit={signUp} />
         </>
     );
 };

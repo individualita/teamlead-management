@@ -2,14 +2,15 @@ import { useNavigate } from 'react-router-dom';
 
 import { logout } from '../../../../shared/stores/authStore';
 
-import { ROUTE_PATHS } from '../../../../app/constants/routePaths';
+// import { ROUTE_PATHS } from '../../../../app/constants/routePaths';
+import { ROUTES } from '../../../../shared/constants/routes';
 
 const ProfileOption = () => {
     const navigate = useNavigate();
 
     const handleLogOut = async () => {
         await logout();
-        navigate(ROUTE_PATHS.SIGN_IN);
+        navigate(ROUTES.SIGN_IN.path);
     };
 
     return (
@@ -17,7 +18,7 @@ const ProfileOption = () => {
             {/* navigate to settings */}
             <button
                 className='cursor-pointer underline text-left hover:opacity-85 transition-opacity delay-100'
-                onClick={() => navigate(ROUTE_PATHS.SETTINGS)}
+                onClick={() => navigate(ROUTES.SETTINGS.path)}
             >
                 Settings
             </button>
