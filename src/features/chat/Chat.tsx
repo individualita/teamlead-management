@@ -1,7 +1,7 @@
 import { useMessages } from './hooks/useMessages';
 import { useAuthUser } from '../../shared/stores/authStore';
 
-import { ErrorMessage } from '../../shared/components/ErrorMessage';
+import { ErrorMessage } from '../../shared/components/errorMessage/ErrorMessage';
 import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
 
 import MessageList from './components/MessageList';

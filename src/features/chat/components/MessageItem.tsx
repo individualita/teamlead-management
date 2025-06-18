@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 
 import { ChatMessage } from '../types';
 
-import Avatar from '../../../shared/components/Avatar';
+import Avatar from '../../../shared/components/avatar/Avatar';
 
 interface MessageItemProps {
     currentUserId: string,

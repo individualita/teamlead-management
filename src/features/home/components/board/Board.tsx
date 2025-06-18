@@ -22,7 +22,7 @@ import { useUpdateStatus } from '../../hooks/useUpdateTask';
 import { useDeleteMutation } from '../../../../shared/hooks/useDeleteMutation';
 
 //components
-import { ErrorMessage } from '../../../../shared/components/ErrorMessage';
+import { ErrorMessage } from '../../../../shared/components/errorMessage/ErrorMessage';
 import { LoadingCircle } from '../../../../shared/components/layouts/loadingCircle/LoadingCircle';
 import BoardColumn from './BoardColumn';
 import Droppable from '../../dnd/Droppable';

@@ -4,7 +4,7 @@ import Draggable from '../../dnd/Draggable';
 import { TaskStatus, Task } from '../../types';
 import { TASK_STATUSES } from '../../constants/tasks';
 
-import EmptyState from '../../../../shared/components/EmptyState';
+import EmptyState from './EmptyState';
 
 import BoardHeader from './BoardHeader';
 import TaskCard from './TaskCard';

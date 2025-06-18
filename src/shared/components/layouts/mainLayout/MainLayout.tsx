@@ -1,13 +1,15 @@
 import { useEffect } from 'react';
 
+//store
+import { useActiveTab, useOpenTabs, setActiveTab, closeTab } from '../../../stores/tabsStore';
+
 //hooks
 import { useEmployeeStore } from '../../../stores/employeesStore';
-import { useTabsStore } from '../../../stores/tabsStore';
 import { useEmployeesQuery } from '../../../hooks/useEmployeesQuery';
 
 import { LoadingCircle } from '../loadingCircle/LoadingCircle';
 import HeaderSection from './headerSection/HeaderSection';
-import Sidebar from './sidebar/Sidebar';
+import Sidebar from '../sidebar/Sidebar';
 import ContentSection from './contentSection/ContentSection';
 
 
@@ -15,8 +17,10 @@ const MainLayout = () => {
 
     const {isLoading, isError, data: employees, error} = useEmployeesQuery();
     const { setEmployees } = useEmployeeStore();
-    const { activeTab, openTabs,  setActiveTab, closeTab  } = useTabsStore();
-
+    //tabs
+    const openTabs = useOpenTabs();
+    const activeTab = useActiveTab();
+    
     const activeEmployee = employees?.find(emp => emp.id === activeTab);
 
     useEffect(() => {

@@ -10,8 +10,8 @@ import { getRouteTitle } from '../../../../utils/getRouteTitle';
 import { OUTLET_TAB } from '../../../../constants/outletTab';
 
 //components
-import { ErrorMessage } from '../../../ErrorMessage';
-import EmployeeProfile from '../../../EmployeeProfile';
+import { ErrorMessage } from '../../../errorMessage/ErrorMessage';
+import EmployeeProfile from '../../../tabs/EmployeeProfile';
 import TabsHeader from '../../../tabs/TabsHeader';
 
 

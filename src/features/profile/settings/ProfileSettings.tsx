@@ -2,7 +2,7 @@
 // import { useAuthStore } from '../../../shared/stores/authStore';
 import { useAuthUser } from '../../../shared/stores/authStore';
 
-import Avatar from '../../../shared/components/Avatar';
+import Avatar from '../../../shared/components/avatar/Avatar';
 
 import UserNameForm from './components/UserNameForm';
 

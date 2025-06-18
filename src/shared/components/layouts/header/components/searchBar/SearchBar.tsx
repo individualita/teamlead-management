@@ -5,13 +5,13 @@ import { CSSTransition } from 'react-transition-group';
 import { CiSearch } from 'react-icons/ci';
 
 //store
-import { useEmployeeStore } from '../../../../../../stores/employeesStore';
+import { useEmployeeStore } from '../../../../../stores/employeesStore';
 
 //hook
 import { useDebounce } from '../../hooks/useDebounce';
 
-import { CSS_ANIMATION_DURATION } from '../../../../../../constants/cssAnimationDuration';
-import { fadeTransitionClassNames } from '../../../../../../constants/fadeTransitionClassNames';
+import { CSS_ANIMATION_DURATION } from '../../../../../constants/cssAnimationDuration';
+import { fadeTransitionClassNames } from '../../../../../constants/fadeTransitionClassNames';
 
 import SearchSuggestionItem from './SearchSuggestionItem';
 

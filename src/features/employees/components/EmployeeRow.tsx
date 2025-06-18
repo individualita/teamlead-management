@@ -27,7 +27,8 @@ import { HiDotsVertical } from 'react-icons/hi';
 import { Employee } from '../../../shared/types';
 import { EmployeeFormData } from '../types';
 
-import { useTabsStore } from '../../../shared/stores/tabsStore';
+//store
+import { openTab } from '../../../shared/stores/tabsStore';
 
 //constants
 import { DATE_FORMAT } from '../../../shared/constants/dateFormat';
@@ -80,8 +81,6 @@ const EmployeeRow = ({
     actionMenuRef,
 
 } : EmployeeRowProps) => {
-
-    const {openTab} = useTabsStore();
 
     return (
         <>
