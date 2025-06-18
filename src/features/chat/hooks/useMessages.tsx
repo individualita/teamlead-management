@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { database } from '../../../shared/config/firebaseConfig';
 import { ref,  onValue} from 'firebase/database';
 
-import { useMessagesStore } from '../store/messagesStore';
+//store
+import { useMessagesList, setMessages } from '../store/messagesStore';
 
 import { ChatMessage } from '../types';
 
@@ -10,7 +11,8 @@ export const useMessages = () => {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
-    const {messages, setMessages} = useMessagesStore();
+    //store
+    const messages = useMessagesList();
 
     useEffect(() => {
 
