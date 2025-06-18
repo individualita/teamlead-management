@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Alert } from '@mui/material';
 import { toast } from 'react-toastify';
 
@@ -7,10 +6,10 @@ import { useEmployees, removeEmployee, modifyEmployee } from '../../shared/store
 //hooks
 import { useDeleteMutation } from '../../shared/hooks/useDeleteMutation';
 import { useUpdateEmployee } from './hooks/useUpdateEmployee';
+import { useAutoDismissAlert } from './hooks/useAutoDismissAlert';
 
 import { Employee } from '../../shared/types';
 import { employeesService } from '../../shared/services/employeesService';
-import { ALERT_TIMEOUT } from './constants/alertTimeout';
 
 import EmployeeCard from './components/employeeCard/EmployeeCard';
 import UiEmployeesTable from './components/uiEmployeesTable/UiEmployeesTable';
@@ -21,7 +20,6 @@ import styles from './employees.module.css';
 
 const Employees = () => {
 
-    const [alertMessage, setAlertMessage] = useState<string>('');
 
     //store
     const employees = useEmployees();
@@ -32,22 +30,8 @@ const Employees = () => {
     });
     const updateEmployeeMutation = useUpdateEmployee()
 
+    const { showAlert, alertMessage } = useAutoDismissAlert();
     
-    //alert
-    useEffect(() => {
-
-        const timer = setTimeout(() => {
-
-            setAlertMessage('');
-
-        }, ALERT_TIMEOUT);
-
-        return () => clearTimeout(timer);
-
-    }, [alertMessage]);
-    
-
-    const showAlert = (name: string) => setAlertMessage(name);
 
     const onDeleteEmployee = (employeeId: string) => {
 

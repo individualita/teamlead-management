@@ -1,4 +1,3 @@
-
 import { create, StateCreator } from 'zustand';
 import { Task, TaskStatus } from '../types';
 import { MOCK_TASKS } from '../mocks/mockTasks';
