@@ -7,7 +7,7 @@ import Drawer from '@mui/material/Drawer';
 import { IoPersonAdd } from 'react-icons/io5';
 
 
-import AddEmployeeForm from './AddEmployeeForm';
+import AddEmployeeForm from '../addEmployeeForm/AddEmployeeForm';
 
 
 const drawerStyle =  {

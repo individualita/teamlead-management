@@ -24,7 +24,7 @@ import { useDeleteMutation } from '../../../../shared/hooks/useDeleteMutation';
 //components
 import { ErrorMessage } from '../../../../shared/components/errorMessage/ErrorMessage';
 import { LoadingCircle } from '../../../../shared/components/layouts/loadingCircle/LoadingCircle';
-import BoardColumn from './BoardColumn';
+import BoardColumn from '../boardColumn/BoardColumn';
 import Droppable from '../../dnd/Droppable';
 
 

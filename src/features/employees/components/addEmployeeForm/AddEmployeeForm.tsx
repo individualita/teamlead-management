@@ -13,15 +13,15 @@ import Button from '@mui/material/Button';
 import { toast } from 'react-toastify';
 
 //types
-import { Employee } from '../../../shared/types';
+import { Employee } from '../../../../shared/types';
 
 //hooks
-import { useAddMutation } from '../../../shared/hooks/useAddMutation';
+import { useAddMutation } from '../../../../shared/hooks/useAddMutation';
 
-import { employeesService } from '../../../shared/services/employeesService';
-import { employeeSchema, EmployeeFormDataSchema } from '../schema/employee.schema';
-import { addEmployeeFormInputSx } from '../constants/styles';
-import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
+import { employeesService } from '../../../../shared/services/employeesService';
+import { employeeSchema, EmployeeFormDataSchema } from '../../schema/employee.schema';
+import { addEmployeeFormInputSx } from '../../constants/styles';
+import { EMPLOYEE_STATUSES } from '../../../../shared/constants/employeeStatuses';
 
 
 interface AddEmployeeFormProps {

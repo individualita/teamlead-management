@@ -5,7 +5,7 @@ import { fadeTransitionClassNames } from '../../../../../shared/constants/fadeTr
 import { CSS_ANIMATION_DURATION } from '../../../../../shared/constants/cssAnimationDuration';
 
 
-import ProfileOption  from '../ProfileOption';
+import ProfileActions  from '../profileActions/ProfileActions';
 
 import styles from './profileDropdown.module.css';
 
@@ -40,7 +40,7 @@ const ProfileDropdown = ({isOpen, username, email}: ProfilePropdownProps) => {
                     <address className={styles.email}>{email}</address>
                 </header>
 
-                <ProfileOption />
+                <ProfileActions />
 
             </article>
 

@@ -4,8 +4,8 @@ import { useAuthUser } from '../../shared/stores/authStore';
 import { ErrorMessage } from '../../shared/components/errorMessage/ErrorMessage';
 import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
 
-import MessageList from './components/MessageList';
-import ChatForm from './components/ChatForm';
+import MessageList from './components/messageList/MessageList';
+import ChatForm from './components/chatForm/ChatForm';
 
 const Chat = () => {
     const { error, loading, messages } = useMessages();

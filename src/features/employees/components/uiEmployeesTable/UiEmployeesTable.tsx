@@ -17,20 +17,20 @@ import {
 
 
 //schema & types
-import { employeeSchema } from '../schema/employee.schema';
-import { Employee } from '../../../shared/types';
-import { EmployeeFormData } from '../types';
+import { employeeSchema } from '../../schema/employee.schema';
+import { Employee } from '../../../../shared/types';
+import { EmployeeFormData } from '../../types';
 
 //Hooks
-import usePagination from '../hooks/usePagination';
+import usePagination from '../../hooks/usePagination';
 
 //constants
-import { TABLE_COLUMNS } from '../constants/tableColumns';
-import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
+import { TABLE_COLUMNS } from '../../constants/tableColumns';
+import { EMPLOYEE_STATUSES } from '../../../../shared/constants/employeeStatuses';
 
 //components
-import TableHeader from './TableHeader';
-import EmployeeRow from './EmployeeRow';
+import TableHeader from '../tableHeader/TableHeader';
+import EmployeeRow from '../employeeRow/EmployeeRow';
 
 
 interface UiEmployeesTableProps {

@@ -3,7 +3,7 @@ import { TaskStatus } from '../../types';
 import { getTaskStatusColor } from '../../utils/getTaskStatusColor';
 import { TASK_STATUS_BORDER_COLORS } from '../../constants/tasks';
 
-import AddTaskButton from './AddTaskButton';
+import AddTaskButton from '../addTaskButton/AddTaskButton';
 
 interface BoardHeaderProps {
     title: TaskStatus,

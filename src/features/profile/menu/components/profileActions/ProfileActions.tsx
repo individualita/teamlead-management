@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 
-import { logout } from '../../../../shared/stores/authStore';
+import { logout } from '../../../../../shared/stores/authStore';
 
 // import { ROUTE_PATHS } from '../../../../app/constants/routePaths';
-import { ROUTES } from '../../../../shared/constants/routes';
+import { ROUTES } from '../../../../../shared/constants/routes';
 
-const ProfileOption = () => {
+const ProfileActions = () => {
     const navigate = useNavigate();
 
     const handleLogOut = async () => {
@@ -34,4 +34,4 @@ const ProfileOption = () => {
     );
 };
 
-export default ProfileOption;
+export default ProfileActions;

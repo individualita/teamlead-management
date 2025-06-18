@@ -4,14 +4,13 @@ import { useAuthUser } from '../../../shared/stores/authStore';
 
 import Avatar from '../../../shared/components/avatar/Avatar';
 
-import UserNameForm from './components/UserNameForm';
+import UserNameForm from './components/userNameForm/UserNameForm';
 
-import UserPhotoForm from './components/UserPhotoForm';
+import UserPhotoForm from './components/userPhotoForm/UserPhotoForm';
 
 
 const ProfileSettings = () => {
 
-    // const { user } = useAuthStore();
     const user = useAuthUser();
 
     if (!user) {

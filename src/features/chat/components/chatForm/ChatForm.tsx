@@ -1,12 +1,12 @@
 import { useState, FormEvent } from 'react';
-import { useSendMessage } from '../hooks/useSendMessage';
+import { useSendMessage } from '../../hooks/useSendMessage';
 
 import { FaTelegramPlane } from 'react-icons/fa';
 import { CircularProgress } from '@mui/material';
 
 
 //types
-import { User } from '../../../shared/types';
+import { User } from '../../../../shared/types';
 
 interface ChatFormProps {
     user: User

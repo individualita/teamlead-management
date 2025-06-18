@@ -2,7 +2,7 @@ import { useState, FormEvent } from 'react';
 import { Button } from '@mui/material';
 import { FaPencil } from 'react-icons/fa6';
 
-import { useFirebaseProfileUpdate } from '../hooks/useFirebaseProfileUpdate';
+import { useFirebaseProfileUpdate } from '../../hooks/useFirebaseProfileUpdate';
 
 interface EditUserNameFormProps {
     currentName: string

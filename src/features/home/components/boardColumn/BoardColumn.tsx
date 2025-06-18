@@ -4,11 +4,11 @@ import Draggable from '../../dnd/Draggable';
 import { TaskStatus, Task } from '../../types';
 import { TASK_STATUSES } from '../../constants/tasks';
 
-import EmptyState from './EmptyState';
+import EmptyState from '../emptyState/EmptyState';
 
-import BoardHeader from './BoardHeader';
-import TaskCard from './TaskCard';
-import AddTaskForm from './AddTaskForm';
+import BoardHeader from '../boardHeader/BoardHeader';
+import TaskCard from '../taskCard/TaskCard';
+import AddTaskForm from '../addTaskForm/AddTaskForm';
 
 
 interface BoardColumnProps {

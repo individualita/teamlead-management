@@ -1,11 +1,11 @@
 import { useRef, useEffect, useMemo , Fragment } from 'react';
 
-import { ChatMessage } from '../types';
+import { ChatMessage } from '../../types';
 
-import { groupMessagesByDate } from '../utils/groupMessagesByDate';
+import { groupMessagesByDate } from '../../utils/groupMessagesByDate';
 
-import EmptyChatState from './EmptyChatState';
-import MessageItem from './MessageItem';
+import EmptyChatState from '../emptyChatState/EmptyChatState';
+import MessageItem from '../messageItem/MessageItem';
 
 interface MessageListProps {
     messages: ChatMessage[],
