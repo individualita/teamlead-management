@@ -4,8 +4,7 @@ import { toast } from 'react-toastify';
 
 
 //store
-import { useTasksStore } from '../../stores/tasksStore';
-
+import { useTasks, setAllTasks, changeTaskStatus } from '../../stores/tasksStore';
 //types
 import { TaskStatus, TasksGroupedByStatus } from '../../types';
 
@@ -35,7 +34,9 @@ const Board = () => {
 
     //Custom hooks
     const { isLoading, isError, data, error } = useTasksQuery();
-    const {tasks, setTasks, updateTaskStatus} = useTasksStore();
+
+    //store
+    const tasks = useTasks();
     const sensors = useCustomDnDSensors();
     const updateStatusMutation = useUpdateStatus();
     const deleteTaskMutation = useDeleteMutation({
@@ -48,7 +49,7 @@ const Board = () => {
 
     // Sync server data to Zustand
     useEffect(() => {
-        if (data) setTasks(data);
+        if (data) setAllTasks(data);
     }, [data]);
 
     // Event handlers
@@ -71,7 +72,7 @@ const Board = () => {
         })
         
         // Zustand. Обновляем состояние задач, меняя статус + completed перетащенной задачи.
-        updateTaskStatus(taskId, newStatus, newStatus === TASK_STATUSES.DONE);
+        changeTaskStatus(taskId, newStatus, newStatus === TASK_STATUSES.DONE);
     };
 
     const onDeleteTask = (taskId: string) => {

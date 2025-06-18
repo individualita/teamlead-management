@@ -1,4 +1,4 @@
-import emptyStateImg from '../assets/hello_nobg.png';
+import emptyStateImg from './hello_nobg.png';
 
 const EmptyChatState = () => {
 

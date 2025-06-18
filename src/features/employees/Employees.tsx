@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import { Alert } from '@mui/material';
 import { toast } from 'react-toastify';
 
+//store
+import { useEmployees, removeEmployee, modifyEmployee } from '../../shared/stores/employeesStore';
 //hooks
-import { useEmployeeStore } from '../../shared/stores/employeesStore';
 import { useDeleteMutation } from '../../shared/hooks/useDeleteMutation';
 import { useUpdateEmployee } from './hooks/useUpdateEmployee';
 
@@ -22,7 +23,9 @@ const Employees = () => {
 
     const [alertMessage, setAlertMessage] = useState<string>('');
 
-    const {employees, deleteEmployee, updateEmployee} = useEmployeeStore();
+    //store
+    const employees = useEmployees();
+
     const deleteEmployeeMutation = useDeleteMutation({
         mutationFn: employeesService.deleteEmployeeFromFirestore,
         queryKey: ['employees']
@@ -50,7 +53,7 @@ const Employees = () => {
 
         deleteEmployeeMutation.mutate(employeeId, {
             onSuccess: () => {
-                deleteEmployee(employeeId); //zustand
+                removeEmployee(employeeId); //zustand
             },
             onError: (error) => {
                 toast.error(error.message);
@@ -61,13 +64,11 @@ const Employees = () => {
     const onUpdateEmployee = (employeeId: string, data: Partial<Employee>) => {
 
         updateEmployeeMutation.mutate({data, employeeId}, {
-            onSuccess: () => updateEmployee(employeeId, data), //zustand
+            onSuccess: () => modifyEmployee(employeeId, data), //zustand
             onError: (error) => toast.error(error.message)
         })
  
     };
-
-
 
     return (
         <div className='employees'>
