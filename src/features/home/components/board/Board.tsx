@@ -39,6 +39,7 @@ const Board = () => {
     const tasks = useTasks();
     const sensors = useCustomDnDSensors();
     const updateStatusMutation = useUpdateStatus();
+    
     const deleteTaskMutation = useDeleteMutation({
         mutationFn: taskService.deleteTaskFromFirestore, 
         queryKey: ['tasks']

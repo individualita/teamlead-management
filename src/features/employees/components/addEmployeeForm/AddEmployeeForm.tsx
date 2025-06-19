@@ -36,7 +36,7 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
         queryKey: ['employees']
     });
 
-    const { register, handleSubmit, control, reset, watch,  formState: {errors}} = useForm<EmployeeFormDataSchema>({
+    const { register, handleSubmit, control, reset, formState: {errors}} = useForm<EmployeeFormDataSchema>({
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
         defaultValues: {
@@ -62,7 +62,6 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
         });
     };
 
-    console.log(watch('startDate'));
     return (
         <form 
             onSubmit={handleSubmit(onSubmit)} 

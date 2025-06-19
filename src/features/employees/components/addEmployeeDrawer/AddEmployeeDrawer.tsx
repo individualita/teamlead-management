@@ -16,7 +16,15 @@ const drawerStyle =  {
     bgcolor: 'background.paper',
     boxShadow: 24,
     height: '100dvh',
-}
+};
+
+const BUTTON_STYLES = {
+    background: 'var(--color-primary)',
+    marginLeft: 'auto',
+    display: 'flex',
+    gap: '8px',
+    textTransform: 'none' as const,
+};
 
 interface EmployeeModalProps {
     showAlert: (name: string) => void;
@@ -35,7 +43,7 @@ const AddEmployeeDrawer = ({showAlert} : EmployeeModalProps) => {
                 type='button'
                 onClick={handleOpen} 
                 variant='contained' 
-                sx={{background: 'var(--color-primary)', marginLeft: 'auto', display:'flex', gap: '8px', textTransform:'none'}}
+                sx={BUTTON_STYLES}
                 aria-label='Add new employee'
                 title='Add new employee'
                 >

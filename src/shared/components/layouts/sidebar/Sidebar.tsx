@@ -1,8 +1,8 @@
 import { useState } from 'react';
-
 import { RxDoubleArrowLeft } from "react-icons/rx";
 
 import { SIDEBAR_LINKS } from './constants/sidebarLinks';
+
 import SidebarItem from './components/SidebarItem';
 
 import styles from './sidebar.module.css';

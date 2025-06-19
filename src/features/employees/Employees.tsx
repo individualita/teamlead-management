@@ -20,7 +20,6 @@ import styles from './employees.module.css';
 
 const Employees = () => {
 
-
     //store
     const employees = useEmployees();
 
@@ -33,7 +32,7 @@ const Employees = () => {
     const { showAlert, alertMessage } = useAutoDismissAlert();
     
 
-    const onDeleteEmployee = (employeeId: string) => {
+    const handleDeleteEmployee = (employeeId: string) => {
 
         deleteEmployeeMutation.mutate(employeeId, {
             onSuccess: () => {
@@ -45,7 +44,7 @@ const Employees = () => {
         })
     };
 
-    const onUpdateEmployee = (employeeId: string, data: Partial<Employee>) => {
+    const handleUpdateEmployee = (employeeId: string, data: Partial<Employee>) => {
 
         updateEmployeeMutation.mutate({data, employeeId}, {
             onSuccess: () => modifyEmployee(employeeId, data), //zustand
@@ -54,33 +53,54 @@ const Employees = () => {
  
     };
 
+    const renderEmptyState = () => (
+        <div className={styles.emptyState}>
+            <span>No employees found. Add your first employee!</span>
+        </div>
+    );
+
+    const renderSuccessAlert = () => {
+        if (!alertMessage) return null;
+        
+        return (
+            <Alert>
+                Employee <strong>{alertMessage}</strong> has been added successfully
+            </Alert>
+        );
+    };
     return (
         <div className='employees'>
             
             <AddEmployeeDrawer showAlert={showAlert}/>
 
-            {!!alertMessage && <Alert>Employee <strong>{alertMessage}</strong> has been added successfully</Alert> }
+            {renderSuccessAlert()}
 
-            {employees.length <= 0 && <span>Add new employee</span>}
+            {employees.length === 0? (
+                renderEmptyState()
+            ) : (
+                <>
 
-            {/* desktop size */}
-            <div className={styles.tableDesktopWrapper}>
+                    {/* desktop size */}
+                    <div className={styles.tableDesktopWrapper}>
 
-                <UiEmployeesTable
-                    employees={employees}
-                    onUpdateEmployee={onUpdateEmployee}
-                    onDeleteEmployee={onDeleteEmployee}
-                    isDeleting={deleteEmployeeMutation.isPending}
-                />
+                        <UiEmployeesTable
+                            employees={employees}
+                            onUpdateEmployee={handleUpdateEmployee}
+                            onDeleteEmployee={handleDeleteEmployee}
+                            isDeleting={deleteEmployeeMutation.isPending}
+                        />
 
-            </div>
+                    </div>
 
-            {/* card view for mobile size */}
-            <div className='block space-y-4 md:hidden'>
+                    {/* card view for mobile size */}
+                    <div className='block space-y-4 md:hidden'>
 
-                {employees.map(emp => <EmployeeCard key={emp.id} employee={emp}/>)}
+                        {employees.map(emp => <EmployeeCard key={emp.id} employee={emp}/>)}
 
-            </div>
+                    </div>
+                
+                </>
+            )}
 
         </div>
     )

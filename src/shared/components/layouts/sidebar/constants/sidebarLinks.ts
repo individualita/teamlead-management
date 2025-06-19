@@ -4,39 +4,39 @@ import { HiOutlineChatBubbleLeftEllipsis } from 'react-icons/hi2';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { FiBarChart } from 'react-icons/fi';
 
+import { ROUTES } from '../../../../../shared/constants/routes';
+
 import { SidebarLink } from '../types';
 
 
 export const SIDEBAR_LINKS: SidebarLink[] = [
     {
         icon: HiOutlineSquares2X2 ,
-        name: 'Home',
-        path: '/home'
+        name: ROUTES.HOME.title,
+        path: ROUTES.HOME.path,
     },
 
     {
         icon: GoPeople,
-        name: 'Employees',
-        path: '/employees'
+        name: ROUTES.EMPLOYEES.title,
+        path: ROUTES.EMPLOYEES.path,
     },
 
     {
         icon: FiBarChart,
-        name: 'Daily activity',
-        path: '/activity'
+        name: ROUTES.ACTIVITY.title,
+        path: ROUTES.ACTIVITY.path,
     },
     {
         icon:  HiOutlineChatBubbleLeftEllipsis, 
-        name: 'Chat',
-        path: '/chat'
+        name: ROUTES.CHAT.title,
+        path: ROUTES.CHAT.path,
     },
 
     {
         icon: IoSettingsOutline,
-        name: 'Settings',
-        path: '/settings'
+        name: ROUTES.SETTINGS.title,
+        path: ROUTES.SETTINGS.path,
     }
 
-
-    
 ]
