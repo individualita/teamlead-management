@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { Dayjs } from 'dayjs';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 
 //MUI
 import { TextField, MenuItem } from '@mui/material';
@@ -19,57 +19,62 @@ import { Employee } from '../../../../shared/types';
 import { useAddMutation } from '../../../../shared/hooks/useAddMutation';
 
 import { employeesService } from '../../../../shared/services/employeesService';
-import { employeeSchema, EmployeeFormDataSchema } from '../../schema/employee.schema';
+import {
+    employeeSchema,
+    EmployeeFormDataSchema,
+} from '../../schema/employee.schema';
 import { addEmployeeFormInputSx } from '../../constants/styles';
 import { EMPLOYEE_STATUSES } from '../../../../shared/constants/employeeStatuses';
 
-
 interface AddEmployeeFormProps {
-    handleClose: () => void,
-    showAlert: (name: string) => void,
+    handleClose: () => void;
+    showAlert: (name: string) => void;
 }
 
-const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
-
+const AddEmployeeForm = ({ handleClose, showAlert }: AddEmployeeFormProps) => {
     const addEmployeeMutation = useAddMutation({
         mutationFn: employeesService.addEmployeeToFirestore,
-        queryKey: ['employees']
+        queryKey: ['employees'],
     });
 
-    const { register, handleSubmit, control, reset, formState: {errors}} = useForm<EmployeeFormDataSchema>({
+    const {
+        register,
+        handleSubmit,
+        control,
+        reset,
+        formState: { errors },
+    } = useForm<EmployeeFormDataSchema>({
         mode: 'onChange',
         resolver: zodResolver(employeeSchema),
         defaultValues: {
             name: '',
             position: '',
             startDate: new Date(),
-            status: EMPLOYEE_STATUSES.ACTIVE, 
+            status: EMPLOYEE_STATUSES.ACTIVE,
             email: '',
             phone: '',
-        }
-
+        },
     });
 
-    const onSubmit: SubmitHandler<EmployeeFormDataSchema> = (data) => {
-
+    const onSubmit: SubmitHandler<EmployeeFormDataSchema> = data => {
         addEmployeeMutation.mutate(data, {
-            onSuccess: (savedData) => {
+            onSuccess: savedData => {
                 reset();
                 handleClose();
                 showAlert((savedData as Employee).name);
             },
-            onError: (error) => toast.error(error.message)
+            onError: error => toast.error(error.message),
         });
     };
 
     return (
-        <form 
-            onSubmit={handleSubmit(onSubmit)} 
-            className='mt-10 flex flex-col gap-4'>
-
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='mt-10 flex flex-col gap-4'
+        >
             <TextField
-                {...register('name', {required: true})}
-                type='text' 
+                {...register('name', { required: true })}
+                type='text'
                 name='name'
                 size='small'
                 label='Employee name'
@@ -78,30 +83,27 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                 sx={addEmployeeFormInputSx}
             />
 
-
-
             <TextField
-                {...register('position', {required: true})}
-                type='text' 
+                {...register('position', { required: true })}
+                type='text'
                 name='position'
                 size='small'
-                label='Position' 
+                label='Position'
                 helperText={errors.position && errors.position.message}
                 error={!!errors.position}
                 sx={addEmployeeFormInputSx}
             />
 
-
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-
-                <Controller 
+                <Controller
                     name='startDate'
                     control={control}
                     render={({ field }) => (
-
                         <DatePicker
                             {...field}
-                            onChange={(date: Dayjs | null) => field.onChange(date ? date.toDate() : null)} // Dayjs -> Date
+                            onChange={(date: Dayjs | null) =>
+                                field.onChange(date ? date.toDate() : null)
+                            } // Dayjs -> Date
                             value={field.value ? dayjs(field.value) : null} // Date -> Dayjs
                             format='DD/MM/YYYY'
                             label='DD/MM/YYY'
@@ -109,25 +111,20 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                                 textField: {
                                     size: 'small',
                                     error: !!errors.startDate,
-                                    helperText: errors.startDate?.message, 
+                                    helperText: errors.startDate?.message,
                                 },
-                            }}  
-                            
+                            }}
                             sx={addEmployeeFormInputSx}
                         />
-
                     )}
                 />
-
             </LocalizationProvider>
 
-
-            <Controller 
+            <Controller
                 name='status'
                 control={control}
-                rules={{required: true}}
+                rules={{ required: true }}
                 render={({ field }) => (
-
                     <TextField
                         {...field}
                         select
@@ -140,26 +137,22 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                         <MenuItem value='' disabled sx={{ fontSize: '14px' }}>
                             Choose status
                         </MenuItem>
-        
+
                         {Object.values(EMPLOYEE_STATUSES).map(status => (
                             <MenuItem
                                 key={status}
                                 value={status}
-                                sx={{fontSize: '14px'}}
+                                sx={{ fontSize: '14px' }}
                             >
                                 {status}
                             </MenuItem>
                         ))}
-                            
                     </TextField>
-
-
                 )}
             />
 
-
             <TextField
-                {...register('email',  {required: true})}
+                {...register('email', { required: true })}
                 type='email'
                 name='email'
                 label='Email'
@@ -167,11 +160,10 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                 helperText={errors.email && errors.email.message}
                 error={!!errors.email}
                 sx={addEmployeeFormInputSx}
-
             />
 
             <TextField
-                {...register('phone', {required: true})}
+                {...register('phone', { required: true })}
                 type='tel'
                 name='phone'
                 label='Phone'
@@ -181,33 +173,29 @@ const AddEmployeeForm = ({handleClose, showAlert}: AddEmployeeFormProps) => {
                 sx={addEmployeeFormInputSx}
             />
 
-
             <div className='flex gap-3 ml-auto'>
-                <Button 
-                    variant='contained' 
-                    color='success' 
-                    type='submit' 
+                <Button
+                    variant='contained'
+                    color='success'
+                    type='submit'
                     size='small'
                     disabled={addEmployeeMutation.isPending}
                 >
-                    {addEmployeeMutation.isPending? 'Loading...' : 'Create'}
+                    {addEmployeeMutation.isPending ? 'Loading...' : 'Create'}
                 </Button>
 
                 <Button
-                    onClick={handleClose} 
-                    variant='text' 
-                    color='warning' 
-                    type='button' 
-                    size='small'>
-                        Close
+                    onClick={handleClose}
+                    variant='text'
+                    color='warning'
+                    type='button'
+                    size='small'
+                >
+                    Close
                 </Button>
-
             </div>
-
         </form>
-    )
-
-}
-
+    );
+};
 
 export default AddEmployeeForm;

@@ -7,39 +7,36 @@ import { IoTrash } from 'react-icons/io5';
 import styles from './actionMenu.module.css';
 
 interface ActionMenuProps {
-    employeeId: string,
-    onEdit: (id: string) => void,
-    isDeleting?: boolean,
-    onDeleteEmployee: (id: string) => void,
+    employeeId: string;
+    onEdit: (id: string) => void;
+    isPending?: boolean;
+    onDeleteEmployee: (id: string) => void;
 }
 
 const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
-    ({ employeeId, onEdit, isDeleting, onDeleteEmployee}, ref) => {
+    ({ employeeId, onEdit, isPending, onDeleteEmployee }, ref) => {
         return (
-
-            <div 
+            <div
                 ref={ref}
                 className={styles.menu}
                 role='menu'
                 aria-label='Employee actions'
             >
-
-                {isDeleting ? (
-                    <span className='p-3'>Loading...</span> 
+                {isPending ? (
+                    <span className='p-3'>Loading...</span>
                 ) : (
                     <>
-                        <button 
-                            onClick={() => onEdit(employeeId)} 
+                        <button
+                            onClick={() => onEdit(employeeId)}
                             className={styles.button}
                             role='menuitem'
                             aria-label='Edit employee'
-
-                            >
-                                <FaPencil className='text-lg'/> 
-                                <span>Edit</span>
+                        >
+                            <FaPencil className='text-lg' />
+                            <span>Edit</span>
                         </button>
-                
-                        <button 
+
+                        <button
                             onClick={() => onDeleteEmployee(employeeId)}
                             className={styles.button}
                             role='menuitem'
@@ -50,11 +47,9 @@ const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
                         </button>
                     </>
                 )}
-                
-
             </div>
         );
-    }
+    },
 );
 
 export default ActionMenu;
