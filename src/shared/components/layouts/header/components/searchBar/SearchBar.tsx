@@ -15,7 +15,6 @@ import { fadeTransitionClassNames } from '../../../../../constants/fadeTransitio
 
 import SearchSuggestionItem from './SearchSuggestionItem';
 
-import styles from './searchBar.module.css';
 
 const SearchBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +52,7 @@ const SearchBar = () => {
                 name='search'
                 type='search'
                 placeholder='Search employee...'
-                className={styles.input}
+                className=' border-gray-300/50 text-sm rounded-lg block  py-2 px-9  w-[400px] placeholder:text-xs bg-gray-100 focus-input'
                 value={query}
                 onChange={e => setQuery(e.target.value)}
             />

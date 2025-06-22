@@ -15,7 +15,7 @@ import { VALIDATION_RULES } from '../../constants/validationRules';
 import ErrorAlert from '../errorAlert/ErrorAlert';
 
 //styles
-import styles from './authForm.module.css';
+import '../../styles/auth.css';
 
 interface AuthInputs {
     username?: string;
@@ -30,6 +30,11 @@ interface AuthFormProps {
         password: string,
         username?: string,
     ) => Promise<void>;
+}
+
+const testCredentials = {
+    login: 'test@test.com',
+    password: 'Test1234'
 }
 
 const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
@@ -49,16 +54,21 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
     };
 
     return (
-        <div className={styles.formContainer}>
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+        <div className='flex justify-center items-center h-dvh'>
+            <form
+                className=' bg-white p-8 w-full inset-shadow-sm shadow-xl max-w-[450px] rounded-[8px] flex flex-col gap-4'
+                onSubmit={handleSubmit(onSubmit)}
+            >
                 <ErrorAlert errorMessage={errorMessage ?? undefined} />
 
-                <div className={styles.logo}>Teamlead </div>
-                <h1 className={styles.title}>{title}</h1>
+                <div className='text-primary text-xl font-bold text-center'>
+                    Teamlead{' '}
+                </div>
+                <h1 className='text-3xl'>{title}</h1>
 
                 {title === ROUTES.SIGN_UP.title && (
-                    <div className={styles.formGroup}>
-                        <label htmlFor='username' className={styles.label}>
+                    <div className='auth-form-group'>
+                        <label htmlFor='username' className='auth-label'>
                             Your name
                         </label>
 
@@ -67,19 +77,19 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
                             id='username'
                             {...register('username', VALIDATION_RULES.USERNAME)}
                             placeholder='Your name'
-                            className={styles.input}
+                            className='auth-input focus-input'
                         />
 
                         {errors.username && (
-                            <span className={styles.error}>
+                            <span className='auth-error'>
                                 {errors.username.message}
                             </span>
                         )}
                     </div>
                 )}
 
-                <div className={styles.formGroup}>
-                    <label htmlFor='email' className={styles.label}>
+                <div className='auth-form-group'>
+                    <label htmlFor='email' className='auth-label'>
                         Email
                     </label>
 
@@ -88,17 +98,17 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
                         id='email'
                         {...register('email', VALIDATION_RULES.EMAIL)}
                         placeholder='your@email.com'
-                        className={styles.input}
+                        className='auth-input focus-input'
                     />
                     {errors.email && (
-                        <span className={styles.error}>
+                        <span className='auth-error'>
                             {errors.email.message}
                         </span>
                     )}
                 </div>
 
-                <div className={styles.formGroup}>
-                    <label htmlFor='password' className={styles.label}>
+                <div className='auth-form-group'>
+                    <label htmlFor='password' className='auth-label'>
                         Password
                     </label>
                     <input
@@ -106,18 +116,21 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
                         id='password'
                         {...register('password', VALIDATION_RULES.PASSWORD)}
                         placeholder='••••••'
-                        className={styles.input}
+                        className='auth-input focus-input'
                         autoComplete='current-password'
                     />
                     {errors.password && (
-                        <span className={styles.error}>
+                        <span className='auth-error'>
                             {' '}
                             {errors.password.message}
                         </span>
                     )}
                 </div>
 
-                <button type='submit' className={styles.button}>
+                <button 
+                    type='submit' 
+                    className='mt-7 w-full p-2 text-white font-bold rounded-2xl cursor-pointer bg-gray-800 text-sm hover-fade'
+                >
                     {title.toUpperCase()}
                 </button>
 
@@ -133,7 +146,7 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
                                 ? ROUTES.SIGN_UP.path
                                 : ROUTES.SIGN_IN.path
                         }
-                        className='text-blue-600'
+                        className=' text-secondary hover:underline'
                     >
                         {title === ROUTES.SIGN_IN.title
                             ? 'Get started'
@@ -145,10 +158,10 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
                     <Alert title='Test account' severity='info'>
                         <p>
                             Login:{' '}
-                            <span className='font-bold'>test@test.com</span>
+                            <span className='font-bold'>{testCredentials.login}</span>
                         </p>
                         <p>
-                            Password:<span className='font-bold'>Test1234</span>
+                            Password:<span className='font-bold'>{testCredentials.password}</span>
                         </p>
                     </Alert>
                 )}

@@ -1,30 +1,20 @@
-:root {
-	/* container settings */
+@theme {
+    /* Container settings */
+    --size-container: 1000px;
+    --spacing-container: 15px;
 
-	--container-width: 1000px;
-	--container-padding: 15px;
-
-	/* Font settings */
-	--font-main: "Nunito Sans", serif;
-
-	/* Background */
-	--page-bg: #fafbfc;
+    /* Font settings */
+    --font-family-main: 'Nunito Sans', serif;
 
 
-	/* text - colors */
-	--text-color: #35323b;
-	--text-inactive: #787486;
+    /* Text colors */
+    --color-base: #35323b;
+    --color-inactive: #787486;
 
-	/* colors */
-	--color-primary: #7F56D9;
-	--color-secondary: #0080fc;
-	--color-warning: #fdB657;
-	--color-critical: #fc717a;
-	--color-success: #1bcb81;
-
-
-	/* Breakpoints */
-    --laptop-size: 1199px;
-	--tablet-size: 959px;
-	--mobile-size: 599px;
-}	
+    /* Brand colors */
+    --color-primary: #7f56d9;
+    --color-secondary: #0080fc;
+    --color-warning: #fdb657;
+    --color-critical: #fc717a;
+    --color-success: #1bcb81;
+}

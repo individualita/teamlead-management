@@ -9,11 +9,7 @@ import AuthForm from '../components/authForm/AuthForm';
 
 const SignUp = () => {
     return (
-        <>
-            <h1>Sign Up page!</h1>
-
-            <AuthForm title={ROUTES.SIGN_UP.title} onFormSubmit={signUp} />
-        </>
+        <AuthForm title={ROUTES.SIGN_UP.title} onFormSubmit={signUp} />
     );
 };
 

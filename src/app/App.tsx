@@ -24,8 +24,6 @@ const SignInLazy = lazy(() => import('../features/auth/pages/SignIn'));
 const SignUpLazy = lazy(() => import('../features/auth/pages/SignUp'));
 const HomeLazy = lazy(() => import('../features/home/Home'));
 
-import './App.css';
-
 
 const App = () => {
 

@@ -1,0 +1,9 @@
+@layer components {
+    .testClass {
+        @apply text-3xl text-primary;
+    }
+    .card {
+        @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+
+    }
+}

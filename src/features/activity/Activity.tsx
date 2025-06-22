@@ -1,5 +1,9 @@
 const Activity = () => {
-    return <><h1>activity</h1></>;
+    return (
+        <div className='card'>
+            CARTOCHKA
+        </div>
+    )
 };
 
 export default Activity;
