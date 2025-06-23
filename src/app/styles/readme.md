@@ -17,24 +17,6 @@ src/
     └── [name].css          # Styles only for this feature
 ```
 
-## 🎯 Decision Logic
-
-### Where to place the style?
-
-```mermaid
-flowchart TD
-    A[New style] --> B{Is it a system style?}
-    B -->|YES| C[app/styles/]
-    B -->|NO| D{Used in 2+ features?}
-    D -->|YES| E[shared/styles/shared.css]
-    D -->|NO| F{Used in only one feature?}
-    F -->|YES| G[features/[name]/styles/[name].css]
-    F -->|NO| H[Inline Tailwind in JSX]
-
-    C --> C1[_base.css - HTML tags]
-    C --> C2[_vars.css - variables] 
-    C --> C3[_utilities.css - utilities]
-```
 
 ## 📋 File Descriptions
 
@@ -70,13 +52,6 @@ flowchart TD
 /* other features */
 ```
 
-### Style Application Order
-
-```
-base → shared → features → utilities
-  ↓       ↓        ↓         ↓
-HTML   Common   Feature-   Utilities
-tags   comps    specific   (priority)
 ```
 
 ## 🛠️ Style Writing Rules
