@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+
+@layer features {
+    .employees-action-button {
+        @apply flex gap-4 items-center py-2 px-3  hover:bg-gray-100 rounded-md cursor-pointer;
+    }
+}

@@ -4,7 +4,7 @@ import { forwardRef } from 'react';
 import { FaPencil } from 'react-icons/fa6';
 import { IoTrash } from 'react-icons/io5';
 
-import styles from './actionMenu.module.css';
+import './../../styles/employees.css';
 
 interface ActionMenuProps {
     employeeId: string;
@@ -18,7 +18,7 @@ const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
         return (
             <div
                 ref={ref}
-                className={styles.menu}
+                className='absolute -left-10 top-3 w-35 bg-white shadow-sm rounded-md inset-shadow-sm z-10 flex flex-col'
                 role='menu'
                 aria-label='Employee actions'
             >
@@ -28,7 +28,7 @@ const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
                     <>
                         <button
                             onClick={() => onEdit(employeeId)}
-                            className={styles.button}
+                            className='employees-action-button'
                             role='menuitem'
                             aria-label='Edit employee'
                         >
@@ -38,7 +38,7 @@ const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
 
                         <button
                             onClick={() => onDeleteEmployee(employeeId)}
-                            className={styles.button}
+                            className='employees-action-button'
                             role='menuitem'
                             aria-label='Delete employee'
                         >

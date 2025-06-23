@@ -1,13 +1,12 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { fadeTransitionClassNames } from '../../../../../shared/constants/fadeTransitionClassNames';
 import { CSS_ANIMATION_DURATION } from '../../../../../shared/constants/cssAnimationDuration';
 
 
 import ProfileActions  from '../profileActions/ProfileActions';
 
-import styles from './profileDropdown.module.css';
+import '../../../../../shared/styles/shared.css';
 
 
 type ProfilePropdownProps = {
@@ -26,18 +25,18 @@ const ProfileDropdown = ({isOpen, username, email}: ProfilePropdownProps) => {
             timeout={CSS_ANIMATION_DURATION} 
             in={isOpen} 
             nodeRef={nodeRef}
-            classNames={fadeTransitionClassNames}  
+            classNames={'fade'}  
             unmountOnExit
             >
 
             <article 
-                className={styles.card}
+                className='absolute right-4 bg-white shadow-sm rounded-md inset-shadow-sm z-10'
                 ref={nodeRef}
             >
 
-                <header className={styles.header}>
+                <header className='border-b border-b-gray-300 px-4 py-3'>
                     <h2 className='text-base font-semibold'>{username || 'Anonymous'}</h2>
-                    <address className={styles.email}>{email}</address>
+                    <address className='text-sm not-italic text-inactive opacity-80'>{email}</address>
                 </header>
 
                 <ProfileActions />

@@ -11,9 +11,10 @@ import { useEmployeeStore } from '../../../../../stores/employeesStore';
 import { useDebounce } from '../../hooks/useDebounce';
 
 import { CSS_ANIMATION_DURATION } from '../../../../../constants/cssAnimationDuration';
-import { fadeTransitionClassNames } from '../../../../../constants/fadeTransitionClassNames';
 
 import SearchSuggestionItem from './SearchSuggestionItem';
+
+import '../../../../../styles/shared.css';
 
 
 const SearchBar = () => {
@@ -63,7 +64,7 @@ const SearchBar = () => {
                 nodeRef={nodeRef}
                 in={isOpen}
                 timeout={CSS_ANIMATION_DURATION}
-                classNames={fadeTransitionClassNames}
+                classNames={'fade'}
                 unmountOnExit
             >
                 <ul

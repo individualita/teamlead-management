@@ -23,8 +23,6 @@ import EmployeeCard from './components/employeeCard/EmployeeCard';
 import UiEmployeesTable from './components/uiEmployeesTable/UiEmployeesTable';
 import AddEmployeeDrawer from './components/addEmployeeDrawer/AddEmployeeDrawer';
 
-//styles
-import styles from './employees.module.css';
 
 const Employees = () => {
     //store
@@ -63,7 +61,7 @@ const Employees = () => {
     };
 
     const renderEmptyState = () => (
-        <div className={styles.emptyState}>
+        <div className='flex flex-col items-center justify-center mt-4 p-12 text-center text-inactive  rounded-lg border-1 border-dashed border-inactive select-none'>
             <span>No employees found. Add your first employee!</span>
         </div>
     );
@@ -89,7 +87,7 @@ const Employees = () => {
             ) : (
                 <>
                     {/* desktop size */}
-                    <div className={styles.tableDesktopWrapper}>
+                    <div className='overflow-x-auto rounded-lg shadow-md hidden md:block'>
                         <UiEmployeesTable
                             employees={employees}
                             onUpdateEmployee={handleUpdateEmployee}

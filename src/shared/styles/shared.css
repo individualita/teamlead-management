@@ -1,0 +1,27 @@
+@import 'tailwindcss';
+@import './../../app/styles/_vars.css';
+
+@layer shared {
+    .test-class {
+        @apply text-primary;
+    }
+
+    /* animations */
+    .fade-enter  {
+        opacity: 0;
+    }
+    .fade-enter-active {
+        opacity: 1;
+        transition: opacity 600ms ease;
+    }
+    .fade-exit {
+        opacity: 1;
+    }
+    .fade-exit-active {
+        opacity: 0;
+        transition: opacity 600ms ease;
+    }
+
+    
+}
+

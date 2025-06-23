@@ -2,9 +2,12 @@
 
 @import 'tailwindcss';
 @import './_vars.css';
-@import './_components.css';
 @import './_utilities.css';
 @import './_base.css';
 
+/* shared styles */
+@import '../../shared/styles/shared.css';
 
-
+/* features */
+@import '../../features/auth/styles/auth.css';
+@import '../../features/employees/styles/employees.css';

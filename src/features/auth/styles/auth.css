@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @import '../../../app/styles/_vars.css';
 
-@layer components {
+@layer features {
     .auth-form-group {
         @apply flex flex-col gap-1;
     }

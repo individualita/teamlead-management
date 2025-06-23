@@ -1,7 +1,7 @@
 const Activity = () => {
     return (
-        <div className='card'>
-            CARTOCHKA
+        <div className='test-class'>
+            test
         </div>
     )
 };
