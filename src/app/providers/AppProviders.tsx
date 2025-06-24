@@ -3,24 +3,19 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { queryClient } from '../../shared/clients/queryClient';
 import { ReactNode } from 'react';
 
-import { BrowserRouter as Router } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import { AuthProvider } from './AuthProvider';
 
-
-const AppProviders = ({children}: {children: ReactNode}) => {
-
+const AppProviders = ({ children }: { children: ReactNode }) => {
     return (
         <QueryClientProvider client={queryClient}>
             <Router>
-                <AuthProvider>
-                    {children}
-                </AuthProvider>
+                <AuthProvider>{children}</AuthProvider>
             </Router>
-            <ReactQueryDevtools initialIsOpen={false}/>
+            <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
-    )
-
-}
+    );
+};
 
 export default AppProviders;

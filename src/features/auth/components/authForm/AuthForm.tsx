@@ -34,8 +34,8 @@ interface AuthFormProps {
 
 const testCredentials = {
     login: 'test@test.com',
-    password: 'Test1234'
-}
+    password: 'Test1234',
+};
 
 const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
     const errorMessage = useAuthError();
@@ -127,8 +127,8 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
                     )}
                 </div>
 
-                <button 
-                    type='submit' 
+                <button
+                    type='submit'
                     className='mt-7 w-full p-2 text-white font-bold rounded-2xl cursor-pointer bg-gray-800 text-sm hover-fade'
                 >
                     {title.toUpperCase()}
@@ -158,10 +158,15 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
                     <Alert title='Test account' severity='info'>
                         <p>
                             Login:{' '}
-                            <span className='font-bold'>{testCredentials.login}</span>
+                            <span className='font-bold'>
+                                {testCredentials.login}
+                            </span>
                         </p>
                         <p>
-                            Password:<span className='font-bold'>{testCredentials.password}</span>
+                            Password:
+                            <span className='font-bold'>
+                                {testCredentials.password}
+                            </span>
                         </p>
                     </Alert>
                 )}

@@ -1,11 +1,10 @@
 import { Alert } from '@mui/material';
 
 type ErrorAlertProps = {
-    errorMessage?: string,
-}
+    errorMessage?: string;
+};
 
-const ErrorAlert = ({errorMessage}: ErrorAlertProps) => {
-
+const ErrorAlert = ({ errorMessage }: ErrorAlertProps) => {
     if (!errorMessage) return null;
 
     return (
@@ -13,7 +12,7 @@ const ErrorAlert = ({errorMessage}: ErrorAlertProps) => {
             <strong>Error:</strong> {''}
             {errorMessage}
         </Alert>
-    )
-}
+    );
+};
 
 export default ErrorAlert;

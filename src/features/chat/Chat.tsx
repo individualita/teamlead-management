@@ -7,6 +7,7 @@ import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/Loa
 import MessageList from './components/messageList/MessageList';
 import ChatForm from './components/chatForm/ChatForm';
 
+
 const Chat = () => {
     const { error, loading, messages } = useMessages();
 

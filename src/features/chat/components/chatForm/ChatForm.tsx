@@ -1,8 +1,10 @@
 import { useState, FormEvent } from 'react';
-import { useSendMessage } from '../../hooks/useSendMessage';
 
 import { FaTelegramPlane } from 'react-icons/fa';
 import { CircularProgress } from '@mui/material';
+
+//hooks
+import { useSendMessage } from '../../hooks/useSendMessage';
 
 //types
 import { User } from '../../../../shared/types';
@@ -18,15 +20,8 @@ const ChatForm = ({ user }: ChatFormProps) => {
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
-
-        try {
-            await send(text);
-            setText('');
-        } catch {
-            alert(
-                'Could not send your message. Please check your connection and try again.',
-            );
-        }
+        await send(text);
+        setText('');
     };
 
     return (
@@ -37,7 +32,7 @@ const ChatForm = ({ user }: ChatFormProps) => {
                         type='text'
                         value={text}
                         onChange={e => setText(e.target.value)}
-                        className='flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500'
+                        className='flex-1 px-4 py-2 border border-gray-300 rounded-lg focus-input'
                         placeholder='Type something...'
                     />
 
@@ -49,7 +44,7 @@ const ChatForm = ({ user }: ChatFormProps) => {
                             className='p-1 hover:scale-105 transition duration-300 ease-in-out cursor-pointer disabled:opacity-50'
                             disabled={loading || !text.trim()}
                         >
-                            <FaTelegramPlane className='w-7 h-7 text-[var(--color-primary)]' />
+                            <FaTelegramPlane className='w-7 h-7 text-primary' />
                         </button>
                     )}
                 </div>

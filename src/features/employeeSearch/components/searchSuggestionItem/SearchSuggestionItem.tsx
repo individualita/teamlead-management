@@ -1,7 +1,7 @@
-import { Employee } from '../../../../../types';
+import { Employee } from '../../../../shared/types';
 
 //store
-import { openTab } from '../../../../../stores/tabsStore';
+import { openTab } from '../../../../shared/stores/tabsStore';
 
 interface SearchSuggestionItemProps {
     employee: Employee;

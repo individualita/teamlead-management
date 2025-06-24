@@ -11,3 +11,4 @@
 /* features */
 @import '../../features/auth/styles/auth.css';
 @import '../../features/employees/styles/employees.css';
+@import '../../features/profile/menu/styles/profileMenu.css';

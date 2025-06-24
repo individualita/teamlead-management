@@ -1,4 +1,3 @@
-
 import { Auth, UserCredential, updateProfile } from 'firebase/auth';
 
 //types
@@ -7,23 +6,27 @@ import { User } from '../../../shared/types';
 //constants
 import { DEFAULT_URL } from '../../../shared/constants/defaultImageUrl';
 
+type AuthActionType = (
+    auth: Auth,
+    email: string,
+    password: string,
+) => Promise<UserCredential>;
 
-type AuthActionType =  (auth: Auth, email:string, password:string) => Promise<UserCredential>;
-
-
-
-export const executeAuthAction = async (action: AuthActionType, auth: Auth, email:string, password:string, username?: string): Promise<User> => {
-    
+export const executeAuthAction = async (
+    action: AuthActionType,
+    auth: Auth,
+    email: string,
+    password: string,
+    username?: string,
+): Promise<User> => {
     try {
         const userCredential = await action(auth, email, password);
         const user = userCredential.user;
 
-
-        
         if (username) {
             await updateProfile(user, {
                 displayName: username,
-                photoURL: DEFAULT_URL
+                photoURL: DEFAULT_URL,
             });
         }
         const token = await user.getIdToken();
@@ -33,12 +36,10 @@ export const executeAuthAction = async (action: AuthActionType, auth: Auth, emai
             email: user.email,
             photoURL: user.photoURL,
             id: user.uid,
-            token: token
-        }
+            token: token,
+        };
     } catch (error) {
         console.error('Authentication failed:', error);
-        throw error; 
+        throw error;
     }
-
-}
-
+};

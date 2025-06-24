@@ -5,42 +5,36 @@ import { FaPencil } from 'react-icons/fa6';
 import { useFirebaseProfileUpdate } from '../../hooks/useFirebaseProfileUpdate';
 
 interface EditUserNameFormProps {
-    currentName: string
+    currentName: string;
 }
-const UserNameForm = ({ currentName}: EditUserNameFormProps) => {
-
+const UserNameForm = ({ currentName }: EditUserNameFormProps) => {
     const [name, setName] = useState(currentName);
     const [isNameUpdating, setIsNameUpdating] = useState(false);
 
-
-    const {update, isLoading} = useFirebaseProfileUpdate();
+    const { update, isLoading } = useFirebaseProfileUpdate();
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        await update({displayName: name});
+        await update({ displayName: name });
         setName(name);
         setIsNameUpdating(false);
-
-    }
-
+    };
 
     return (
-
-        <form 
-            onSubmit={handleSubmit} 
+        <form
+            onSubmit={handleSubmit}
             className='flex flex-col'
             aria-label='edit username'
         >
             <div className='flex gap-3 items-center rounded-md relative'>
-
-                <input 
+                <input
                     type='text'
                     value={name}
-                    name='username' 
-                    onChange={(e) => setName(e.target.value)}
+                    name='username'
+                    onChange={e => setName(e.target.value)}
                     className={`
-                        ${isNameUpdating? 'border': 'border-none'}
+                        ${isNameUpdating ? 'border' : 'border-none'}
                         border-gray-300 rounded-lg px-2 py-2
                         text-base
                         focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-transparent
@@ -54,60 +48,48 @@ const UserNameForm = ({ currentName}: EditUserNameFormProps) => {
                     required
                 />
 
-
-                {isNameUpdating? (
+                {isNameUpdating ? (
                     <div className='flex gap-3'>
-
                         <Button
-                            type='submit' 
-                            variant='contained' 
-                            color='success' 
+                            type='submit'
+                            variant='contained'
+                            color='success'
                             size='medium'
                             disabled={isLoading}
                             aria-label='Save username'
                             title='Save username'
                         >
-                            {isLoading? 'Saving...' : 'Save'}
+                            {isLoading ? 'Saving...' : 'Save'}
                         </Button>
 
                         <Button
-                            type='button' 
+                            type='button'
                             onClick={() => {
                                 setIsNameUpdating(false);
-                                setName(currentName)
-                            }} 
-                            variant='text' 
-                            color='warning' 
+                                setName(currentName);
+                            }}
+                            variant='text'
+                            color='warning'
                             size='medium'
                             aria-label='Cancel editing'
                             title='Cancel editing'
                         >
-                                Cancel
+                            Cancel
                         </Button>
                     </div>
-
                 ) : (
-                    
                     <button
-                        type='button' 
+                        type='button'
                         className='absolute right-2 cursor-pointer'
                         onClick={() => setIsNameUpdating(true)}
                         aria-label='Edit username'
                     >
-                        <FaPencil 
-                            className='text-base'
-                            title='Edit name'
-                        /> 
+                        <FaPencil className='text-base' title='Edit name' />
                     </button>
-
                 )}
-
-
             </div>
-
         </form>
-    )
-
-}
+    );
+};
 
 export default UserNameForm;

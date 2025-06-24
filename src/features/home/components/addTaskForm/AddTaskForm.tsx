@@ -4,7 +4,6 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 
-
 // Internal modules: stores and hooks
 import { useAddMutation } from '../../../../shared/hooks/useAddMutation';
 import { taskService } from '../../services/taskService';
@@ -17,35 +16,33 @@ import { Task } from '../../types';
 import { addTaskFormInputSx } from '../../constants/styles';
 import { TASK_PRIORITIES, TASK_STATUSES } from '../../constants/tasks';
 
-
-
 interface AddTaskFormProps {
-    onClose: () => void,
+    onClose: () => void;
 }
 
-
-const AddTaskForm = ({onClose}: AddTaskFormProps) => {
-
+const AddTaskForm = ({ onClose }: AddTaskFormProps) => {
     const addTaskMutation = useAddMutation({
         mutationFn: taskService.addTaskToFirestore,
-        queryKey: ['tasks']
+        queryKey: ['tasks'],
     });
 
-
-    const { register, handleSubmit, control, reset, formState: {errors}} = useForm<TaskFormDataSchema>({
+    const {
+        register,
+        handleSubmit,
+        control,
+        reset,
+        formState: { errors },
+    } = useForm<TaskFormDataSchema>({
         mode: 'onChange',
         resolver: zodResolver(taskSchema),
         defaultValues: {
             title: '',
             description: '',
-            priority: TASK_PRIORITIES.LOW
-        } 
-
-
+            priority: TASK_PRIORITIES.LOW,
+        },
     });
 
-    const onSubmit: SubmitHandler<TaskFormDataSchema> = (data) => {
-
+    const onSubmit: SubmitHandler<TaskFormDataSchema> = data => {
         const newTask: Omit<Task, 'id'> = {
             ...data,
             status: TASK_STATUSES.TODO,
@@ -53,37 +50,39 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
         };
 
         addTaskMutation.mutate(newTask, {
-            onSuccess: (savedTask) => {
-                toast.success(`Task ${(savedTask as Task).title.toUpperCase()} added successfully!`)
+            onSuccess: savedTask => {
+                toast.success(
+                    `Task ${(savedTask as Task).title.toUpperCase()} added successfully!`,
+                );
                 reset();
                 onClose();
             },
 
-            onError: (error) => {
+            onError: error => {
                 toast.error(error.message);
-            }
-        })
+            },
+        });
     };
 
-
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className='bg-white rounded-lg shadow-sm p-4 flex flex-col gap-4'>
-
+        <form
+            onSubmit={handleSubmit(onSubmit)}
+            className='bg-white rounded-lg shadow-sm p-4 flex flex-col gap-4'
+        >
             <TextField
-                {...register('title', {required: true})}
-                type='text' 
+                {...register('title', { required: true })}
+                type='text'
                 name='title'
                 size='small'
                 label='Task title'
                 helperText={errors.title && errors.title.message}
                 error={!!errors.title}
                 sx={addTaskFormInputSx}
-                
             />
 
             <TextField
-                {...register('description', {required: true})}
-                type='text' 
+                {...register('description', { required: true })}
+                type='text'
                 name='description'
                 multiline
                 rows={4}
@@ -92,15 +91,12 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
                 helperText={errors.description && errors.description.message}
                 error={!!errors.description}
                 sx={addTaskFormInputSx}
-                
             />
 
-
-            <Controller 
+            <Controller
                 name='priority'
                 control={control}
                 render={({ field }) => (
-
                     <TextField
                         {...field}
                         select
@@ -110,35 +106,30 @@ const AddTaskForm = ({onClose}: AddTaskFormProps) => {
                         error={!!errors.priority}
                         sx={addTaskFormInputSx}
                     >
-
                         {Object.values(TASK_PRIORITIES).map(item => (
-                            <MenuItem 
-                                key={item} 
+                            <MenuItem
+                                key={item}
                                 value={item}
-                                sx={{fontSize: '14px'}}
-                                >
-                                    {item}
+                                sx={{ fontSize: '14px' }}
+                            >
+                                {item}
                             </MenuItem>
                         ))}
-                            
                     </TextField>
-
-
                 )}
             />
 
             <Button
-                variant='contained' 
-                color='success' 
-                type='submit' 
+                variant='contained'
+                color='success'
+                type='submit'
                 size='small'
                 disabled={addTaskMutation.isPending}
-                >
-                    {addTaskMutation.isPending ? 'Adding...' : 'Add'}
-
+            >
+                {addTaskMutation.isPending ? 'Adding...' : 'Add'}
             </Button>
         </form>
-    )
-}
+    );
+};
 
 export default AddTaskForm;

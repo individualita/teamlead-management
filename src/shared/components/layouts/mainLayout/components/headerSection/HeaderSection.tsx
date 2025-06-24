@@ -1,6 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import Header from '../../header/Header';
-
+import Header from '../../../header/Header';
 const HeaderSection = () => {
     return (
         <>

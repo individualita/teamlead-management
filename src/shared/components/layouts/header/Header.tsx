@@ -1,4 +1,4 @@
-import SearchBar from './components/searchBar/SearchBar';
+import SearchBar from '../../../../features/employeeSearch/SearchBar';
 import Logo from './components/logo/Logo';
 
 import ProfileMenu from '../../../../features/profile/menu/ProfileMenu';

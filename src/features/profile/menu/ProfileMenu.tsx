@@ -16,7 +16,6 @@ const ProfileMenu = () => {
     const profileRef = useRef<HTMLDivElement>(null);
 
     const handleClickOutside = (e: MouseEvent) => {
-        //клие не внутри
         if (!profileRef.current?.contains(e.target as Node)) {
             setIsOpenProfileMenu(false);
         }

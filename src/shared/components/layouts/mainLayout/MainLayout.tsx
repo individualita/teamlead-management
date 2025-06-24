@@ -8,9 +8,9 @@ import { setAllEmployees, useEmployeeById } from '../../../stores/employeesStore
 import { useEmployeesQuery } from '../../../hooks/useEmployeesQuery';
 
 import { LoadingCircle } from '../loadingCircle/LoadingCircle';
-import HeaderSection from './headerSection/HeaderSection';
+import HeaderSection from './components/headerSection/HeaderSection';
+import ContentSection from './components/contentSection/ContentSection';
 import Sidebar from '../sidebar/Sidebar';
-import ContentSection from './contentSection/ContentSection';
 
 
 const MainLayout = () => {

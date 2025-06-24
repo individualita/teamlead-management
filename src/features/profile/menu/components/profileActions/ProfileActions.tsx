@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { logout } from '../../../../../shared/stores/authStore';
 
-// import { ROUTE_PATHS } from '../../../../app/constants/routePaths';
 import { ROUTES } from '../../../../../shared/constants/routes';
+
+import '../../styles/profileMenu.css';
 
 const ProfileActions = () => {
     const navigate = useNavigate();
@@ -17,7 +18,7 @@ const ProfileActions = () => {
         <div className='p-4 flex flex-col gap-1'>
             {/* navigate to settings */}
             <button
-                className='cursor-pointer underline text-left hover:opacity-85 transition-opacity delay-100'
+                className='profile-action-button hover-fade'
                 onClick={() => navigate(ROUTES.SETTINGS.path)}
             >
                 Settings
@@ -25,7 +26,7 @@ const ProfileActions = () => {
 
             <button
                 onClick={handleLogOut}
-                className='cursor-pointer underline text-left hover:opacity-85 transition-opacity delay-100'
+                className='profile-action-button hover-fade'
                 aria-label='Sign out'
             >
                 Sign out

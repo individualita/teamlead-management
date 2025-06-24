@@ -2,18 +2,16 @@ import { Outlet } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 //types
-import { Employee } from '../../../../types';
+import { Employee } from '../../../../../types';
 
 //utils + constants
-// import { getPageTitle } from '../../../../utils/getPageTitle';
-import { getRouteTitle } from '../../../../utils/getRouteTitle';
-import { OUTLET_TAB } from '../../../../constants/outletTab';
+import { getRouteTitle } from '../../../../../utils/getRouteTitle';
+import { OUTLET_TAB } from '../../../../../constants/outletTab';
 
 //components
-import { ErrorMessage } from '../../../errorMessage/ErrorMessage';
-import EmployeeProfile from '../../../tabs/EmployeeProfile';
-import TabsHeader from '../../../tabs/TabsHeader';
-
+import { ErrorMessage } from '../../../../errorMessage/ErrorMessage';
+import EmployeeProfile from '../../../../../../features/employees/components/employeeProfile/EmployeeProfile';
+import TabsHeader from '../../../../tabs/TabsHeader';
 
 interface ContentSectionProps {
     activeEmployee: Employee | undefined,

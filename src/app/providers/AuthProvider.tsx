@@ -2,9 +2,7 @@ import { ReactNode, useEffect } from 'react';
 
 import { useListenAuthState } from '../../shared/stores/authStore';
 
-
-export const AuthProvider = ({children} : {children: ReactNode}) => {
-
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const listenAuthState = useListenAuthState();
 
     useEffect(() => {

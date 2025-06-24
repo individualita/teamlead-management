@@ -1,0 +1,7 @@
+@import 'tailwindcss';
+
+@layer features {
+    .profile-action-button {
+        @apply cursor-pointer underline text-left;
+    }
+}
