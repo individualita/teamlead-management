@@ -6,13 +6,16 @@
         @apply flex flex-col gap-1;
     }
     .auth-input {
-        @apply border border-gray-300/50 bg-gray-50 text-sm rounded-lg block min-w-full py-2 px-2;
+        @apply text-xs md:text-sm border border-gray-300/50 bg-gray-50 rounded-lg block min-w-full py-2 px-2;
     }
     .auth-label {
-        @apply text-sm text-inactive select-none;
+        @apply text-xs md:text-sm text-inactive select-none;
     }
     .auth-error {
-        @apply text-xs text-red-600 select-none;
+        @apply text-[10px] md:text-xs text-red-600 select-none;
+    }
+    .auth-info {
+        @apply text-xs md:text-[14px];
     }
 }
 

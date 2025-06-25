@@ -23,11 +23,6 @@ export const SIDEBAR_LINKS: SidebarLink[] = [
     },
 
     {
-        icon: FiBarChart,
-        name: ROUTES.ACTIVITY.title,
-        path: ROUTES.ACTIVITY.path,
-    },
-    {
         icon:  HiOutlineChatBubbleLeftEllipsis, 
         name: ROUTES.CHAT.title,
         path: ROUTES.CHAT.path,

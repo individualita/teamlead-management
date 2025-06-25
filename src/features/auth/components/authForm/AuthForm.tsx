@@ -64,7 +64,7 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
                 <div className='text-primary text-xl font-bold text-center'>
                     Teamlead{' '}
                 </div>
-                <h1 className='text-3xl'>{title}</h1>
+                <h1 className='text-2xl md:text-3xl font-bold'>{title}</h1>
 
                 {title === ROUTES.SIGN_UP.title && (
                     <div className='auth-form-group'>
@@ -129,13 +129,13 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
 
                 <button
                     type='submit'
-                    className='mt-7 w-full p-2 text-white font-bold rounded-2xl cursor-pointer bg-gray-800 text-sm hover-fade'
+                    className='text-xs md:text-sm mt-3 md:mt-6 w-full p-2 text-white font-bold rounded-xl md:rounded-2xl cursor-pointer bg-gray-800 hover-fade'
                 >
                     {title.toUpperCase()}
                 </button>
 
-                <Divider>or</Divider>
-                <p className='text-center'>
+                <Divider className='text-[10px] md:text-xs'>or</Divider>
+                <p className='text-center text-xs md:text-sm'>
                     {title === ROUTES.SIGN_IN.title
                         ? `Don't have an account?`
                         : 'Already have an account?'}{' '}
@@ -156,13 +156,13 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
 
                 {title === ROUTES.SIGN_IN.title && (
                     <Alert title='Test account' severity='info'>
-                        <p>
+                        <p className='auth-info'>
                             Login:{' '}
                             <span className='font-bold'>
                                 {testCredentials.login}
                             </span>
                         </p>
-                        <p>
+                        <p className='auth-info'>
                             Password:
                             <span className='font-bold'>
                                 {testCredentials.password}

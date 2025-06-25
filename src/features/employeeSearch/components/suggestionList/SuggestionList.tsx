@@ -16,15 +16,15 @@ interface SuggestionListProps {
     isOpen: boolean;
     filteredEmployees: Employee[];
     clearQuery: () => void;
+    onSelect?: (employee: Employee) => void;
 }
 
-// components/SearchResults.jsx
 const SuggestionList = ({
     isOpen,
     filteredEmployees,
     clearQuery,
+    onSelect,
 }: SuggestionListProps) => {
-
     const nodeRef = useRef(null);
 
     return (
@@ -37,7 +37,7 @@ const SuggestionList = ({
         >
             <ul
                 ref={nodeRef}
-                className='absolute top-10 w-100 z-10 bg-white shadow-lg rounded-md'
+                className='absolute top-10 w-100 lg:w-140 z-10 bg-white shadow-lg rounded-md'
             >
                 {filteredEmployees.length > 0 ? (
                     filteredEmployees.map(emp => (
@@ -45,6 +45,7 @@ const SuggestionList = ({
                             key={emp.id}
                             employee={emp}
                             clearQuery={clearQuery}
+                            onSelect={onSelect}
                         />
                     ))
                 ) : (

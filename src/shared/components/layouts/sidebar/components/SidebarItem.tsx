@@ -25,7 +25,7 @@ const SidebarItem = ({link, isOpen}: SidebarItemProps) => {
                 }
             >
                     <link.icon className='min-w-6 min-h-6' />
-                    {isOpen && <span >{link.name}</span>}
+                    {isOpen && <span className='hidden md:block' >{link.name}</span>}
 
             </NavLink>
             

@@ -8,6 +8,7 @@ import { useDebounce } from './useDebounce';
 
 export const useEmployeeSearch = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const [isMobileSearchOpen, setMobileSearchOpen] = useState(false);
     const [query, setQuery] = useState('');
     const employees = useEmployees();
     const debouncedQuery = useDebounce(query);
@@ -30,10 +31,13 @@ export const useEmployeeSearch = () => {
         setIsOpen(false);
     }, []);
 
+
     return {
         query,
         setQuery,
         isOpen,
+        isMobileSearchOpen,
+        setMobileSearchOpen,
         filteredEmployees,
         clearQuery,
     };

@@ -1,5 +1,4 @@
 import { QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { queryClient } from '../../shared/clients/queryClient';
 import { ReactNode } from 'react';
 
@@ -13,7 +12,6 @@ const AppProviders = ({ children }: { children: ReactNode }) => {
             <Router>
                 <AuthProvider>{children}</AuthProvider>
             </Router>
-            <ReactQueryDevtools initialIsOpen={false} />
         </QueryClientProvider>
     );
 };

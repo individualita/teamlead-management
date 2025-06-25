@@ -19,10 +19,6 @@ export const ROUTES = {
         path: '/employee/:employeeId',
         title: ''
     },
-    ACTIVITY: {
-        path: '/activity',
-        title: 'Daily Activity'
-    },
     CHAT: {
         path: '/chat',
         title: 'Chat'

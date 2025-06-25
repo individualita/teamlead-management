@@ -32,10 +32,8 @@ const MainLayout = () => {
     return (
         <div className='h-dvh'>
             <HeaderSection />
+            <main className='flex flex-col-reverse md:flex md:flex-row h-full'>
 
-            <main className='flex h-full'>
-
-                {/* либо флекс бейсис 260*/}
                 <Sidebar  />
                 
                 <ContentSection 

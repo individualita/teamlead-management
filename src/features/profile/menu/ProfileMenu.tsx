@@ -32,7 +32,7 @@ const ProfileMenu = () => {
     if (!user) return <div>No user</div>;
 
     return (
-        <div className='relative' ref={profileRef}>
+        <div className='relative ml-auto' ref={profileRef}>
             <div
                 className='w-10 h-10 cursor-pointer flex justify-center items-center'
                 onClick={toggleOpen}

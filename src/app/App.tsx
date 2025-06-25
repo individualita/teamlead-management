@@ -11,7 +11,6 @@ import { PublicRoute } from './routes/PublicRoute';
 
 import MainLayout from '../shared/components/layouts/mainLayout/MainLayout';
 import Employees from '../features/employees/Employees';
-import Activity from '../features/activity/Activity';
 import Chat from '../features/chat/Chat';
 import ProfileSettings from '../features/profile/settings/ProfileSettings';
 import { ErrorResetter } from '../features/auth/components/errorResetter/ErrorResetter';
@@ -51,10 +50,6 @@ const App = () => {
                                 <Route
                                     path={ROUTES.EMPLOYEES.path}
                                     element={<Employees />}
-                                />
-                                <Route
-                                    path={ROUTES.ACTIVITY.path}
-                                    element={<Activity />}
                                 />
                                 <Route
                                     path={ROUTES.CHAT.path}
