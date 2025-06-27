@@ -11,7 +11,11 @@ import SidebarItem from './components/SidebarItem';
 const Sidebar = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     return (
-        <aside className={`flex flex-col gap-5 shrink-0 min-w-[60px] py-4 px-2 transition-[width] duration-400 ease-in-out will-change-[width] border-r-2 border-r-gray-100 w-full ${isSidebarOpen ? 'md:w-[220px]' : 'md:w-[60px]'}`}>           
+        <aside className={`
+            flex flex-col gap-5 shrink-0 min-w-[60px] py-4 px-2 transition-[width] duration-400 ease-in-out will-change-[width] w-full border-r-0
+            md:border-r-2 md:border-r-gray-100 
+            ${isSidebarOpen ? 'md:w-[220px]' : 'md:w-[60px]'}
+        `}>           
             <button 
                 onClick={() =>setIsSidebarOpen(prev => !prev)}
                 className={`

@@ -21,7 +21,7 @@ const SidebarItem = ({link, isOpen}: SidebarItemProps) => {
             <NavLink 
                 to={link.path} 
                 className={({ isActive }) =>
-                    `${'flex items-center gap-3 w-full px-1 py-2 hover-fade'} ${isActive ? ACTIVE_LINK_CLASS : INACTIVE_LINK_CLASS}`
+                    `${'flex items-center gap-3 w-full py-3 px-4 md:px-1 md:py-2 hover-fade'} ${isActive ? ACTIVE_LINK_CLASS : INACTIVE_LINK_CLASS}`
                 }
             >
                     <link.icon className='min-w-6 min-h-6' />

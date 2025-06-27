@@ -37,7 +37,7 @@ const SuggestionList = ({
         >
             <ul
                 ref={nodeRef}
-                className='absolute top-10 w-100 lg:w-140 z-10 bg-white shadow-lg rounded-md'
+                className='absolute top-14 md:top-10 w-full md:w-100 lg:w-140 z-10 bg-white shadow-lg rounded-md'
             >
                 {filteredEmployees.length > 0 ? (
                     filteredEmployees.map(emp => (

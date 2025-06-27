@@ -106,6 +106,7 @@ const EmployeeRowView = ({
                         isPending={isPending}
                         onDeleteEmployee={onDeleteEmployee}
                         ref={actionMenuRef}
+                        className={'w-35 absolute md:-left-14 md:w-32 lg:-left-6 -left-10 top-3'}
                     />
                 )}
             </TableCell>

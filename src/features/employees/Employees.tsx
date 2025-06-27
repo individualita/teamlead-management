@@ -102,7 +102,10 @@ const Employees = () => {
                     {/* card view for mobile size */}
                     <div className='block space-y-4 md:hidden'>
                         {employees.map(emp => (
-                            <EmployeeCard key={emp.id} employee={emp} />
+                            <EmployeeCard 
+                                key={emp.id} 
+                                employee={emp} 
+                            />
                         ))}
                     </div>
                 </>

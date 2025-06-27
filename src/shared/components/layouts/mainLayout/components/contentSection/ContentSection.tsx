@@ -47,7 +47,9 @@ const ContentSection = ({activeEmployee, isError,  error, openTabs, activeTab, s
 
             </div>
 
-            <div className='container mx-auto pt-3'>
+            <div className='pt-3'>
+            {/* <div className='container mx-auto pt-3'> */}
+
                 {isError && <ErrorMessage message={error?.message}/> }
                 {activeTab === OUTLET_TAB ? 
                     <Outlet /> 

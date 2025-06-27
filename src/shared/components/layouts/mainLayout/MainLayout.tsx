@@ -28,11 +28,11 @@ const MainLayout = () => {
 
 
     if (isLoading ) return <LoadingCircle />;
-
+//h-dvh flex flex-col
     return (
-        <div className='h-dvh'>
+        <div className='h-dvh flex flex-col' role='application'>
             <HeaderSection />
-            <main className='flex flex-col-reverse md:flex md:flex-row h-full'>
+            <main className='flex flex-col-reverse md:flex md:flex-row flex-grow'>
 
                 <Sidebar  />
                 

@@ -4,21 +4,26 @@ import { forwardRef } from 'react';
 import { FaPencil } from 'react-icons/fa6';
 import { IoTrash } from 'react-icons/io5';
 
-import './../../styles/employees.css';
+//components
+import ActionButton from '../actionButton/ActionButton';
 
 interface ActionMenuProps {
     employeeId: string;
     onEdit: (id: string) => void;
     isPending?: boolean;
     onDeleteEmployee: (id: string) => void;
+    className?: string;
 }
 
 const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
-    ({ employeeId, onEdit, isPending, onDeleteEmployee }, ref) => {
+    (
+        { employeeId, onEdit, isPending, onDeleteEmployee, className = '' },
+        ref,
+    ) => {
         return (
             <div
                 ref={ref}
-                className='absolute -left-10 top-3 w-35 bg-white shadow-sm rounded-md inset-shadow-sm z-10 flex flex-col'
+                className={`${className} bg-white shadow-sm rounded-md inset-shadow-sm z-10 flex flex-col`}
                 role='menu'
                 aria-label='Employee actions'
             >
@@ -26,25 +31,19 @@ const ActionMenu = forwardRef<HTMLDivElement, ActionMenuProps>(
                     <span className='p-3'>Loading...</span>
                 ) : (
                     <>
-                        <button
+                        <ActionButton
                             onClick={() => onEdit(employeeId)}
-                            className='employees-action-button'
-                            role='menuitem'
-                            aria-label='Edit employee'
-                        >
-                            <FaPencil className='text-lg' />
-                            <span>Edit</span>
-                        </button>
+                            ariaLabel='Edit employee'
+                            text='Edit'
+                            icon={<FaPencil className='text-lg' />}
+                        />
 
-                        <button
+                        <ActionButton
                             onClick={() => onDeleteEmployee(employeeId)}
-                            className='employees-action-button'
-                            role='menuitem'
-                            aria-label='Delete employee'
-                        >
-                            <IoTrash className='text-lg text-red-600' />
-                            <span>Delete</span>
-                        </button>
+                            ariaLabel='Delete employee'
+                            text='Delete'
+                            icon={<IoTrash className='text-lg text-red-600' />}
+                        />
                     </>
                 )}
             </div>
