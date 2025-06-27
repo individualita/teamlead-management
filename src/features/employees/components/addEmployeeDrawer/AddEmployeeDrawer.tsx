@@ -9,11 +9,12 @@ import { IoPersonAdd } from 'react-icons/io5';
 import AddEmployeeForm from '../addEmployeeForm/AddEmployeeForm';
 
 const drawerStyle = {
-    width: 400,
-    padding: '18px',
+    width: { xs: '100vw', sm: 400 },
+    padding: { xs: '12px', sm: '18px' },
     bgcolor: 'background.paper',
     boxShadow: 24,
     height: '100dvh',
+    overflowY: 'auto'
 };
 
 const buttonStyles = {
@@ -22,6 +23,7 @@ const buttonStyles = {
     display: 'flex',
     gap: '8px',
     textTransform: 'none' as const,
+    padding: { xs: '8px', sm: '6px 16px' }, 
 };
 
 interface EmployeeModalProps {

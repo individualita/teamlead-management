@@ -9,6 +9,9 @@ import { updateUserMessagesPhotoURL } from '../../services/updateUserMessagesPho
 
 import { useFirebaseProfileUpdate } from '../../hooks/useFirebaseProfileUpdate';
 
+//styles
+import '../../styles/profileSettings.css';
+
 const UserPhotoForm = () => {
     const [photoURL, setPhotoURL] = useState('');
     const [error, setError] = useState<string | null>(null);
@@ -50,7 +53,7 @@ const UserPhotoForm = () => {
 
     return (
         <form aria-label='Change profile picture' onSubmit={handleSubmit}>
-            <div className='flex gap-3 relative'>
+            <div className='flex flex-col md:flex-row gap-3 relative'>
                 <input
                     type='text'
                     value={photoURL}
@@ -59,14 +62,7 @@ const UserPhotoForm = () => {
                         setPhotoURL(e.target.value);
                         if (error) setError(null);
                     }}
-                    className={`
-                        border border-gray-300 rounded-lg px-2 py-2
-                        text-base
-                        focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-transparent
-                        hover:border-gray-400
-                        placeholder-gray-400 placeholder:text-sm
-                        transition-all duration-200
-                    `}
+                    className='profile-settings-input focus-input'
                     placeholder='Past image link here'
                     required
                 />
@@ -87,17 +83,19 @@ const UserPhotoForm = () => {
                     {isLoading ? 'Changing...' : 'Change'}
                 </Button>
 
-                <button
-                    type='button'
-                    className='
-                        p-2 bg-gray-200 rounded-md uppercase text-[13px] cursor-pointer transition
-                        hover:bg-gray-300 '
+                <Button
                     onClick={() => setPhotoURL(DEFAULT_URL)}
+                    type='button'
+                    variant='contained'
+                    size='small'
+                    disabled={isLoading}
                     title='Generate default link'
                     aria-label='set default URL user image'
+                    sx={{background: 'var(--color-inactive)'}}
                 >
-                    Default URL
-                </button>
+                    {isLoading ? 'Changing...' : 'Default'}
+                </Button>
+
             </div>
         </form>
     );

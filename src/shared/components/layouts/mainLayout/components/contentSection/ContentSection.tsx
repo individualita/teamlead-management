@@ -28,9 +28,9 @@ const ContentSection = ({activeEmployee, isError,  error, openTabs, activeTab, s
     const title = getRouteTitle(pathname);
 
     return (
-        <div className='grow-1 px-6'>
+        <div className='grow-1 px-6 pb-10'>
 
-            <h1 className='text-lg font-bold mt-3'>{title}</h1>
+            <h1 className='text-lg text-inactive font-bold mt-3'>{title}</h1>
 
             <div 
                 className='flex gap-4 mt-2'

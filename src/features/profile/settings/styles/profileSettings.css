@@ -1,0 +1,10 @@
+
+@import 'tailwindcss';
+
+@layer features {
+    .profile-settings-input {
+        @apply border border-gray-300 rounded-lg px-2 py-1 md:py-1.5 
+         hover:border-gray-400 
+         placeholder-gray-400 placeholder:text-sm
+    }
+}

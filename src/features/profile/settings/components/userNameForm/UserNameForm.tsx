@@ -4,6 +4,9 @@ import { FaPencil } from 'react-icons/fa6';
 
 import { useFirebaseProfileUpdate } from '../../hooks/useFirebaseProfileUpdate';
 
+//styles
+import '../../styles/profileSettings.css';
+
 interface EditUserNameFormProps {
     currentName: string;
 }
@@ -27,21 +30,15 @@ const UserNameForm = ({ currentName }: EditUserNameFormProps) => {
             className='flex flex-col'
             aria-label='edit username'
         >
-            <div className='flex gap-3 items-center rounded-md relative'>
+            <div className='flex flex-col md:flex-row gap-3 items-center rounded-md relative'>
                 <input
                     type='text'
                     value={name}
                     name='username'
                     onChange={e => setName(e.target.value)}
                     className={`
-                        ${isNameUpdating ? 'border' : 'border-none'}
-                        border-gray-300 rounded-lg px-2 py-2
-                        text-base
-                        focus:outline-none focus:ring-1 focus:ring-blue-700 focus:border-transparent
-                        hover:border-gray-400
-                        disabled:opacity-80 disabled:text-lg disabled:font-bold
-                        placeholder-gray-400 
-                        transition-all duration-200
+                        ${isNameUpdating ? 'border' : 'border-none text-lg font-bold'}
+                        profile-settings-input focus-input 
                     `}
                     placeholder='Enter your name'
                     disabled={!isNameUpdating}
@@ -54,7 +51,7 @@ const UserNameForm = ({ currentName }: EditUserNameFormProps) => {
                             type='submit'
                             variant='contained'
                             color='success'
-                            size='medium'
+                            size='small'
                             disabled={isLoading}
                             aria-label='Save username'
                             title='Save username'
@@ -70,7 +67,7 @@ const UserNameForm = ({ currentName }: EditUserNameFormProps) => {
                             }}
                             variant='text'
                             color='warning'
-                            size='medium'
+                            size='small'
                             aria-label='Cancel editing'
                             title='Cancel editing'
                         >

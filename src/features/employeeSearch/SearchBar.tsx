@@ -29,7 +29,7 @@ const SearchBar = () => {
                     name='search'
                     type='search'
                     placeholder='Search employee...'
-                    className='border-gray-300/50 text-sm rounded-lg block py-2 px-9 w-100 lg:w-140 placeholder:text-xs bg-gray-100 focus-input'
+                    className='border-gray-300/50 text-sm rounded-lg block py-2 px-9 w-100 lg:w-140 placeholder:text-xs bg-gray-100 focus-input hover:bg-gray-200'
                     value={query}
                     onChange={e => setQuery(e.target.value)}
                 />

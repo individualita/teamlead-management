@@ -87,7 +87,7 @@ const Employees = () => {
             ) : (
                 <>
                     {/* desktop size */}
-                    <div className='overflow-x-auto rounded-lg shadow-md hidden md:block'>
+                    <div className='mt-5 shadow-md overflow-x-auto rounded-lg inset-shadow-2xs hidden md:block'>
                         <UiEmployeesTable
                             employees={employees}
                             onUpdateEmployee={handleUpdateEmployee}

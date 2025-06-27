@@ -143,7 +143,7 @@ const EmployeeRow = ({
 
             <CollapsibleRow
                 employee={employee}
-                isRowExpanded={isExpanded || isEditing || (isPending ?? false)}
+                isRowExpanded={isExpanded || isEditing}
                 isEmployeeEditing={isEditing}
                 colSpanCount={TABLE_COLUMNS.length}
                 errors={errors}

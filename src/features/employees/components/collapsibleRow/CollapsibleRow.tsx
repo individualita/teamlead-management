@@ -1,12 +1,6 @@
 import { UseFormRegister, FieldErrors } from 'react-hook-form';
 
-import {
-    TextField,
-    TableRow,
-    TableCell,
-    Collapse,
-    Box,
-} from '@mui/material';
+import { TextField, TableRow, TableCell, Collapse, Box } from '@mui/material';
 
 //types
 import { EmployeeFormData } from '../../types';
@@ -42,10 +36,10 @@ const CollapsibleRow = ({
                 <Collapse in={isRowExpanded} timeout='auto' unmountOnExit>
                     <Box
                         sx={{
-                            padding: 2,
+                            padding: { xs: 1, md: 2 },
                             borderRadius: 1,
                             display: 'grid',
-                            gap: 2,
+                            gap: { xs: 1, md: 2 },
                         }}
                     >
                         {/* Заголовки */}
@@ -73,7 +67,7 @@ const CollapsibleRow = ({
                                 display: 'grid',
                                 gap: '10px',
                                 gridTemplateColumns: '1fr 1fr',
-                                color: 'var(--text-inactive)',
+                                color: 'text-inactive',
                             }}
                         >
                             {isEmployeeEditing ? (

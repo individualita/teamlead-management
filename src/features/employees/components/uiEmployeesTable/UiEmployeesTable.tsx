@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-
 //MUI
 import {
     Table,
@@ -54,62 +53,58 @@ const UiEmployeesTable = ({
     } = usePagination({ items: employees });
 
     return (
-        <div className='mt-5'>
-            <TableContainer
-                sx={{
-                    borderRadius: 3,
-                }}
-                component={Paper}
-            >
-                <Table>
-                    <TableHeader />
+        <TableContainer
+            sx={{
+                borderRadius: 3,
+            }}
+            component={Paper}
+        >
+            <Table>
+                <TableHeader />
 
-                    <TableBody>
-                        {paginatedEmployees.map((employee: Employee) => (
-                            <EmployeeRow
-                                key={employee.id}
-                                employee={employee}
-                                isExpanded={expandedRowId === employee.id}
-                                onToggleExpansion={handleToggleRowExpansion}
-                                onUpdateEmployee={onUpdateEmployee}
-                                onDeleteEmployee={onDeleteEmployee}
-                                isPending={isPending}
+                <TableBody>
+                    {paginatedEmployees.map((employee: Employee) => (
+                        <EmployeeRow
+                            key={employee.id}
+                            employee={employee}
+                            isExpanded={expandedRowId === employee.id}
+                            onToggleExpansion={handleToggleRowExpansion}
+                            onUpdateEmployee={onUpdateEmployee}
+                            onDeleteEmployee={onDeleteEmployee}
+                            isPending={isPending}
+                        />
+                    ))}
+                </TableBody>
+
+                {/* Футер таблицы с пагинацией */}
+                <TableFooter>
+                    <TableRow>
+                        <TableCell
+                            colSpan={TABLE_COLUMNS.length}
+                            sx={{ padding: '1px' }}
+                        >
+                            <TablePagination
+                                rowsPerPageOptions={[
+                                    5,
+                                    10,
+                                    { value: -1, label: 'All' },
+                                ]}
+                                count={employees.length}
+                                rowsPerPage={rowsPerPage}
+                                page={currentPage}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'right',
+                                    borderBottom: 'none',
+                                }}
                             />
-                        ))}
-                    </TableBody>
-
-                    {/* Футер таблицы с пагинацией */}
-                    <TableFooter>
-                        <TableRow>
-                            <TableCell
-                                colSpan={TABLE_COLUMNS.length}
-                                sx={{ padding: '1px' }}
-                            >
-                                <TablePagination
-                                    rowsPerPageOptions={[
-                                        5,
-                                        10,
-                                        { value: -1, label: 'All' },
-                                    ]}
-                                    count={employees.length}
-                                    rowsPerPage={rowsPerPage}
-                                    page={currentPage}
-                                    onPageChange={handleChangePage}
-                                    onRowsPerPageChange={
-                                        handleChangeRowsPerPage
-                                    }
-                                    sx={{
-                                        display: 'flex',
-                                        justifyContent: 'right',
-                                        borderBottom: 'none',
-                                    }}
-                                />
-                            </TableCell>
-                        </TableRow>
-                    </TableFooter>
-                </Table>
-            </TableContainer>
-        </div>
+                        </TableCell>
+                    </TableRow>
+                </TableFooter>
+            </Table>
+        </TableContainer>
     );
 };
 

@@ -25,7 +25,7 @@ const MessageItem = ({ currentUserId, message }: MessageItemProps) => {
                     {message.text}
                 </p>
 
-                <span className='text-[8px] text-gray-500 absolute top-8 right-1'>
+                <span className={`text-[8px] text-gray-500 absolute top-8 ${isMine? 'right-1' : 'left-1'}`}>
                     {formattedTime}
                 </span>
             </div>

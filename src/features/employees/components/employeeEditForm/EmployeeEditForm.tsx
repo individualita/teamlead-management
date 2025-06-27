@@ -42,7 +42,7 @@ const EmployeeEditForm = ({
         <Box
             component='form'
             onSubmit={onSubmit}
-            sx={{ display: 'flex', gap: 2 }}
+            sx={{ display: 'flex', gap: 2, flexDirection: {md: 'row', xs: 'column'} }}
         >
             <TextField
                 {...register('name', { required: true })}
