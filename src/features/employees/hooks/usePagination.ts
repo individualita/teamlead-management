@@ -12,7 +12,7 @@ const usePagination = <T,>({ initialRowsPerPage = 5, items} : usePaginationProps
     const [rowsPerPage, setRowsPerPage] = useState<number>(initialRowsPerPage);
     const [currentPage, setCurrentPage] = useState<number>(0);
 
-    const handleChangePage = (event: unknown, newPage: number) => {
+    const handleChangePage = (_event: unknown, newPage: number) => {
         setCurrentPage(newPage);
     };
     
