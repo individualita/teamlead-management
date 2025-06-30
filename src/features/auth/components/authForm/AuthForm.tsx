@@ -146,7 +146,7 @@ const AuthForm = ({ title, onFormSubmit }: AuthFormProps) => {
                                 ? ROUTES.SIGN_UP.path
                                 : ROUTES.SIGN_IN.path
                         }
-                        className=' text-secondary hover:underline'
+                        className=' text-secondary hover:md:underline'
                     >
                         {title === ROUTES.SIGN_IN.title
                             ? 'Get started'
