@@ -44,7 +44,10 @@ const MobileSearch = ({
                 />
                 <button
                     className='text-gray-600 p-2 text-sm'
-                    onClick={() => setMobileSearchOpen(false)}
+                    onClick={() =>  {
+                        setMobileSearchOpen(false);
+                        clearQuery();
+                    }}
                 >
                     Close
                 </button>
