@@ -1,10 +1,10 @@
 import { useAuthUser } from '../../../shared/stores/authStore';
 
-import Avatar from '../../../shared/components/avatar/Avatar';
+import Avatar from '../../../shared/components/Avatar';
 
-import UserNameForm from './components/userNameForm/UserNameForm';
+import UserNameForm from './components/UserNameForm';
 
-import UserPhotoForm from './components/userPhotoForm/UserPhotoForm';
+import UserPhotoForm from './components/UserPhotoForm';
 
 const ProfileSettings = () => {
     const user = useAuthUser();

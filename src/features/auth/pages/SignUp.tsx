@@ -5,7 +5,7 @@ import { signUp } from '../../../shared/stores/authStore';
 import { ROUTES } from '../../../shared/constants/routes';
 
 //components
-import AuthForm from '../components/authForm/AuthForm';
+import AuthForm from '../components/AuthForm';
 
 const SignUp = () => {
     return (

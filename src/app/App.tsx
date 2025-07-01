@@ -3,8 +3,8 @@ import { Suspense, lazy } from 'react';
 
 import { ROUTES } from '../shared/constants/routes';
 
-import Container from '../shared/components/layouts/container/Container';
-import { LoadingCircle } from '../shared/components/layouts/loadingCircle/LoadingCircle';
+import Container from '../shared/components/layouts/Container';
+import { LoadingCircle } from '../shared/components/layouts/LoadingCircle';
 
 import { ProtectedRoute } from './routes/ProtectedRoute';
 import { PublicRoute } from './routes/PublicRoute';
@@ -13,7 +13,7 @@ import MainLayout from '../shared/components/layouts/mainLayout/MainLayout';
 import Employees from '../features/employees/Employees';
 import Chat from '../features/chat/Chat';
 import ProfileSettings from '../features/profile/settings/ProfileSettings';
-import { ErrorResetter } from '../features/auth/components/errorResetter/ErrorResetter';
+import { ErrorResetter } from '../features/auth/components/ErrorResetter';
 
 // Lazy-loaded components
 

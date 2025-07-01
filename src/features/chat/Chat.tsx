@@ -1,11 +1,13 @@
 import { useMessages } from './hooks/useMessages';
 import { useAuthUser } from '../../shared/stores/authStore';
 
-import { ErrorMessage } from '../../shared/components/errorMessage/ErrorMessage';
-import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
+//shared components
+import { ErrorMessage } from '../../shared/components/ErrorMessage';
+import { LoadingCircle } from '../../shared/components/layouts/LoadingCircle';
 
-import MessageList from './components/messageList/MessageList';
-import ChatForm from './components/chatForm/ChatForm';
+//feature components
+import MessageList from './components/MessageList';
+import ChatForm from './components/ChatForm';
 
 
 const Chat = () => {

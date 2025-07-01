@@ -9,7 +9,7 @@ import {
 import { ROUTES } from '../../shared/constants/routes';
 
 
-import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
+import { LoadingCircle } from '../../shared/components/layouts/LoadingCircle';
 
 export const PublicRoute = () => {
     const user = useAuthUser();

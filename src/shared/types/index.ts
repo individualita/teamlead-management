@@ -1,3 +1,5 @@
+import { Auth, UserCredential } from 'firebase/auth';
+
 import { EMPLOYEE_STATUSES } from '../constants/employeeStatuses';
 
 // Employee
@@ -22,3 +24,6 @@ export interface User {
     photoURL: string | null,
     token: string | null,
 }
+
+// Auth
+export type AuthActionType =  (auth: Auth, email:string, password:string) => Promise<UserCredential>;

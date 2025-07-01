@@ -6,8 +6,7 @@ import { auth } from '../config/firebaseConfig';
 //types
 import { FirebaseError } from 'firebase/app';
 import { User } from '../types';
-import { AuthActionType } from '../../features/auth/types';
-
+import { AuthActionType } from '../types';
 import { executeAuthAction } from '../../features/auth/services/executeAuthAction';
 
 import { FIREBASE_AUTH_ERRORS } from '../../features/auth/constants/firebaseAuthErrors';

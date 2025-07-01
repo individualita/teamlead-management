@@ -1,16 +1,12 @@
-import { Auth, UserCredential, updateProfile } from 'firebase/auth';
+import { Auth, updateProfile } from 'firebase/auth';
 
 //types
 import { User } from '../../../shared/types';
+import { AuthActionType } from '../../../shared/types';
 
 //constants
 import { DEFAULT_URL } from '../../../shared/constants/defaultImageUrl';
 
-type AuthActionType = (
-    auth: Auth,
-    email: string,
-    password: string,
-) => Promise<UserCredential>;
 
 export const executeAuthAction = async (
     action: AuthActionType,

@@ -7,9 +7,9 @@ import { useActiveTab, useOpenTabs, setActiveTab, closeTab } from '../../../stor
 import { setAllEmployees, useEmployeeById } from '../../../stores/employeesStore';
 import { useEmployeesQuery } from '../../../hooks/useEmployeesQuery';
 
-import { LoadingCircle } from '../loadingCircle/LoadingCircle';
-import HeaderSection from './components/headerSection/HeaderSection';
-import ContentSection from './components/contentSection/ContentSection';
+import { LoadingCircle } from '../LoadingCircle';
+import HeaderSection from './components/HeaderSection';
+import ContentSection from './components/ContentSection';
 import Sidebar from '../sidebar/Sidebar';
 
 

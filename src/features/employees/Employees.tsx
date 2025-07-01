@@ -19,9 +19,9 @@ import { Employee } from '../../shared/types';
 import { employeesService } from '../../shared/services/employeesService';
 
 //components
-import EmployeeCard from './components/employeeCard/EmployeeCard';
-import UiEmployeesTable from './components/uiEmployeesTable/UiEmployeesTable';
-import AddEmployeeDrawer from './components/addEmployeeDrawer/AddEmployeeDrawer';
+import EmployeeCard from './components/EmployeeCard';
+import UiEmployeesTable from './components/UiEmployeesTable';
+import AddEmployeeDrawer from './components/AddEmployeeDrawer';
 
 
 const Employees = () => {

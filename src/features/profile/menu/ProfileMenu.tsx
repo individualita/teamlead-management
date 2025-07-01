@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import { useAuthUser } from '../../../shared/stores/authStore';
 
 //local components
-import Avatar from '../../../shared/components/avatar/Avatar';
-import ProfileDropdown from './components/profileDropdown/ProfileDropdown';
+import Avatar from '../../../shared/components/Avatar';
+import ProfileDropdown from './components/ProfileDropdown';
 
 const ProfileMenu = () => {
     const user = useAuthUser();

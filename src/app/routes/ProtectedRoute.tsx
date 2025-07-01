@@ -10,7 +10,7 @@ import {
 //constants
 import { ROUTES } from '../../shared/constants/routes';
 //components
-import { LoadingCircle } from '../../shared/components/layouts/loadingCircle/LoadingCircle';
+import { LoadingCircle } from '../../shared/components/layouts/LoadingCircle';
 
 export const ProtectedRoute = () => {
     const user = useAuthUser();

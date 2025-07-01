@@ -200,18 +200,12 @@ This project is built on **Feature-Based Architecture** with clear separation of
 Contains global application setup, routing, and root-level providers.
 
 **What belongs here:**
-- Global routes and route protection
+- Public and Protected Routes
 - Root providers and app configuration  
-- Application-wide styles and constants
+- Application-wide styles
 
 **Examples:**
 ```typescript
-// ✅ Correct - global route paths
-export enum ROUTE_PATHS {
-  SIGN_IN = '/sign-in',
-  HOME = '/home',
-  EMPLOYEES = '/employees'
-}
 
 // ✅ Correct - app-wide provider
 const AppProviders = ({ children }) => (
@@ -280,6 +274,60 @@ Store is only used within a single feature.
 // - features/chat/components/MessageList.tsx
 // - features/chat/hooks/useMessages.ts
 ```
+### 🏷️ TypeScript Types Strategy
+
+Types follow the same placement logic as other code - based on usage scope.
+
+#### **Single File Usage**
+If a type is only used within one file, define it locally.
+
+#### **Feature-Scoped Types**
+If a type is used multiple times within one feature, create `types/index.ts`:
+
+```typescript
+// features/chat/types/index.ts
+export interface ChatMessage {
+    authorId: string,
+    name: string,
+    photoURL: string,
+    text: string,
+    timestamp: number
+};
+
+
+// Used in:
+// - features/chat/components/MessageItem.tsx
+// - features/chat/components/MessageList.tsx
+
+```
+
+#### **Shared Types**
+If a type is used across multiple features, place in `shared/types/index.ts`:
+
+```typescript
+// shared/types/index.ts
+export interface Employee {
+    id: string,
+    name: string;
+    position: string;
+    phone: string;
+    email: string;
+    startDate: Date,
+    status: EmployeeStatus;
+};
+
+// Used across features:
+// - shared/services/employeesService.ts
+// - shared/stores/employeesStore.ts
+// - features/employeeSearch/components/SearchSuggestionItem.tsx
+// - features/employees/components/EmployeeProfile.tsx
+```
+
+**Type Placement Rules:**
+- **Single file** → Define locally in the same file
+- **Single feature** → `features/[name]/types/index.ts`
+- **Multiple features** → `shared/types/index.ts`
+
 
 ### 📝 Naming Conventions
 

@@ -5,8 +5,8 @@ import { CiSearch } from 'react-icons/ci';
 import { useEmployeeSearch } from './hooks/useEmployeeSearch';
 
 //components
-import MobileSearch from './components/mobileSearch/MobileSearch';
-import SuggestionList from './components/suggestionList/SuggestionList';
+import MobileSearch from './components/MobileSearch';
+import SuggestionList from './components/SuggestionList';
 
 const SearchBar = () => {
     const {
