@@ -14,7 +14,7 @@ const MessageItem = ({ currentUserId, message }: MessageItemProps) => {
 
     return (
         <li
-            className={`relative flex gap-1 items-center mb-3 ${isMine ? 'self-end' : 'self-start flex-row-reverse'}`}
+            className={` max-w-90 break-words flex gap-1 items-center mb-3 ${isMine ? 'self-end' : 'self-start flex-row-reverse'}`}
         >
             <div
                 className={`flex flex-col ${isMine ? 'items-end' : 'items-start'}`}
@@ -24,17 +24,15 @@ const MessageItem = ({ currentUserId, message }: MessageItemProps) => {
                 >
                     {message.text}
                 </p>
-
-                <span className={`text-[8px] text-gray-500 absolute top-8 ${isMine? 'right-1' : 'left-1'}`}>
-                    {formattedTime}
-                </span>
             </div>
 
-            <div className='h-8 w-8'>
-                <Avatar 
-                    src={message.photoURL} 
-                    username={message.name} 
-                />
+            <div className='flex flex-col gap-1'>
+                <div className='h-8 w-8'>
+                    <Avatar src={message.photoURL} username={message.name} />
+                </div>
+                <span className={`text-[6px] text-gray-500`}>
+                    {formattedTime}
+                </span>
             </div>
         </li>
     );
