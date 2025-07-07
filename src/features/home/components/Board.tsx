@@ -18,11 +18,11 @@ import { taskService } from '../services/taskService';
 import useCustomDnDSensors from '../dnd/hooks/useCustomDnDSensors';
 import { useTasksQuery } from '../hooks/useTasksQuery';
 import { useUpdateStatus } from '../hooks/useUpdateTask';
-import { useDeleteMutation } from '../../../shared/hooks/useDeleteMutation';
+import { useDeleteMutation } from '@/shared/hooks/useDeleteMutation';
 
 //components
-import { ErrorMessage } from '../../../shared/components/ErrorMessage';
-import { LoadingCircle } from '../../../shared/components/layouts/LoadingCircle';
+import { ErrorMessage } from '@/shared/components/ErrorMessage';
+import { LoadingCircle } from '@/shared/components/layouts/LoadingCircle';
 import BoardColumn from './BoardColumn';
 import Droppable from '../dnd/Droppable';
 

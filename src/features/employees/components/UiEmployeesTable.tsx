@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 
 //schema & types
-import { Employee } from '../../../shared/types';
+import { Employee } from '@/shared/types';
 
 //Hooks
 import usePagination from '../hooks/usePagination';

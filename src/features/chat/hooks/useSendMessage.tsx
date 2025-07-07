@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { ref,  push} from 'firebase/database';
-import { database } from '../../../shared/config/firebaseConfig';
-import { User } from '../../../shared/types';
+import { database } from '@/shared/config/firebaseConfig';
+import { User } from '@/shared/types';
 
 export const useSendMessage = (user: User) => {
 

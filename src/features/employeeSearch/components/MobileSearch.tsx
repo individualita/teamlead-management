@@ -1,12 +1,12 @@
 import { CiSearch } from 'react-icons/ci';
 
 //types
-import { Employee } from '../../../shared/types';
+import { Employee } from '@/shared/types';
 
 //components
 import SuggestionList from './SuggestionList';
 
-import { openTab } from '../../../shared/stores/tabsStore';
+import { openTab } from '@/shared/stores/tabsStore';
 
 type MobileSearchProps = {
     query: string;

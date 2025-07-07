@@ -1,3 +1,3 @@
-import { Employee } from '../../../shared/types';
+import { Employee } from '@/shared/types';
 
 export type EmployeeFormData = Omit<Employee, 'id'>;

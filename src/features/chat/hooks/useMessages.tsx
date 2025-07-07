@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { database } from '../../../shared/config/firebaseConfig';
+import { database } from '@/shared/config/firebaseConfig';
 import { ref,  onValue} from 'firebase/database';
 
 //store

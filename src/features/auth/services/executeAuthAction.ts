@@ -1,11 +1,11 @@
 import { Auth, updateProfile } from 'firebase/auth';
 
 //types
-import { User } from '../../../shared/types';
-import { AuthActionType } from '../../../shared/types';
+import { User } from '@/shared/types';
+import { AuthActionType } from '@/shared/types';
 
 //constants
-import { DEFAULT_URL } from '../../../shared/constants/defaultImageUrl';
+import { DEFAULT_URL } from '@/shared/constants/defaultImageUrl';
 
 
 export const executeAuthAction = async (

@@ -1,14 +1,14 @@
 import { TableCell, Box } from '@mui/material';
 
 //types
-import { Employee } from '../../../shared/types';
+import { Employee } from '@/shared/types';
 
 //utils
-import { formatDate } from '../../../shared/utils/formatDate';
-import { getEmployeeStatusColor } from '../../../shared/utils/getEmployeeStatusColor';
+import { formatDate } from '@/shared/utils/formatDate';
+import { getEmployeeStatusColor } from '@/shared/utils/getEmployeeStatusColor';
 
 //store
-import { openTab } from '../../../shared/stores/tabsStore';
+import { openTab } from '@/shared/stores/tabsStore';
 
 
 //icons

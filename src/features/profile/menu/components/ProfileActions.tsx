@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
-import { logout } from '../../../../shared/stores/authStore';
+import { logout } from '@/shared/stores/authStore';
 
-import { ROUTES } from '../../../../shared/constants/routes';
+import { ROUTES } from '@/shared/constants/routes';
 
 import '../styles/profileMenu.css';
 

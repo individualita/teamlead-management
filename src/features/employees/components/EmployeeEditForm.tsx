@@ -12,8 +12,8 @@ import dayjs, { Dayjs } from 'dayjs';
 import { EmployeeFormData } from '../types';
 
 //constants
-import { DATE_FORMAT } from '../../../shared/constants/dateFormat';
-import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
+import { DATE_FORMAT } from '@/shared/constants/dateFormat';
+import { EMPLOYEE_STATUSES } from '@/shared/constants/employeeStatuses';
 import {
     employeesTableInputSx,
     employeesTableDatePickerSx,

@@ -6,17 +6,17 @@ import {
     useEmployees,
     removeEmployee,
     modifyEmployee,
-} from '../../shared/stores/employeesStore';
+} from '@/shared/stores/employeesStore';
 //hooks
-import { useDeleteMutation } from '../../shared/hooks/useDeleteMutation';
+import { useDeleteMutation } from '@/shared/hooks/useDeleteMutation';
 import { useUpdateEmployee } from './hooks/useUpdateEmployee';
 import { useAutoDismissAlert } from './hooks/useAutoDismissAlert';
 
 //types
-import { Employee } from '../../shared/types';
+import { Employee } from '@/shared/types';
 
 //services
-import { employeesService } from '../../shared/services/employeesService';
+import { employeesService } from '@/shared/services/employeesService';
 
 //components
 import EmployeeCard from './components/EmployeeCard';

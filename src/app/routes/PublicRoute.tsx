@@ -4,12 +4,12 @@ import {
     useAuthUser,
     useAuthLoading,
     useAuthInitialized,
-} from '../../shared/stores/authStore';
+} from '@/shared/stores/authStore';
 
-import { ROUTES } from '../../shared/constants/routes';
+import { ROUTES } from '@/shared/constants/routes';
 
 
-import { LoadingCircle } from '../../shared/components/layouts/LoadingCircle';
+import { LoadingCircle } from '@/shared/components/layouts/LoadingCircle';
 
 export const PublicRoute = () => {
     const user = useAuthUser();

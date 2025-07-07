@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { updateProfile } from 'firebase/auth';
 
-import { auth } from '../../../../shared/config/firebaseConfig';
-import { useAuthUser } from '../../../../shared/stores/authStore';
-import { setUser } from '../../../../shared/stores/authStore';
+import { auth } from '@/shared/config/firebaseConfig';
+import { useAuthUser } from '@/shared/stores/authStore';
+import { setUser } from '@/shared/stores/authStore';
 
 interface ProfileFields {
     displayName?: string;

@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 
 //store
-import { useAuthUser } from '../../../shared/stores/authStore';
+import { useAuthUser } from '@/shared/stores/authStore';
 
 //local components
-import Avatar from '../../../shared/components/Avatar';
+import Avatar from '@/shared/components/Avatar';
 import ProfileDropdown from './components/ProfileDropdown';
 
 const ProfileMenu = () => {

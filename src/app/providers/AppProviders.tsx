@@ -1,5 +1,5 @@
 import { QueryClientProvider } from '@tanstack/react-query';
-import { queryClient } from '../../shared/clients/queryClient';
+import { queryClient } from '@/shared/clients/queryClient';
 import { ReactNode } from 'react';
 
 import { BrowserRouter as Router } from 'react-router-dom';

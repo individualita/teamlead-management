@@ -12,7 +12,7 @@ import {
 import { employeeSchema } from '../schema/employee.schema';
 
 //types
-import { Employee } from '../../../shared/types';
+import { Employee } from '@/shared/types';
 import { EmployeeFormData } from '../types';
 
 //constants

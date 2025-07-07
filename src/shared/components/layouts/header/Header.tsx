@@ -1,7 +1,7 @@
-import SearchBar from '../../../../features/employeeSearch/SearchBar';
+import SearchBar from '@/features/employeeSearch/SearchBar';
 import Logo from './components/logo/Logo';
 
-import ProfileMenu from '../../../../features/profile/menu/ProfileMenu';
+import ProfileMenu from '@/features/profile/menu/ProfileMenu';
 
 
 const Header = () => {
@@ -10,7 +10,6 @@ const Header = () => {
             <Logo />
             <SearchBar />
             <ProfileMenu />
-
         </header>
     )
 }

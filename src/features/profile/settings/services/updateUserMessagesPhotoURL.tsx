@@ -1,5 +1,5 @@
 import { ref, query, orderByChild, equalTo, get, update } from 'firebase/database';
-import { database } from '../../../../shared/config/firebaseConfig';
+import { database } from '@/shared/config/firebaseConfig';
 
 
 export const updateUserMessagesPhotoURL  = async (photoURL: string, userId: string) => {

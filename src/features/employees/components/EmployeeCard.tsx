@@ -6,21 +6,21 @@ import { FaPencil } from 'react-icons/fa6';
 import { IoTrash } from 'react-icons/io5';
 
 //types
-import { Employee } from '../../../shared/types';
+import { Employee } from '@/shared/types';
 import { EmployeeFormData } from '../types';
 
 //utils
-import { formatDate } from '../../../shared/utils/formatDate';
-import { employeesService } from '../../../shared/services/employeesService';
+import { formatDate } from '@/shared/utils/formatDate';
+import { employeesService } from '@/shared/services/employeesService';
 
 //store
 import {
     modifyEmployee,
     removeEmployee,
-} from '../../../shared/stores/employeesStore';
+} from '@/shared/stores/employeesStore';
 
 //hooks
-import { useDeleteMutation } from '../../../shared/hooks/useDeleteMutation';
+import { useDeleteMutation } from '@/shared/hooks/useDeleteMutation';
 import { useUpdateEmployee } from '../hooks/useUpdateEmployee';
 
 import { employeeSchema } from '../schema/employee.schema';

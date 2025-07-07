@@ -1,12 +1,12 @@
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
 import '../styles/employees.css';
 
 interface ActionButton {
-    onClick: () =>  void,
-    ariaLabel: string,
-    text: string,
-    icon: ReactNode,
+    onClick: () => void;
+    ariaLabel: string;
+    text: string;
+    icon: ReactNode;
 }
 const ActionButton = ({ onClick, ariaLabel, text, icon }: ActionButton) => {
     return (

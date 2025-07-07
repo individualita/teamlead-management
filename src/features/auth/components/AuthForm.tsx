@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import { Alert, Divider } from '@mui/material';
 
 //store
-import { useAuthError } from '../../../shared/stores/authStore';
+import { useAuthError } from '@/shared/stores/authStore';
 
 //constants
-import { ROUTES } from '../../../shared/constants/routes';
+import { ROUTES } from '@/shared/constants/routes';
 import { VALIDATION_RULES } from '../constants/validationRules';
 
 //components

@@ -1,16 +1,16 @@
 import { CSSTransition } from 'react-transition-group';
 import { useRef } from 'react';
 //types
-import { Employee } from '../../../shared/types';
+import { Employee } from '@/shared/types';
 
 //constants
-import { CSS_ANIMATION_DURATION } from '../../../shared/constants/cssAnimationDuration';
+import { CSS_ANIMATION_DURATION } from '@/shared/constants/cssAnimationDuration';
 
 //components
 import SearchSuggestionItem from './SearchSuggestionItem';
 
 //styles
-import '../../../shared/styles/shared.css';
+import '@/shared/styles/shared.css';
 
 interface SuggestionListProps {
     isOpen: boolean;

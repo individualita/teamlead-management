@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
 
 //store
-import { useEmployees } from '../../../shared/stores/employeesStore';
+import { useEmployees } from '@/shared/stores/employeesStore';
 
 //hooks
 import { useDebounce } from './useDebounce';

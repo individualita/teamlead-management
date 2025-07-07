@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 
 //store
-import { useActiveTab, useOpenTabs, setActiveTab, closeTab } from '../../../stores/tabsStore';
+import { useActiveTab, useOpenTabs, setActiveTab, closeTab } from '@/shared/stores/tabsStore';
 
 //hooks
-import { setAllEmployees, useEmployeeById } from '../../../stores/employeesStore';
-import { useEmployeesQuery } from '../../../hooks/useEmployeesQuery';
+import { setAllEmployees, useEmployeeById } from '@/shared/stores/employeesStore';
+import { useEmployeesQuery } from '@/shared/hooks/useEmployeesQuery';
 
 import { LoadingCircle } from '../LoadingCircle';
 import HeaderSection from './components/HeaderSection';

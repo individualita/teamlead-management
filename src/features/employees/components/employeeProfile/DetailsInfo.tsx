@@ -1,5 +1,5 @@
-import { STATUS_TEXT_COLORS } from '../../../../shared/constants/statusTextColors';
-import { getEmployeeStatusColor } from '../../../../shared/utils/getEmployeeStatusColor';
+import { STATUS_TEXT_COLORS } from '@/shared/constants/statusTextColors';
+import { getEmployeeStatusColor } from '@/shared/utils/getEmployeeStatusColor';
 
 interface DetailsInfoProps {
     startDate: Date;

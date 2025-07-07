@@ -7,7 +7,7 @@ import { CircularProgress } from '@mui/material';
 import { useSendMessage } from '../hooks/useSendMessage';
 
 //types
-import { User } from '../../../shared/types';
+import { User } from '@/shared/types';
 
 interface ChatFormProps {
     user: User;

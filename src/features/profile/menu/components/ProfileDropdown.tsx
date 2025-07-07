@@ -1,11 +1,11 @@
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 
-import { CSS_ANIMATION_DURATION } from '../../../../shared/constants/cssAnimationDuration';
+import { CSS_ANIMATION_DURATION } from '@/shared/constants/cssAnimationDuration';
 
 import ProfileActions from './ProfileActions';
 
-import '../../../../shared/styles/shared.css';
+import '@/shared/styles/shared.css';
 
 type ProfilePropdownProps = {
     isOpen: boolean;

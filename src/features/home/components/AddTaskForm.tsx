@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'react-toastify';
 
 // Internal modules: stores and hooks
-import { useAddMutation } from '../../../shared/hooks/useAddMutation';
+import { useAddMutation } from '@/shared/hooks/useAddMutation';
 import { taskService } from '../services/taskService';
 
 // Internal modules: types and schemas

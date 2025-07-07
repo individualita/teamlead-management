@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { queryClient } from '../../../shared/clients/queryClient';
+import { queryClient } from '@/shared/clients/queryClient';
 
 
 import { taskService, UpdateTaskStatus } from '../services/taskService';

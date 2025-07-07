@@ -1,9 +1,9 @@
 import { useState, FormEvent } from 'react';
 import { Button } from '@mui/material';
 //store
-import { useAuthUser } from '../../../../shared/stores/authStore';
+import { useAuthUser } from '@/shared/stores/authStore';
 
-import { DEFAULT_URL } from '../../../../shared/constants/defaultImageUrl';
+import { DEFAULT_URL } from '@/shared/constants/defaultImageUrl';
 
 import { updateUserMessagesPhotoURL } from '../services/updateUserMessagesPhotoURL';
 

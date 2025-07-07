@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-import { EMPLOYEE_STATUSES } from '../../../shared/constants/employeeStatuses';
-import { EmployeeStatus } from '../../../shared/types';
+import { EMPLOYEE_STATUSES } from '@/shared/constants/employeeStatuses';
+import { EmployeeStatus } from '@/shared/types';
 
 const statusValues = Object.values(EMPLOYEE_STATUSES) as [EmployeeStatus, ...EmployeeStatus[]]
 

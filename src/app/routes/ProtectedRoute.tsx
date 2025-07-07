@@ -1,16 +1,12 @@
 import { Outlet, Navigate } from 'react-router-dom';
 
 //store
-import {
-    useAuthUser,
-    useAuthLoading,
-    useAuthInitialized,
-} from '../../shared/stores/authStore';
+import { useAuthUser, useAuthLoading, useAuthInitialized } from '@/shared/stores/authStore';
 
 //constants
-import { ROUTES } from '../../shared/constants/routes';
+import { ROUTES } from '@/shared/constants/routes';
 //components
-import { LoadingCircle } from '../../shared/components/layouts/LoadingCircle';
+import { LoadingCircle } from '@/shared/components/layouts/LoadingCircle';
 
 export const ProtectedRoute = () => {
     const user = useAuthUser();
